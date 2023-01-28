@@ -1,6 +1,7 @@
 /* @import-normalize;  bring in normalize.css styles */
 
-@import "normalize.scss";
+
+@import "normalize.css";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@500&display=swap');
 
 
