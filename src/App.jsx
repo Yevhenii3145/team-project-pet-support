@@ -1,11 +1,10 @@
-// import { lazy } from "react";
-// import { Routes, Route, Navigate } from "react-router-dom";
+import UserRoutes from "./UserRoutes";
 
 export const App = () => {
   return (
-    <>
-      <div>adf</div>
-    </>
+    <UserRoutes/>
   );
 };
+
+
 
