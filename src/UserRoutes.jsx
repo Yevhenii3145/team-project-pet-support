@@ -1,32 +1,32 @@
-// import { lazy, Suspense } from "react";
-// import { Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 
 const UserRoutes = () => {
     return (
-        {/* Зразок роутів від Ані */ }
-        //     <>
-        //     < Routes >
-        //     <Route path="/" element={<SharedLayout />}>
-        //         <Route index element={<HomePage />} />
-        //         {/* <Route path="friends" element={<OurFriendsPage />} />
-        //       <Route path="news" element={<NewsPage />} />
+        <>
+            <Suspense fallback={null} >
+                <Routes>
+                    <Route path="/" element={<SharedLayout />} />
+                    <Route index element={<HomePage />} />
+                    <Route element={<Public />}>
+                        <Route path="news" element={<NewsPage />} />
+                        <Route path="notices" element={<NoticesPage />}>
+                            <Route path="/:categoryName" element={NoticesCategoryList} />
+                        </Route>
+                        <Route path="friends" element={<OurFriendsPage />} />
+                        <Route path="register" element={<RegisterPage />} />
+                        <Route path="login" element={<LoginPage />} />
+                    </Route>
 
-        //       <Route
-        //         path="/register"
-        //         element={<RegisterPage />}
-        //       />
-        //       <Route
-        //         path="/login"
-        //        element={<LoginPage />}
 
-        //       />
-        //       <Route
-        //         path="/contacts"
-        //        element={<UserPage />} /> */}
+                    <Route element={<Private />}>
+                        <Route path="user" element={<UserPage />} />
+                    </Route>
 
-        //     </Route>
-        //     {/* <Route path="*" element={<NotFound />} /> */ }
-        //   </ >
+                    <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+            </Suspense>
+        </ >
     );
 };
 
