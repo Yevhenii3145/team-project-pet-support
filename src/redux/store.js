@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 import {
   persistReducer,
   persistStore,
@@ -17,11 +17,28 @@ const persistConfig = {
   whitelist: ['token'],
 };
 
+// зразок редюсера, щоб працювала жива сторінка
+
+let initialState = {
+  user:{ },
+  token: '',
+  isLoading: false,
+  isLogin: false,
+  error: null,
+}
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  extraReducers:{
+}})
+// кінець редюсера
+
 export const store = configureStore({
   reducer: {
     // Тут мають бути редюсери:
     //   
-      
+    auth: persistReducer(persistConfig, authSlice.reducer),      
   },
 
   middleware: getDefaultMiddleware =>

@@ -1,9 +1,10 @@
 import scss from "./user-nav.module.scss";
+import { NavLink } from "react-router-dom";
 
 const UserNav = () => {
 
     return (
-        <div>UserNav</div>
+        <NavLink to={'user'}>Account</NavLink>
     )
 }
 
