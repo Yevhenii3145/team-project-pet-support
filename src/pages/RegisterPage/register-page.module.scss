@@ -1,10 +1,13 @@
 /* .register__container{
-    display: flex;
-  }
-  
-  .register__form{
-    display: flex;
-  } */
+  display: flex;
+}
+
+.register__form{
+  display: flex;
+} */
+@import '../../helpers/container.module.scss';
+@import '../../helpers/variables.module.scss';
+
 .register__container {
   box-sizing: border-box;
   padding-left: 20px;
@@ -12,7 +15,8 @@
   padding-top: 40px;
   text-align: center;
 
-  background: #fdf7f2;
+  //background: #fdf7f2;
+  background: $background;
   background-image: url(../../images/wave-mobile-auth.png);
   background-position: bottom;
   background-size: contain;
@@ -34,7 +38,7 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
-  background: #fdf7f2;
+  background: $background;
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
   font-style: normal;
@@ -55,15 +59,12 @@
 }
 
 .register__button {
-  margin: 0;
-  padding: 0;
-  padding: 10px 28px;
-  background: #f59256;
+  padding: 10px 0px;
+  background: $accentColor;
   border-radius: 40px;
-  color: #ffffff;
+  color: $lightColor;
   letter-spacing: 0.04em;
 
-  font-family: 'Manrope';
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
@@ -79,16 +80,17 @@
   }
 }
 .register__back_button {
-  background-color: #ffffff;
+  display: block;
+  background-color: $lightColor;
   border-radius: 40px;
   font-weight: 500;
   font-size: 20px;
   line-height: 27px;
   cursor: pointer;
-  border: 2px solid #f59256;
+  border: 2px solid $accentColor;
   width: 100%;
 
-  padding: 10px 28px;
+  padding: 10px 0px;
   margin-bottom: 5px;
 
   &:hover,
@@ -99,7 +101,6 @@
 }
 
 .register__description {
-  font-family: 'Manrope';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -113,53 +114,57 @@
   color: #3091eb;
 }
 
-@media screen and (max-width: 480px) {
-}
-
 @media screen and (min-width: 768px) {
+  .register__container {
+    padding: 169px 80px 266px;
+    background-image: url(../../images/wave-tablet-auth.png);
+    background-size: 1410px, 538px, contain;
+    background-position: bottom -150px right -250px;
+  }
+
+  .register__form__section {
+    background: $lightColor;
+    box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
+    border-radius: 40px;
+    padding: 60px 80px 40px;
+  }
+
   .register__tittle {
-    font-family: 'Manrope';
-    font-style: normal;
     font-weight: 500;
     font-size: 36px;
     line-height: 49px;
-    letter-spacing: 0.04em;
-    color: #111111;
   }
+
   .register__input {
-    background: #fdf7f2;
-    border: 1px solid rgba(245, 146, 86, 0.5);
-    border-radius: 40px;
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 400;
+    padding: 14px 32px 13px;
     font-size: 18px;
     line-height: 25px;
-    letter-spacing: 0.04em;
-    color: rgba(17, 17, 17, 0.6);
+  }
+
+  .register__button {
+    padding: 8, 5px 0px;
+  }
+
+  .register__back_button {
+    padding: 8, 5px 0px;
   }
 }
 
-@media screen and (min-width: 769px) and (max-width: 1680px) {
-  .register__tittle {
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 36px;
-    line-height: 49px;
-    letter-spacing: 0.04em;
-    color: #111111;
+@media screen and (min-width: 1280px) {
+  .register__container {
+    padding: 45px 331px 114px;
+    background-image: url(../../images/wave-desktop-auth.png);
   }
-  .register__input {
-    background: #fdf7f2;
-    border: 1px solid rgba(245, 146, 86, 0.5);
-    border-radius: 40px;
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 25px;
-    letter-spacing: 0.04em;
-    color: rgba(17, 17, 17, 0.6);
+
+  .register__form__section {
+    padding: 60px 80px;
+  }
+
+  .register__button {
+    padding: 10, 5px 0px;
+  }
+
+  .register__back_button {
+    padding: 10, 5px 0px;
   }
 }
