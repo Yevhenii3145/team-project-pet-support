@@ -1,0 +1,12 @@
+@import '../../helpers/variables.module.scss';
+
+.header {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 68px;
+    width: 100%;
+    z-index: 100;
+}
