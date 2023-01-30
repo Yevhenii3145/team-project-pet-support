@@ -1,10 +1,7 @@
-import scss from "./logo.module.scss";
+import scss from './Logo.module.scss';
 
 const Logo = () => {
-
-    return (
-        <div>Logo</div>
-    )
-}
+  return <div>Logo</div>;
+};
 
 export default Logo;
