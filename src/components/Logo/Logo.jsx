@@ -4,6 +4,7 @@ import SvgInsert from "../Svg/Svg";
 
 const Logo = () => {
 
+    
     return (
         <div className={scss.logoWrapper}>
             <SvgInsert id="icon-logo"/>
