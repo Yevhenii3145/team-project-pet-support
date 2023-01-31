@@ -1,0 +1,40 @@
+@import "../../helpers/variables.module.scss";
+
+.wrapper {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    width: 100vw;
+    height: 90vh;
+    pointer-events: none;
+    z-index: 300;
+}
+
+.authWrapper {
+padding-top: 36px;
+margin-bottom: 60px;
+}
+
+.linkWrapper {
+   
+}
+
+.linkMain {
+display: block;
+font-weight: 500;
+font-size: 32px;
+line-height: 1.4;
+color: #181C27;
+text-align: center;
+
+    &:not(:last-child) {
+        margin-bottom: 40px;
+    }
+
+    &:hover, &:focus {
+        font-weight: 700;
+        color: $accentColor;
+        text-decoration: underline;
+    }
+}
