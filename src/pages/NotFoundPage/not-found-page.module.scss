@@ -1,0 +1,43 @@
+@import '../../helpers/container.module.scss';
+@import '../../helpers/buttons.module.scss';
+
+.notfound__section{
+    background-image: url(../../images/not-found-page.webp);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom 30px right 0px;
+    height: 100vh;
+    text-align: center;
+}
+
+.notfound__button{
+    display: inline-block;
+    margin-top: 30px;
+}
+
+@media screen and (min-width: 480px){
+    .notfound__section{
+        text-align: start;
+    }
+    .notfound__button{
+        margin-top: 0px;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .notfound__button{
+        margin-top: 50px;
+        margin-left: 30px
+    }
+}
+
+@media screen and (min-width: 1280px){
+    .notfound__section{
+        background-position: bottom 0px right 200px;
+    }
+
+    .notfound__button{
+        margin-top: 150px;
+        margin-left: 100px
+    }
+}
