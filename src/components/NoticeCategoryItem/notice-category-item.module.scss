@@ -44,6 +44,9 @@
     position: absolute;
     top: 12px;
     right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 44px;
     height: 44px;
 
@@ -81,8 +84,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // padding-top: 6px;
-    // padding-bottom: 7px;
     width: 158px;
     height: 28px;
 
