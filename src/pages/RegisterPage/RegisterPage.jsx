@@ -63,7 +63,10 @@ const RegisterPage = () => {
   };
 
   const backButtonClick = () => {
+    console.log(stepOne);
+    console.log(!stepOne);
     if (!stepOne) {
+      console.log('I am here');
       return setStepOne(true);
     }
   };
@@ -157,13 +160,12 @@ const RegisterPage = () => {
                 name="number"
                 render={msg => Notify.warning(`${msg}`)}
               />
-              <button
+              <span
                 className={scss.register__back_button}
-                type="button"
                 onClick={backButtonClick}
               >
                 &#5130; Go back
-              </button>
+              </span>
               <button className={scss.register__button} type="submit">
                 Register
               </button>
