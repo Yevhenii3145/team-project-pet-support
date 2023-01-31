@@ -1,0 +1,23 @@
+@import "helpers/variables.module.scss";
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    gap: 12px;
+}
+
+.link {
+    display: block;
+    padding: 8px 28px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.36;
+    letter-spacing: 0.04em;
+    color: inherit;
+
+    background-color: $lightColor;
+    border: 2px solid $accentColor;
+    border-radius: 40px;
+}
