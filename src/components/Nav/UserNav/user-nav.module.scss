@@ -1,0 +1,12 @@
+@import "../../../helpers/variables.module.scss";
+
+.account {
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 500;
+font-size: 14px;
+line-height: 1.3;
+letter-spacing: 0.04em;
+color: $lightColor;
+}
