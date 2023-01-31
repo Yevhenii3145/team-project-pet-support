@@ -1,0 +1,67 @@
+@import './variables.module.scss';
+
+.button__primary {
+  padding: 10px 28px;
+  background: transparent;
+  border: 2px solid $accentColor;
+  border-radius: 40px;
+  color: $darkColor;
+  letter-spacing: 0.04em;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background: $accentColor;
+    color: $lightColor;
+    border: 0;
+  }
+}
+
+.button__secondary {
+  padding: 8px 28px;  
+  background-color: $lightColor;
+  border-radius: 40px;
+  border: 2px solid $accentColor;
+  color: #111111;
+
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background: $accentColor;
+    color: $lightColor;
+    border: 0;
+  }
+}
+
+.button__learn {
+    padding: 8px 28px;  
+    background-color: $lightColor;
+    border-radius: 40px;
+    border: 2px solid $accentColor;
+    color: $accentColor;
+  
+  
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  
+    &:hover,
+    &:focus {
+      color: #FF6101;
+      border: 2px solid #FF6101;
+    }
+  }
