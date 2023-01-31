@@ -1,0 +1,15 @@
+@import "../../helpers/variables.module.scss";
+
+.openMenu {
+    &:hover, &:focus {
+        fill: $accentColor;
+    }
+}
+
+.closeMenu {
+    display: none;
+    stroke: #111;
+    &:hover, &:focus {
+        stroke: $accentColor;
+    }
+}
