@@ -1,10 +1,15 @@
 /* @import-normalize;  bring in normalize.css styles */
 
-@import "normalize.css";
+@import 'normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@500&display=swap');
+
+
+html {
+  background-color: #fdf7f2;
 
 * {
   box-sizing: border-box;
+
 }
 
 body {

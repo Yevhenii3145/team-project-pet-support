@@ -1,8 +1,15 @@
+
 import scss from "./logo.module.scss";
 import img from "../../images/cat1.webp";
 import SvgInsert from "../Svg/Svg";
 
+
 const Logo = () => {
+  return <div>Logo</div>;
+};
+
+
+export default Logo;
 
     
     return (
@@ -15,3 +22,4 @@ const Logo = () => {
 }
 
 export default Logo;
+
