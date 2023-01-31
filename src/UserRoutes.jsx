@@ -16,6 +16,7 @@ const UserPage = lazy(() => import('./pages/UserPage/UserPage'));
 const NoticesCategoryList = lazy(() => import('./pages/NoticesCategoryList/NoticesCategoryList'));
 const Public = lazy(() => import('./components/Public/Public'));
 const Private = lazy(() => import('./components/Private/Private'));
+const Header = lazy(()=>import('./components/Header/Header'));
 
 const UserRoutes = () => {
     return (

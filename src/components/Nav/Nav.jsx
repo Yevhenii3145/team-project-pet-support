@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import scss from "./nav.module.scss";
 import AuthNav from "./AuthNav/AuthNav";
 import UserNav from "./UserNav/UserNav";
@@ -6,8 +7,11 @@ import UserNav from "./UserNav/UserNav";
 
 const Nav = () => {
 
+    const isActive = useSelector(state=>state.menu.menuActive);
+
     return (
-        <div className={scss.wrapper}>
+        <>
+        <div className={isActive === false ? scss.wrapper : `${scss.wrapper} ${scss.isActive}`}>
         <div className={scss.authWrapper}>
                 {/* для неавторизованого */}
         <AuthNav/> 
@@ -20,6 +24,7 @@ const Nav = () => {
         <NavLink to={'friends'} className={scss.linkMain}>Our friends</NavLink>
         </div>
         </div>
+        </>
     )
 }
 

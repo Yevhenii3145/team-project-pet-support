@@ -1,4 +1,4 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import {
   persistReducer,
   persistStore,
@@ -10,6 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { menuSlice } from './menuSlice';
 
 const persistConfig = {
   key: 'token',
@@ -17,28 +18,9 @@ const persistConfig = {
   whitelist: ['token'],
 };
 
-// зразок редюсера, щоб працювала жива сторінка
-
-let initialState = {
-  user:{ },
-  token: '',
-  isLoading: false,
-  isLogin: false,
-  error: null,
-}
-
-const authSlice = createSlice({
-  name: 'auth',
-  initialState,
-  extraReducers:{
-}})
-// кінець редюсера
-
 export const store = configureStore({
-  reducer: {
-    // Тут мають бути редюсери:
-    //   
-    auth: persistReducer(persistConfig, authSlice.reducer),      
+  reducer: { 
+    menu: persistReducer(persistConfig, menuSlice.reducer),     
   },
 
   middleware: getDefaultMiddleware =>
@@ -48,5 +30,6 @@ export const store = configureStore({
       },
     }),
 });
+
 
 export const persistor = persistStore(store);
