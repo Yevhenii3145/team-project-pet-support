@@ -1,0 +1,61 @@
+@import "../../helpers/variables.module.scss";
+
+
+.userItem_container {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    
+}
+
+.userItem__yourPhoto {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+}
+
+.userItem_box_btnPhoto {
+    display: block;
+    margin: 12px 24px 32px auto;
+    text-align: right;
+}
+
+
+.userItem_button {
+    display: block;
+    width: 62px;
+    height: 22px;
+    margin-left: auto;
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.8;
+    padding: 0;
+    background-color:$lightColor;
+    border: none;
+
+}
+
+
+.userItem_field {
+    text-align: left;
+    color: #111111;
+    margin-top: 10px;
+    background-color: $lightColor;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.33;
+
+}
+
+.userItem_box_text {
+    display: block;
+    margin: 27px auto 44px 16px;
+}

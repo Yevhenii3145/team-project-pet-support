@@ -1,10 +1,20 @@
-import scss from "./user-data.module.scss";
+import UserDataItem from "../UserDataItem/UserDataItem";
 
-const UserData = () => {
 
-    return (
-        <div>UserData</div>
-    )
-}
 
-export default UserData;
+export function UserData() {
+  
+  // const usersCard = useSelector(getUser);
+  // const {loading, error} = useSelector(getState);
+  // const dispatch = useDispatch();
+
+
+  // useEffect(() => {
+  //       dispatch(fetchUsers())
+  //   }, [dispatch]);
+  
+
+ return (
+          <UserDataItem />
+    );
+      }
