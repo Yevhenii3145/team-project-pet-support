@@ -2,8 +2,14 @@ import s from './newsItem.module.scss';
 import PropTypes from 'prop-types';
 import EllipsisText from 'react-ellipsis-text';
 import { format } from 'date-fns';
+import { useState } from 'react';
+
 // compareAsc;
 const NewsItem = ({ title, url, description, date }) => {
+  const [matches, setMatches] = useState(
+    window.matchMedia('(min-width: 1280px)').matches
+  );
+
   const formatDate = format(new Date(date), 'dd/MM/yyyy');
   const zeroDate = formatDate === '01/01/1970' ? '' : formatDate;
 
@@ -15,7 +21,7 @@ const NewsItem = ({ title, url, description, date }) => {
         className={s.news_title}
         text={title}
         tooltip={title}
-        length={35}
+        length={`${matches ? 50 : 35}`}
       />
       <EllipsisText className={s.news_text} text={description} length={230} />
       <div className={s.wrap_news_info}>

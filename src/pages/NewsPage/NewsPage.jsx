@@ -33,12 +33,17 @@ const NewsPage = () => {
   }, []);
 
   const [filter, setFilter] = useState('');
-  const [inputTrue, setinputTrue] = useState(false);
+  const [inputValue, setInputValue] = useState(false);
+
   const handleChange = event => {
+    // console.log(filter.length);
     setFilter(event.currentTarget.value);
-    console.log(filter);
-    filter === '' ? setinputTrue(true) : setinputTrue(false);
   };
+
+  useEffect(() => {
+    filter.length > 0 ? setInputValue(true) : setInputValue(false);
+  }, [filter.length]);
+
   const resetInput = event => {
     setFilter('');
   };
@@ -63,7 +68,7 @@ const NewsPage = () => {
             input={filter}
             onChange={handleChange}
             resetInput={resetInput}
-            inputTrue={inputTrue}
+            inputValue={inputValue}
           />
           <NewsList data={filterNews()} />
         </div>

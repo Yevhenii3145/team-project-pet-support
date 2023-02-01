@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
 import s from './newsFilter.module.scss';
-import { SlClose } from 'react-icons/sl';
+// import { SlClose } from 'react-icons/sl';
+import SvgInsert from 'components/Svg/Svg';
 // import { useState, useEffect } from 'react';
 
-export default function NewsFilter({ input, onChange, resetInput, inputTrue }) {
+export default function NewsFilter({
+  input,
+  onChange,
+  resetInput,
+  inputValue,
+}) {
   //   const [inputTrue, setinputTrue] = useState(false);
 
   //   useEffect(() => {
@@ -16,16 +22,15 @@ export default function NewsFilter({ input, onChange, resetInput, inputTrue }) {
         type="text"
         placeholder="Search"
         name="filter"
-        onChange={onChange}
+        onInput={onChange}
         value={input}
       />
-      {!inputTrue && (
-        <SlClose
-          size={20}
-          onClick={() => resetInput()}
-          className={s.search_reset}
-        />
+      {inputValue && (
+        <div onClick={() => resetInput()}>
+          <SvgInsert id="icon-reset-search" />
+        </div>
       )}
+      {!inputValue && <SvgInsert id="icon-search" />}
     </div>
   );
 }
