@@ -32,8 +32,11 @@
         stroke: $accentColor;
     }
 
-    @media screen and (min-width: 1280px) {
-        display: none;
-    }
+}
+
+.heart {
+    fill: $lightColor; 
+    opacity: 0.6;
+    stroke: $accentColor;
 }
 
