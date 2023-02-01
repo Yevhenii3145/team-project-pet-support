@@ -14,21 +14,21 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     extraReducers: {
-        [signup.pending]: (store) => {
-            store.loading = true;
-            store.error = null;
-        },
-        [signup.fulfilled]: (store, {payload}) => {
-            store.loading = false;
-            store.user = payload.user;
-            store.token = payload.token;
-            store.isLogin = true;
-        },
-        [signup.rejected]: (store, {payload}) => {
-            store.loading = false;
-            alert('Логин или пароль не верный, попробуйте снова.')
-            store.error = payload;
-        },
+        // [signup.pending]: (store) => {
+        //     store.loading = true;
+        //     store.error = null;
+        // },
+        // [signup.fulfilled]: (store, {payload}) => {
+        //     store.loading = false;
+        //     store.user = payload.user;
+        //     store.token = payload.token;
+        //     store.isLogin = true;
+        // },
+        // [signup.rejected]: (store, {payload}) => {
+        //     store.loading = false;
+        //     alert('Логин или пароль не верный, попробуйте снова.')
+        //     store.error = payload;
+        // },
         [login.pending]: (store) => {
             store.loading = true;
             store.error = null;
