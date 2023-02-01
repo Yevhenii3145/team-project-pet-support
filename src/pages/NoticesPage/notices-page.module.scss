@@ -11,3 +11,15 @@
     text-align: center;
     margin-bottom: 28px;
 }
+
+@media screen and (min-width: 768px) {
+    .main {
+        padding-top: 90px;
+    }
+
+    .main_title {
+        font-size: 48px;
+        line-height: 1.38;
+        margin-bottom: 40px;
+    }
+}
