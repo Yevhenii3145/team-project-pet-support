@@ -1,13 +1,6 @@
-div {
-  //background-color: red;
-  width: 1000;
-  height: 1000;
-}
-
 @import '../../helpers/variables.module.scss';
 
 .background {
-
     margin-top: 69px;
     padding-top: 36px;
     background-image: url(../../images/portrait-mobile@1x.png), url(../../images/wave-mobile-home.png);
@@ -20,7 +13,6 @@ div {
   @media screen and (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-
       background-image: url(../../images/portrait-mobile@2x.png), url(../../images/wave-mobile-home.png);
       }
 
@@ -43,27 +35,23 @@ div {
         padding-top: 0;
         background-size: contain;
         background-image: url(../../images/wave-desktop-home.png);
-
-        @media screen and (min-device-pixel-ratio: 2),
-        (min-resolution: 192dpi),
-        (min-resolution: 2dppx) {
-      background-image: url(../../images/wave-desktop-home.png);
-      }
       }
 }
 
 .wrapperHome {
+    @media screen and (min-width: 1280px) {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    }
 }
 
 .image {
   display: none;
 
       @media screen and (min-width: 1280px) {
-        position: relative;
         display: block;
+        position: relative;
         width: 590px;
         height: 640px;
         background-position: center;

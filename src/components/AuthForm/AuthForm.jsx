@@ -1,9 +1,13 @@
 import scss from './auth-form.module.scss';
+
+import { useDispatch, useSelector } from 'react-redux';
+import operations from '../../redux/operations';
+
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 
 const schemasForStepFirst = Yup.object().shape({
   email: Yup.string().email().required(),
@@ -35,23 +39,13 @@ const schemasForStepSecond = Yup.object().shape({
     .min(10),
 });
 
-let user;
-
-const AuthForm = ({page}) => {
+const AuthForm = () => {
   const [stepOne, setStepOne] = useState(true);
-  const [isRegisterPage, setIsRegisterPage] = useState(false)
-  const [isLoginPage, setIsLoginPage] = useState(false)
+  const location = useLocation();
+  const page = location.pathname;
 
-  useEffect(()=>{
-    if(page === 'register'){
-      setIsRegisterPage(true)
-      setIsLoginPage(false)
-    } else if(page === 'login'){
-      setIsLoginPage(true)
-      setIsRegisterPage(false)
-    }
-    return;
-  },[])
+  let user = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
 
   const initialValue = {
     email: '',
@@ -64,7 +58,6 @@ const AuthForm = ({page}) => {
 
   const handleSubmitForRegister = (values, actions) => {
     console.log(values);
-    console.log(actions);
     if (stepOne) {
       if (values.password !== values.passwordConfirm) {
         return Notify.failure('Your passwords must have the same value');
@@ -76,7 +69,16 @@ const AuthForm = ({page}) => {
       console.log(user);
       actions.resetForm();
       return setStepOne(true);
+      //return dispatch(operations.registerNewUser(user))
     }
+  };
+
+  const handleSubmitForLogin = (values, actions) => {
+    console.log(values);
+    user = values;
+    console.log(user);
+    actions.resetForm();
+    return;
   };
 
   const backButtonClick = () => {
@@ -87,12 +89,124 @@ const AuthForm = ({page}) => {
 
   return (
     <>
-    {isRegisterPage && <>
-        {stepOne ? (
+      {page === '/register' && (
+        <>
+          {stepOne ? (
+            <Formik
+              validationSchema={schemasForStepFirst}
+              initialValues={initialValue}
+              onSubmit={handleSubmitForRegister}
+            >
+              <Form className={scss.form__container} autoComplete="off">
+                <Field
+                  className={scss.form__input}
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                />
+                <ErrorMessage
+                  name="email"
+                  render={msg => Notify.warning(`${msg}`)}
+                />
+                <Field
+                  className={scss.form__input}
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  validate={validatePassword}
+                />
+                <ErrorMessage
+                  name="password"
+                  render={msg => Notify.warning(`${msg}`)}
+                />
+                <Field
+                  className={scss.form__input}
+                  type="password"
+                  name="passwordConfirm"
+                  placeholder="Confirm Password"
+                  validate={validatePassword}
+                />
+                <ErrorMessage
+                  name="passwordConfirm"
+                  render={msg => Notify.warning(`${msg}`)}
+                />
+                <button
+                  className={`${scss.button__primary_main} ${scss.form__button}`}
+                  type="submit"
+                >
+                  Next
+                </button>
+              </Form>
+            </Formik>
+          ) : (
+            <Formik
+              validationSchema={schemasForStepSecond}
+              initialValues={initialValue}
+              onSubmit={handleSubmitForRegister}
+              autoComplete="off"
+            >
+              <Form className={scss.form__container}>
+                <Field
+                  className={scss.form__input}
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  required
+                />
+                <ErrorMessage
+                  name="name"
+                  render={msg => Notify.warning(`${msg}`)}
+                />
+                <Field
+                  className={scss.form__input}
+                  type="text"
+                  name="region"
+                  placeholder="City, region"
+                  required
+                />
+                <ErrorMessage
+                  name="region"
+                  render={msg => Notify.warning(`${msg}`)}
+                />
+                <Field
+                  className={scss.form__input}
+                  type="tel"
+                  name="number"
+                  placeholder="Mobile phone"
+                />
+                <ErrorMessage
+                  name="number"
+                  render={msg => Notify.warning(`${msg}`)}
+                />
+                <span
+                  className={`${scss.button__primary_not_main} ${scss.form__back_button}`}
+                  onClick={backButtonClick}
+                >
+                  &#5130; Go back
+                </span>
+                <button
+                  className={`${scss.button__primary_main} ${scss.form__button}`}
+                  type="submit"
+                >
+                  Register
+                </button>
+              </Form>
+            </Formik>
+          )}
+          <p className={scss.form__description}>
+            Already have an account?{' '}
+            <NavLink className={scss.description__nav} to="/login">
+              Login
+            </NavLink>
+          </p>
+        </>
+      )}
+      {page === '/login' && (
+        <>
           <Formik
             validationSchema={schemasForStepFirst}
             initialValues={initialValue}
-            onSubmit={handleSubmitForRegister}
+            onSubmit={handleSubmitForLogin}
           >
             <Form className={scss.form__container} autoComplete="off">
               <Field
@@ -106,7 +220,7 @@ const AuthForm = ({page}) => {
                 render={msg => Notify.warning(`${msg}`)}
               />
               <Field
-                className={scss.form__input}
+                className={`${scss.form__input} ${scss.form__login__input}`}
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -116,83 +230,25 @@ const AuthForm = ({page}) => {
                 name="password"
                 render={msg => Notify.warning(`${msg}`)}
               />
-              <Field
-                className={scss.form__input}
-                type="password"
-                name="passwordConfirm"
-                placeholder="Confirm Password"
-                validate={validatePassword}
-              />
-              <ErrorMessage
-                name="passwordConfirm"
-                render={msg => Notify.warning(`${msg}`)}
-              />
-              <button className={`${scss.button__primary} ${scss.form__button}`} type="submit">
-                Next
-              </button>
-            </Form>
-           </Formik>
-        ) : (
-          <Formik
-            validationSchema={schemasForStepSecond}
-            initialValues={initialValue}
-            onSubmit={handleSubmitForRegister}
-            autoComplete="off"
-          >
-            <Form className={scss.form__container}>
-              <Field
-                className={scss.form__input}
-                type="text"
-                name="name"
-                placeholder="Name"
-                required
-              />
-              <ErrorMessage
-                name="name"
-                render={msg => Notify.warning(`${msg}`)}
-              />
-              <Field
-                className={scss.form__input}
-                type="text"
-                name="region"
-                placeholder="City, region"
-                required
-              />
-              <ErrorMessage
-                name="region"
-                render={msg => Notify.warning(`${msg}`)}
-              />
-              <Field
-                className={scss.form__input}
-                type="tel"
-                name="number"
-                placeholder="Mobile phone"
-              />
-              <ErrorMessage
-                name="number"
-                render={msg => Notify.warning(`${msg}`)}
-              />
-              <span
-                className={`${scss.button__primary} ${scss.form__back_button}`}
-                onClick={backButtonClick}
+
+              <button
+                className={`${scss.button__primary_main} ${scss.form__button}`}
+                type="submit"
               >
-                &#5130; Go back
-              </span>
-              <button className={`${scss.button__primary} ${scss.form__button}`} type="submit">
-                Register
+                Login
+
               </button>
             </Form>
           </Formik>
-        )}
-        <p className={scss.form__description}>
-          Already have an account?{' '}
-          <NavLink className={scss.description__nav} to="/login">Login</NavLink>
-        </p>
-        </>}
-        {isLoginPage && <>
-        <p>LOGIN FORM</p>
-        </>}
+          <p className={scss.form__description}>
+            Don't have an account?{' '}
+            <NavLink to="/register" className={scss.description__nav}>
+              Register
+            </NavLink>
+          </p>
         </>
+      )}
+    </>
   );
 };
 
