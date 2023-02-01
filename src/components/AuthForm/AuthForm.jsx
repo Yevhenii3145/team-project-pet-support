@@ -127,7 +127,7 @@ const AuthForm = ({page}) => {
                 name="passwordConfirm"
                 render={msg => Notify.warning(`${msg}`)}
               />
-              <button className={`${scss.button__primary} ${scss.form__button}`} type="submit">
+              <button className={`${scss.button__primary_main} ${scss.form__button}`} type="submit">
                 Next
               </button>
             </Form>
@@ -173,12 +173,12 @@ const AuthForm = ({page}) => {
                 render={msg => Notify.warning(`${msg}`)}
               />
               <span
-                className={`${scss.button__primary} ${scss.form__back_button}`}
+                className={`${scss.button__primary_not_main} ${scss.form__back_button}`}
                 onClick={backButtonClick}
               >
                 &#5130; Go back
               </span>
-              <button className={`${scss.button__primary} ${scss.form__button}`} type="submit">
+              <button className={`${scss.button__primary_main} ${scss.form__button}`} type="submit">
                 Register
               </button>
             </Form>
