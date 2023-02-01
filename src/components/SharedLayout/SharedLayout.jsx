@@ -7,7 +7,6 @@ const SharedLayout = () => {
 
     return (
             <>
-            <Header/>
         <section className={scss.background}>
             <div className={base.container}>
                 <div className={scss.wrapperHome}>
