@@ -1,10 +1,9 @@
 import scss from "./logout.module.scss";
 
-const Logout = () => {
-
+export function Logout() {
     return (
-        <div>Logout</div>
+        <div className={scss.logout_box}>
+            <button className={scss.logout_button} type="button">Logout</button>
+        </div>
     )
 }
-
-export default Logout;

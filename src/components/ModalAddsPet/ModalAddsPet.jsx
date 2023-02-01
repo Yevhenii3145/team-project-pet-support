@@ -1,10 +1,16 @@
-import scss from "./modal-adds-pet.module.scss";
+import React from "react";
+import "./modaladdspet.css";
 
-const ModalAddsPet = () => {
-
+const ModalAddsPet = ({active, setActive, children}) => {
     return (
-        <div>ModalAddsPet</div>
+        <div className={active ? "modal_active" : "modal"} onClick={() => setActive(false)}>
+            <div className="modal__content" onClick={e => e.stopPropagation()}>
+                {children}
+               
+            </div>
+        </div>
     )
 }
+
 
 export default ModalAddsPet;

@@ -1,0 +1,23 @@
+@import "../../helpers/variables.module.scss";
+
+.logout_button {
+    
+    width: 63px;
+    display: block;
+    height: 22px;
+    margin-left: auto;
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.4;
+    padding: 0;
+    background-color: $lightColor;
+    border: none;
+}
+
+.logout_box {
+    display: block;
+    margin: 10px 12px 0 auto;
+    text-align: right;
+}
