@@ -1,4 +1,4 @@
-import scss from "./notices-search.module.scss";
+// import scss from "./notices-search.module.scss";
 
 const NoticesSearch = () => {
 
