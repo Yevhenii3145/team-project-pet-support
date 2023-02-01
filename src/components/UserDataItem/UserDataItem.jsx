@@ -1,8 +1,11 @@
 
 import scss from "./user-data-item.module.scss";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+<<<<<<< Updated upstream
 import { async } from "q";
 import { create } from "lodash";
+=======
+>>>>>>> Stashed changes
 
 export default function UserDataItem() {
 
@@ -13,6 +16,7 @@ export default function UserDataItem() {
        const handelSabmit = (event) => {
            event.preventDefault();
            const { UserPhoto } = this.elements;
+           console.log(UserPhoto.value);
            const data = new FormData();
            data.append("UserPhoto", UserPhoto.files[0]);
         // onAddContact({ name, number });
@@ -28,6 +32,7 @@ export default function UserDataItem() {
     return (
         <div className={scss.userItem_container}>
             <img className={scss.userItem__yourPhoto} src="https://dummyimage.com/150x150/FDF7F2.gif&text=You+photo!" alt="" />
+<<<<<<< Updated upstream
             <div className={scss.userItem_box_btnPhoto}>
                 <button className={scss.userItem_button} type="button" onClick={onClick}>Edit photo</button>
                 {onClick
@@ -42,6 +47,50 @@ export default function UserDataItem() {
                         </div>
                     </form> }
             </div>
+=======
+            <form onSubmit={handelSabmit}  enctype="multipart/form-data">
+                <div>
+                    <input type="file" name="UserPhoto"/>
+                </div>
+                <div className={scss.userItem_box_btnPhoto}>
+                    <button className={scss.userItem_button} type='button'>Edit photo</button>
+                </div>
+            </form>
+
+                <Formik
+                    initialValues={{ name: 'Elena', }}
+                    validate={values => {
+                        const errors = {};
+                        if (!values.name) {
+                        errors.name = 'Required';
+                        } else if (
+                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                        ) {
+                        errors.name = 'Invalid email address';
+                        }
+                        return errors;
+                    }}
+                    onSubmit={(values, { setSubmitting }) => {
+                        setTimeout(() => {
+                        alert(JSON.stringify(values, null, 2));
+                        setSubmitting(false);
+                        }, 400);
+                    }}
+                    >
+                    {({ isSubmitting }) => (
+                        <Form>
+                        <Field type="email" name="email" />
+                        <ErrorMessage name="email" component="div" />
+                        <Field type="password" name="password" />
+                        <ErrorMessage name="password" component="div" />
+                        <button type="submit" disabled={isSubmitting}>
+                            Submit
+                        </button>
+                        </Form>
+                    )}
+            </Formik>
+            
+>>>>>>> Stashed changes
             <div className={scss.userItem_box_text}>
                              <Formik
        initialValues={{ name: '', email: '', birthday: '', phone: '', city: ''}}
