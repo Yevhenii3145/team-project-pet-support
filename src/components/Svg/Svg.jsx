@@ -1,3 +1,4 @@
+
 import scss from './svg.module.scss';
 
 const SvgInsert = ({ id }) => {
@@ -243,5 +244,6 @@ const SvgInsert = ({ id }) => {
       return <svg></svg>;
   }
 };
+
 
 export default SvgInsert;
