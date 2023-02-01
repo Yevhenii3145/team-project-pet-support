@@ -6,8 +6,6 @@ import Nav from "components/Nav/Nav";
 
 
 const Header = () => {
-  // const onShowMenu = () => {
-  // }
 
   return (
     <header className={scss.header}>
