@@ -2,13 +2,18 @@ import s from './newsItem.module.scss';
 import PropTypes from 'prop-types';
 import EllipsisText from 'react-ellipsis-text';
 import { format } from 'date-fns';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // compareAsc;
 const NewsItem = ({ title, url, description, date }) => {
   const [matches, setMatches] = useState(
     window.matchMedia('(min-width: 1280px)').matches
   );
+  useEffect(() => {
+    window
+      .matchMedia('(min-width: 1280px)')
+      .addEventListener('change', e => setMatches(e.matches));
+  }, []);
 
   const formatDate = format(new Date(date), 'dd/MM/yyyy');
   const zeroDate = formatDate === '01/01/1970' ? '' : formatDate;
