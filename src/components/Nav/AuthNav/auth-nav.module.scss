@@ -1,0 +1,58 @@
+@import "../../../helpers/variables.module.scss";
+
+.login {
+font-weight: 500;
+font-size: 14px;
+line-height: 1.3;
+text-align: center;
+letter-spacing: 0.04em;
+color: $lightColor;
+cursor: pointer;
+padding: 8px 28px;
+background: #F59256;
+border-radius: 40px;
+border: 2px solid $accentColor;
+margin-right: 12px;
+
+&:hover,
+&:focus {
+  background: $lightColor;
+  color: $accentColor;
+}
+
+@media screen and (min-width: 768px) {
+    font-size: 20px;
+}
+
+@media screen and (min-width: 768px) {
+    padding: 10px 28px;
+}
+}
+
+.register {
+padding: 8px 28px;
+font-weight: 500;
+font-size: 14px;
+line-height: 1.3;
+text-align: center;
+letter-spacing: 0.04em;
+color: #111111;
+cursor: pointer;
+background-color: $lightColor;
+border-radius: 40px;
+border: 2px solid $accentColor;
+
+&:hover, &:focus {
+    background: $accentColor;
+    color: $lightColor;
+    border: 2px solid $accentColor;
+}
+
+@media screen and (min-width: 768px) {
+   font-size: 20px;
+}
+
+@media screen and (min-width: 768px) {
+    padding: 10px 28px;
+}
+}
