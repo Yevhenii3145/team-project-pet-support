@@ -5,6 +5,8 @@ import NewsFilter from '../../components/NewsFilter/NewsFilter';
 import { useState, useEffect } from 'react';
 import news from './news.json';
 import { format } from 'date-fns';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 // import { useSelector, useDispatch } from 'react-redux';
 // import { setNewsFilter } from '../../redux/newsFilter/newsFilter-actions';
 // import { getNewsFilter } from '../../redux/newsFilter/newsFilter-selectors';
@@ -33,12 +35,17 @@ const NewsPage = () => {
   }, []);
 
   const [filter, setFilter] = useState('');
-  const [inputTrue, setinputTrue] = useState(false);
+  const [inputValue, setInputValue] = useState(false);
+
   const handleChange = event => {
+    // console.log(filter.length);
     setFilter(event.currentTarget.value);
-    console.log(filter);
-    filter === '' ? setinputTrue(true) : setinputTrue(false);
   };
+
+  useEffect(() => {
+    filter.length > 0 ? setInputValue(true) : setInputValue(false);
+  }, [filter.length]);
+
   const resetInput = event => {
     setFilter('');
   };
@@ -51,6 +58,10 @@ const NewsPage = () => {
     const filterlist = data.filter(news => {
       return news.title.toLocaleLowerCase().includes(normalizedFilter);
     });
+    console.log(filterlist);
+    if (filterlist.length === 0) {
+      Notify.warning('Write a correct request');
+    }
     return filterlist;
   }
 
@@ -63,7 +74,7 @@ const NewsPage = () => {
             input={filter}
             onChange={handleChange}
             resetInput={resetInput}
-            inputTrue={inputTrue}
+            inputValue={inputValue}
           />
           <NewsList data={filterNews()} />
         </div>

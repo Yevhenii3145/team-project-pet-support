@@ -8,7 +8,11 @@ p {
 
   list-style-type: none;
   @media (min-width: 768px) {
-    min-width: 336px;
+    max-width: 336px;
+    margin-top: 60px;
+  }
+  @media (min-width: 1280px) {
+    max-width: 394px;
   }
 }
 
@@ -20,6 +24,13 @@ p {
 
   border-radius: 5px;
   background-image: linear-gradient(to right, #ff634e, #ffdf48);
+  @media (min-width: 768px) {
+    width: 280px;
+    height: 8px;
+  }
+  @media (min-width: 1280px) {
+    width: 340px;
+  }
 }
 
 .news_title {

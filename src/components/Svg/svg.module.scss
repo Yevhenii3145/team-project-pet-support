@@ -1,17 +1,37 @@
-@import "../../helpers/variables.module.scss";
+@import '../../helpers/variables.module.scss';
+
+.logo {
+    @media screen and (min-width:768px) {
+        width: 94px;
+        height: 48px;
+    }
+}
 
 .openMenu {
+
+    padding-top: 4px;
+    transition: fill 500ms ease-in-out;
+    cursor: pointer;
+
     &:hover, &:focus {
         fill: $accentColor;
+    }
+
+    @media screen and (min-width: 1280px) {
+        display: none;
     }
 }
 
 .closeMenu {
-    display: none;
+    padding-top: 4px;
     stroke: #111;
+    transition: stroke 500ms ease-in-out;
+    cursor: pointer;
+
     &:hover, &:focus {
         stroke: $accentColor;
     }
+
 }
 
 .heart {
@@ -19,3 +39,4 @@
     opacity: 0.6;
     stroke: $accentColor;
 }
+
