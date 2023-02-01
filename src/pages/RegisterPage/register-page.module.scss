@@ -1,12 +1,5 @@
-/* .register__container{
-  display: flex;
-}
-
-.register__form{
-  display: flex;
-} */
-@import '../../helpers/container.module.scss';
 @import '../../helpers/variables.module.scss';
+
 
 .register__container {
   box-sizing: border-box;
@@ -15,7 +8,6 @@
   padding-top: 40px;
   text-align: center;
 
-  //background: #fdf7f2;
   background: $background;
   background-image: url(../../images/wave-mobile-auth.png);
   background-position: bottom;
@@ -34,95 +26,8 @@
   padding: 0;
 }
 
-.register__input {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  background: $background;
-  border: 1px solid rgba(245, 146, 86, 0.5);
-  border-radius: 40px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 19px;
-  letter-spacing: 0.04em;
-  color: rgba(17, 17, 17, 0.6);
-
-  padding: 11px 14px 12px;
-  margin-top: 16px;
-  &:first-child {
-    margin-top: 0px;
-  }
-  &:nth-child(3) {
-    margin-bottom: 40px;
-  }
-}
-
-.register__button {
-  padding: 10px 0px;
-  background: $accentColor;
-  border-radius: 40px;
-  color: $lightColor;
-  letter-spacing: 0.04em;
-
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 27px;
-
-  width: 100%;
-  cursor: pointer;
-  border-width: 0;
-
-  &:hover,
-  &:focus {
-    background: #cf7c48;
-  }
-}
-.register__back_button {
-  display: block;
-  background-color: $lightColor;
-  border-radius: 40px;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 27px;
-  cursor: pointer;
-  border: 2px solid $accentColor;
-  width: 100%;
-
-  padding: 10px 0px;
-  margin-bottom: 5px;
-
-  &:hover,
-  &:focus {
-    border: 2px solid #de864f;
-    background-color: #dddbdb;
-  }
-}
-
-.register__description {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.04em;
-  color: rgba(17, 17, 17, 0.6);
-
-  margin-top: 40px;
-}
-.description__nav {
-  color: #3091eb;
-}
-
 @media screen and (min-width: 768px) {
-  .register__container {
-    padding: 169px 80px 266px;
-    background-image: url(../../images/wave-tablet-auth.png);
-    background-size: 1410px, 538px, contain;
-    background-position: bottom -150px right -250px;
-  }
-
-  .register__form__section {
+  .register__section {
     background: $lightColor;
     box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
     border-radius: 40px;
@@ -134,37 +39,23 @@
     font-size: 36px;
     line-height: 49px;
   }
-
-  .register__input {
-    padding: 14px 32px 13px;
-    font-size: 18px;
-    line-height: 25px;
-  }
-
-  .register__button {
-    padding: 8, 5px 0px;
-  }
-
-  .register__back_button {
-    padding: 8, 5px 0px;
-  }
 }
 
+@media screen and (min-width: 768px) and (max-width: 1279px){
+  .register__container {
+    padding: 169px 80px 266px;
+    background-image: url(../../images/wave-tablet-auth.png);
+    background-size: 1410px, 538px, contain;
+    background-position: bottom -150px right -250px;
+  }
+}
 @media screen and (min-width: 1280px) {
   .register__container {
     padding: 45px 331px 114px;
     background-image: url(../../images/wave-desktop-auth.png);
   }
 
-  .register__form__section {
+  .register__section {
     padding: 60px 80px;
-  }
-
-  .register__button {
-    padding: 10, 5px 0px;
-  }
-
-  .register__back_button {
-    padding: 10, 5px 0px;
   }
 }

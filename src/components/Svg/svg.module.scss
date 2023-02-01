@@ -1,4 +1,4 @@
-@import "../../helpers/variables.module.scss";
+@import '../../helpers/variables.module.scss';
 
 .logo {
     @media screen and (min-width:768px) {
@@ -8,6 +8,7 @@
 }
 
 .openMenu {
+
     padding-top: 4px;
     transition: fill 500ms ease-in-out;
     cursor: pointer;
@@ -35,3 +36,4 @@
         display: none;
     }
 }
+

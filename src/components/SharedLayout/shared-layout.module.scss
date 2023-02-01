@@ -1,6 +1,13 @@
+div {
+  //background-color: red;
+  width: 1000;
+  height: 1000;
+}
+
 @import '../../helpers/variables.module.scss';
 
 .background {
+
     margin-top: 69px;
     padding-top: 36px;
     background-image: url(../../images/portrait-mobile@1x.png), url(../../images/wave-mobile-home.png);
@@ -10,9 +17,10 @@
     background-size: contain;
     height: 100vh;
 
-    @media screen and (min-device-pixel-ratio: 2),
+  @media screen and (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
+
       background-image: url(../../images/portrait-mobile@2x.png), url(../../images/wave-mobile-home.png);
       }
 
@@ -86,3 +94,4 @@ color: $darkColor;
   margin-top: 60px;
 }
 }
+
