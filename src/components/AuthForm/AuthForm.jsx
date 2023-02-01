@@ -230,11 +230,13 @@ const AuthForm = () => {
                 name="password"
                 render={msg => Notify.warning(`${msg}`)}
               />
+
               <button
                 className={`${scss.button__primary_main} ${scss.form__button}`}
                 type="submit"
               >
                 Login
+
               </button>
             </Form>
           </Formik>

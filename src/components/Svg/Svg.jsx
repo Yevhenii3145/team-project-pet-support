@@ -30,7 +30,7 @@ const SvgInsert = ({id}) => {
 
         case "icon-logout" :
             return (<svg id="icon-logout" viewBox="0 0 32 32">
-            <path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.7778" d="M27.209 11.682l0-0c0.141-0.141 0.369-0.141 0.511 0l2.799 2.799c0.871 0.871 0.871 2.291 0 3.162l-2.799 2.799c-0.071 0.071-0.162 0.106-0.255 0.106s-0.184-0.035-0.255-0.106h-0c-0.141-0.141-0.141-0.369 0-0.51l3.508-3.509h-17.155c-0.2 0-0.361-0.162-0.361-0.361s0.162-0.361 0.361-0.361h17.155l-3.508-3.509c-0.141-0.141-0.141-0.369 0-0.51zM21.736 24.5v2.5c0 2.266-1.845 4.111-4.111 4.111h-12.563c-2.266 0-4.111-1.845-4.111-4.111v-22c0-2.266 1.845-4.111 4.111-4.111h12.563c2.266 0 4.111 1.845 4.111 4.111v2.5c0 0.2-0.162 0.361-0.361 0.361s-0.361-0.162-0.361-0.361v-2.5c0-1.869-1.519-3.389-3.389-3.389h-12.563c-1.869 0-3.389 1.52-3.389 3.389v22c0 1.869 1.52 3.389 3.389 3.389h12.563c1.869 0 3.389-1.52 3.389-3.389v-2.5c0-0.199 0.162-0.361 0.361-0.361s0.361 0.162 0.361 0.361z"></path>
+            <path strokeLinejoin="miter" strokeLinecap="butt" strokeMiterlimit="4" strokeWidth="1.7778" d="M27.209 11.682l0-0c0.141-0.141 0.369-0.141 0.511 0l2.799 2.799c0.871 0.871 0.871 2.291 0 3.162l-2.799 2.799c-0.071 0.071-0.162 0.106-0.255 0.106s-0.184-0.035-0.255-0.106h-0c-0.141-0.141-0.141-0.369 0-0.51l3.508-3.509h-17.155c-0.2 0-0.361-0.162-0.361-0.361s0.162-0.361 0.361-0.361h17.155l-3.508-3.509c-0.141-0.141-0.141-0.369 0-0.51zM21.736 24.5v2.5c0 2.266-1.845 4.111-4.111 4.111h-12.563c-2.266 0-4.111-1.845-4.111-4.111v-22c0-2.266 1.845-4.111 4.111-4.111h12.563c2.266 0 4.111 1.845 4.111 4.111v2.5c0 0.2-0.162 0.361-0.361 0.361s-0.361-0.162-0.361-0.361v-2.5c0-1.869-1.519-3.389-3.389-3.389h-12.563c-1.869 0-3.389 1.52-3.389 3.389v22c0 1.869 1.52 3.389 3.389 3.389h12.563c1.869 0 3.389-1.52 3.389-3.389v-2.5c0-0.199 0.162-0.361 0.361-0.361s0.361 0.162 0.361 0.361z"></path>
             </svg>);
 
         case "icon-close" :
@@ -55,7 +55,7 @@ const SvgInsert = ({id}) => {
 
         case "icon-account" :
             return (<svg id="icon-account" viewBox="0 0 32 32" width="20" height="20">
-            <path fill="#fff" d="M16 1.186c-8.178 0-14.815 6.637-14.815 14.815s6.637 14.815 14.815 14.815c8.178 0 14.815-6.637 14.815-14.815s-6.637-14.815-14.815-14.815zM16 7.112c2.859 0 5.185 2.326 5.185 5.185s-2.326 5.185-5.185 5.185c-2.859 0-5.185-2.326-5.185-5.185s2.326-5.185 5.185-5.185zM16 27.852c-3.007 0-6.563-1.215-9.096-4.267 2.595-2.036 5.798-3.143 9.096-3.143s6.501 1.107 9.096 3.143c-2.533 3.052-6.089 4.267-9.096 4.267z"></path>
+            <path d="M16 1.186c-8.178 0-14.815 6.637-14.815 14.815s6.637 14.815 14.815 14.815c8.178 0 14.815-6.637 14.815-14.815s-6.637-14.815-14.815-14.815zM16 7.112c2.859 0 5.185 2.326 5.185 5.185s-2.326 5.185-5.185 5.185c-2.859 0-5.185-2.326-5.185-5.185s2.326-5.185 5.185-5.185zM16 27.852c-3.007 0-6.563-1.215-9.096-4.267 2.595-2.036 5.798-3.143 9.096-3.143s6.501 1.107 9.096 3.143c-2.533 3.052-6.089 4.267-9.096 4.267z"></path>
             </svg>);
 
         case "icon-delete" :
@@ -66,13 +66,13 @@ const SvgInsert = ({id}) => {
         case "icon-heart" :
             return (<svg id="icon-heart" viewBox="0 0 35 32" width="24" height="22" className={scss.heart}>
             <path d="M9.333 1.333c-4.418 0-8 3.645-8 8.142 0 3.63 1.4 12.246 15.181 20.955 0.247 0.154 0.53 0.236 0.819 0.236s0.572-0.082 0.819-0.236c13.781-8.709 15.181-17.325 15.181-20.955 0-4.497-3.582-8.142-8-8.142s-8 4.935-8 4.935c0 0-3.582-4.935-8-4.935z"></path>
-            <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M9.333 1.333c-4.418 0-8 3.645-8 8.142 0 3.63 1.4 12.246 15.181 20.955 0.247 0.154 0.53 0.236 0.819 0.236s0.572-0.082 0.819-0.236c13.781-8.709 15.181-17.325 15.181-20.955 0-4.497-3.582-8.142-8-8.142s-8 4.935-8 4.935c0 0-3.582-4.935-8-4.935z"></path>
+            <path strokeLinejoin="round" strokeLinecap="round" strokeMiterlimit="4" strokeWidth="2.6667" d="M9.333 1.333c-4.418 0-8 3.645-8 8.142 0 3.63 1.4 12.246 15.181 20.955 0.247 0.154 0.53 0.236 0.819 0.236s0.572-0.082 0.819-0.236c13.781-8.709 15.181-17.325 15.181-20.955 0-4.497-3.582-8.142-8-8.142s-8 4.935-8 4.935c0 0-3.582-4.935-8-4.935z"></path>
             </svg>);
 
         case "icon-add-pet" :
             return (<svg id="icon-add-pet" viewBox="0 0 32 32">
             <path fill="#fff" d="M16 30.222v0zM16 16v0zM16 16v0zM16 16v0z"></path>
-            <path fill="none" stroke="#fff" stroke-linejoin="miter" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M16 30.222v-14.222M16 16v-14.222M16 16h14.222M16 16h-14.222"></path>
+            <path fill="none" stroke="#fff" strokeLinejoin="miter" strokeLinecap="round" strokeMiterlimit="4" strokeWidth="2.6667" d="M16 30.222v-14.222M16 16v-14.222M16 16h14.222M16 16h-14.222"></path>
             </svg>);
 
         case "icon-edit-avatar" :
@@ -89,9 +89,9 @@ const SvgInsert = ({id}) => {
 
         case "icon-reset-search" :
             return (<svg id="icon-reset-search" viewBox="0 0 32 32">
-            <path fill="none" stroke="#111" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M16 28c6.627 0 12-5.373 12-12s-5.373-12-12-12c-6.627 0-12 5.373-12 12s5.373 12 12 12z"></path>
-            <path fill="none" stroke="#000" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M20 12l-8 8"></path>
-            <path fill="none" stroke="#000" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M12 12l8 8"></path>
+            <path fill="none" stroke="#111" strokeLinejoin="round" strokeLinecap="round" strokeMiterlimit="4" strokeWidth="2.6667" d="M16 28c6.627 0 12-5.373 12-12s-5.373-12-12-12c-6.627 0-12 5.373-12 12s5.373 12 12 12z"></path>
+            <path fill="none" stroke="#000" strokeLinejoin="round" strokeLinecap="round" strokeMiterlimit="4" strokeWidth="2.6667" d="M20 12l-8 8"></path>
+            <path fill="none" stroke="#000" strokeLinejoin="round" strokeLinecap="round" strokeMiterlimit="4" strokeWidth="2.6667" d="M12 12l8 8"></path>
             </svg>);
 
         default:
