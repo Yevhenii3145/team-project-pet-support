@@ -7,7 +7,7 @@ const RegisterPage = () => {
     <section className={scss.register__container}>
       <div className={scss.register__section}>
         <h1 className={scss.register__tittle}>Registration</h1>
-       <AuthForm page={'register'}/>
+       <AuthForm />
       </div>
     </section>
   );
