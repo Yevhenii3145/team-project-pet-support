@@ -15,8 +15,6 @@ h1 {
 //   width: 320px;
 // }
 
-.news {
-}
 .title {
   padding-top: 45px;
 
@@ -24,4 +22,11 @@ h1 {
   font-size: 24px;
   line-height: 1.375;
   text-align: center;
+  @media (min-width: 768px) {
+    padding-top: 90px;
+    font-size: 48px;
+  }
+  @media (min-width: 1280px) {
+    padding-top: 70px;
+  }
 }
