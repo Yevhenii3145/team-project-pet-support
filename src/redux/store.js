@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { menuSlice } from './menuSlice';
+import { menuSlice, authReducer } from './menuSlice';
 
 const persistConfig = {
   key: 'token',
@@ -19,8 +19,9 @@ const persistConfig = {
 };
 
 export const store = configureStore({
-  reducer: { 
-    menu: persistReducer(persistConfig, menuSlice.reducer),     
+  reducer: {
+    menu: persistReducer(persistConfig, menuSlice.reducer),
+    auth: authReducer,
   },
 
   middleware: getDefaultMiddleware =>
@@ -30,6 +31,5 @@ export const store = configureStore({
       },
     }),
 });
-
 
 export const persistor = persistStore(store);
