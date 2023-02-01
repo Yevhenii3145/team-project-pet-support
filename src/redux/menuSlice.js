@@ -38,46 +38,46 @@ export const authSlice = createSlice({
       );
     },
     
-        // [login.fulfilled]: (store, { payload }) => {
-        //     console.log('payload', payload)
-        //     store.loading = false;
-        //     store.user = payload.user;
-        //     store.token = payload.token;
-        //     store.isLogin = true;
-        // },
-        // [login.rejected]: (store, { payload }) => {
-        //     console.log('payload', payload)
-        //     alert('Логин или пароль не верный, попробуйте снова.')
-        //     store.loading = false;
-        //     store.error = payload;
-        // },
-        // [logout.pending]: (store) => {
-        //     store.loading = true;
-        //     store.error = null;
-        // },
-        // [logout.fulfilled]: (store, {payload}) => {
-        //     store.loading = false;
-        //     store.user = {};
-        //     store.token = "";
-        //     store.isLogin = false;
-        // },
-        // [logout.rejected]: (store, {payload}) => {
-        //     store.loading = false;
-        //     store.error = payload;
-        // },
-        // [current.pending]: (store) => {
-        //     store.isLoadingUser = true;
-        //     store.error = null;
-        // },
-        // [current.fulfilled]: (store, {payload}) => {
-        //     store.isLoadingUser = false;
-        //     store.user = payload;
-        //     store.isLogin = true;
-        // },
-        // [current.rejected]: (store, {payload}) => {
-        //     store.isLoadingUser = false;
-        //     store.error = payload;
-        // },
+        [operations.login.fulfilled]: (store, { payload }) => {
+            console.log('payload', payload)
+            store.loading = false;
+            store.user = payload.user;
+            store.token = payload.token;
+            store.isLogin = true;
+        },
+        [operations.login.rejected]: (store, { payload }) => {
+            console.log('payload', payload)
+            alert('Логин или пароль не верный, попробуйте снова.')
+            store.loading = false;
+            store.error = payload;
+        },
+        [operations.logout.pending]: (store) => {
+            store.loading = true;
+            store.error = null;
+        },
+        [operations.logout.fulfilled]: (store, {payload}) => {
+            store.loading = false;
+            store.user = {};
+            store.token = "";
+            store.isLogin = false;
+        },
+        [operations.logout.rejected]: (store, {payload}) => {
+            store.loading = false;
+            store.error = payload;
+        },
+        [operations.current.pending]: (store) => {
+            store.isLoadingUser = true;
+            store.error = null;
+        },
+        [operations.current.fulfilled]: (store, {payload}) => {
+            store.isLoadingUser = false;
+            store.user = payload;
+            store.isLogin = true;
+        },
+        [operations.current.rejected]: (store, {payload}) => {
+            store.isLoadingUser = false;
+            store.error = payload;
+        },
   },
 });
 

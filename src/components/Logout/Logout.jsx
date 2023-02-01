@@ -1,10 +1,18 @@
 import scss from "./logout.module.scss";
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../../redux/auth/auth-operations'
 
-const Logout = () => {
+export default function Logout() {
+    const dispatch = useDispatch()
+  
+
+    const onLogout = () => {
+        dispatch(logout())
+    }
+
 
     return (
-        <div>Logout</div>
+        <button onClick={onLogout}>Logout</button>
     )
 }
-
-export default Logout;

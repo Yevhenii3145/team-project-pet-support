@@ -11,6 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { menuSlice, authReducer } from './menuSlice';
+// import authReducer from './auth/auth-slice'
 
 const persistConfig = {
   key: 'token',
@@ -18,10 +19,13 @@ const persistConfig = {
   whitelist: ['token'],
 };
 
+// const persistedReducer = persistReducer(persistConfig, authReducer)
+
 export const store = configureStore({
   reducer: {
     menu: persistReducer(persistConfig, menuSlice.reducer),
     auth: authReducer,
+    // auth: persistedReducer,
   },
 
   middleware: getDefaultMiddleware =>
