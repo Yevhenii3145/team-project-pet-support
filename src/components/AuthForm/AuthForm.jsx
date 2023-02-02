@@ -236,7 +236,6 @@ const AuthForm = () => {
                 type="submit"
               >
                 Login
-
               </button>
             </Form>
           </Formik>

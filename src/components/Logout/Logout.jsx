@@ -1,9 +1,20 @@
 import scss from "./logout.module.scss";
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../../redux/auth/auth-operations'
 
-export function Logout() {
+export default function Logout() {
+    const dispatch = useDispatch()
+  
+
+    const onLogout = () => {
+        dispatch(logout())
+    }
+
+
+
     return (
-        <div className={scss.logout_box}>
-            <button className={scss.logout_button} type="button">Logout</button>
-        </div>
+        <button onClick={onLogout}>Logout</button>
+
     )
 }
