@@ -4,20 +4,19 @@ import scss from "./nav.module.scss";
 import AuthNav from "./AuthNav/AuthNav";
 import UserNav from "./UserNav/UserNav";
 import { setMenuActive } from "redux/menuSlice";
-import { tr } from "date-fns/locale";
 
 const Nav = () => {
 
     const isActive = useSelector(state=>state.menu.menuActive)
-    // const isLogin = useSelector(state=>state.auth.isLogin)
+    const isLogin = useSelector(state=>state.auth.isLogin)
     const dispatch = useDispatch();
 
     return (
         <>
         <div className={isActive === false ? scss.wrapper : `${scss.wrapper} ${scss.isActive}`}>
         <div className={scss.authWrapper}>
-        {/* {isLogin ? <UserNav/> : <AuthNav/>} */}
-        <AuthNav/> 
+        {isLogin ? <UserNav/> : <AuthNav/>}
+        {/* <AuthNav/>  */}
         {/* <UserNav/> */}
         </div>
         <div className={scss.linkWrapper}>
