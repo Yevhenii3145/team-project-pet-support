@@ -2,27 +2,34 @@ import scss from "./OurFriendsPageItem.module.scss"
 
 const OurFriendsPageItem = ({ title, day, start, end, adress, email, phone, foto }) => {
     return (
-        <li className={scss.gg}>
+        <li className={scss.card_item}>
             <h2>{title}</h2>
             {/* ${foto} */}
             <div className={scss.wrapper}>
-                <div className={scss.zagluchay}>r</div>
+
+                <div className={scss.zagluchay}>
+                    <img src={foto} alt={`foto of ${title}`} />
+                </div>
                 <div className="scss.qwe">
                     <div>
                         <p>Time:</p>
-                        {start}-{end}
+                        <span>{start}-{end}</span>
+
                     </div>
                     <div>
                         <p>Address:</p>
-                        {adress}
+                        <span className={scss.underline}>{adress}</span>
+
                     </div>
                     <div>
                         <p>Email:</p>
-                        {email}
+                        <link rel="stylesheet" href="" />
+                        <a href={`mailto: ${email}`}>{email}</a>
+
                     </div>
                     <div>
                         <p>Phone:</p>
-                        {phone}
+                        <span>{phone}</span>
                     </div>
                 </div>
             </div>
