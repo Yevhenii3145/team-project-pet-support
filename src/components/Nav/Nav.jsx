@@ -4,6 +4,7 @@ import scss from "./nav.module.scss";
 import AuthNav from "./AuthNav/AuthNav";
 import UserNav from "./UserNav/UserNav";
 import { setMenuActive } from "redux/menuSlice";
+import { tr } from "date-fns/locale";
 
 const Nav = () => {
 
@@ -20,9 +21,9 @@ const Nav = () => {
         {/* <UserNav/> */}
         </div>
         <div className={scss.linkWrapper}>
-        <NavLink to={'news'} className={scss.linkMain} onClick={()=>dispatch(setMenuActive(!isActive))}>News</NavLink>
-        <NavLink to={'notices'} className={scss.linkMain} onClick={()=>dispatch(setMenuActive(!isActive))}>Find pet</NavLink>
-        <NavLink to={'friends'} className={scss.linkMain} onClick={()=>dispatch(setMenuActive(!isActive))}>Our friends</NavLink>
+            {isActive === true ? <NavLink to={'news'} className={scss.linkMain} onClick={()=>dispatch(setMenuActive(!isActive))}>News</NavLink> : <NavLink to={'news'} className={scss.linkMain}>News</NavLink>}
+            {isActive === true ? <NavLink to={'notices'} className={scss.linkMain} onClick={()=>dispatch(setMenuActive(!isActive))}>Find pet</NavLink> : <NavLink to={'notices'} className={scss.linkMain}>Find pet</NavLink>}
+            {isActive === true ? <NavLink to={'friends'} className={scss.linkMain} onClick={()=>dispatch(setMenuActive(!isActive))}>Our friends</NavLink> : <NavLink to={'friends'} className={scss.linkMain}>Our friends</NavLink>}
         </div>
         </div>
         </>
