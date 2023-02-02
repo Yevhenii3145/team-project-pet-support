@@ -20,8 +20,60 @@ const registerNewUser = createAsyncThunk(
   }
 );
 
+const login = createAsyncThunk(
+    "auth/login",
+    async(data, { rejectWithValue }) => {
+        try {
+            const result = await axios.post('/users/login', data);
+            return result.data;
+        } catch({response}) {
+            const error = {
+                status: response.status,
+                message: response.data.message,
+            }
+            return rejectWithValue(error);
+        }
+    }
+)
+
+const logout = createAsyncThunk(
+    "auth/logout",
+    async(_, { rejectWithValue }) => {
+        try {
+            const result = await axios.post('/users/logout');
+            return result;
+        } catch ({response}) {
+            const error = {
+                status: response.status,
+                message: response.data.message
+            }
+            return rejectWithValue(error);
+        }
+    }
+)
+
+const current = createAsyncThunk(
+    "auth/current",
+    async(_, { rejectWithValue, getState }) => {
+        try {
+            const { auth } = getState();
+            const result = await axios.get('/users/current', auth.token);
+            return result;
+        } catch ({response}) {
+            const error = {
+                status: response.status,
+                message: response.data.message
+            }
+            return rejectWithValue(error);
+        }
+    }
+)
+
 const operations = {
   registerNewUser,
+  login,
+  logout,
+  current
 };
 
 export default operations;

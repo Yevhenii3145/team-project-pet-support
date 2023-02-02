@@ -11,8 +11,8 @@ const AuthNav = () => {
 
     return (
         <>
-        <NavLink to={'login'} className={scss.login} onClick={()=>dispatch(setMenuActive(!isActive))}>Login</NavLink>
-        <NavLink to={'register'} className={scss.register} onClick={()=>dispatch(setMenuActive(!isActive))}>Registration</NavLink>
+        {isActive === true ? <NavLink to={'login'} className={scss.login} onClick={()=>dispatch(setMenuActive(!isActive))}>Login</NavLink> : <NavLink to={'login'} className={scss.login}>Login</NavLink>}
+        {isActive === true ? <NavLink to={'register'} className={scss.register} onClick={()=>dispatch(setMenuActive(!isActive))}>Registration</NavLink> : <NavLink to={'register'} className={scss.register}>Registration</NavLink>}
         </>
     )
 }

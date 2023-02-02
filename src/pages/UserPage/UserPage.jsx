@@ -2,7 +2,7 @@
 
 import React from "react";
 import { UserData } from "../../components/UserData/UserData";
-import { Logout } from "../../components/Logout/Logout";
+import Logout from "../../components/Logout/Logout";
 import PetsData from "../../components/PetsData/PetsData";
 import scss from "../../helpers/container.module.scss";
 

@@ -1,4 +1,4 @@
-import scss from "./notices-categories-list.module.scss";
+// import scss from "./notices-categories-list.module.scss";
 
 const NoticesCategoriesList = () => {
 

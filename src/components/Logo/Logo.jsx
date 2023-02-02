@@ -1,7 +1,6 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import scss from "./logo.module.scss";
-import img from "../../images/cat1.webp";
 import SvgInsert from "../Svg/Svg";
 import { setMenuActive } from "redux/menuSlice";
 
