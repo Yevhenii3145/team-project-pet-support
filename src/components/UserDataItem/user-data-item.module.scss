@@ -26,8 +26,9 @@
 
 
 .userItem_button {
-    display: block;
-    width: 62px;
+    position: relative;
+    display: flex;
+    width: 80px;
     height: 22px;
     margin-left: auto;
     font-family: "Manrope";
@@ -38,9 +39,14 @@
     padding: 0;
     background-color:$lightColor;
     border: none;
+    justify-content: space-between;
 
 }
 
+.userDataForm_box {
+    display: block;
+    margin: 0 12px 44px 16px;
+}
 
 .userItem_field {
     text-align: left;
@@ -55,19 +61,22 @@
 
 }
 
-.userItem_box_text {
+.form_box {
     display: flex;
-    margin: 27px auto 44px 16px;
-    
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+
 }
 
-.register__input {
+.userDataForm_field {
     display: block;
     width: 159px;
     height: 24px;
     box-sizing: border-box;
-    background: #fdf7f2;
-    border: 1px solid rgba(245, 146, 86, 0.5);
+    background: $lightColor;
+    border: 1px solid $lightColor;
     border-radius: 40px;
     font-style: normal;
     font-weight: 400;
@@ -79,18 +88,28 @@
     padding: 11px 14px 12px;
     margin-top: 16px;
 
-    &:first-child {
-        margin-top: 0px;
-    }
-
-    &:nth-child(3) {
-        margin-bottom: 40px;
-    }
 }
 
-.form_box {
-    display: flex; 
-    flex-direction: row;
-     justify-content: space-between; 
-     align-items: flex-end;
+
+.iconEdit_btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background-color: $background;
+    padding: 0;
+
+}
+
+.iconEdit_btn::before {
+    position:absolute;
+
+   
+    content: '';
+    
+
 }

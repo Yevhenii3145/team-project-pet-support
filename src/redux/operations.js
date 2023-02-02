@@ -20,6 +20,18 @@ const registerNewUser = createAsyncThunk(
   }
 );
 
+export const fetchUserData = createAsyncThunk(
+    "auth/user",
+    async(user, thunkAPI) => {
+        try {
+            const response = await axios.post("/auth/user", user);
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
+
 const operations = {
   registerNewUser,
 };

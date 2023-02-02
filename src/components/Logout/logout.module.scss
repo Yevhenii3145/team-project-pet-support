@@ -1,9 +1,10 @@
 @import "../../helpers/variables.module.scss";
 
 .logout_button {
-    
-    width: 63px;
-    display: block;
+    position: relative;
+    width: 75px;
+    display: flex;
+    justify-content: space-between;
     height: 22px;
     margin-left: auto;
     font-family: "Manrope";
@@ -14,6 +15,11 @@
     padding: 0;
     background-color: $lightColor;
     border: none;
+}
+
+.logout_button::before {
+    position: absolute;
+    content: "";
 }
 
 .logout_box {

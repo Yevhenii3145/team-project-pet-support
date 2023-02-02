@@ -1,4 +1,5 @@
 import scss from "./pets-list.module.scss";
+import SvgInsert from "../Svg/Svg";
 
 
 
@@ -23,7 +24,7 @@ export function PetsList() {
                 <p className={scss.petsList_field}>Breed:    petBreed</p>
                 <p className={scss.petsList_field}>Comments:</p>
                 <div className={scss.petsList_boxBtn} >
-                    <button className={scss.petsList_button} type='button'>X</button>
+                    <button className={scss.petsList_button} type='button'><SvgInsert id='icon-delete'/></button>
                 </div>
             </div>
         </div>
