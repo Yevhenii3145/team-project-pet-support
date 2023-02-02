@@ -16,6 +16,10 @@
     border-radius: 0px 0px 20px 20px;
 }
 
+.card_img {
+    width: 280px;
+}
+
 .card_info {
     padding-top: 20px;
     padding-bottom: 32px;
@@ -25,6 +29,7 @@
 
 .card_info_title {
     margin-bottom: 20px;
+    width: 231px;
     font-size: 28px;
     line-height: 1.36;
     letter-spacing: -0.01em;
@@ -60,7 +65,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin: 20px auto 0;
     padding-top: 8px;
     padding-bottom: 8px;
     min-width: 248px;
@@ -94,4 +99,44 @@
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(2px);
     border-radius: 0px 40px 40px 0px;
+}
+
+// ============== Tablet ======================
+
+@media screen and (min-width: 768px) {
+    .card_list {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .card_item {
+        width: 336px;
+        border-radius: 0px 0px 40px 40px;
+    }
+
+    .card_img {
+        width: 336px;
+    }
+
+    .card_info {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+// ============== Desktop ======================
+
+@media screen and (min-width: 1280px) {
+    .card_item {
+        width: 288px;
+    }
+
+    .card_img {
+        width: 288px;
+    }
+
+    .learn_more_btn {
+        box-shadow: 7px 4px 16px rgba(0, 0, 0, 0.08);
+    }
 }

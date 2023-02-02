@@ -12,7 +12,9 @@ export default function Logout() {
     }
 
 
+
     return (
         <button onClick={onLogout}>Logout</button>
+
     )
 }

@@ -1,0 +1,138 @@
+@import "../../../helpers/variables.module.scss";
+
+
+.modalAdds_page  {
+    max-width: 280px;
+    max-height: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    margin-bottom: 40px;
+    text-align: center;
+    background: $lightColor;
+    background-position: bottom;
+    background-size: contain;
+    // height: 100vh;
+    background-repeat: no-repeat;
+}
+
+.modalAdds_page__tittle {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    margin: 0px 0px 20px;
+    padding: 0;
+}
+
+.modalAdds_page__input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    background: $background;
+    border: 1px solid rgba(245, 146, 86, 0.5);
+    border-radius: 40px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    color: rgba(17, 17, 17, 0.6);
+    text-align: left;
+    padding-left: 14px;
+    margin-top: 8px;
+}
+
+input:first-child {
+    margin-top: 0;
+}
+
+.modalAdds_page__label {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #111111;
+}
+
+.modalAdds_page__field {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #111111;
+    margin-bottom: 20px;
+}
+
+.modalAdds_page_box {
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 16px auto 0 0;
+
+    &:first-child {
+        margin-top: 0px;
+        }
+}
+
+.modalAdds_page__photoBox {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
+
+.modalAdds_commit_box {
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 20px auto 40px 0;
+}
+
+.modalAdds_commit {
+    display: block;
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    background: $background;
+    border: 1px solid $accentColor;
+    border-radius: 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    color: rgba(17, 17, 17, 0.6);
+    padding-left: 14px;
+    padding-top: 12px;
+    margin-top: 8px;
+        
+
+}
+
+.modalAdds_page__button {
+    margin: 0;
+    padding: 0;
+    padding: 10px 28px;
+    background: $accentColor;
+    border-radius: 40px;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.5;
+    width: 100%;
+    cursor: pointer;
+    border-width: 0;
+
+    // &:hover,
+    // &:focus {
+    //     background: $accentColor;
+    // }
+}
+

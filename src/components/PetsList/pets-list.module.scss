@@ -1,0 +1,56 @@
+@import "../../helpers/variables.module.scss";
+
+
+.petsList_box {
+    display: block;
+    width: 100%;
+    background: $lightColor;
+    box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    margin-top: 26px;
+    padding-top: 16px;
+}
+
+
+.petsList_photo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+
+}
+
+
+
+.petsList_text_box {
+    display: block;
+    margin-top: 20px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    position: relative;
+    // z-index: 6;
+}
+
+.petsList_field{
+    text-align: left;
+    color: #111111;
+    margin-top: 10px;
+    background-color: $lightColor;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.33;
+}
+
+.petsList_button {
+    margin: 0 auto;
+    display: block;
+    background-color: $lightColor;
+    border: none;
+    position: absolute;
+    left: 80%;
+    bottom: 100%;
+    top: 5px;
+}

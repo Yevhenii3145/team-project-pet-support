@@ -1,4 +1,4 @@
-import scss from "./modal-add-notice.module.scss";
+// import scss from "./modal-add-notice.module.scss";
 
 const ModalAddNotice = () => {
 
