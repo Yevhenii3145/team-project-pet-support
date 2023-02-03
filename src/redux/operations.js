@@ -15,6 +15,7 @@ const registerNewUser = createAsyncThunk(
       const response = await axios.post('/auth/register', user);
       return response.data;
     } catch (error) {
+      console.log(error.message)
       return thunkAPI.rejectWithValue(error.message);
     }
   }

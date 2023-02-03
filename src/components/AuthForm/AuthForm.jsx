@@ -45,6 +45,7 @@ const AuthForm = () => {
   const page = location.pathname;
 
   let user = useSelector(state => state.auth.user);
+  const loading = useSelector(state => state.auth.loading);
   const dispatch = useDispatch();
 
   const initialValue = {
