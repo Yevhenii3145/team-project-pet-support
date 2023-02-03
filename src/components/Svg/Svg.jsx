@@ -156,7 +156,11 @@ const SvgInsert = ({ id }) => {
 
     case 'icon-add-pet':
       return (
-        <svg id="icon-add-pet" viewBox="0 0 32 32">
+        <svg id="icon-add-pet"
+          viewBox="0 0 32 32"
+          width="32"
+          height="32"
+          className={scss.iconAddPet}>
           <path fill="#fff" d="M16 30.222v0zM16 16v0zM16 16v0zM16 16v0z"></path>
           <path
             fill="none"

@@ -73,3 +73,17 @@
   }
 }
 
+.iconAddPet{
+  @media (min-width: 768px) {
+    background-color: coral;
+    padding: 7px;
+    border-radius: 50px;
+    margin-left: 12px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      stroke: $accentColor;
+    }
+  }
+}
