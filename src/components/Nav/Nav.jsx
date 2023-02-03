@@ -16,8 +16,6 @@ const Nav = () => {
         <div className={isActive === false ? scss.wrapper : `${scss.wrapper} ${scss.isActive}`}>
         <div className={scss.authWrapper}>
         {isLogin ? <UserNav/> : <AuthNav/>}
-        {/* <AuthNav/>  */}
-        {/* <UserNav/> */}
         </div>
         <div className={scss.linkWrapper}>
             {isActive === true ? <NavLink to={'news'} className={scss.linkMain} onClick={()=>dispatch(setMenuActive(!isActive))}>News</NavLink> : <NavLink to={'news'} className={scss.linkMain}>News</NavLink>}
