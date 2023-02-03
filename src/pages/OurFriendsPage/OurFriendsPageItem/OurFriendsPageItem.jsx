@@ -1,40 +1,51 @@
-import scss from "./OurFriendsPageItem.module.scss"
+import scss from './our-friends-page-item.module.scss';
 
-const OurFriendsPageItem = ({ title, day, start, end, adress, email, phone, foto }) => {
+const OurFriendsPageItem = ({
+    title,
+    start,
+    end,
+    adress,
+    email,
+    phone,
+    foto,
+}) => {
     return (
         <li className={scss.card_item}>
             <h2>{title}</h2>
-            {/* ${foto} */}
             <div className={scss.wrapper}>
-
-                <div className={scss.zagluchay}>
-                    <img src={foto} alt={`foto of ${title}`} />
+                <div className={scss.plug}>
+                    {foto && (
+                        <img
+                            className={scss.item_image}
+                            src={foto}
+                            alt={`foto of ${title}`}
+                        />
+                    )}
                 </div>
-                <div className="scss.qwe">
-                    <div>
-                        <p>Time:</p>
-                        <span>{start}-{end}</span>
+                <div>
+                    <p>Time:</p>
+                    <span>
+                        {start}-{end}
+                    </span>
+                    <p>Address:</p>
+                    <span className={scss.underline}>{adress}</span>
 
-                    </div>
-                    <div>
-                        <p>Address:</p>
-                        <span className={scss.underline}>{adress}</span>
 
-                    </div>
-                    <div>
-                        <p>Email:</p>
-                        <link rel="stylesheet" href="" />
-                        <a href={`mailto: ${email}`}>{email}</a>
-
-                    </div>
-                    <div>
-                        <p>Phone:</p>
-                        <span>{phone}</span>
-                    </div>
+                    {/* <span (if ({adress} !== '-------------------------')) {(className={scss.underline}))>{adress}</span> */}
+                    <p>Email:</p>
+                    {/* {({ email } === 1) ? (<span>uuuu</span>) : (<a href={`mailto: ${email}`}>{email}</a>)} */}
+                    {/* if ({email} !== ('-------------------------')) {
+                        (<a href={`mailto: ${email}`}>{email}</a>)
+                    }else {
+                        (<span>uuuu</span>)
+                    } */}
+                    <a href={`mailto: ${email}`}>{email}</a>
+                    <p>Phone:</p>
+                    <span>{phone}</span>
                 </div>
             </div>
         </li>
-    )
-}
+    );
+};
 
 export default OurFriendsPageItem;
