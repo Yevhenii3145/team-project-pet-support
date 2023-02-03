@@ -15,10 +15,8 @@ function PetsData() {
 
   return (
         <>
-          <div className={scss.petsData_title_box}>
-                <div className={scss.petsData_title_box}>
-                    <h2 className={scss.petsData_title}>My pets:</h2> 
-                </div>
+            <div className={scss.petsData_title_box}>
+                <h2 className={scss.petsData_title}>My pets:</h2> 
                 <div className={scss.addPetModal_buttonBox}>
                     <button className={scss.addPetModal_button} type='button' onClick={() => setModalActivePageOne(true)}>Add pet<SvgInsert id='icon-add-pet'/></button>
                 </div>

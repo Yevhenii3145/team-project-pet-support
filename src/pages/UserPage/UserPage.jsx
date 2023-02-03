@@ -11,7 +11,7 @@ import style from "./user-page.module.scss"
 function UserPage() {
 
     return (
-        <div className={scss.container}>
+        <div className={scss.container }>
             <h2 className={style.userPage_title}>My information:</h2>
             <div className={style.userData_box}>
                 <UserData />

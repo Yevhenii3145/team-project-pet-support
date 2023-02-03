@@ -25,6 +25,17 @@
 
 .logout_box {
     display: block;
-
     text-align: right;
+    font-size: 12px;
+
+@media screen and (min-width: 768px) {
+    position: absolute;
+
+    top: 460px;
+    
+}
+
+@media screen and (min-width: 1280px) {
+
+}
 }

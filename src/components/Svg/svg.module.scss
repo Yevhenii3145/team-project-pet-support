@@ -81,6 +81,11 @@
 
 .iconEdit  {
   fill: $accentColor;
+
+@media screen and (min-width: 768px) {
+  width: 20px;
+  height: 20px;
+  }
 }
 
 .iconLogout 
@@ -110,4 +115,19 @@
 
 .iconDone {
   fill: $accentColor;
+
+@media screen and (min-width: 768px) {
+  width: 20px;
+  height: 20px;
+  }
+}
+
+.edit_avatar {
+  fill: $accentColor;
+  margin-bottom: -2px;
+  margin-right: 3px;
+
+  &:hover {
+    fill: #ff6101;
+  }
 }

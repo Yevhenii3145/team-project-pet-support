@@ -1,24 +1,25 @@
 @import "../../helpers/variables.module.scss";
 
-.userData_container {
-    display: block;
-    width: 100%;
-    margin-bottom: 47px;
+.container {
+    // padding: 0 20px;
+    // width: 320px;
+    // display: block;
     
 
-        @media screen and (min-width: 768px) {
-                width: 100%;
-                margin: 0 32px 20px 0;
-                padding: 0 32px;
-                display: flex;
+@media screen and (min-width: 768px) {
+                // width: 100%;
+                // margin: 0 32px 20px 0;
+                // padding: 0 32px;
+    
+    // position: relative;
 
-            }
+}
             
-            @media screen and (min-width: 1280px) {
-                width: 1280px;
-                padding: 0 16px;
-            }
-        }
+@media screen and (min-width: 1280px) {
+    width: 1280px;   
+    padding: 0 16px;
+}
+}
 
 
 .userPage_title {
@@ -55,17 +56,19 @@
     padding-bottom: 20px;
     background-color: $lightColor;
     padding: 20px 24px;
+    
 
-        @media screen and (min-width: 768px) {
-            border-radius: 0 40px 40px 0;
-            padding: 40px 40px 24px 32px;
-            margin: 0;
-             
-            }
+@media screen and (min-width: 768px) {
+    border-radius: 0 40px 40px 0;
+    padding: 40px 40px 24px 32px;
+    margin: 0;
+    right: 32px;
+    // position: absolute;
+}
         
-        @media screen and (min-width: 1280px) {
-                margin-bottom: 17px;
-                margin-left: 24px;
-            }
+@media screen and (min-width: 1280px) {
+    margin-bottom: 17px;
+    margin-left: 24px;
+}
             
     }

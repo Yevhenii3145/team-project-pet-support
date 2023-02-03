@@ -9,36 +9,34 @@
     margin-right: auto;
     text-align: center;
 
-    @media screen and (min-width: 768px) {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-        justify-content: space-between;
-        margin: 0;
-
-
-        }
+@media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    position: relative;
+}
     
-        @media screen and (min-width: 1280px) {
-            width: 411px;
-            height: 541px;
+@media screen and (min-width: 1280px) {
+    width: 411px;
+    height: 541px;
 
 }
 }
 
 .userItem_box_yourPhoto {
 
-        @media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
         // display: block;
 
-
-        }
+}
     
-    @media screen and (min-width: 1280px) {
+@media screen and (min-width: 1280px) {
 
 }
 }
-
 
 .userItem__yourPhoto {
     display: block;
@@ -49,8 +47,18 @@
 
 .userItem_box_btnPhoto {
     display: block;
-    margin: 12px 0 36px 0;
+    margin-top: 8px;
     text-align: right;
+
+@media screen and (min-width: 768px) {
+        // display: block;
+    margin-top: 8px;
+
+}
+    
+@media screen and (min-width: 1280px) {
+
+}
 }
 
 
@@ -76,17 +84,16 @@
     display: block;
     margin-bottom: 44px;
 
-    @media screen and (min-width: 768px) {
-        display: block;
+@media screen and (min-width: 768px) {
+    width: 379px;
+    height: 192px;
      
-     }
-    
-    @media screen and (min-width: 1280px) {
-
-    }
- 
 }
+    
+@media screen and (min-width: 1280px) {
 
+}
+}
 
 
 .field_box {
@@ -97,7 +104,18 @@
     align-items: center;
     
     &:not(:last-child) {
-            margin-bottom: 12px;
+        margin-bottom: 12px;
+    }
+
+            @media screen and (min-width: 768px) {
+                &:not(:last-child) {
+                    margin-bottom: 8px;
+                }
+     
+        }
+    
+            @media screen and (min-width: 1280px) {
+
         }
 }
 
@@ -115,10 +133,17 @@
     line-height: 1.33;
     letter-spacing: 0.04em;
     color: rgba(17, 17, 17, 0.6);
-
     padding: 0;
 
+            @media screen and (min-width: 768px) {
+                font-size: 18px;
+                line-height: 1.33;
+                }
+     
 
+            @media screen and (min-width: 1280px) {
+
+            }
 }
 
 .userDataForm_field_active {
@@ -153,7 +178,16 @@
     background-color: $background;
     padding: 0;
 
-}
+
+    @media screen and (min-width: 768px) {
+            width: 32px;
+            height: 32px;
+        }
+    
+    
+        @media screen and (min-width: 1280px) {}
+    }
+
 
 .iconEdit_btn::before {
     position:absolute;
@@ -171,6 +205,17 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33;
+
+        @media screen and (min-width: 768px) {
+            font-size: 18px;
+            line-height: 1.33;
+        }
+    
+    
+    
+        @media screen and (min-width: 1280px) {
+
+        }
 
 }
       
