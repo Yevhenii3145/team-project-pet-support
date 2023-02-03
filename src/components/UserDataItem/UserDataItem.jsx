@@ -32,18 +32,18 @@ export default function UserDataItem() {
             <div className={scss.userItem_box_btnPhoto}>
                 <button className={scss.userItem_button} type="button" onClick={onClick}>Edit photo</button>
                 {onClick
-                    ? <form onSubmit={handelSabmit} style={{ opacity: '0' }} enctype="multipart/form-data">
+                    ? <form onSubmit={handelSabmit} style={{ opacity: '0' }} encType="multipart/form-data">
                         <div>
                             <input type="file" name="UserPhoto" />
                         </div>
                     </form>
-                    :<form onSubmit={handelSabmit} style={{ opacity: '1' }} enctype="multipart/form-data">
+                    :<form onSubmit={handelSabmit} style={{ opacity: '1' }} encType="multipart/form-data">
                         <div>
                             <input type="file" name="UserPhoto" />
                         </div>
                     </form> }
             </div>
-            <form onSubmit={handelSabmit}  enctype="multipart/form-data">
+            <form onSubmit={handelSabmit}  encType="multipart/form-data">
                 <div>
                     <input type="file" name="UserPhoto"/>
                 </div>

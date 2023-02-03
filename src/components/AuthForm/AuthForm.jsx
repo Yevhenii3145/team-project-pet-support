@@ -65,7 +65,13 @@ const AuthForm = () => {
       return setStepOne(false);
     }
     if (!stepOne) {
-      user = values;
+      user = {
+        email: values.email,
+        password: values.password,
+        name: values.name,
+        city: values.region,
+        phone: values.number
+      };
       console.log(user);
       actions.resetForm();
       return setStepOne(true);
