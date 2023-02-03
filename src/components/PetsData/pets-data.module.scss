@@ -1,6 +1,13 @@
 @import "../../helpers/variables.module.scss";
 
+.petsData_section {
 
+@media screen and (min-width: 1280px) {
+    width: 821px;
+}
+
+
+}
 
 .petsData_title_box {
     display: flex;
@@ -12,9 +19,11 @@
 @media screen and (min-width: 768px) {
     margin: 20px 0 24px 0;
 
-    }
+}
 
-    @media screen and (min-width: 1280px) {}
+@media screen and (min-width: 1280px) {
+    margin: 0 0 24px 0;
+}
 }
 
 
@@ -29,11 +38,11 @@
 @media screen and (min-width: 768px) {
     font-size: 28px;
     line-height: 1.4;
-
-
 }
 
-@media screen and (min-width: 1280px) {}
+@media screen and (min-width: 1280px) {
+
+}
 }
 
 
@@ -56,11 +65,20 @@
     height: 40px;
     background-color: $background;
     border: none;
+
+@media screen and (min-width: 1280px) {
+    margin-right: 6px;
+
+    }
 }
+
+
+
 
 .addPetModal_button::before {
     position: absolute;
     content: "";
+
 }
 .petModal_button {
     background-color: $lightColor;

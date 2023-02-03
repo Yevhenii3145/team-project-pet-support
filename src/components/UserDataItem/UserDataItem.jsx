@@ -3,9 +3,8 @@ import scss from "./user-data-item.module.scss";
 import { UserFormik } from "./UserFormik";
 import SvgInsert from "../Svg/Svg";
 import axios from 'axios';
-import SvgInsert from 'components/Svg/Svg';
 import { useState } from 'react';
-import { RiSave3Fill } from 'react-icons/ri';16:50
+import { RiSave3Fill } from 'react-icons/ri';
 
 
 export default function UserDataItem() {
@@ -64,21 +63,40 @@ export default function UserDataItem() {
     return (
         <div className={scss.userItem_container}>
             <div className={scss.userItem_box_yourPhoto}>
-                <img className={scss.userItem__yourPhoto} src="https://dummyimage.com/233x233/FDF7F2.gif&text=You+photo!" alt="" />
+                <img className={scss.userItem__yourPhoto} src={imagePreviewUrl} alt="" />
                 <div className={scss.userItem_box_btnPhoto}>
-                    {/* <form onSubmit={handelSabmit} style={{ opacity: '1' }} enctype="multipart/form-data">
-                        <div>
-                            <input type="file" name="UserPhoto"/>
-                        </div> */}
-                        <button className={scss.userItem_button} type='button'><SvgInsert id='icon-edit-avatar' />Edit photo</button>
-                    {/* </form> */}
+                {!editPhoto && (
+                <>
+                    <input
+                    className={scss.userItem_input_edit_photo}
+                    type="file"
+                    name="file"
+                    id="file"
+                    onChange={e => handleImageChange(e)}
+                    />
+                    <label htmlFor="file" className={scss.userItem_edit_photo}>
+                    <SvgInsert id="icon-edit-avatar" />
+                    Edit photo
+                    </label>
+            </>
+                )}
+                {editPhoto && (
+                <button
+                    className={scss.userItem_button}
+                    type="submit"
+                    onClick={() => handleSubmit()}
+                >
+                    <RiSave3Fill size={20} className={scss.userItem_button_icon} />
+                    Save edit
+                </button>
+                )}
                 </div>
             </div>
             {/* <div className={scss.userDataForm_box}> */}
                 <UserFormik/>
             {/* </div> */}
-    
-</div>
+                    
+        </div>
     )}
 
 

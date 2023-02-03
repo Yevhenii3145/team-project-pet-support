@@ -14,7 +14,7 @@ function PetsData() {
   const [modalActivePageTwo, setModalActivePageTwo] = useState(false);
 
   return (
-        <>
+        <div className={scss.petsData_section}>
             <div className={scss.petsData_title_box}>
                 <h2 className={scss.petsData_title}>My pets:</h2> 
                 <div className={scss.addPetModal_buttonBox}>
@@ -42,7 +42,7 @@ function PetsData() {
                     </div>
         
                 </div>  
-        </>
+        </div>
 
     )
 }
