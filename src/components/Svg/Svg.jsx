@@ -65,7 +65,12 @@ const SvgInsert = ({ id }) => {
 
     case 'icon-logout':
       return (
-        <svg id="icon-logout" viewBox="0 0 32 32">
+        <svg
+          id="icon-logout"
+          viewBox="0 0 32 32"
+          width="18"
+          height="18"
+          className={scss.logout}>
           <path
             strokeLinejoin="miter"
             strokeLinecap="butt"
