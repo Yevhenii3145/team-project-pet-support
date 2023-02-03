@@ -1,16 +1,42 @@
-import React from "react";
-import "./modaladdspet.css";
+import scss from './modaladdspet.module.scss';
 
-const ModalAddsPet = ({active, setActive, children}) => {
-    return (
-        <div className={active ? "modal_active" : "modal"} onClick={() => setActive(false)}>
-            <div className="modal__content" onClick={e => e.stopPropagation()}>
-                {children}
-               
-            </div>
-        </div>
-    )
-}
+import React from 'react';
 
+import { createPortal } from 'react-dom';
+import { useEffect } from 'react';
+const modalRoot = document.querySelector('#modal-root');
+
+const ModalAddsPet = ({ onClose, children }) => {
+  useEffect(() => {
+    const handleDownInEscape = e => {
+      if (e.code === 'Escape') {
+        onClose();
+        console.log('close in Escape');
+      }
+    };
+    console.log('modal open');
+    window.addEventListener('keydown', handleDownInEscape);
+    return () => {
+      return window.removeEventListener('keydown', handleDownInEscape);
+    };
+  }, [onClose]);
+
+  const handleDown = e => {
+    if (e.currentTarget === e.target) {
+      onClose();
+    }
+  };
+
+  children = React.cloneElement(children, {
+    close: onClose,
+  });
+
+  return createPortal(
+    <div className={scss.modal} onClick={handleDown}>
+      <div className={scss.modal__section}>{children}</div>
+    </div>,
+    modalRoot
+  );
+};
 
 export default ModalAddsPet;

@@ -1,4 +1,4 @@
-import scss from './add-notice-button.module.scss';
+// import scss from './add-notice-button.module.scss';
 
 const AddNoticeButton = () => {
 

@@ -14,17 +14,24 @@ import storage from 'redux-persist/lib/storage';
 import { menuSlice, authReducer } from './menuSlice';
 import { userReducer } from './userSlice';
 
+// import authReducer from './auth/auth-slice'
+
 const persistConfig = {
   key: 'token',
   storage,
   whitelist: ['token'],
 };
 
+// const persistedReducer = persistReducer(persistConfig, authReducer)
+
 export const store = configureStore({
   reducer: {
     menu: persistReducer(persistConfig, menuSlice.reducer),
     auth: authReducer,
     user: userReducer,
+
+    // auth: persistedReducer,
+
   },
 
   middleware: getDefaultMiddleware =>

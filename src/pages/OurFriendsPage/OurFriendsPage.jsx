@@ -1,10 +1,17 @@
+import OurFriendsPageTitle from './OurFriendsPageTitle/OurFriendsPageTitle';
+import OurFriendsPageList from "./OurFriendsPageList/OurFriendsPage";
+import items from "./sponsors.json";
 import scss from "./our-friends-page.module.scss";
 
-const OurFriendsPage = () => {
+// Проптайпс
 
+const OurFriendsPage = () => {
     return (
-        <div>OurFriendsPage</div>
-    )
-}
+        <div className={scss.container}>
+            <OurFriendsPageTitle title={"Our friends"} />
+            <OurFriendsPageList items={items} />
+        </div>
+    );
+};
 
 export default OurFriendsPage;

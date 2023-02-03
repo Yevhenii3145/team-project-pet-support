@@ -91,6 +91,7 @@ export default function UserDataItem() {
                 </button>
                 )}
                 </div>
+
             </div>
             {/* <div className={scss.userDataForm_box}> */}
                 <UserFormik/>
@@ -98,5 +99,17 @@ export default function UserDataItem() {
                     
         </div>
     )}
+
+      
+    // const elements = contacts.map(({ name, number, id }) => {
+    //     return <li className={css.listItem} key={id}>{name}: {number}
+    //         <span className={css.deleteItem} onClick={() => onDeleteContact(id)}>Delete</span></li>
+    // })
+    //     return (
+    //        <>
+    //         <ol>{elements}</ol>
+    //     </>
+    //     )
+
 
 

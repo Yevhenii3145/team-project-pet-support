@@ -1,12 +1,18 @@
 @import "../../helpers/variables.module.scss";
 
 .logout_button {
+
     position: relative;
     width: 75px;
     display: flex;
     justify-content: space-between;
+
+    // width: 63px;
+    display: flex;
+    flex-direction: row;
     height: 22px;
-    margin-left: auto;
+    margin-left: 16px;
+    // margin-left: auto;
     font-family: "Manrope";
     font-style: normal;
     font-weight: 500;
@@ -14,6 +20,9 @@
     line-height: 1.4;
     padding: 0;
     background-color: $lightColor;
+    color: rgba(17, 17, 17, 0.6);
+    // color: $darkColor;
+    // opacity: 0.6;
     border: none;
     
 }
@@ -41,3 +50,29 @@
 
 }
 }
+
+
+        // &:hover,
+        // &:focus {
+        //     color: $accentColor;
+        //     stroke: $darkColor;
+        //     fill: $darkColor;
+        // }
+        //         &:hover .logout,
+        //         &:focus .logout{
+        //             stroke: $darkColor;
+        //         }
+
+
+
+
+.logout_text {
+    margin-left: 8px;
+}
+
+// .logout_box {
+//     display: block;
+//     margin: 10px 12px 0 auto;
+//     text-align: right;
+// }
+
