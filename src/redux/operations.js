@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4001/api-docs';
+axios.defaults.baseURL = 'http://localhost:4001/api';
 
 //---for token---//
 // const setAuthHeader = token => {

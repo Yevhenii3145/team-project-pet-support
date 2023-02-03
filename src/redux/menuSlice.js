@@ -23,10 +23,10 @@ export const authSlice = createSlice({
   },
   extraReducers: {
     [operations.registerNewUser.fulfilled](state, action) {
-      state.user = action.payload.user;
+      state.user = action.payload;
       Report.info(
         'SUCCESS!',
-        `${action.payload.user.name}, you have successfully registered, the verification has been sent to your mail.`,
+        `${action.payload.name}, you have successfully registered, the verification has been sent to your mail.`,
         'Okay'
       );
     },

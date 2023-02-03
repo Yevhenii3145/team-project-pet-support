@@ -74,8 +74,8 @@ const AuthForm = () => {
       };
       console.log(user);
       actions.resetForm();
-      return setStepOne(true);
-      //return dispatch(operations.registerNewUser(user))
+      setStepOne(true);
+      return dispatch(operations.registerNewUser(user))
     }
   };
 
