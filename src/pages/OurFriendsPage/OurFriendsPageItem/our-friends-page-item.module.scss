@@ -46,7 +46,8 @@ h2 {
     padding-top: 16px;
   }
   @media screen and (min-width: 1280px) {
-    width: 395px;
+    flex-basis: calc(95% / 3 - 32px);
+    // width: 395px;
     height: 287px;
   }
 }
