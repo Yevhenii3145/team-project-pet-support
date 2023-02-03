@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4001/api-docs';
+axios.defaults.baseURL = 'http://localhost:4001/api';
 
 //---for token---//
 // const setAuthHeader = token => {
@@ -15,6 +15,7 @@ const registerNewUser = createAsyncThunk(
       const response = await axios.post('/auth/register', user);
       return response.data;
     } catch (error) {
+      console.log(error.message)
       return thunkAPI.rejectWithValue(error.message);
     }
   }

@@ -45,6 +45,7 @@ const AuthForm = () => {
   const page = location.pathname;
 
   let user = useSelector(state => state.auth.user);
+  const loading = useSelector(state => state.auth.loading);
   const dispatch = useDispatch();
 
   const initialValue = {
@@ -65,11 +66,17 @@ const AuthForm = () => {
       return setStepOne(false);
     }
     if (!stepOne) {
-      user = values;
+      user = {
+        email: values.email,
+        password: values.password,
+        name: values.name,
+        city: values.region,
+        phone: values.number
+      };
       console.log(user);
       actions.resetForm();
-      return setStepOne(true);
-      //return dispatch(operations.registerNewUser(user))
+      setStepOne(true);
+      return dispatch(operations.registerNewUser(user))
     }
   };
 
