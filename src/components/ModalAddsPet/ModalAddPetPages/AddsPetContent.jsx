@@ -2,23 +2,57 @@ import { useState } from 'react';
 import scss from './modal-add-pet-pages.module.scss';
 const AddsPetContent = ({ close }) => {
   const [stepOne, setStepOne] = useState(true);
-  const [pet, setPet] = useState({});
+  // const [pet, setPet] = useState({name: '', date: '', bird: ''});
+  const [petName, setPetName] = useState("");
+  const [petDate, setPetDate] = useState("");
+  const [petBird, setPetBird] = useState("");
+  const [imageURL, setImageURL] = useState(null)
+
+  const changeStepOne = (e) =>{
+    switch (e.currentTarget.name) {
+      case 'name':
+        setPetName(e.currentTarget.value);
+        break;
+
+      case 'date':
+        setPetDate(e.currentTarget.value);
+        break;
+
+      case 'bird':
+        setPetBird(e.currentTarget.value);
+        break;
+
+      default:
+        return;
+    }
+  }
 
   const changeStep = () => {
     return setStepOne(!stepOne);
   };
 
+    const handleImageChange = (e) => {
+    const reader = new FileReader()
+    const image = e.target.files[0]
+    reader.onloadend = () =>{
+        setImageURL(reader.result)
+    }
+    reader.readAsDataURL(image)
+    return
+    // const fileName = e.target.value.split(' ');
+    // console.log(fileName)
+    // setPetPhoto(true)
+    // setPetPhotoName(e.target.value)
+  }
+
   const handleSubmitForStepOne = e => {
     e.preventDefault();
     const form = e.currentTarget;
     const { name, date, bird } = form.elements;
-    const dataFirst = {
-      name: name.value,
-      date: date.value,
-      bird: bird.value,
-    };
-    setPet(dataFirst);
-    console.log(dataFirst);
+    setPetName(name.value)
+    setPetDate(date.value)
+    setPetBird(bird.value);
+    console.log(petName, petBird, petDate);
     return changeStep();
   };
 
@@ -27,12 +61,16 @@ const AddsPetContent = ({ close }) => {
     const form = e.currentTarget;
     const { image, comments } = form.elements;
     const data = new FormData();
-    data.append('name', pet.name);
-    data.append('date', pet.date);
-    data.append('bird', pet.bird);
+    data.append('name', petName);
+    data.append('date', petDate);
+    data.append('bird', petBird);
     data.append('comments', comments.value);
     data.append('image', image.files[0]);
-    console.log(pet.name, pet.date, pet.bird, comments.value, image.files[0]);
+    console.log(petName, petDate, petBird, comments.value, image.files[0]);
+    setPetBird("")
+    setPetDate("")
+    setPetName("")
+    setImageURL(null)
     return form.reset();
   };
 
@@ -52,6 +90,8 @@ const AddsPetContent = ({ close }) => {
             placeholder="Type name pet"
             type="text"
             required
+            value={petName}
+            onChange={changeStepOne}
           />
           <label
             className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
@@ -64,6 +104,8 @@ const AddsPetContent = ({ close }) => {
             type="text"
             placeholder="Type date of birth"
             required
+            value={petDate}
+            onChange={changeStepOne}
           />
           <label
             className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
@@ -76,6 +118,8 @@ const AddsPetContent = ({ close }) => {
             name="bird"
             placeholder="Type bird"
             required
+            value={petBird}
+            onChange={changeStepOne}
           />
           <div className={scss.addPet__button}>
             <button
@@ -113,9 +157,10 @@ const AddsPetContent = ({ close }) => {
               id="img"
               required
               multiple
+              onChange={handleImageChange}
             />
             <label className={scss.addspet__imgLabel} htmlFor="img"></label>
-
+            {imageURL && <div className={scss.addspetPhoto__container}><p>You image:</p><img src={imageURL} alt="pet" /></div>}
             <label
               className={`${scss.modalAdds_page__label} ${scss.modalAdds_commit_box}`}
             >
