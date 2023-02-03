@@ -14,6 +14,7 @@ const OurFriendsPageList = ({ items }) => {
                     email={item.email || '-------------------------'}
                     phone={item.phone || '--------------------------'}
                     foto={item.imageUrl}
+                    workDays={item.workDays}
                 ></OurFriendsPageItem>
             ))}
         </ul>
