@@ -24,18 +24,20 @@ export default function UserDataItem() {
     
     return (
         <div className={scss.userItem_container}>
-            <img className={scss.userItem__yourPhoto} src="https://dummyimage.com/150x150/FDF7F2.gif&text=You+photo!" alt="" />
-            <div className={scss.userItem_box_btnPhoto}>
-                {/* <form onSubmit={handelSabmit} style={{ opacity: '1' }} enctype="multipart/form-data">
-                    <div>
-                        <input type="file" name="UserPhoto"/>
-                    </div> */}
-                    <button className={scss.userItem_button} type='button'><SvgInsert id='icon-edit-avatar' />Edit photo</button>
-                {/* </form> */}
+            <div className={scss.userItem_box_yourPhoto}>
+                <img className={scss.userItem__yourPhoto} src="https://dummyimage.com/233x233/FDF7F2.gif&text=You+photo!" alt="" />
+                <div className={scss.userItem_box_btnPhoto}>
+                    {/* <form onSubmit={handelSabmit} style={{ opacity: '1' }} enctype="multipart/form-data">
+                        <div>
+                            <input type="file" name="UserPhoto"/>
+                        </div> */}
+                        <button className={scss.userItem_button} type='button'><SvgInsert id='icon-edit-avatar' />Edit photo</button>
+                    {/* </form> */}
+                </div>
             </div>
-            <div className={scss.userItem_box_text}>
-            <UserFormik/>
-    </div>
+            {/* <div className={scss.userDataForm_box}> */}
+                <UserFormik/>
+            {/* </div> */}
     
 </div>
     )}

@@ -1,7 +1,71 @@
-// @import "../../helpers/container.module.scss";
+@import "../../helpers/variables.module.scss";
 
 .userData_container {
     display: block;
     width: 100%;
     margin-bottom: 47px;
-}
+    
+
+        @media screen and (min-width: 768px) {
+                width: 100%;
+                margin: 0 32px 20px 0;
+                padding: 0 32px;
+                display: flex;
+
+            }
+            
+            @media screen and (min-width: 1280px) {
+                width: 1280px;
+                padding: 0 16px;
+            }
+        }
+
+
+.userPage_title {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.3;
+
+        @media screen and (min-width: 768px) {
+            font-size: 28px;
+            line-height: 38px;
+            margin-bottom: 40px;
+            }
+        
+        @media screen and (min-width: 1280px) {
+            margin-bottom: 17px;
+            margin-left: 24px;
+            }
+    }
+
+
+
+
+
+.userData_box {
+    display: block;
+    width:100%;
+    background: #FFFFFF;
+    box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
+    border-radius: 20px;
+    margin-bottom: 47px;
+    margin-top: 18px;
+    padding-bottom: 20px;
+    background-color: $lightColor;
+    padding: 20px 24px;
+
+        @media screen and (min-width: 768px) {
+            border-radius: 0 40px 40px 0;
+            padding: 40px 40px 24px 32px;
+            margin: 0;
+             
+            }
+        
+        @media screen and (min-width: 1280px) {
+                margin-bottom: 17px;
+                margin-left: 24px;
+            }
+            
+    }

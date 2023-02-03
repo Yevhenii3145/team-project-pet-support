@@ -8,8 +8,37 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+
+    @media screen and (min-width: 768px) {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        justify-content: space-between;
+        margin: 0;
+
+
+        }
     
+        @media screen and (min-width: 1280px) {
+            width: 411px;
+            height: 541px;
+
 }
+}
+
+.userItem_box_yourPhoto {
+
+        @media screen and (min-width: 768px) {
+        // display: block;
+
+
+        }
+    
+    @media screen and (min-width: 1280px) {
+
+}
+}
+
 
 .userItem__yourPhoto {
     display: block;
@@ -20,7 +49,7 @@
 
 .userItem_box_btnPhoto {
     display: block;
-    margin: 12px 24px 32px auto;
+    margin: 12px 0 36px 0;
     text-align: right;
 }
 
@@ -45,29 +74,31 @@
 
 .userDataForm_box {
     display: block;
-    margin: 0 12px 44px 16px;
+    margin-bottom: 44px;
+
+    @media screen and (min-width: 768px) {
+        display: block;
+     
+     }
+    
+    @media screen and (min-width: 1280px) {
+
+    }
+ 
 }
 
-.userItem_field {
-    text-align: left;
-    color: #111111;
-    margin-top: 10px;
-    background-color: $lightColor;
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 1.33;
 
-}
 
-.form_box {
+.field_box {
     display: flex;
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
-
+    align-items: center;
+    
+    &:not(:last-child) {
+            margin-bottom: 12px;
+        }
 }
 
 .userDataForm_field {
@@ -80,16 +111,35 @@
     border-radius: 40px;
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
+    font-size: 12px;
+    line-height: 1.33;
     letter-spacing: 0.04em;
     color: rgba(17, 17, 17, 0.6);
 
-    padding: 11px 14px 12px;
-    margin-top: 16px;
+    padding: 0;
+
 
 }
 
+.userDataForm_field_active {
+    display: block;
+        width: 159px;
+        height: 24px;
+        box-sizing: border-box;
+        background: $background;
+        border: 1px solid;
+        border-color: $accentColor;
+        border-radius: 40px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.04em;
+        color: rgba(17, 17, 17, 0.6);
+    
+        padding: 11px 14px 12px;
+
+}
 
 .iconEdit_btn {
     position: relative;
@@ -107,9 +157,20 @@
 
 .iconEdit_btn::before {
     position:absolute;
-
-   
     content: '';
     
 
 }
+
+.userDataForm_label {
+    text-align: left;
+    color: #111111;
+    background-color: $lightColor;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+
+}
+      

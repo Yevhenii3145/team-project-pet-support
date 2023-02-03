@@ -1,8 +1,9 @@
 import scss from "./user-data-item.module.scss";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import SvgInsert from "../Svg/Svg";
+import { useState } from 'react';
 
-import { fetchUserData } from "../../redux/operations";
+// import { fetchUserData } from "../../redux/operations";
 // import {useEffect} from "react";
 // import {useDispatch } from "react-redux";
 
@@ -16,9 +17,11 @@ export function UserFormik() {
     //     dispatch(fetchUserData())
     // }, [dispatch])
 
-const OnClick = () => {
-    const isEdit = 0;
-    console.log('gfhj')
+  
+    const [style, setStyle] = useState(false)
+
+    const OnClick = () => {
+        style === false ? setStyle(true) : setStyle(false)
     }
 
     return (
@@ -51,44 +54,44 @@ const OnClick = () => {
                 >
                 {({ isSubmitting }) => (
                 
-                <Form >
-                    <div className={scss.userDataForm_box}>
-                        <div className={scss.form_box}>
-                            <label>Name:</label>
+                <Form className={scss.userDataForm_box} >
+                    {/* <div className={scss.userDataForm_box}> */}
+                        <div className={scss.field_box}>
+                            <label className={scss.userDataForm_label}>Name:</label>
                             {/* <Field type="name" name="name" placeholder={`${auth.name}`} className={scss.userDataForm_field}/> */}
-                            <Field type="name" name="name" placeholder="Name" className={scss.userDataForm_field}/>
+                            <Field type="name" name="name" placeholder="Name" className={style ? scss.userDataForm_field_active : scss.userDataForm_field}/>
                             <ErrorMessage name="name" component="div" />
-                            <button type="submit" onclick={() => OnClick()} className={scss.iconEdit_btn} disabled={isSubmitting}> <SvgInsert id='icon-done' /></button>          
+                            <button type="submit" onClick={OnClick} className={scss.iconEdit_btn} disabled={isSubmitting}> {!style ? <SvgInsert id='icon-edit' /> : <SvgInsert id='icon-done' />}</button>
                         </div>
-                        <div className={scss.form_box}>
-                            <label>Email:</label>
+                        <div className={scss.field_box}>
+                            <label className={scss.userDataForm_label}>Email:</label>
                             {/* <Field type="email" name="email" placeholder={`${auth.email}`} className={scss.userDataForm_field}/> */}
-                            <Field type="email" name="email" placeholder="Email" className={scss.userDataForm_field}/>
+                            <Field type="email" name="email" placeholder="Email"  className={style ? scss.userDataForm_field_active : scss.userDataForm_field}/>
                             <ErrorMessage name="Email" component="div" />
-                            <button type="submit"  className={scss.iconEdit_btn} disabled={isSubmitting}><SvgInsert id='icon-edit' /></button>
+                            <button type="submit" onClick={OnClick} className={scss.iconEdit_btn} disabled={isSubmitting}> {!style ? <SvgInsert id='icon-edit' /> : <SvgInsert id='icon-done' />}</button>
                         </div>
-                        <div className={scss.form_box}>
-                            <label>Birthday:</label>
+                        <div className={scss.field_box}>
+                            <label className={scss.userDataForm_label}>Birthday:</label>
                             <Field type="data" name="data" placeholder="Birthday" className={scss.userDataForm_field} />
                             {/* <Field type="data" name="data" placeholder={`${auth.birthday}`} className={scss.userDataForm_field}/> */}
                             <ErrorMessage name="data" component="div" />
-                            <button type="submit"  className={scss.iconEdit_btn} disabled={isSubmitting}><SvgInsert id='icon-edit' /></button>           
+                            <button type="submit" onClick={OnClick} className={scss.iconEdit_btn} disabled={isSubmitting}> {!style ? <SvgInsert id='icon-edit' /> : <SvgInsert id='icon-done' />}</button>           
                         </div>
-                        <div className={scss.form_box}>
-                            <label>Phone:</label>
+                        <div className={scss.field_box}>
+                            <label className={scss.userDataForm_label}>Phone:</label>
                             {/* <Field type="tel" name="phone" placeholder={`${auth.phone}`} className={scss.userDataForm_field}/> */}
                             <Field type="tel" name="phone" placeholder="Phone" className={scss.userDataForm_field}/>
                             <ErrorMessage name="phone" component="div" />
-                            <button type="submit"  className={scss.iconEdit_btn} disabled={isSubmitting}><SvgInsert id='icon-edit' /></button>           
+                            <button type="submit" onClick={OnClick} className={scss.iconEdit_btn} disabled={isSubmitting}> {!style ? <SvgInsert id='icon-edit' /> : <SvgInsert id='icon-done' />}</button>           
                         </div>
-                        <div className={scss.form_box}>
-                            <label>City:</label>
+                        <div className={scss.field_box}>
+                            <label className={scss.userDataForm_label}>City:</label>
                             {/* <Field type="text" name="name" placeholder={`${auth.city}`} className={scss.userDataForm_field}/> */}
                             <Field type="text" name="name" placeholder="City" className={scss.userDataForm_field}/>
                             <ErrorMessage name="City" component="div" />
-                            <button type="submit"  className={scss.iconEdit_btn} disabled={isSubmitting}><SvgInsert id='icon-edit' /></button>           
+                            <button type="submit" onClick={OnClick} className={scss.iconEdit_btn} disabled={isSubmitting}> {!style ? <SvgInsert id='icon-edit' /> : <SvgInsert id='icon-done' />}</button>           
                         </div>
-                </div>
+                {/* </div> */}
             </Form>   
                 )}
         </Formik>

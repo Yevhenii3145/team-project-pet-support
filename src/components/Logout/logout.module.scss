@@ -15,6 +15,7 @@
     padding: 0;
     background-color: $lightColor;
     border: none;
+    
 }
 
 .logout_button::before {
@@ -24,6 +25,6 @@
 
 .logout_box {
     display: block;
-    margin: 10px 12px 0 auto;
+
     text-align: right;
 }
