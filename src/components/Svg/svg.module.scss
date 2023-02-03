@@ -38,6 +38,11 @@
   fill: $lightColor;
   opacity: 0.6;
   stroke: $accentColor;
+
+  &:hover,
+  &:focus {
+    fill: $accentColor;
+  }
 }
 
 .search {
