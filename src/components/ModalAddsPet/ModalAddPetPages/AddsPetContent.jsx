@@ -1,14 +1,20 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import scss from './modal-add-pet-pages.module.scss';
+import operations from '../../../redux/operations';
+import { Report } from 'notiflix/build/notiflix-report-aio';
+import Loader from 'components/Loader/Loader';
+
 const AddsPetContent = ({ close }) => {
   const [stepOne, setStepOne] = useState(true);
-  // const [pet, setPet] = useState({name: '', date: '', bird: ''});
-  const [petName, setPetName] = useState("");
-  const [petDate, setPetDate] = useState("");
-  const [petBird, setPetBird] = useState("");
-  const [imageURL, setImageURL] = useState(null)
+  const [petName, setPetName] = useState('');
+  const [petDate, setPetDate] = useState('');
+  const [petBreed, setPetBreed] = useState('');
+  const [imageURL, setImageURL] = useState(null);
+  const loading = useSelector(state => state.user.loading);
+  const dispatch = useDispatch();
 
-  const changeStepOne = (e) =>{
+  const changeStepOne = e => {
     switch (e.currentTarget.name) {
       case 'name':
         setPetName(e.currentTarget.value);
@@ -18,41 +24,49 @@ const AddsPetContent = ({ close }) => {
         setPetDate(e.currentTarget.value);
         break;
 
-      case 'bird':
-        setPetBird(e.currentTarget.value);
+      case 'breed':
+        setPetBreed(e.currentTarget.value);
         break;
 
       default:
         return;
     }
-  }
+  };
 
   const changeStep = () => {
     return setStepOne(!stepOne);
   };
 
-    const handleImageChange = (e) => {
-    const reader = new FileReader()
-    const image = e.target.files[0]
-    reader.onloadend = () =>{
-        setImageURL(reader.result)
-    }
-    reader.readAsDataURL(image)
-    return
-    // const fileName = e.target.value.split(' ');
-    // console.log(fileName)
-    // setPetPhoto(true)
-    // setPetPhotoName(e.target.value)
-  }
+  const handleImageChange = e => {
+    const reader = new FileReader();
+    const image = e.target.files[0];
+    reader.onloadend = () => {
+      setImageURL(reader.result);
+    };
+    reader.readAsDataURL(image);
+    return;
+  };
+
+  const dateNow = new Date();
+  const formatDate = `0${dateNow.getDate()}.0${
+    dateNow.getMonth() + 1
+  }.${dateNow.getFullYear()}`;
 
   const handleSubmitForStepOne = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    const { name, date, bird } = form.elements;
-    setPetName(name.value)
-    setPetDate(date.value)
-    setPetBird(bird.value);
-    console.log(petName, petBird, petDate);
+    const { name, date, breed } = form.elements;
+    setPetName(name.value);
+    setPetDate(date.value);
+    setPetBreed(breed.value);
+    if (new Date(petDate) >= new Date(formatDate)) {
+      return Report.info(
+        'Pet Info',
+        'Please choose a date no later than today.',
+        'Okay'
+      );
+    }
+    console.log(petName, petBreed, petDate);
     return changeStep();
   };
 
@@ -62,20 +76,23 @@ const AddsPetContent = ({ close }) => {
     const { image, comments } = form.elements;
     const data = new FormData();
     data.append('name', petName);
-    data.append('date', petDate);
-    data.append('bird', petBird);
+    data.append('birthday', petDate);
+    data.append('breed', petBreed);
     data.append('comments', comments.value);
     data.append('image', image.files[0]);
-    console.log(petName, petDate, petBird, comments.value, image.files[0]);
-    setPetBird("")
-    setPetDate("")
-    setPetName("")
-    setImageURL(null)
-    return form.reset();
+    console.log(petName, petDate, petBreed, comments.value, image.files[0]);
+    setPetBreed('');
+    setPetDate('');
+    setPetName('');
+    setImageURL(null);
+    dispatch(operations.addPet(data));
+    form.reset();
+    return close();
   };
 
   return (
     <div className={scss.modalAdds_page}>
+      {loading && <Loader />}
       <h3 className={scss.modalAdds_page__tittle}>Add pet</h3>
       {stepOne && (
         <form onSubmit={handleSubmitForStepOne}>
@@ -96,12 +113,14 @@ const AddsPetContent = ({ close }) => {
           <label
             className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
           >
-            Data of birth
+            Date of birth
           </label>
           <input
             className={scss.modalAdds_page__input}
             name="date"
             type="text"
+            pattern="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"
+            title="Date must be in the format: DD.MM.YYYY or DD/MM/YYYY or DD-MM-YYYY"
             placeholder="Type date of birth"
             required
             value={petDate}
@@ -115,10 +134,10 @@ const AddsPetContent = ({ close }) => {
           <input
             className={scss.modalAdds_page__input}
             type="text"
-            name="bird"
-            placeholder="Type bird"
+            name="breed"
+            placeholder="Type breed"
             required
-            value={petBird}
+            value={petBreed}
             onChange={changeStepOne}
           />
           <div className={scss.addPet__button}>
@@ -132,7 +151,7 @@ const AddsPetContent = ({ close }) => {
               className={`${scss.button__primary_not_main} ${scss.modalAdds_page__button}`}
               onClick={close}
             >
-              Cansel
+              Cancel
             </span>
           </div>
         </form>
@@ -160,7 +179,12 @@ const AddsPetContent = ({ close }) => {
               onChange={handleImageChange}
             />
             <label className={scss.addspet__imgLabel} htmlFor="img"></label>
-            {imageURL && <div className={scss.addspetPhoto__container}><p>You image:</p><img src={imageURL} alt="pet" /></div>}
+            {imageURL && (
+              <div className={scss.addspetPhoto__container}>
+                <p>You image:</p>
+                <img src={imageURL} alt="pet" />
+              </div>
+            )}
             <label
               className={`${scss.modalAdds_page__label} ${scss.modalAdds_commit_box}`}
             >
@@ -171,6 +195,7 @@ const AddsPetContent = ({ close }) => {
               type="text"
               name="comments"
               placeholder="Type comments"
+              minLength={8}
               required
             />
 
