@@ -15,79 +15,90 @@ const registerNewUser = createAsyncThunk(
       const response = await axios.post('/auth/register', user);
       return response.data;
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-
 export const fetchUserData = createAsyncThunk(
-    "auth/user",
-    async(user, thunkAPI) => {
-        try {
-            const response = await axios.post("/auth/user", user);
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error);
-        }
+  'auth/user',
+  async (user, thunkAPI) => {
+    try {
+      const response = await axios.post('/auth/user', user);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
+  }
 );
 
 const login = createAsyncThunk(
-    "auth/login",
-    async(data, { rejectWithValue }) => {
-        try {
-            const result = await axios.post('/users/login', data);
-            return result.data;
-        } catch({response}) {
-            const error = {
-                status: response.status,
-                message: response.data.message,
-            }
-            return rejectWithValue(error);
-        }
+  'auth/login',
+  async (data, { rejectWithValue }) => {
+    try {
+      const result = await axios.post('/users/login', data);
+      return result.data;
+    } catch ({ response }) {
+      const error = {
+        status: response.status,
+        message: response.data.message,
+      };
+      return rejectWithValue(error);
     }
-)
+  }
+);
 
 const logout = createAsyncThunk(
-    "auth/logout",
-    async(_, { rejectWithValue }) => {
-        try {
-            const result = await axios.post('/users/logout');
-            return result;
-        } catch ({response}) {
-            const error = {
-                status: response.status,
-                message: response.data.message
-            }
-            return rejectWithValue(error);
-        }
+  'auth/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      const result = await axios.post('/users/logout');
+      return result;
+    } catch ({ response }) {
+      const error = {
+        status: response.status,
+        message: response.data.message,
+      };
+      return rejectWithValue(error);
     }
-)
+  }
+);
 
 const current = createAsyncThunk(
-    "auth/current",
-    async(_, { rejectWithValue, getState }) => {
-        try {
-            const { auth } = getState();
-            const result = await axios.get('/users/current', auth.token);
-            return result;
-        } catch ({response}) {
-            const error = {
-                status: response.status,
-                message: response.data.message
-            }
-            return rejectWithValue(error);
-        }
+  'auth/current',
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const { auth } = getState();
+      const result = await axios.get('/users/current', auth.token);
+      return result;
+    } catch ({ response }) {
+      const error = {
+        status: response.status,
+        message: response.data.message,
+      };
+      return rejectWithValue(error);
     }
-)
+  }
+);
+
+const addPet = createAsyncThunk('user/addPet', async (dataPet, thunkAPI) => {
+  try {
+    const response = await axios.post('/users/addPet', dataPet);
+    console.log(response.data)
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
 
 const operations = {
   registerNewUser,
   login,
   logout,
-  current
+  current,
+  addPet,
 };
 
 export default operations;
