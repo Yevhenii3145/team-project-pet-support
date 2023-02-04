@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import operations from '../../redux/operations';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Hearts } from 'react-loader-spinner';
+import Loader from 'components/Loader/Loader';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -78,7 +78,7 @@ const AuthForm = () => {
       console.log(user);
       actions.resetForm();
       setStepOne(true);
-      return
+      return;
       // return dispatch(operations.registerNewUser(user));
     }
   };
@@ -99,19 +99,7 @@ const AuthForm = () => {
 
   return (
     <>
-      {loading && (
-        <div className={scss.loading__modal}>
-          <Hearts
-            height="100"
-            width="100"
-            color="#F59256"
-            ariaLabel="hearts-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
-        </div>
-      )}
+      {loading && <Loader />}
       {page === '/register' && (
         <>
           {stepOne ? (

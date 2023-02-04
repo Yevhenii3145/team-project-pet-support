@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:4001/api';
-
+axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGNmZWRiMWE2Y2I0ZjlkNTJlOTYwZSIsImlhdCI6MTY3NTUzMjE0NCwiZXhwIjoxNjc1NjE0OTQ0fQ.TCE19oHh_jueRFQFEjnQp7ydbK-1FbsYf46jW8PcW74`;
 //---for token---//
 // const setAuthHeader = token => {
 //     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -15,7 +15,6 @@ const registerNewUser = createAsyncThunk(
       const response = await axios.post('/auth/register', user);
       return response.data;
     } catch (error) {
-      console.log(error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -88,7 +87,6 @@ const addPet = createAsyncThunk('user/addPet', async (dataPet, thunkAPI) => {
     console.log(response.data)
     return response.data;
   } catch (error) {
-    console.log(error.message);
     return thunkAPI.rejectWithValue(error.message);
   }
 });

@@ -10,6 +10,7 @@ const initialState = {
     loading: false,
     userId: "",
     pets: [],
+    token: null
 }
 
 const userSlice = createSlice({
@@ -27,11 +28,16 @@ const userSlice = createSlice({
         [operations.addPet.pending]: (state, action) => {
             state.loading = true;
           },
-          [operations.addPet.fulfilled]: (state, action) => {
+        [operations.addPet.fulfilled]: (state, action) => {
             state.loading = false;
-            state.pets.push(action.payload);
+            //state.pets.push(action.payload);
+            Report.success(
+                'Success',
+                `${action.payload.name} added successfully.`,
+                'Okay',
+                );
           },
-          [operations.addPet.rejected]: (state, action) => {
+        [operations.addPet.rejected]: (state, action) => {
             state.loading = false;
             Report.warning(
               'Warning',
