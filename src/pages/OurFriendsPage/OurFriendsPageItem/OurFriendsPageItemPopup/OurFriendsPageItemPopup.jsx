@@ -10,7 +10,7 @@ const OurFriendsPageItemPopup = ({ active, setActive, workDays, day }) => {
         >
             <div className={scss.popup_content} onClick={e => e.stopPropagation()}>
                 {arrayOfDays.map((el, i) => (
-                    <p className={day === i ? scss.targetDay : ''}>
+                    <p key={i} className={day === i ? scss.targetDay : ''}>
                         {el} {workDays?.[i].from}-{workDays?.[i].to}
                     </p>
                 ))}

@@ -59,4 +59,9 @@
 .targetDay {
   color: greenyellow;
   background-color: $accentColor;
+  opacity: 0.8;
+  &:hover,
+  &:focus {
+    color: aqua;
+  }
 }

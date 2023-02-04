@@ -68,7 +68,9 @@ const OurFriendsPageItem = ({
                             day={day}
                         />
                     </div>
-                    <span>
+                    <span onClick={() => {
+                        setPopupActive(!popupActive);
+                    }}>
                         {start}-{end}
                     </span>
                     <p>Address:</p>
