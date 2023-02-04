@@ -13,15 +13,16 @@
 }
 
 .modal__section {
+  width: 280px;
   padding: 40px 20px;
   border-radius: 20px;
   font-family: 'Manrope';
   background-color: #ffffff;
-}
 
-@media screen and (min-width: 768px) {
-  .modal__section {
-    padding: 40px 80px;
-    min-width: 608px;
+  @media screen and (min-width: 768px) {
+    padding: 40px 60px;
+    width: 608px;
   }
 }
+
+

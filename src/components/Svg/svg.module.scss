@@ -75,15 +75,23 @@
 
 .iconAddPet{
   @media (min-width: 768px) {
-    background-color: coral;
+    background-color: $accentColor;
     padding: 7px;
     border-radius: 50px;
     margin-left: 12px;
     cursor: pointer;
+  }
+}
 
-    &:hover,
-    &:focus {
-      stroke: $accentColor;
-    }
+.male{
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  width: 40px;
+  height: 40px;
+
+  @media (min-width: 768px) {
+    width: 60px;
+    height: 60px;
   }
 }

@@ -1,16 +1,18 @@
-import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
+import NoticesCategories from '../NoticesCategories/NoticesCategories';
+import SvgInsert from 'components/Svg/Svg';
 import { useState } from 'react';
 import scss from './modal-add-pet-pages.module.scss';
+
 const AddsPetContent = ({ close }) => {
   const [stepOne, setStepOne] = useState(true);
   const [petName, setPetName] = useState("");
   const [petTitle, setPetTitle] = useState("");
   const [petDate, setPetDate] = useState("");
   const [petBird, setPetBird] = useState("");
-  // const [petLocation, setPetLocation] = useState("")
-  // const [petPrice, setPetPrice] = useState("");
+  const [currentRadioValue, setCurrentRadioValue] = useState()
+  const [petLocation, setPetLocation] = useState("")
+  const [petPrice, setPetPrice] = useState("");
   const [imageURL, setImageURL] = useState(null)
-
   const changeStepOne = (e) => {
     switch (e.currentTarget.name) {
       case 'title':
@@ -68,14 +70,17 @@ const AddsPetContent = ({ close }) => {
   const handleSubmitForStepOne = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    const { title, name, date, bird, location, price } = form.elements;
+    const { title, name, date, bird, } = form.elements;
     setPetTitle(title.value);
     setPetName(name.value)
     setPetDate(date.value)
     setPetBird(bird.value);
-    // setPetLocation(location.value);
-    // setPetPrice(price.value);
     return changeStep();
+  };
+
+  const handleRadioChange = (e) => {
+    setCurrentRadioValue(e.target.value);
+    console.log(e.target.value)
   };
 
   const handleSubmit = e => {
@@ -87,16 +92,16 @@ const AddsPetContent = ({ close }) => {
     data.append('name', petName);
     data.append('date', petDate);
     data.append('bird', petBird);
-    // data.append('location', petLocation);
-    // data.append('price', petPrice);
+    data.append('location', petLocation);
+    data.append('price', petPrice);
     data.append('comments', comments.value);
     data.append('image', image.files[0]);
     setPetTitle("")
     setPetBird("")
     setPetDate("")
     setPetName("")
-    // setPetLocation("")
-    // setPetPrice("")
+    setPetLocation("")
+    setPetPrice("")
     setImageURL(null)
     return form.reset();
   };
@@ -104,81 +109,83 @@ const AddsPetContent = ({ close }) => {
   return (
     <div className={scss.modalAdds_page}>
       <h3 className={scss.modalAdds_page__tittle}>Add pet</h3>
-      <p className={scss.modalAdds_descriptions}>Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur</p>
-      <NoticesCategoriesNav />
       {stepOne && (
-        <form onSubmit={handleSubmitForStepOne}>
-          <label
-            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
-          >
-            Tittle of ad <span className={scss.star}>*</span>
-          </label>
-          <input
-            className={scss.modalAdds_page__input}
-            name="title"
-            placeholder="Type name pet"
-            type="text"
-            required
-            value={petTitle}
-            onChange={changeStepOne}
-          />
-          <label
-            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
-          >
-            Name pet
-          </label>
-          <input
-            className={scss.modalAdds_page__input}
-            name="name"
-            placeholder="Type name pet"
-            type="text"
-            required
-            value={petName}
-            onChange={changeStepOne}
-          />
-          <label
-            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
-          >
-            Data of birth
-          </label>
-          <input
-            className={scss.modalAdds_page__input}
-            name="date"
-            type="text"
-            placeholder="Type date of birth"
-            required
-            value={petDate}
-            onChange={changeStepOne}
-          />
-          <label
-            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
-          >
-            Breed
-          </label>
-          <input
-            className={scss.modalAdds_page__input}
-            type="text"
-            name="bird"
-            placeholder="Type breed"
-            required
-            value={petBird}
-            onChange={changeStepOne}
-          />
-          <div className={scss.addPet__button}>
-            <button
-              className={`${scss.button__primary_main} ${scss.modalAdds_page__button}`}
-              type="submit"
+        <>
+          <p className={scss.modalAdds_descriptions}>Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur</p>
+            <NoticesCategories/>
+          <form onSubmit={handleSubmitForStepOne}>
+            <label
+              className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
             >
-              Next
-            </button>
-            <span
-              className={`${scss.button__primary_not_main} ${scss.modalAdds_page__button}`}
-              onClick={close}
+              Tittle of ad <span className={scss.star}>*</span>
+            </label>
+            <input
+              className={scss.modalAdds_page__input}
+              name="title"
+              placeholder="Type name pet"
+              type="text"
+              required
+              value={petTitle}
+              onChange={changeStepOne}
+            />
+            <label
+              className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
             >
-              Cancel
-            </span>
-          </div>
-        </form>
+              Name pet
+            </label>
+            <input
+              className={scss.modalAdds_page__input}
+              name="name"
+              placeholder="Type name pet"
+              type="text"
+              required
+              value={petName}
+              onChange={changeStepOne}
+            />
+            <label
+              className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+            >
+              Data of birth
+            </label>
+            <input
+              className={scss.modalAdds_page__input}
+              name="date"
+              type="text"
+              placeholder="Type date of birth"
+              required
+              value={petDate}
+              onChange={changeStepOne}
+            />
+            <label
+              className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+            >
+              Breed
+            </label>
+            <input
+              className={scss.modalAdds_page__input}
+              type="text"
+              name="bird"
+              placeholder="Type breed"
+              required
+              value={petBird}
+              onChange={changeStepOne}
+            />
+            <div className={scss.addPet__button}>
+              <button
+                className={`${scss.button__primary_main} ${scss.modalAdds_page__button}`}
+                type="submit"
+              >
+                Next
+              </button>
+              <span
+                className={`${scss.button__primary_not_main} ${scss.modalAdds_page__button}`}
+                onClick={close}
+              >
+                Cancel
+              </span>
+            </div>
+          </form>
+        </>
       )}
       {!stepOne && (
         <form
@@ -190,10 +197,46 @@ const AddsPetContent = ({ close }) => {
 
 
 
+
+
+          <section>
+            <h2 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>The sex<span className={scss.star}>*</span>:</h2>
+            <div className={scss.radioButtonSection}>
+              <label className={scss.radioButton}>
+                <SvgInsert id="icon-male" />
+                Male
+                <input
+                  className={scss.radioButtonInput}
+                  type="radio"
+                  // checked={currentRadioValue}
+                  name="gender"
+                  value="male"
+                  onChange={handleRadioChange}
+                />
+              </label>
+              <label className={scss.radioButton}>
+                <SvgInsert id="icon-female" />
+                Female
+                <input
+                  className={scss.radioButtonInput}
+                  type="radio"
+                  // checked={currentRadioValue}
+                  name="gender"
+                  value="female"
+                  onChange={handleRadioChange}
+                />
+              </label>
+            </div>
+
+          </section>
+
+
+
+
           <label
             className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
           >
-            Location
+            Location<span className={scss.star}>*</span>:
           </label>
           <input
             className={scss.modalAdds_page__input}
@@ -202,12 +245,12 @@ const AddsPetContent = ({ close }) => {
             placeholder="Type name pet"
             required
           // value={petPrice}
-          // onChange={changeStepTwo}
+          // onChange={}
           />
           <label
             className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
           >
-            Price
+            Price<span className={scss.star}>*</span>:
           </label>
           <input
             className={scss.modalAdds_page__input}
@@ -216,15 +259,18 @@ const AddsPetContent = ({ close }) => {
             placeholder="Type date of birth"
             required
           // value={petPrice}
-          // onChange={changeStepTwo}
+          // onChange={}
           />
 
 
+
+
+
+
           <div className={scss.add__pet__container}>
-            <p className={scss.modalAdds_page__field}>
+            <p className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>
               Load the pet’s image
             </p>
-
             <input
               className={scss.addspet__imgInput}
               type="file"
@@ -248,8 +294,9 @@ const AddsPetContent = ({ close }) => {
               name="comments"
               placeholder="Type breed"
               required
+              minlength="8"
+              maxlength="120"
             />
-
             <div className={scss.addPet__button}>
               <button
                 className={`${scss.button__primary_main} ${scss.modalAdds_page__button}`}
