@@ -1,6 +1,12 @@
 @import "../../helpers/variables.module.scss";
 
 .logout_button {
+
+    position: relative;
+    width: 75px;
+    display: flex;
+    justify-content: space-between;
+
     // width: 63px;
     display: flex;
     flex-direction: row;
@@ -18,18 +24,45 @@
     // color: $darkColor;
     // opacity: 0.6;
     border: none;
-
-        &:hover,
-        &:focus {
-            color: $accentColor;
-            stroke: $darkColor;
-            fill: $darkColor;
-        }
-                &:hover .logout,
-                &:focus .logout{
-                    stroke: $darkColor;
-                }
+    
 }
+
+.logout_button::before {
+    position: absolute;
+    content: "";
+}
+
+.logout_box {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+
+@media screen and (min-width: 768px) {
+    position: absolute;
+
+    top: 455px;
+    
+}
+
+@media screen and (min-width: 1280px) {
+    top: 655px;
+    left: 16px;
+
+}
+}
+
+
+        // &:hover,
+        // &:focus {
+        //     color: $accentColor;
+        //     stroke: $darkColor;
+        //     fill: $darkColor;
+        // }
+        //         &:hover .logout,
+        //         &:focus .logout{
+        //             stroke: $darkColor;
+        //         }
+
 
 
 
@@ -42,3 +75,4 @@
 //     margin: 10px 12px 0 auto;
 //     text-align: right;
 // }
+

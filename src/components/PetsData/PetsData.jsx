@@ -2,6 +2,7 @@ import { PetsList } from '../PetsList/PetsList';
 import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
 import AddsPetContent from '../ModalAddsPet/ModalAddPetPages/AddsPetContent';
 import { useState } from 'react';
+import SvgInsert from "../Svg/Svg";
 
 import scss from './pets-data.module.scss';
 
