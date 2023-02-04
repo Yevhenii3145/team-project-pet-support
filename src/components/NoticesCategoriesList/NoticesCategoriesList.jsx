@@ -1,26 +1,28 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import scss from "./notices-categories-list.module.scss";
 import NoticesCategoryList from "components/NoticesCategoryList/NoticesCategoryList";
+import { fetchCategoryNotices } from "redux/notices/notices-operation";
+import { getStore, getNotices } from "redux/notices/notices-selectors";
 
 const NoticesCategoriesList = () => {
 
-    const [pets, setPets] = useState([]);
-
-    console.log(pets)
+    const { categoryName } = useParams();
+    const pets = useSelector(getNotices);
+    const { loading, error } = useSelector(getStore);
+    const dispatch = useDispatch(); 
 
     useEffect(() => {
-        const fetchPets = async () => {
-            const result = await axios.get('http://localhost:4001/api/notices/sell');
-            setPets(result.data.notices);
-        }
-        fetchPets();
-    }, [])
+        dispatch(fetchCategoryNotices(categoryName))
+    }, [dispatch, categoryName])
 
     return (
         <>
-            {pets.length > 0 && <NoticesCategoryList pets={pets} />}
+            {loading && "Loading!"}
+            {pets && <NoticesCategoryList pets={pets.data.notices} />}
+            {error && "Oops, something went wrong" }
         </>
     )
 }

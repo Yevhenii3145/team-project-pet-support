@@ -12,6 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { menuSlice, authReducer } from './menuSlice';
 // import authReducer from './auth/auth-slice'
+import noticesReducer from './notices/notices-slice';
 
 const persistConfig = {
   key: 'token',
@@ -26,6 +27,7 @@ export const store = configureStore({
     menu: persistReducer(persistConfig, menuSlice.reducer),
     auth: authReducer,
     // auth: persistedReducer,
+    notices: noticesReducer,
   },
 
   middleware: getDefaultMiddleware =>
