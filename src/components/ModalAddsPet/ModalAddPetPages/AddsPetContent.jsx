@@ -116,7 +116,7 @@ const AddsPetContent = ({ close }) => {
             name="date"
             type="text"
             pattern="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"
-            title="Date must be in the format: XX.XX.XXXX or XX/XX/XXXX or XX-XX-XXXX "
+            title="Date must be in the format: DD.MM.YYYY or DD/MM/YYYY or DD-MM-YYYY"
             placeholder="Type date of birth"
             required
             value={petDate}
