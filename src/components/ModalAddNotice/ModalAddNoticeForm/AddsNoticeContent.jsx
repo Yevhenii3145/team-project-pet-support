@@ -1,0 +1,273 @@
+import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
+import { useState } from 'react';
+import scss from './modal-add-pet-pages.module.scss';
+const AddsPetContent = ({ close }) => {
+  const [stepOne, setStepOne] = useState(true);
+  const [petName, setPetName] = useState("");
+  const [petTitle, setPetTitle] = useState("");
+  const [petDate, setPetDate] = useState("");
+  const [petBird, setPetBird] = useState("");
+  // const [petLocation, setPetLocation] = useState("")
+  // const [petPrice, setPetPrice] = useState("");
+  const [imageURL, setImageURL] = useState(null)
+
+  const changeStepOne = (e) => {
+    switch (e.currentTarget.name) {
+      case 'title':
+        setPetTitle(e.currentTarget.value);
+        break;
+
+      case 'name':
+        setPetName(e.currentTarget.value);
+        break;
+
+      case 'date':
+        setPetDate(e.currentTarget.value);
+        break;
+
+      case 'bird':
+        setPetBird(e.currentTarget.value);
+        break;
+
+      default:
+        return;
+    }
+  }
+
+
+  // const changeStepTwo = (e) => {
+  //   switch (e.currentTarget.name) {
+  //     case 'location':
+  //       setPetLocation(e.currentTarget.value);
+  //       break;
+
+  //     case 'price':
+  //       setPetPrice(e.currentTarget.value);
+  //       break;
+
+  //     default:
+  //       return;
+  //   }
+  // }
+
+
+  const changeStep = () => {
+    return setStepOne(!stepOne);
+  };
+
+  const handleImageChange = (e) => {
+    const reader = new FileReader()
+    const image = e.target.files[0]
+    reader.onloadend = () => {
+      setImageURL(reader.result)
+    }
+    reader.readAsDataURL(image)
+    return
+  }
+
+  const handleSubmitForStepOne = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const { title, name, date, bird, location, price } = form.elements;
+    setPetTitle(title.value);
+    setPetName(name.value)
+    setPetDate(date.value)
+    setPetBird(bird.value);
+    // setPetLocation(location.value);
+    // setPetPrice(price.value);
+    return changeStep();
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const { image, comments } = form.elements;
+    const data = new FormData();
+    data.append('title', petTitle);
+    data.append('name', petName);
+    data.append('date', petDate);
+    data.append('bird', petBird);
+    // data.append('location', petLocation);
+    // data.append('price', petPrice);
+    data.append('comments', comments.value);
+    data.append('image', image.files[0]);
+    setPetTitle("")
+    setPetBird("")
+    setPetDate("")
+    setPetName("")
+    // setPetLocation("")
+    // setPetPrice("")
+    setImageURL(null)
+    return form.reset();
+  };
+
+  return (
+    <div className={scss.modalAdds_page}>
+      <h3 className={scss.modalAdds_page__tittle}>Add pet</h3>
+      <p className={scss.modalAdds_descriptions}>Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur</p>
+      <NoticesCategoriesNav />
+      {stepOne && (
+        <form onSubmit={handleSubmitForStepOne}>
+          <label
+            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+          >
+            Tittle of ad <span className={scss.star}>*</span>
+          </label>
+          <input
+            className={scss.modalAdds_page__input}
+            name="title"
+            placeholder="Type name pet"
+            type="text"
+            required
+            value={petTitle}
+            onChange={changeStepOne}
+          />
+          <label
+            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+          >
+            Name pet
+          </label>
+          <input
+            className={scss.modalAdds_page__input}
+            name="name"
+            placeholder="Type name pet"
+            type="text"
+            required
+            value={petName}
+            onChange={changeStepOne}
+          />
+          <label
+            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+          >
+            Data of birth
+          </label>
+          <input
+            className={scss.modalAdds_page__input}
+            name="date"
+            type="text"
+            placeholder="Type date of birth"
+            required
+            value={petDate}
+            onChange={changeStepOne}
+          />
+          <label
+            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+          >
+            Breed
+          </label>
+          <input
+            className={scss.modalAdds_page__input}
+            type="text"
+            name="bird"
+            placeholder="Type breed"
+            required
+            value={petBird}
+            onChange={changeStepOne}
+          />
+          <div className={scss.addPet__button}>
+            <button
+              className={`${scss.button__primary_main} ${scss.modalAdds_page__button}`}
+              type="submit"
+            >
+              Next
+            </button>
+            <span
+              className={`${scss.button__primary_not_main} ${scss.modalAdds_page__button}`}
+              onClick={close}
+            >
+              Cancel
+            </span>
+          </div>
+        </form>
+      )}
+      {!stepOne && (
+        <form
+          action=""
+          id="book-add-form"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+        >
+
+
+
+          <label
+            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+          >
+            Location
+          </label>
+          <input
+            className={scss.modalAdds_page__input}
+            type="text"
+            name="location"
+            placeholder="Type name pet"
+            required
+          // value={petPrice}
+          // onChange={changeStepTwo}
+          />
+          <label
+            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+          >
+            Price
+          </label>
+          <input
+            className={scss.modalAdds_page__input}
+            type="text"
+            name="price"
+            placeholder="Type date of birth"
+            required
+          // value={petPrice}
+          // onChange={changeStepTwo}
+          />
+
+
+          <div className={scss.add__pet__container}>
+            <p className={scss.modalAdds_page__field}>
+              Load the pet’s image
+            </p>
+
+            <input
+              className={scss.addspet__imgInput}
+              type="file"
+              name="image"
+              accept="image/png, image/jpeg, image/jpg, image/webp"
+              id="img"
+              required
+              multiple
+              onChange={handleImageChange}
+            />
+            <label className={scss.addspet__imgLabel} htmlFor="img"></label>
+            {imageURL && <div className={scss.addspetPhoto__container}><p>You image:</p><img src={imageURL} alt="pet" /></div>}
+            <label
+              className={`${scss.modalAdds_page__label} ${scss.modalAdds_commit_box}`}
+            >
+              Comments
+            </label>
+            <textarea
+              className={scss.modalAdds_commit}
+              type="text"
+              name="comments"
+              placeholder="Type breed"
+              required
+            />
+
+            <div className={scss.addPet__button}>
+              <button
+                className={`${scss.button__primary_main} ${scss.modalAdds_page__button}`}
+                type="submit"
+              >
+                Done
+              </button>
+              <span
+                className={`${scss.button__primary_not_main} ${scss.modalAdds_page__button}`}
+                onClick={changeStep}
+              >
+                Back
+              </span>
+            </div>
+          </div>
+        </form>
+      )}
+    </div>
+  );
+};
+export default AddsPetContent;
