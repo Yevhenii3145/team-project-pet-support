@@ -1,6 +1,6 @@
 import NoticesCategories from '../NoticesCategories/NoticesCategories';
 import SvgInsert from 'components/Svg/Svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import scss from './modal-add-pet-pages.module.scss';
 
 const AddsPetContent = ({ close }) => {
@@ -9,10 +9,12 @@ const AddsPetContent = ({ close }) => {
   const [petTitle, setPetTitle] = useState("");
   const [petDate, setPetDate] = useState("");
   const [petBird, setPetBird] = useState("");
-  const [currentRadioValue, setCurrentRadioValue] = useState()
+  const [currentRadioValue, setCurrentRadioValue] = useState("")
   const [petLocation, setPetLocation] = useState("")
   const [petPrice, setPetPrice] = useState("");
   const [imageURL, setImageURL] = useState(null)
+
+
   const changeStepOne = (e) => {
     switch (e.currentTarget.name) {
       case 'title':
@@ -92,6 +94,7 @@ const AddsPetContent = ({ close }) => {
     data.append('name', petName);
     data.append('date', petDate);
     data.append('bird', petBird);
+    data.append('gender', currentRadioValue);
     data.append('location', petLocation);
     data.append('price', petPrice);
     data.append('comments', comments.value);
@@ -209,9 +212,11 @@ const AddsPetContent = ({ close }) => {
                   className={scss.radioButtonInput}
                   type="radio"
                   // checked={currentRadioValue}
+                  defaultChecked=""
                   name="gender"
                   value="male"
                   onChange={handleRadioChange}
+
                 />
               </label>
               <label className={scss.radioButton}>
@@ -294,8 +299,8 @@ const AddsPetContent = ({ close }) => {
               name="comments"
               placeholder="Type breed"
               required
-              minlength="8"
-              maxlength="120"
+              minLength="8"
+              maxLength="120"
             />
             <div className={scss.addPet__button}>
               <button

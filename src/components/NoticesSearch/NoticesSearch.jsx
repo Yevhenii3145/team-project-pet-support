@@ -11,14 +11,16 @@ const NoticesSearch = () => {
   const [inputValue, setInputValue] = useState(false);
 
 
-  // const getNews = async () => {
+  // const getSearch = async () => {
   //   const response = await axios.get(
-  //     'https://newsapi.org/v2/top-headlines?country=ua&category=technology&apiKey=a1d1809d7fe146168b31a26552e963b0'
+  //     'http//localhost:4001/notices/search?keyword={e.currentTarget.value}'
   //   );
   //   return response.data;
   // };
-  // console.log(getNews)
+  // console.log(getSearch)
+
 // "/notices/search?keyword={yourKeyword}"
+// localhost:4001
 
   const handleChange = e => {
     console.log(e.currentTarget.value)
