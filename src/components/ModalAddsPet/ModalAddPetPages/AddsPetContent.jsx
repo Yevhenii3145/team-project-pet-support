@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import scss from './modal-add-pet-pages.module.scss';
 import addPet from '../../../redux/operations';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const AddsPetContent = ({ close }) => {
   const [stepOne, setStepOne] = useState(true);
@@ -45,6 +46,9 @@ const AddsPetContent = ({ close }) => {
     return;
   };
 
+  const dateNow = new Date();
+  const formatDate = `0${dateNow.getDate()}.0${dateNow.getMonth() + 1}.${dateNow.getFullYear()}`
+
   const handleSubmitForStepOne = e => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -52,6 +56,13 @@ const AddsPetContent = ({ close }) => {
     setPetName(name.value);
     setPetDate(date.value);
     setPetBird(bird.value);
+    if(new Date(petDate) >= new Date(formatDate)){
+      return Report.info(
+        'Pet Info',
+        'Please choose a date no later than today.',
+        'Okay',
+        );
+    }
     console.log(petName, petBird, petDate);
     return changeStep();
   };
