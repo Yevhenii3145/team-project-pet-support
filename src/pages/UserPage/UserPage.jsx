@@ -11,16 +11,17 @@ import style from "./user-page.module.scss"
 function UserPage() {
 
     return (
-        <div className={`${scss.container} ${style.section}`}>
-            <div style={{display:'block', height:'100%'}} >
+        <div className={scss.container}>
+            <div className={style.userPage_section} >
                 <h2 className={style.userPage_title}>My information:</h2>
                 <div  className={style.userData_box}>
                     <UserData />
                     <Logout />
                 </div>
             </div>
-            <PetsData />
-            
+            <div className={style.petsData_section}>
+                <PetsData />    
+            </div>
         </div>
     )
 }

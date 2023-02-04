@@ -15,10 +15,12 @@ export default function Logout() {
     }
 
     return (
+        <div className={scss.logout_box}>
             <button className={scss.logout_button} onClick={onLogout}>
                 <SvgInsert className={scss.logout} id="icon-logout"/>
                 <p className={scss.logout_text}>Logout</p>
             </button>
+        </div>
 
     )
 }
