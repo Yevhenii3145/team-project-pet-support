@@ -15,7 +15,7 @@ const OurFriendsPage = lazy(() => import('./pages/OurFriendsPage/OurFriendsPage'
 const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const UserPage = lazy(() => import('./pages/UserPage/UserPage'));
 
-const NoticesCategoryList = lazy(() => import('./pages/NoticesCategoryList/NoticesCategoryList'));
+// const NoticesCategoryList = lazy(() => import('./pages/NoticesCategoryList/NoticesCategoryList'));
 const Public = lazy(() => import('./components/Public/Public'));
 const Private = lazy(() => import('./components/Private/Private'));
 

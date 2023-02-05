@@ -6,13 +6,13 @@ import noticeImage1 from "images/cat1.webp";
 import SvgInsert from "components/Svg/Svg";
 import { addNoticeToFavorite, deleteNotice } from "redux/notices/notices-operation";
 // import { getFavoriteNotice } from "redux/notices/notices-selectors";
-import { isLogin } from "redux/auth/auth-selectors";
+// import { isLogin } from "redux/auth/auth-selectors";
 
 const NoticeCategoryItem = (pet) => {
 
     const { _id, title, breed, place, birthday, price, category } = pet.pet;
 
-    const isAuth = useSelector(isLogin);
+    // const isAuth = useSelector(isLogin);
     const dispatch = useDispatch();
 
     const btnAddToFavorite = (noticeId) => {
@@ -44,9 +44,9 @@ const NoticeCategoryItem = (pet) => {
                     </ul>
                     <div className={scss.box_btn}>
                         <button type="button" className={scss.learn_more_btn} >Learn more</button>
-                        {isAuth && <button type="button" className={scss.delete_btn} onClick={() => btnDeleteNotice(_id)}>Delete
+                        {/* {isAuth && <button type="button" className={scss.delete_btn} onClick={() => btnDeleteNotice(_id)}>Delete
                             <SvgInsert id="icon-delete"/>
-                        </button>} 
+                        </button>}  */}
                         <button type="button" className={scss.add_to_favorite_btn} onClick={() => btnAddToFavorite(_id)}>
                             <SvgInsert id="icon-heart" />
                         </button>

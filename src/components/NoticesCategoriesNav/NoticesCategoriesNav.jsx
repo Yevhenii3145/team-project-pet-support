@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import scss from "./notices-categories-nav.module.scss";
-import { isLogin } from "redux/auth/auth-selectors";
+// import { isLogin } from "redux/auth/auth-selectors";
 
 const NoticesCategoriesNav = () => {
 
-    const isAuth = useSelector(isLogin);
+    // const isAuth = useSelector(isLogin);
 
     const getClassName = ({ isActive }) => {
         return isActive ? `${scss.link} ${scss.active}` : `${scss.link}`;
@@ -22,7 +22,7 @@ const NoticesCategoriesNav = () => {
             <li className={scss.item_order}>
                 <NavLink to="/notices/sell" className={getClassName} >sell</NavLink>          
             </li>
-            {isAuth && 
+            {/* {isAuth && 
                 <>
                     <li className={scss.item}>
                         <NavLink to="/notices/favorite" className={getClassName} >favorite ads</NavLink>
@@ -31,7 +31,7 @@ const NoticesCategoriesNav = () => {
                         <NavLink to="/notices/own" className={getClassName} >my ads</NavLink>
                     </li>
                 </>
-            }
+            } */}
         </ul>
   )
 }
