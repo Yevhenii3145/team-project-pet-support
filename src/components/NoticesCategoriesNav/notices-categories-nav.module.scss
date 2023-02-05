@@ -20,6 +20,11 @@
     background-color: $lightColor;
     border: 2px solid $accentColor;
     border-radius: 40px;
+
+    &:hover, :focus {
+        background-color: $accentColor;
+        color: $lightColor;
+    }
 }
 
 .link.active {

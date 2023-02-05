@@ -1,29 +1,57 @@
+import { useSelector, useDispatch } from "react-redux";
+import { formatDistanceStrict } from 'date-fns';
+
 import scss from "./notice-category-item.module.scss";
 import noticeImage1 from "images/cat1.webp";
-
 import SvgInsert from "components/Svg/Svg";
+import { addNoticeToFavorite, deleteNotice } from "redux/notices/notices-operation";
+// import { getFavoriteNotice } from "redux/notices/notices-selectors";
+import { isLogin } from "redux/auth/auth-selectors";
 
 const NoticeCategoryItem = (pet) => {
 
-    const { petBreed, petLocation, petDateOfBirth, petPrice } = pet.pet;
+    const { _id, title, breed, place, birthday, price, category } = pet.pet;
+
+    const isAuth = useSelector(isLogin);
+    const dispatch = useDispatch();
+
+    const btnAddToFavorite = (noticeId) => {
+        dispatch(addNoticeToFavorite(noticeId));
+    }
+
+    const btnDeleteNotice = (noticeId) => {
+        dispatch(deleteNotice(noticeId));
+    }
+
+    const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
+
+    const getPlacePet = () => {
+        const result = place.split(" ");
+        return result[0]
+    }
 
     return (
         <>
             <li className={scss.card_item} >
                 <img src={noticeImage1} alt="pet" className={scss.card_img} />
                 <div className={scss.card_info}>
-                    <h3 className={scss.card_info_title}>Сute dog looking for a home</h3>
+                    <h3 className={scss.card_info_title}>{title}</h3>
                     <ul className={scss.card_info_list}>
-                        <li className={scss.card_info_item}>Breed: {petBreed}</li>
-                        <li className={scss.card_info_item}>Place: {petLocation}</li>
-                        <li className={scss.card_info_item}>Age: {petDateOfBirth}</li>
-                        <li className={scss.card_info_item}>Price: {petPrice}$</li>
+                        <li className={scss.card_info_item}>Breed: {breed ? breed : 'no information'}</li>
+                        <li className={scss.card_info_item}>Place: {getPlacePet()}</li>
+                        <li className={scss.card_info_item}>Age: {getAgePet}</li>
+                        {category === "sell" && <li className={scss.card_info_item}>Price: {price}$</li>}
                     </ul>
-                    <button type="button" className={scss.add_to_favorite_btn}>
-                        <SvgInsert id="icon-heart" />
-                    </button>
-                    <button type="button" className={scss.learn_more_btn} >Learn more</button>
-                    <p className={scss.card_text}>Sell</p>
+                    <div className={scss.box_btn}>
+                        <button type="button" className={scss.learn_more_btn} >Learn more</button>
+                        {isAuth && <button type="button" className={scss.delete_btn} onClick={() => btnDeleteNotice(_id)}>Delete
+                            <SvgInsert id="icon-delete"/>
+                        </button>} 
+                        <button type="button" className={scss.add_to_favorite_btn} onClick={() => btnAddToFavorite(_id)}>
+                            <SvgInsert id="icon-heart" />
+                        </button>
+                    </div>
+                    <p className={scss.card_text}>{category}</p>
                 </div>
             </li>
 

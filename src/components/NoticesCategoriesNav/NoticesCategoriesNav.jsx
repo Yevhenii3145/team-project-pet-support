@@ -1,22 +1,15 @@
 import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
-import { fetchCategoryPets } from "redux/notices/notices-operation";
+import { useSelector } from "react-redux";
 import scss from "./notices-categories-nav.module.scss";
+import { isLogin } from "redux/auth/auth-selectors";
 
 const NoticesCategoriesNav = () => {
 
-    const dispatch = useDispatch();
+    const isAuth = useSelector(isLogin);
 
     const getClassName = ({ isActive }) => {
         return isActive ? `${scss.link} ${scss.active}` : `${scss.link}`;
     }
-
-    // const handleClick = (sell) => {
-    //     console.log(sell)
-    //     return dispatch(fetchCategoryPets(sell))
-    // }
 
     return (
         <ul className={scss.list}>
@@ -29,6 +22,16 @@ const NoticesCategoriesNav = () => {
             <li className={scss.item_order}>
                 <NavLink to="/notices/sell" className={getClassName} >sell</NavLink>          
             </li>
+            {isAuth && 
+                <>
+                    <li className={scss.item}>
+                        <NavLink to="/notices/favorite" className={getClassName} >favorite ads</NavLink>
+                    </li>
+                    <li className={scss.item}>
+                        <NavLink to="/notices/own" className={getClassName} >my ads</NavLink>
+                    </li>
+                </>
+            }
         </ul>
   )
 }
