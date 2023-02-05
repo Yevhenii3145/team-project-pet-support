@@ -2,12 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 //require("dotenv").config();
-const {REACT_APP_BASE_URL} = process.env;
-console.log(REACT_APP_BASE_URL)
+// const {REACT_APP_BASE_URL} = process.env;
+// console.log(REACT_APP_BASE_URL)
 // axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
 axios.defaults.baseURL = 'http://localhost:4001/api';
-axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGNmZWRiMWE2Y2I0ZjlkNTJlOTYwZSIsImlhdCI6MTY3NTUzMjE0NCwiZXhwIjoxNjc1NjE0OTQ0fQ.TCE19oHh_jueRFQFEjnQp7ydbK-1FbsYf46jW8PcW74`;
+axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGNmZWRiMWE2Y2I0ZjlkNTJlOTYwZSIsImlhdCI6MTY3NTYxNzI3MywiZXhwIjoxNjc1NzAwMDczfQ.G0FbqzDm8gTf7oREHVS_VNOMQlgKQHjGXNSZOmlXjs4`;
 //---for token---//
 // const setAuthHeader = token => {
 //     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -95,9 +95,35 @@ const addPet = createAsyncThunk('user/addPet', async (dataPet, thunkAPI) => {
     console.log('response.data',response.data)
     return response.data;
   } catch (error) {
+    console.log(error)
+    console.log(error.message)
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+const searchNotice = createAsyncThunk('notices/searchOne', async (id, thunkAPI) => {
+  try {
+    const response = await axios.get(`/notices/notice/${id}`);
+    console.log('response.data',response.data)
+    return response.data;
+  } catch (error) {
+    console.log(error)
+    console.log(error.message)
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+// const updateNotice = createAsyncThunk('notices/update', async (id, thunkAPI) => {
+//   try {
+//     const response = await axios.patch(`/notices/favorites/${id}`);
+//     console.log('response.data',response.data)
+//     return response.data;
+//   } catch (error) {
+//     console.log(error)
+//     console.log(error.message)
+//     return thunkAPI.rejectWithValue(error.message);
+//   }
+// });
 
 const operations = {
   registerNewUser,
@@ -105,6 +131,8 @@ const operations = {
   logout,
   current,
   addPet,
+  searchNotice,
+  // updateNotice,
 };
 
 export default operations;

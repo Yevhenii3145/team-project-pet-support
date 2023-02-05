@@ -13,6 +13,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { menuSlice, authReducer } from './menuSlice';
 import { userReducer } from './userSlice';
+import { noticesReducer } from './noticesSlice'
 
 // import authReducer from './auth/auth-slice'
 
@@ -29,6 +30,7 @@ export const store = configureStore({
     menu: persistReducer(persistConfig, menuSlice.reducer),
     auth: authReducer,
     user: userReducer,
+    notices: noticesReducer,
 
     // auth: persistedReducer,
 
