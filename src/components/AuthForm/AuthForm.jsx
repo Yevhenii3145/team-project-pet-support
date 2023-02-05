@@ -26,7 +26,7 @@ function validatePassword(value) {
   return error;
 }
 
-const phoneRegExp = /^\+380\d{3}\d{2}\d{2}\d{2}$/;
+const phoneRegExp = /^\[0-9]{3}\[0-9]{3}[0-9]{2}[0-9]{2}/;
 
 const schemasForStepSecond = Yup.object().shape({
   name: Yup.string(),
@@ -35,9 +35,8 @@ const schemasForStepSecond = Yup.object().shape({
     'Is not correct format, must "City, Region"'
   ),
   number: Yup.string()
-    .matches(phoneRegExp, 'Is not correct format, must +380xxxxxxxxx')
     .required()
-    .min(10),
+    .min(12, 'Is not correct format, must 380xxxxxxxxx'),
 });
 
 const AuthForm = () => {
@@ -78,8 +77,8 @@ const AuthForm = () => {
       console.log(user);
       actions.resetForm();
       setStepOne(true);
-      return;
-      // return dispatch(operations.registerNewUser(user));
+      // return;
+      return dispatch(operations.registerNewUser(user));
     }
   };
 

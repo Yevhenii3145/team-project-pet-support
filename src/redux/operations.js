@@ -1,7 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// const {REACT_APP_BASE_URL} = process.env;
+//require("dotenv").config();
+const {REACT_APP_BASE_URL} = process.env;
+console.log(REACT_APP_BASE_URL)
 // axios.defaults.baseURL = REACT_APP_BASE_URL;
 
 axios.defaults.baseURL = 'http://localhost:4001/api';
@@ -16,8 +18,11 @@ const registerNewUser = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const response = await axios.post('/auth/register', user);
+      console.log('response.data', response.data)
       return response.data;
     } catch (error) {
+        console.log(error.message)
+        console.log(error)
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -87,7 +92,7 @@ const current = createAsyncThunk(
 const addPet = createAsyncThunk('user/addPet', async (dataPet, thunkAPI) => {
   try {
     const response = await axios.post('/users/addPet', dataPet);
-    console.log(response.data)
+    console.log('response.data',response.data)
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
