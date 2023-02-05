@@ -216,7 +216,6 @@ const AddsPetContent = ({ close }) => {
                   name="gender"
                   value="male"
                   onChange={handleRadioChange}
-
                 />
               </label>
               <label className={scss.radioButton}>
