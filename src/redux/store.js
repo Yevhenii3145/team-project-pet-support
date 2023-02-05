@@ -15,6 +15,7 @@ import { menuSlice, authReducer } from './menuSlice';
 import { userReducer } from './userSlice';
 
 // import authReducer from './auth/auth-slice'
+import noticesReducer from './notices/notices-slice';
 
 const persistConfig = {
   key: 'token',
@@ -30,13 +31,20 @@ export const store = configureStore({
     auth: persistedReducer,
     // auth: authReducer,
     user: userReducer,
+
+    notices: noticesReducer,
+    // auth: persistedReducer,
+    
+
+
   },
 
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false
+      // {
+      //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      // },
     }),
 });
 

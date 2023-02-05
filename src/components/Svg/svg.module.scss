@@ -42,6 +42,11 @@
   fill: $lightColor;
   opacity: 0.6;
   stroke: $accentColor;
+
+  &:hover,
+  &:focus {
+    fill: $accentColor;
+  }
 }
 
 .search {
@@ -162,4 +167,12 @@
     }
 }
 
+.delete {
+  margin-left: 13px;
+  fill: #FF6101;
+}
+
+.active {
+  fill: $accentColor;
+}
 

@@ -1,7 +1,12 @@
 
+import { useSelector } from "react-redux";
 import scss from './svg.module.scss';
+import { getFavoriteNotice } from "redux/notices/notices-selectors";
 
 const SvgInsert = ({ id }) => {
+
+  let favoriteNotice = useSelector(getFavoriteNotice);
+
   switch (id) {
     case 'icon-logo':
       return (
@@ -153,7 +158,7 @@ const SvgInsert = ({ id }) => {
           viewBox="0 0 35 32"
           width="24"
           height="22"
-          className={scss.heart}
+          className={favoriteNotice ? scss.heart : `${scss.heart} ${scss.active}`}
         >
           <path d="M9.333 1.333c-4.418 0-8 3.645-8 8.142 0 3.63 1.4 12.246 15.181 20.955 0.247 0.154 0.53 0.236 0.819 0.236s0.572-0.082 0.819-0.236c13.781-8.709 15.181-17.325 15.181-20.955 0-4.497-3.582-8.142-8-8.142s-8 4.935-8 4.935c0 0-3.582-4.935-8-4.935z"></path>
           <path
