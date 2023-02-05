@@ -1,6 +1,6 @@
 import scss from "./shared-layout.module.scss";
 import base from "../../helpers/container.module.scss";
-import love from "../../images/heart-desktop-home.png";
+import love from "../../images/heart-desktop.svg";
 
 const SharedLayout = () => {
 
