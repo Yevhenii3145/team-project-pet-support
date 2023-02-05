@@ -48,9 +48,10 @@ const AddsPetContent = ({ close }) => {
   };
 
   const dateNow = new Date();
-  const formatDate = `0${dateNow.getDate()}.0${
-    dateNow.getMonth() + 1
+  const formatDate = `${dateNow.getDate() < 10 ? `0${dateNow.getDate()}` : dateNow.getDate()}.${
+    dateNow.getMonth() < 10 ? `0${dateNow.getMonth() + 1}` : dateNow.getMonth() + 1
   }.${dateNow.getFullYear()}`;
+  console.log(formatDate)
 
   const handleSubmitForStepOne = e => {
     e.preventDefault();
