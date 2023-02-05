@@ -14,9 +14,11 @@ const NoticesPage = lazy(() => import('./pages/NoticesPage/NoticesPage'));
 const OurFriendsPage = lazy(() => import('./pages/OurFriendsPage/OurFriendsPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const UserPage = lazy(() => import('./pages/UserPage/UserPage'));
-const NoticesCategoriesList = lazy(() => import('./components/NoticesCategoriesList/NoticesCategoriesList'));
-// const Public = lazy(() => import('./components/Public/Public'));
-// const Private = lazy(() => import('./components/Private/Private'));
+
+const NoticesCategoryList = lazy(() => import('./pages/NoticesCategoryList/NoticesCategoryList'));
+const Public = lazy(() => import('./components/Public/Public'));
+const Private = lazy(() => import('./components/Private/Private'));
+
 
 const UserRoutes = () => {
     return (
@@ -26,19 +28,19 @@ const UserRoutes = () => {
                 <Routes>
                     <Route path="/" element={<HomePage />}></Route>
 
-                    {/* <Route element={<Public />}> */}
+                    <Route element={<Public />}>
                     <Route path="/news" element={<NewsPage />} />
                     <Route path="/notices/:categoryName" element={<NoticesPage />} />
                     {/* <Route path="/notices/:categoryName" element={<NoticesCategoriesList />} /> */}
                     <Route path="/friends" element={<OurFriendsPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/login" element={<LoginPage />} />
-                    {/* </Route> */}
+                    </Route>
 
 
-                    {/* <Route element={<Private />}> */}
+                    <Route element={<Private />}>
                     <Route path="/user" element={<UserPage />} />
-                    {/* </Route> */}
+                    </Route>
 
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>

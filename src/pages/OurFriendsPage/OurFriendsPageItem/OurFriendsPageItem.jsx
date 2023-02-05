@@ -1,5 +1,4 @@
-import { click } from '@testing-library/user-event/dist/click';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import scss from './our-friends-page-item.module.scss';
 import OurFriendsPageItemPopup from './OurFriendsPageItemPopup/OurFriendsPageItemPopup';
 
@@ -16,18 +15,6 @@ const OurFriendsPageItem = ({
     day,
 }) => {
     const [popupActive, setPopupActive] = useState(false);
-
-    // useEffect(() => {
-    //     document.addEventListener('keydown', function (event) {
-    //         if (event.code === 'KeyZ' && (event.ctrlKey || event.metaKey)) {
-    //             setPopupActive(!popupActive)
-    //         }
-    //     });
-    // }, [popupActive]);
-
-    useEffect(() => {
-        console.log('ttttttttttttttt', workDays);
-    }, [popupActive, workDays]);
 
     const closeModal = () => {
         if (popupActive) {
@@ -68,9 +55,11 @@ const OurFriendsPageItem = ({
                             day={day}
                         />
                     </div>
-                    <span onClick={() => {
-                        setPopupActive(!popupActive);
-                    }}>
+                    <span
+                        onClick={() => {
+                            setPopupActive(!popupActive);
+                        }}
+                    >
                         {start}-{end}
                     </span>
                     <p>Address:</p>

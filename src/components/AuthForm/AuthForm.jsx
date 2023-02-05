@@ -39,6 +39,11 @@ const schemasForStepSecond = Yup.object().shape({
     .max(12, 'Is not correct format, must 380xxxxxxxxx!'),
 });
 
+const schemasForLogin = Yup.object().shape({
+  email: Yup.string().email().required(),
+  password: Yup.string().required().min(7).max(32)
+});
+
 const AuthForm = () => {
   const [stepOne, setStepOne] = useState(true);
   const location = useLocation();
@@ -48,6 +53,10 @@ const AuthForm = () => {
   const loading = useSelector(state => state.auth.loading);
   // const loading = true;
   const dispatch = useDispatch();
+
+  const onLogin = (data) => {
+    dispatch(operations.login(data));
+  }
 
   const initialValue = {
     email: '',
@@ -83,11 +92,16 @@ const AuthForm = () => {
   };
 
   const handleSubmitForLogin = (values, actions) => {
-    console.log(values);
-    user = values;
+    console.log("values", values);
+    user = {
+        email: values.email,
+        password: values.password,
+        
+      };
     console.log(user);
     actions.resetForm();
-    return;
+    return onLogin(user)
+    // return dispatch(operations.login(user));
   };
 
   const backButtonClick = () => {
@@ -214,7 +228,7 @@ const AuthForm = () => {
       {page === '/login' && (
         <>
           <Formik
-            validationSchema={schemasForStepFirst}
+            validationSchema={schemasForLogin}
             initialValues={initialValue}
             onSubmit={handleSubmitForLogin}
           >
