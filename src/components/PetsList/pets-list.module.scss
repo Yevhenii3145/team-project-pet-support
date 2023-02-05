@@ -7,8 +7,6 @@
     background: $lightColor;
     box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
     border-radius: 20px;
-    margin-bottom: 20px;
-    margin-top: 26px;
     padding-top: 16px;
 
 @media screen and (min-width: 768px) {
@@ -17,12 +15,13 @@
     border-radius: 40px;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
+    // margin: 0;
 
 }
     
 @media screen and (min-width: 1280px) {
     border-radius: 40px;
+    
 }
 }
 
@@ -85,8 +84,8 @@
     background-color: $lightColor;
     border: none;
     position: absolute;
-    // left: 80%;
-    // bottom: 85%;
+    left: 230px;
+    bottom: 87%;
 
 @media screen and (min-width: 768px) {
     width: 44px;

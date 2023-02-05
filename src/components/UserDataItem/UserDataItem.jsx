@@ -10,7 +10,7 @@ import { RiSave3Fill } from 'react-icons/ri';
 export default function UserDataItem() {
 
     const [avatar, setAvatar] = useState({});
-    const [imagePreviewUrl, setImagePreviewUrl] = useState('https://dummyimage.com/150x150/FDF7F2.gif&text=You+photo!');
+    const [imagePreviewUrl, setImagePreviewUrl] = useState('https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!');
     const [editPhoto, setEditPhoto] = useState(false);
 
   const handleSubmit = () => {
@@ -45,15 +45,7 @@ export default function UserDataItem() {
     reader.readAsDataURL(file);
   };
     
-    
-    //    const handelSabmit = (event) => {
-    //        event.preventDefault();
-    //        const { UserPhoto } = this.elements;
-    //        console.log(UserPhoto.value);
-    //        const data = new FormData();
-    //        data.append("UserPhoto", UserPhoto.files[0]);
 
-    // }
     
     // const onClick = () => {
     //     console.log('sdfgh');
