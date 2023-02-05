@@ -83,96 +83,34 @@
 }
 
 
-.iconAddAvatar 
-  :hover,
-  :focus {
-      fill: $accentColor;
-}
-
-.iconEdit  {
-  fill: #000000;
-
-@media screen and (min-width: 768px) {
-  width: 20px;
-  height: 20px;
+.iconAddPet{
+  @media (min-width: 768px) {
+    background-color: $accentColor;
+    padding: 7px;
+    border-radius: 50px;
+    margin-left: 12px;
+    cursor: pointer;
   }
 }
 
-.iconEdit_active {
-  fill: $accentColor;
-
-  @media screen and (min-width: 768px) {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-.iconLogout 
-  :hover,
-  :focus {
-    fill: $accentColor;
-}
-
-.iconAddPet {
-  border: 1px solid $accentColor;
+.male{
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 12px;
   width: 40px;
   height: 40px;
-  padding: 10px;
-  border-radius: 50%;
-  background-color: $accentColor;
 
-}
-
-
-.iconDelete 
-    :hover,
-    :focus {
-      fill: $accentColor;
-}
-
-.iconDone {
-  fill: $accentColor;
-
-@media screen and (min-width: 768px) {
-  width: 20px;
-  height: 20px;
+  @media (min-width: 768px) {
+    width: 60px;
+    height: 60px;
   }
 }
 
-.iconEditAvatar {
-  &:hover {
-      fill: #ff6101;
-    }
-}
-
-.edit_avatar {
-  fill: $accentColor;
-  margin-bottom: -2px;
-  margin-right: 5px;
-
-  &:hover {
-    fill: #ff6101;
-  }
-}
-
-.logout {
+.iconClose{
   display: block;
-  fill: $lightColor;
-  opacity: 0.6;
-  stroke: $accentColor;
-    &:hover,
-    &:focus {
-      stroke: $darkColor;
-      // fill: $darkColor;
-    }
-}
-
-.delete {
-  margin-left: 13px;
-  fill: #FF6101;
-}
-
-.active {
-  fill: $accentColor;
+width: 16px;
+height: 16px;
+margin-left: auto;
+border: #111;
 }
 
