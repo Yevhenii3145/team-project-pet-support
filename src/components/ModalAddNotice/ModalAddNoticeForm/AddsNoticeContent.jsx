@@ -56,7 +56,7 @@ const AddsPetContent = ({ close }) => {
   const handleSubmitForStepOne = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    const { title, name, date, bird, location, price} = form.elements;
+    const { title, name, date, bird } = form.elements;
     setPetTitle(title.value);
     setPetName(name.value);
     setPetDate(date.value);
@@ -89,6 +89,7 @@ const AddsPetContent = ({ close }) => {
     setPetLocation("")
     setPetPrice("")
     setImageURL(null)
+    console.log()
     return form.reset();
   };
 
@@ -98,7 +99,6 @@ const AddsPetContent = ({ close }) => {
   };
 
   const handleRadioChange = (e) => {
-    console.log("gender", e.target.value)
     setCurrentRadioValue(e.target.value);
   };
 
@@ -264,20 +264,18 @@ const AddsPetContent = ({ close }) => {
             value={petLocation}
             onChange={changeStepOne}
           />
-          <label
-            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
-          >
+          <label className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>
             Price<span className={scss.star}>*</span>:
+            <input
+              className={scss.modalAdds_page__input}
+              type="text"
+              name="price"
+              placeholder="Type date of birth"
+              required
+              value={petPrice}
+              onChange={changeStepOne}
+            />
           </label>
-          <input
-            className={scss.modalAdds_page__input}
-            type="text"
-            name="price"
-            placeholder="Type date of birth"
-            required
-            value={petPrice}
-            onChange={changeStepOne}
-          />
           <div className={scss.add__pet__container}>
             <p className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>
               Load the pet’s image
