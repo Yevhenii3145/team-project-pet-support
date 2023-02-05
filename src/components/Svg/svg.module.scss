@@ -32,12 +32,21 @@
   &:focus {
     stroke: $accentColor;
   }
+
+  @media screen and (min-width: 1280px) {
+    display: none;
+  }
 }
 
 .heart {
   fill: $lightColor;
   opacity: 0.6;
   stroke: $accentColor;
+
+  &:hover,
+  &:focus {
+    fill: $accentColor;
+  }
 }
 
 .search {
@@ -73,6 +82,7 @@
   }
 }
 
+
 .iconAddPet{
   @media (min-width: 768px) {
     background-color: $accentColor;
@@ -103,3 +113,4 @@ height: 16px;
 margin-left: auto;
 border: #111;
 }
+

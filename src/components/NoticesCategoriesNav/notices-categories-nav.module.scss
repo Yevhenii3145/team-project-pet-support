@@ -21,4 +21,39 @@
     background-color: $lightColor;
     border: 2px solid $accentColor;
     border-radius: 40px;
+
+
+    &:hover, :focus {
+        background-color: $accentColor;
+        color: $lightColor;
+    }
+}
+
+.link.active {
+    background-color: $accentColor;
+    color: $lightColor;
+}
+
+// ============== Tablet ======================
+
+@media screen and (min-width: 768px) {
+    .list {
+        margin-bottom: 60px;
+    }
+
+    .link {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 20px;
+        line-height: 1.35;
+    }
+}
+
+// ============== Desktop ======================
+
+@media screen and (min-width: 1280px){
+    .item_order {
+        order: -1;
+    }
+
 }

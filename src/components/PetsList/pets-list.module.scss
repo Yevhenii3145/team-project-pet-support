@@ -1,0 +1,108 @@
+@import "../../helpers/variables.module.scss";
+
+
+.petsList_box {
+    display: block;
+    width: 100%;
+    background: $lightColor;
+    box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
+    border-radius: 20px;
+    padding-top: 16px;
+
+@media screen and (min-width: 768px) {
+    display: flex;
+    padding: 20px;
+    border-radius: 40px;
+    justify-content: space-between;
+    align-items: center;
+    // margin: 0;
+
+}
+    
+@media screen and (min-width: 1280px) {
+    border-radius: 40px;
+    
+}
+}
+
+.petsList_photo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    width: 240px;
+    height: 240px;
+
+@media screen and (min-width: 768px) {
+    margin: 0;
+    width: 161px;
+    height: 161px;
+    border-radius: 40px;
+}
+    
+@media screen and (min-width: 1280px) {
+
+}
+}
+
+
+
+.petsList_text_box {
+    display: block;
+    margin-top: 20px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    position: relative;
+    // z-index: 6;
+
+@media screen and (min-width: 768px) {
+    width: 471px;
+    padding: 0;
+    margin: 0;
+}
+
+@media screen and (min-width: 1280px) {
+    width: 580px;
+}
+}
+
+.petsList_field{
+    text-align: left;
+    color: #111111;
+    margin-top: 10px;
+    background-color: $lightColor;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.33;
+}
+
+.petsList_button {
+    margin: 0 auto;
+    display: block;
+    background-color: $lightColor;
+    border: none;
+    position: absolute;
+    left: 230px;
+    bottom: 87%;
+
+@media screen and (min-width: 768px) {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: $background;
+    margin: 0;
+    padding: 0;
+    left: 92%;
+    bottom: 82%;
+    
+
+}
+
+@media screen and (min-width: 1280px) {
+    
+
+}
+}
+ 

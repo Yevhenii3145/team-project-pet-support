@@ -20,25 +20,79 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: {},
+    token: null,
+    isLogin: false,
+    loading: false
   },
   extraReducers: {
+    [operations.registerNewUser.pending](state, action) {
+      state.loading = true;
+    },
     [operations.registerNewUser.fulfilled](state, action) {
-      state.user = action.payload.user;
+      state.user = action.payload;
+      state.loading = false;
       Report.info(
         'SUCCESS!',
-        `${action.payload.user.name}, you have successfully registered, the verification has been sent to your mail.`,
+        `${action.payload.name}, you have successfully registered, the verification has been sent to your mail.`,
         'Okay'
       );
     },
-    [operations.registerNewUser.rejected](state) {
+    [operations.registerNewUser.rejected](state, action) {
+      state.loading = false;
       Report.warning(
         'Warning',
         `Something went wrong or user with this name already exists!`,
         'Okay'
       );
     },
+    [operations.login.pending]: (store) => {
+            store.loading = true;
+            store.error = null;
+        },
+        [operations.login.fulfilled]: (store, { payload }) => {
+            console.log('payload', payload)
+            store.loading = false;
+            store.user = payload.user;
+            store.token = payload.token;
+            store.isLogin = true;
+        },
+        [operations.login.rejected]: (store, { payload }) => {
+            console.log('payload', payload)
+            alert('Логин или пароль не верный, попробуйте снова.')
+            store.loading = false;
+            store.error = payload;
+        },
+        [operations.logout.pending]: (store) => {
+            store.loading = true;
+            store.error = null;
+        },
+        [operations.logout.fulfilled]: (store, {payload}) => {
+            store.loading = false;
+            store.user = {};
+            store.token = "";
+            store.isLogin = false;
+        },
+        [operations.logout.rejected]: (store, {payload}) => {
+            store.loading = false;
+            store.error = payload;
+        },
+        [operations.current.pending]: (store) => {
+            store.isLoadingUser = true;
+            store.error = null;
+        },
+        [operations.current.fulfilled]: (store, {payload}) => {
+            store.isLoadingUser = false;
+            store.user = payload;
+            store.isLogin = true;
+        },
+        [operations.current.rejected]: (store, {payload}) => {
+            store.isLoadingUser = false;
+            store.error = payload;
+        },
   },
 });
+
+
 
 export const { setMenuActive } = menuSlice.actions;
 export const authReducer = authSlice.reducer;

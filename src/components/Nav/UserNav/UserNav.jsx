@@ -10,9 +10,14 @@ const UserNav = () => {
     const dispatch = useDispatch();
 
     return (
-        <NavLink to={'user'} className={scss.account} onClick={()=>dispatch(setMenuActive(!isActive))}>
-        <SvgInsert id="icon-account"/>
-            Account</NavLink>
+        isActive === true 
+            ? <NavLink to={'user'} className={scss.account} onClick={()=>dispatch(setMenuActive(!isActive))}>
+            <SvgInsert id="icon-account"/>
+                Account</NavLink>
+            : <NavLink to={'user'} className={scss.account}>
+            <SvgInsert id="icon-account"/>
+                Account</NavLink>
+        
     )
 }
 

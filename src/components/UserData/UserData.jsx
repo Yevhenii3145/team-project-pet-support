@@ -1,10 +1,27 @@
-import scss from "./user-data.module.scss";
+// import { useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+import UserDataItem from "../UserDataItem/UserDataItem";
 
-const UserData = () => {
 
-    return (
-        <div>UserData</div>
-    )
-}
 
-export default UserData;
+export function UserData() {
+
+
+//    const dispatch = useDispatch();
+
+
+// useEffect(() => {
+//         dispatch(fetchContacts())
+//     }, [dispatch]);
+  
+  // const usersCard = useSelector(getUser);
+  // const {loading, error} = useSelector(getState);
+  // const dispatch = useDispatch();
+
+
+  
+
+ return (
+          <UserDataItem />
+    );
+      }

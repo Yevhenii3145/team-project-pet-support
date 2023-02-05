@@ -1,10 +1,28 @@
-import scss from "./user-page.module.scss";
+// import scss from "./user-page.module.scss";
 
-const UserPage = () => {
+import React from "react";
+import { UserData } from "../../components/UserData/UserData";
+import Logout from "../../components/Logout/Logout";
+import PetsData from "../../components/PetsData/PetsData";
+import scss from "../../helpers/container.module.scss";
+import style from "./user-page.module.scss"
+
+
+function UserPage() {
 
     return (
-        <div>UserPage</div>
+        <div className={scss.container}>
+            <div className={style.userPage_section} >
+                <h2 className={style.userPage_title}>My information:</h2>
+                <div  className={style.userData_box}>
+                    <UserData />
+                    <Logout />
+                </div>
+            </div>
+            <div className={style.petsData_section}>
+                <PetsData />    
+            </div>
+        </div>
     )
 }
-
 export default UserPage;

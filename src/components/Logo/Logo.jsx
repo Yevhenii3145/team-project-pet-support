@@ -1,8 +1,9 @@
+
 import { useDispatch, useSelector } from "react-redux";
 import scss from "./logo.module.scss";
-import img from "../../images/cat1.webp";
 import SvgInsert from "../Svg/Svg";
 import { setMenuActive } from "redux/menuSlice";
+import { NavLink } from "react-router-dom";
 
 
 const Logo = () => {
@@ -11,7 +12,9 @@ const dispatch = useDispatch();
 
     return (
         <div className={scss.logoWrapper}>
+        <NavLink to="/">
             <SvgInsert id="icon-logo" />
+        </NavLink>
             {isActive === false
             ? <a onClick={()=>dispatch(setMenuActive(!isActive))}><SvgInsert id="icon-menu-open"/> </a>
             : <a onClick={()=>dispatch(setMenuActive(!isActive))}><SvgInsert id="icon-menu-close"/></a>}

@@ -1,9 +1,11 @@
+
 import scss from "./notices-search.module.scss";
 import SvgInsert from 'components/Svg/Svg';
 import { useState, useEffect } from "react";
 // import axios from "axios";
 // import { format } from 'date-fns';
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 
 const NoticesSearch = () => {
   // const [data, setData] = useState([]);
