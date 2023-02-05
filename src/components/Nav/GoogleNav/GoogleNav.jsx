@@ -14,11 +14,11 @@ const GoogleAuth = () => {
     return (
         <>
         <p className={scss.googleDecs}>Or sign in with</p>
-        {isActive === true ? <a href={`${REACT_APP_BASE_URL}/auth/google`} className={scss.googleLink} onClick={()=>dispatch(setMenuActive(!isActive))}>
+        {isActive === true ? <a href={`${REACT_APP_BASE_URL}/api/auth/google`} className={scss.googleLink} onClick={()=>dispatch(setMenuActive(!isActive))}>
         <SvgInsert id="icon-google"/>
         <p className={scss.googleDecs}>Google</p>
         </a>
-        : <a href={`${REACT_APP_BASE_URL}/auth/google`} className={scss.googleLink}>
+        : <a href={`${REACT_APP_BASE_URL}/api/auth/google`} className={scss.googleLink}>
         <SvgInsert id="icon-google"/>
         <p className={scss.googleDecs}>Google</p>
         </a>}
