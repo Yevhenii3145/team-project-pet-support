@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { useReducer } from 'react';
 import {
   persistReducer,
   persistStore,
@@ -11,6 +12,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { menuSlice, authReducer } from './menuSlice';
+import { userReducer } from './userSlice';
+
 // import authReducer from './auth/auth-slice'
 import noticesReducer from './notices/notices-slice';
 
@@ -26,8 +29,10 @@ export const store = configureStore({
   reducer: {
     menu: persistReducer(persistConfig, menuSlice.reducer),
     auth: authReducer,
-    // auth: persistedReducer,
+    user: userReducer,
     notices: noticesReducer,
+    // auth: persistedReducer,
+    
   },
 
   middleware: getDefaultMiddleware =>

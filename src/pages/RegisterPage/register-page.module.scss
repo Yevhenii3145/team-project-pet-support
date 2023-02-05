@@ -1,11 +1,9 @@
 @import '../../helpers/variables.module.scss';
-
+@import '../../helpers/container.module.scss';
 
 .register__container {
   box-sizing: border-box;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 40px;
+  padding-top: 31px;
   text-align: center;
 
   background: $background;
@@ -43,7 +41,7 @@
 
 @media screen and (min-width: 768px) and (max-width: 1279px){
   .register__container {
-    padding: 169px 80px 266px;
+    padding: 145px 80px 266px;
     background-image: url(../../images/wave-tablet-auth.png);
     background-size: 1410px, 538px, contain;
     background-position: bottom -150px right -250px;
@@ -51,7 +49,7 @@
 }
 @media screen and (min-width: 1280px) {
   .register__container {
-    padding: 45px 331px 114px;
+    padding: 25px 331px 114px;
     background-image: url(../../images/wave-desktop-auth.png);
   }
 

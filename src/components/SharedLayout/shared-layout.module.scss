@@ -8,7 +8,7 @@
     display: flex;
     align-items: flex-end;
     padding-top: 48px;
-    background-image: url(../../images/wave-mobile-home.png);
+    background-image: url(../../images/wave-mobile-home.svg);
     background-repeat: no-repeat;
     background-position: bottom;
     background-position-y: bottom;
@@ -16,15 +16,16 @@
     box-sizing: content-box;
 
       @media screen and (min-width: 768px) {
-        position: static;
         display: block;
         padding-top: 64px;
-        background-image: url(../../images/wave-tablet-home.png);
+        background-size: cover;
+        background-image: url(../../images/wave-tablet-home.svg);
       }
 
       @media screen and (min-width: 1280px) {
+        background-size: contain;
         padding-top: 88px;
-        background-image: url(../../images/wave-desktop-home.png);
+        background-image: url(../../images/wave-desktop.svg);
       }
 }
 
@@ -47,9 +48,9 @@
 .image {
   width: 280px;
   height: 337px;
-  background-position: center;
+  background-position: bottom;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   margin: 0 auto;
   background-image: url(../../images/portrait-mobile@1x.png);
 
@@ -61,7 +62,7 @@
 
   @media screen and (min-width: 768px) {
     height: 640px;
-    width: 590px;
+    width: 645px;
     background-image: url(../../images/portrait-tablet@1x.png);
 
     @media screen and (min-device-pixel-ratio: 2),
@@ -72,6 +73,8 @@
   }
 
       @media screen and (min-width: 1280px) {
+        width: 590px;
+        height: 640px;
         position: relative;
         background-image: url(../../images/portrait-desktop@1x.png);
 
@@ -101,4 +104,5 @@ margin-bottom: 57px;
   margin-bottom: 0;
 }
 }
+
 

@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import operations from '../../redux/operations';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import Loader from 'components/Loader/Loader';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const schemasForStepFirst = Yup.object().shape({
   email: Yup.string().email().required(),
@@ -25,8 +26,6 @@ function validatePassword(value) {
   return error;
 }
 
-const phoneRegExp = /^\+380\d{3}\d{2}\d{2}\d{2}$/;
-
 const schemasForStepSecond = Yup.object().shape({
   name: Yup.string(),
   region: Yup.string().matches(
@@ -34,9 +33,10 @@ const schemasForStepSecond = Yup.object().shape({
     'Is not correct format, must "City, Region"'
   ),
   number: Yup.string()
-    .matches(phoneRegExp, 'Is not correct format, must +380xxxxxxxxx')
+  .matches(/[0-9]/, 'Field must contain only numbers!')
     .required()
-    .min(10),
+    .min(12, 'Is not correct format, must 380xxxxxxxxx!')
+    .max(12, 'Is not correct format, must 380xxxxxxxxx!'),
 });
 
 const AuthForm = () => {
@@ -46,6 +46,7 @@ const AuthForm = () => {
 
   let user = useSelector(state => state.auth.user);
   const loading = useSelector(state => state.auth.loading);
+  // const loading = true;
   const dispatch = useDispatch();
 
   const initialValue = {
@@ -71,12 +72,13 @@ const AuthForm = () => {
         password: values.password,
         name: values.name,
         city: values.region,
-        phone: values.number
+        phone: values.number,
       };
       console.log(user);
       actions.resetForm();
       setStepOne(true);
-      return dispatch(operations.registerNewUser(user))
+      // return;
+      return dispatch(operations.registerNewUser(user));
     }
   };
 
@@ -96,6 +98,7 @@ const AuthForm = () => {
 
   return (
     <>
+      {loading && <Loader />}
       {page === '/register' && (
         <>
           {stepOne ? (

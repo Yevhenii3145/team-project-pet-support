@@ -32,6 +32,10 @@
   &:focus {
     stroke: $accentColor;
   }
+
+  @media screen and (min-width: 1280px) {
+    display: none;
+  }
 }
 
 .heart {
@@ -75,6 +79,79 @@
   }
   @media (min-width: 1280px) {
     right: 332px;
+  }
+}
+
+
+.iconAddAvatar 
+  :hover,
+  :focus {
+      fill: $accentColor;
+}
+
+.iconEdit  {
+  fill: #000000;
+
+@media screen and (min-width: 768px) {
+  width: 20px;
+  height: 20px;
+  }
+}
+
+.iconEdit_active {
+  fill: $accentColor;
+
+  @media screen and (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.iconLogout 
+  :hover,
+  :focus {
+    fill: $accentColor;
+}
+
+.iconAddPet {
+  border: 1px solid $accentColor;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: $accentColor;
+
+}
+
+
+.iconDelete 
+    :hover,
+    :focus {
+      fill: $accentColor;
+}
+
+.iconDone {
+  fill: $accentColor;
+
+@media screen and (min-width: 768px) {
+  width: 20px;
+  height: 20px;
+  }
+}
+
+.iconEditAvatar {
+  &:hover {
+      fill: #ff6101;
+    }
+}
+
+.edit_avatar {
+  fill: $accentColor;
+  margin-bottom: -2px;
+  margin-right: 5px;
+
+  &:hover {
+    fill: #ff6101;
   }
 }
 

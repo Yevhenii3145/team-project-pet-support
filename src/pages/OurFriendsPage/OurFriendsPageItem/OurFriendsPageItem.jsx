@@ -7,11 +7,13 @@ const OurFriendsPageItem = ({
     title,
     start,
     end,
-    adress,
+    address,
+    addressUrl,
     email,
     phone,
     foto,
-    workDays
+    workDays,
+    day,
 }) => {
     const [popupActive, setPopupActive] = useState(false);
 
@@ -24,13 +26,23 @@ const OurFriendsPageItem = ({
     // }, [popupActive]);
 
     useEffect(() => {
-        console.log("ttttttttttttttt", workDays)
+        console.log('ttttttttttttttt', workDays);
     }, [popupActive, workDays]);
 
+    const closeModal = () => {
+        if (popupActive) {
+            setPopupActive(false);
+        }
+    };
+
+    const normalEmail = email !== '-------------------------';
+    const normalAddress = address !== '-------------------------';
+    const normalPhone = phone !== '--------------------------';
+    const phoneLink = `tel:${phone}`;
 
     return (
-        <li className={scss.card_item}>
-            <h2>{title}</h2>
+        <li className={scss.card_item} onClick={closeModal}>
+            <h2>{title} </h2>
             <div className={scss.wrapper}>
                 <div className={scss.plug}>
                     {foto && (
@@ -53,25 +65,28 @@ const OurFriendsPageItem = ({
                             active={popupActive}
                             setActive={setPopupActive}
                             workDays={workDays}
+                            day={day}
                         />
                     </div>
-                    <span>
+                    <span onClick={() => {
+                        setPopupActive(!popupActive);
+                    }}>
                         {start}-{end}
                     </span>
                     <p>Address:</p>
-                    <span className={scss.underline}>{adress}</span>
-
-                    {/* <span (if ({adress} !== '-------------------------')) {(className={scss.underline}))>{adress}</span> */}
+                    {normalAddress && (
+                        <a href={addressUrl} className={scss.underline}>
+                            {address}
+                        </a>
+                    )}
+                    {!normalAddress && <span>{address}</span>}
                     <p>Email:</p>
-                    {/* {({ email } === 1) ? (<span>uuuu</span>) : (<a href={`mailto: ${email}`}>{email}</a>)} */}
-                    {/* if ({email} !== ('-------------------------')) {
-                        (<a href={`mailto: ${email}`}>{email}</a>)
-                    }else {
-                        (<span>uuuu</span>)
-                    } */}
-                    <a href={`mailto: ${email}`}>{email}</a>
+                    {normalEmail && <a href={`mailto: ${email}`}>{email}</a>}
+                    {!normalEmail && <span>{email}</span>}
+
                     <p>Phone:</p>
-                    <span>{phone}</span>
+                    {normalPhone && <a href={phoneLink}>{phone}</a>}
+                    {!normalPhone && <span>{phone}</span>}
                 </div>
             </div>
         </li>
