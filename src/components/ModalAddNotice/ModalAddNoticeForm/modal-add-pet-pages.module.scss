@@ -68,8 +68,8 @@
   @media screen and (min-width: 768px) {
     margin-right: 350px;
     margin-top: 53px;
-    width: 140px;
-    height: 140px;
+    width: 130px;
+    height: 130px;
   }
 
   &:hover {
@@ -261,5 +261,35 @@
   @media screen and (max-width: 767px) {
     display: flex;
     width: 400px;
+  }
+}
+
+.buttonCont {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  gap: 12px;
+
+  @media screen and (min-width: 768px) {
+    width: 289px;
+  }
+}
+
+.button {
+  display: block;
+  padding: 7px 24px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.36;
+  letter-spacing: 0.04em;
+  color: inherit;
+  background-color: $lightColor;
+  border: 2px solid $accentColor;
+  border-radius: 40px;
+
+  &:hover,
+  &:focus {
+    background-color: $accentColor;
   }
 }
