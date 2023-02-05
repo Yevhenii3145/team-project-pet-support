@@ -76,7 +76,7 @@ const AddsPetContent = ({ close }) => {
     data.append('name', petName);
     data.append('date', petDate);
     data.append('bird', petBird);
-    data.append('gender', currentRadioValue);
+    data.append('sex', currentRadioValue);
     data.append('location', petLocation);
     data.append('price', petPrice);
     data.append('comments', comments.value);
@@ -89,7 +89,6 @@ const AddsPetContent = ({ close }) => {
     setPetLocation("")
     setPetPrice("")
     setImageURL(null)
-    console.log()
     return form.reset();
   };
 
@@ -231,7 +230,7 @@ const AddsPetContent = ({ close }) => {
                   type="radio"
                   // checked={currentRadioValue}
                   defaultChecked=""
-                  name="gender"
+                  name="sex"
                   value="male"
                   onChange={handleRadioChange}
                 />
@@ -243,7 +242,7 @@ const AddsPetContent = ({ close }) => {
                   className={scss.radioButtonInput}
                   type="radio"
                   // checked={currentRadioValue}
-                  name="gender"
+                  name="sex"
                   value="female"
                   onChange={handleRadioChange}
                 />

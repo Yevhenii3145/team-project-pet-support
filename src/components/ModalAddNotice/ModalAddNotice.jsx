@@ -32,7 +32,7 @@ const ModalAddNotice = ({ onClose, children }) => {
   return createPortal(
     <div className={scss.modal} onClick={handleDown}>
       <div className={scss.modal__section}>
-        {/* <SvgInsert id="icon-close" /> */}
+        <SvgInsert id="icon-close" onClick={handleDown}/>
         {children}
       </div>
     </div>,
