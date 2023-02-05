@@ -8,10 +8,14 @@ console.log(REACT_APP_BASE_URL)
 
 axios.defaults.baseURL = 'http://localhost:4001/api';
 axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGNmZWRiMWE2Y2I0ZjlkNTJlOTYwZSIsImlhdCI6MTY3NTUzMjE0NCwiZXhwIjoxNjc1NjE0OTQ0fQ.TCE19oHh_jueRFQFEjnQp7ydbK-1FbsYf46jW8PcW74`;
+
 //---for token---//
-// const setAuthHeader = token => {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   };
+const setAuthHeader = (token) => {
+    if (token) {
+        return axios.defaults.headers.common.authorization = `Bearer ${token} `
+    } 
+    axios.defaults.headers.common.authorization = ''
+}
 
 const registerNewUser = createAsyncThunk(
   'auth/register',
@@ -42,16 +46,20 @@ export const fetchUserData = createAsyncThunk(
 
 const login = createAsyncThunk(
   'auth/login',
-  async (data, { rejectWithValue }) => {
+  async (user, thunkAPI) => {
     try {
-      const result = await axios.post('/users/login', data);
-      return result.data;
+      const response = await axios.post('/auth/login', user);
+      const state = thunkAPI.getState();
+      console.log("state", state)
+      console.log('response.data', response.data);
+      return response.data;
     } catch ({ response }) {
+
       const error = {
         status: response.status,
         message: response.data.message,
       };
-      return rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -60,7 +68,7 @@ const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      const result = await axios.post('/users/logout');
+      const result = await axios.post('/auth/logout');
       return result;
     } catch ({ response }) {
       const error = {
@@ -72,19 +80,27 @@ const logout = createAsyncThunk(
   }
 );
 
-const current = createAsyncThunk(
-  'auth/current',
-  async (_, { rejectWithValue, getState }) => {
-    try {
-      const { auth } = getState();
-      const result = await axios.get('/users/current', auth.token);
-      return result;
-    } catch ({ response }) {
+const current = createAsyncThunk('users/current', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const persistedToken = state.auth.token
+  console.log("persistedToken", persistedToken)
+
+  if (persistedToken === null) {
+    return thunkAPI.rejectWithValue('Unable to fetch user');
+  }
+  
+  try {
+    setAuthHeader(persistedToken);
+    const response = await axios.get('/users/current');
+    return response.data;
+
+  } catch ({ response }) {
+    setAuthHeader()
       const error = {
         status: response.status,
         message: response.data.message,
       };
-      return rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
