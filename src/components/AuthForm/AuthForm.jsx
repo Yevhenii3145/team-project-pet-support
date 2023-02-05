@@ -8,7 +8,7 @@ import Loader from 'components/Loader/Loader';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const schemasForStepFirst = Yup.object().shape({
   email: Yup.string().email().required(),
