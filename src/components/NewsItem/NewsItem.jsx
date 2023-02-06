@@ -26,7 +26,7 @@ const NewsItem = ({ title, url, description, date }) => {
         className={s.news_title}
         text={title}
         tooltip={title}
-        length={`${matches ? 50 : 35}`}
+        length={Number(`${matches ? 50 : 35}`)}
       />
       <EllipsisText className={s.news_text} text={description} length={230} />
       <div className={s.wrap_news_info}>
