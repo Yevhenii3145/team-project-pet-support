@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import SvgInsert from "../../Svg/Svg";
 import scss from "./google-nav.module.scss";
 import { useSelector, useDispatch } from "react-redux";
