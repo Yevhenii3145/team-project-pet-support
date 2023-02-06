@@ -23,19 +23,19 @@ const NoticeCategoryItem = pet => {
     return console.log(modalShow);
   }
 
-  const showModal = () => {
-    setModalShow(true);
-  };
+//   const showModal = () => {
+//     setModalShow(true);
+//   };
 
   const { _id, title, breed, place, birthday, price, category } = pet.pet;
 
 
-const isAuth = useSelector(isLogin);
+// const isAuth = useSelector(isLogin);
   const dispatch = useDispatch();
 
-    const btnDeleteNotice = (noticeId) => {
-     dispatch(deleteNotice(noticeId));
-    }
+//     const btnDeleteNotice = (noticeId) => {
+//      dispatch(deleteNotice(noticeId));
+//     }
 
 
   const btnAddToFavorite = noticeId => {
