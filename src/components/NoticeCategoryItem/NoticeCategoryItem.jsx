@@ -37,7 +37,7 @@ const NoticeCategoryItem = (pet) => {
     return (
         <>
             <li className={scss.card_item} >
-                <img src={noticeImage1} alt="pet" className={scss.card_img} />
+                <img src={image} alt="pet" className={scss.card_img} />
                 <div className={scss.card_info}>
                     <h3 className={scss.card_info_title}>{title}</h3>
                     <ul className={scss.card_info_list}>
