@@ -16,8 +16,8 @@ const dispatch = useDispatch();
             <SvgInsert id="icon-logo" />
         </NavLink>
             {isActive === false
-            ? <button type="button"  onClick={()=>dispatch(setMenuActive(!isActive))}><SvgInsert id="icon-menu-open"/> </button>
-            : <button type="button"  onClick={()=>dispatch(setMenuActive(!isActive))}><SvgInsert id="icon-menu-close"/></button>}
+            ? <button type="button"  onClick={()=>dispatch(setMenuActive(!isActive))} className={scss.button}><SvgInsert id="icon-menu-open"/> </button>
+            : <button type="button"  onClick={()=>dispatch(setMenuActive(!isActive))} className={scss.button}><SvgInsert id="icon-menu-close"/></button>}
         </div>
     )
 }
