@@ -1,6 +1,7 @@
 @import "../../../helpers/variables.module.scss";
 
 .login {
+display: inline-block;
 font-weight: 500;
 font-size: 14px;
 line-height: 1.3;
@@ -13,6 +14,7 @@ background: #F59256;
 border-radius: 40px;
 border: 2px solid $accentColor;
 margin-right: 12px;
+margin-bottom: 12px;
 
 &:hover,
 &:focus {
@@ -22,14 +24,13 @@ margin-right: 12px;
 
 @media screen and (min-width: 768px) {
     font-size: 20px;
-}
-
-@media screen and (min-width: 768px) {
     padding: 10px 28px;
+    margin-bottom: 0;
 }
 }
 
 .register {
+display: inline-block;
 padding: 8px 28px;
 font-weight: 500;
 font-size: 14px;
@@ -41,6 +42,7 @@ cursor: pointer;
 background-color: $lightColor;
 border-radius: 40px;
 border: 2px solid $accentColor;
+margin-bottom: 12px;
 
 &:hover, &:focus {
     background: $accentColor;
@@ -50,9 +52,8 @@ border: 2px solid $accentColor;
 
 @media screen and (min-width: 768px) {
    font-size: 20px;
-}
-
-@media screen and (min-width: 768px) {
-    padding: 10px 28px;
+   padding: 10px 28px;
+   margin-right: 12px;
+   margin-bottom: 0;
 }
 }

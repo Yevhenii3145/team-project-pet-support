@@ -1,7 +1,7 @@
 import scss from "./user-data-item.module.scss";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import SvgInsert from "../Svg/Svg";
-import style from "../Svg/svg.module.scss"
+// import style from "../Svg/svg.module.scss"
 // import { useState } from 'react';
 import React from 'react';
 

@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
+
 import { formatDistanceStrict } from 'date-fns';
 
 import scss from './notice-category-item.module.scss';
@@ -28,8 +29,14 @@ const NoticeCategoryItem = pet => {
 
   const { _id, title, breed, place, birthday, price, category } = pet.pet;
 
-  // const isAuth = useSelector(isLogin);
+
+const isAuth = useSelector(isLogin);
   const dispatch = useDispatch();
+
+    const btnDeleteNotice = (noticeId) => {
+     dispatch(deleteNotice(noticeId));
+    }
+
 
   const btnAddToFavorite = noticeId => {
     dispatch(addNoticeToFavorite(noticeId));
