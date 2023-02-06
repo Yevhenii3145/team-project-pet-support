@@ -11,7 +11,7 @@ axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cC
 const setAuthHeader = (token) => {
     if (token) {
         return axios.defaults.headers.common.authorization = `Bearer ${token} `
-    } 
+    }
     axios.defaults.headers.common.authorization = ''
 }
 
@@ -85,7 +85,7 @@ const current = createAsyncThunk('users/current', async (_, thunkAPI) => {
   if (persistedToken === null) {
     return thunkAPI.rejectWithValue('Unable to fetch user');
   }
-  
+
   try {
     setAuthHeader(persistedToken);
     const response = await axios.get('/users/current');
@@ -112,12 +112,22 @@ const addPet = createAsyncThunk('user/addPet', async (dataPet, thunkAPI) => {
   }
 });
 
+const addNotice = createAsyncThunk('notices/notice', async (dataNotice, thunkAPI) => {
+  try {
+    const response = await axios.post('/notices/notice', dataNotice);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
 const operations = {
   registerNewUser,
   login,
   logout,
   current,
   addPet,
+  addNotice,
 };
 
 export default operations;
