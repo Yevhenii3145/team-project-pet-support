@@ -1,32 +1,73 @@
 @import '../../helpers/variables.module.scss';
 
+// .background {
+//     position: absolute;
+//     left: 0;
+//     bottom: 0;
+//     width: 100%;
+//     display: flex;
+//     align-items: flex-end;
+//     padding-top: 48px;
+//     background-image: url(../../images/wave-mobile-home.svg);
+//     background-repeat: no-repeat;
+//     background-position: bottom;
+//     background-position-y: bottom;
+//     background-size: contain;
+//     box-sizing: content-box;
+
+//       @media screen and (min-width: 768px) {
+//         display: block;
+//         padding-top: 64px;
+//         background-size: cover;
+//         background-image: url(../../images/wave-tablet-home.svg);
+//       }
+
+//       @media screen and (min-width: 1280px) {
+//         background-size: contain;
+//         padding-top: 88px;
+//         background-image: url(../../images/wave-desktop.svg);
+//       }
+// }
+
+
+
 .background {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-    padding-top: 48px;
-    background-image: url(../../images/wave-mobile-home.svg);
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-position-y: bottom;
-    background-size: contain;
-    box-sizing: content-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  // bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  background-image: url(../../images/wave-mobile-home.svg);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  box-sizing: content-box;
 
-      @media screen and (min-width: 768px) {
-        display: block;
-        padding-top: 64px;
-        background-size: cover;
-        background-image: url(../../images/wave-tablet-home.svg);
-      }
+    @media screen and (min-width: 768px) {
+      padding-top: 64px;
+      overflow-y: scroll;
+      background-size: cover;
+      background-image: url(../../images/wave-tablet-home.svg);
+    }
 
-      @media screen and (min-width: 1280px) {
-        background-size: contain;
-        padding-top: 88px;
-        background-image: url(../../images/wave-desktop.svg);
+    @media screen and (min-width: 768px) and (max-width: 1280px){
+      & > div {
+        height: 100%;
       }
+    }
+
+    @media screen and (min-width: 1280px) {
+      background-size: contain;
+      padding-top: 88px;
+      background-image: url(../../images/wave-desktop.svg);
+
+      & > div {
+        display: flex;
+        align-items: flex-end;
+      }
+    }
 }
 
 .wrapperHome {
@@ -61,7 +102,7 @@
   }
 
   @media screen and (min-width: 768px) {
-    height: 640px;
+    height: 775px;
     width: 645px;
     background-image: url(../../images/portrait-tablet@1x.png);
 
