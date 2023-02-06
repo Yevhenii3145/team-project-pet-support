@@ -28,12 +28,12 @@ const UserRoutes = () => {
             <Suspense fallback={<Progress colorScheme='green' height='32px' value={20} />} >
                 <Routes>
                     <Route path="/" element={<HomePage />}></Route>
+                    <Route path="/news" element={<NewsPage />} />
+                    <Route path="/notices/:categoryName" element={<NoticesPage />} />
+                    {/* <Route path="/notices/:categoryName" element={<NoticesCategoriesList />} /> */}
+                    <Route path="/friends" element={<OurFriendsPage />} />
 
                     <Route element={<Public />}>
-                        <Route path="/news" element={<NewsPage />} />
-                        <Route path="/notices/:categoryName" element={<NoticesPage />} />
-                        {/* <Route path="/notices/:categoryName" element={<NoticesCategoriesList />} /> */}
-                        <Route path="/friends" element={<OurFriendsPage />} />
                         <Route path="/register" element={<RegisterPage />} />
                         <Route path="/login" element={<LoginPage />} />
                     </Route>
