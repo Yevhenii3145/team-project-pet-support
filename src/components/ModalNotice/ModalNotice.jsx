@@ -1,9 +1,10 @@
 import scss from './modal-notice.module.scss';
 import SvgInsert from '../Svg/Svg';
 
-// import { useDispatch, useSelector } from 'react-redux';
-// import searchNotice from "../../redux/notices/notices-operation"
-// import Loader from 'components/Loader/Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import {searchNotice} from "../../redux/notices/notices-operation"
+import Loader from 'components/Loader/Loader';
+import { useEffect } from 'react';
 
 const notices = [
   {
@@ -13,7 +14,7 @@ const notices = [
     name: 'Rich',
     birthday: '22.04.16',
     breed: 'dachshund',
-    location: 'Odessa',
+    place: 'Odessa',
     theSex: 'girl',
     email: 'user@example.com',
     phone: '+3800000000',
@@ -24,117 +25,120 @@ const notices = [
   },
 ];
 
-const ModalNotice = ({ id, onClose }) => {
-  //const dispatch = useDispatch();
-  //const loading = useSelector(state => state.auth.loading);
-  //робимо запит до бекенду по ід яке нам передали...
-  const notice = notices.find(one => one.id === id);
-  //const notice = dispatch(operations.searchNotice(id))
-  console.log(notice);
-
-  const handleClickFavorite = id => {
-    console.log('added to favorite', id);
-  };
+const ModalNotice = ({ id, onClose, btnAddToFavorite }) => {
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
+  const notice = notices.find(one => one.id === 1);
+//   const notice = useSelector(state => state.notices.notice)
+  useEffect(()=>{
+    dispatch(searchNotice(id))
+  },[dispatch, id])
+    console.log(notice)
 
   return (
-    <div className={scss.modal_notice__content}>
-      <div className={scss.modal_notice__content_info}>
-        <div className={scss.modal_notice__close} onClick={onClose}>
-          <SvgInsert id="icon-close" />
+    <>
+    {loading && <Loader/>}
+    {
+        notice && <div className={scss.modal_notice__content}>
+        <div className={scss.modal_notice__content_info}>
+          <div className={scss.modal_notice__close} onClick={onClose}>
+            <SvgInsert id="icon-close" />
+          </div>
+          <div className={scss.modal_notice__image_content}>
+            <img
+              className={scss.modal_notice__image}
+              src={notice.image}
+              alt={notice.name}
+            />
+            <span className={scss.modal_notice__category}>{notice.category}</span>
+          </div>
+          <div>
+            <h3 className={scss.modal_notice__title}>{notice.title}</h3>
+            <ul className={scss.modal_notice__list}>
+              <li className={scss.modal_notice__item}>
+                <h4 className={scss.modal_notice__item_title}>Name:</h4>
+                <p className={scss.modal_notice__item_description}>
+                  {notice.name}
+                </p>
+              </li>
+              <li className={scss.modal_notice__item}>
+                <h4 className={scss.modal_notice__item_title}>Birthday:</h4>
+                <p className={scss.modal_notice__item_description}>
+                  {notice.birthday}
+                </p>
+              </li>
+              <li className={scss.modal_notice__item}>
+                <h4 className={scss.modal_notice__item_title}>Breed:</h4>
+                <p className={scss.modal_notice__item_description}>
+                  {notice.breed}
+                </p>
+              </li>
+              <li className={scss.modal_notice__item}>
+                <h4 className={scss.modal_notice__item_title}>Location:</h4>
+                <p className={scss.modal_notice__item_description}>
+                  {notice.place}
+                </p>
+              </li>
+              <li className={scss.modal_notice__item}>
+                <h4 className={scss.modal_notice__item_title}>The sex:</h4>
+                <p className={scss.modal_notice__item_description}>
+                  {notice.theSex}
+                </p>
+              </li>
+              <li className={scss.modal_notice__item}>
+                <h4 className={scss.modal_notice__item_title}>Email:</h4>
+                <p className={scss.modal_notice__item_description}>
+                  {notice.email}
+                </p>
+              </li>
+              <li className={scss.modal_notice__item}>
+                <h4 className={scss.modal_notice__item_title}>Phone:</h4>
+                <p className={scss.modal_notice__item_description}>
+                  {notice.phone}
+                </p>
+              </li>
+              <li className={scss.modal_notice__item}>
+                <h4 className={scss.modal_notice__item_title}>Price:</h4>
+                <p className={scss.modal_notice__item_description}>
+                  {notice.price}
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className={scss.modal_notice__image_content}>
-          <img
-            className={scss.modal_notice__image}
-            src={notice.image}
-            alt={notice.name}
-          />
-          <span className={scss.modal_notice__category}>{notice.category}</span>
-        </div>
-        <div>
-          <h3 className={scss.modal_notice__title}>{notice.title}</h3>
-          <ul className={scss.modal_notice__list}>
-            <li className={scss.modal_notice__item}>
-              <h4 className={scss.modal_notice__item_title}>Name:</h4>
-              <p className={scss.modal_notice__item_description}>
-                {notice.name}
-              </p>
-            </li>
-            <li className={scss.modal_notice__item}>
-              <h4 className={scss.modal_notice__item_title}>Birthday:</h4>
-              <p className={scss.modal_notice__item_description}>
-                {notice.birthday}
-              </p>
-            </li>
-            <li className={scss.modal_notice__item}>
-              <h4 className={scss.modal_notice__item_title}>Breed:</h4>
-              <p className={scss.modal_notice__item_description}>
-                {notice.breed}
-              </p>
-            </li>
-            <li className={scss.modal_notice__item}>
-              <h4 className={scss.modal_notice__item_title}>Location:</h4>
-              <p className={scss.modal_notice__item_description}>
-                {notice.location}
-              </p>
-            </li>
-            <li className={scss.modal_notice__item}>
-              <h4 className={scss.modal_notice__item_title}>The sex:</h4>
-              <p className={scss.modal_notice__item_description}>
-                {notice.theSex}
-              </p>
-            </li>
-            <li className={scss.modal_notice__item}>
-              <h4 className={scss.modal_notice__item_title}>Email:</h4>
-              <p className={scss.modal_notice__item_description}>
-                {notice.email}
-              </p>
-            </li>
-            <li className={scss.modal_notice__item}>
-              <h4 className={scss.modal_notice__item_title}>Phone:</h4>
-              <p className={scss.modal_notice__item_description}>
-                {notice.phone}
-              </p>
-            </li>
-            <li className={scss.modal_notice__item}>
-              <h4 className={scss.modal_notice__item_title}>Price:</h4>
-              <p className={scss.modal_notice__item_description}>
-                {notice.price}
-              </p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <article className={scss.modal_notice__item_comment}>
-        <span className={scss.modal_notice__item_title}>Comments:</span>
-        {notice.comments}
-      </article>
-      <div className={scss.modal_notice__button_container}>
-        <button
-          className={`${scss.button__primary_main} ${scss.modal_notice__button}`}
-          type="button"
-        >
-          <a
-            className={scss.modal_notice__button_contact}
-            href={`tel:+${notice.phone}`}
+        <article className={scss.modal_notice__item_comment}>
+          <span className={scss.modal_notice__item_title}>Comments:</span>
+          {notice.comments}
+        </article>
+        <div className={scss.modal_notice__button_container}>
+          <button
+            className={`${scss.button__primary_main} ${scss.modal_notice__button}`}
+            type="button"
           >
-            Contact
-          </a>
-        </button>
-        <button
-          onClick={() => {
-            handleClickFavorite(notice.id);
-          }}
-          className={`${scss.button__primary_not_main} ${scss.modal_notice__button}`}
-          type="button"
-        >
-          Add to{' '}
-          <SvgInsert
-            className={scss.modal_notice__button_favorite}
-            id="icon-heart-favorite"
-          />
-        </button>
+            <a
+              className={scss.modal_notice__button_contact}
+              href={`tel:+${notice.phone}`}
+            >
+              Contact
+            </a>
+          </button>
+          <button
+            onClick={() => {
+              console.log('add to favorite')
+            }}
+            className={`${scss.button__primary_not_main} ${scss.modal_notice__button}`}
+            type="button"
+          >
+            Add to{' '}
+            <SvgInsert
+              className={scss.modal_notice__button_favorite}
+              id="icon-heart-favorite"
+            />
+          </button>
+        </div>
       </div>
-    </div>
+    }
+    </>
   );
 };
 

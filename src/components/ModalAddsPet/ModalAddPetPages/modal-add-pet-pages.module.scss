@@ -2,8 +2,27 @@
 @import "../../../helpers/buttons.module.scss";
 
 .modalAdds_page  {
+    position: relative;
     text-align: center;
     background: $lightColor;
+}
+
+.modalAdds_page__close{
+    position: absolute;
+    right: 0;
+    top: -5px;
+    text-align: center;
+    background: $background;
+    backdrop-filter: blur(2px);
+    margin-left: auto;
+    max-width: 34px;
+    max-height: 34px;
+    padding: 6px;
+    border-radius: 40px;
+    cursor: pointer;
+        &:hover, &:focus{
+        background: #e6dfda;
+    }
 }
 
 .modalAdds_page__tittle {
@@ -167,6 +186,11 @@
 }
 
 @media screen and (min-width: 768px) {
+    .modalAdds_page__close{
+        right: -60px;
+        top: -20px;
+    }
+
     .modalAdds_page__tittle {
         font-size: 36px;
         line-height: 49px;
