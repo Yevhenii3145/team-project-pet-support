@@ -42,9 +42,6 @@ const isAuth = useSelector(isLogin);
     dispatch(addNoticeToFavorite(noticeId));
   };
 
-  const btnDeleteNotice = noticeId => {
-    dispatch(deleteNotice(noticeId));
-  };
 
   const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
 
