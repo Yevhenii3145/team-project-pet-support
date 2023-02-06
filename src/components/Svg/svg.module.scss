@@ -114,3 +114,21 @@ margin-left: auto;
 border: #111;
 }
 
+
+.google {
+  display: flex;
+  margin: 0 auto 6px;
+  box-sizing: content-box;
+  background-color: $lightColor;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid $accentColor;
+  border-radius: 40px;
+
+  @media screen and (min-width: 768px) {
+    display: inline-block;
+    margin: 0 auto 0;
+  }
+}
+
+
