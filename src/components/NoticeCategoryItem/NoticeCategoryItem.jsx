@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
 import { formatDistanceStrict } from 'date-fns';
@@ -8,7 +8,7 @@ import noticeImage1 from 'images/cat1.webp';
 import SvgInsert from 'components/Svg/Svg';
 import {
   addNoticeToFavorite,
-  deleteNotice,
+//   deleteNotice,
 } from 'redux/notices/notices-operation';
 // import { getFavoriteNotice } from "redux/notices/notices-selectors";
 // import { isLogin } from "redux/auth/auth-selectors";
