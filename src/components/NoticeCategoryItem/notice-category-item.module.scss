@@ -41,6 +41,14 @@
     line-height: 1.38;
 }
 
+.card_info_item {
+    display: flex;
+}
+
+.card_info_item_text {
+    min-width: 90px;
+}
+
 .add_to_favorite_btn {
     position: absolute;
     top: 12px;
@@ -56,6 +64,17 @@
     border: none;
     border-radius: 50%;
     cursor: pointer;
+}
+
+.add_to_favorite_btn > svg {
+    fill: $lightColor;
+    opacity: 0.6;
+    stroke: $accentColor;
+}
+
+.add_to_favorite_btn > svg:hover, 
+.add_to_favorite_btn > svg:focus {
+    fill: $accentColor;
 }
 
 .box_btn {

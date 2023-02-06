@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const { REACT_APP_BASE_URL } = process.env;
+
 const instance = axios.create({
-    baseURL: 'http://localhost:4001/api'
+    baseURL: `${REACT_APP_BASE_URL}/api`
+    // baseURL: `https://backend3-team-project-pet-support.onrender.com/api`
 })
 
 export const getCategoryNotices = async (categoryName) => {

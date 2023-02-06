@@ -38,17 +38,6 @@
   }
 }
 
-.heart {
-  fill: $lightColor;
-  opacity: 0.6;
-  stroke: $accentColor;
-
-  &:hover,
-  &:focus {
-    fill: $accentColor;
-  }
-}
-
 .search {
   position: absolute;
   right: 8px;
@@ -167,12 +156,8 @@
     }
 }
 
-.delete {
+.iconDeleteNotice {
   margin-left: 13px;
   fill: #FF6101;
-}
-
-.active {
-  fill: $accentColor;
 }
 
