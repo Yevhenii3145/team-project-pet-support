@@ -1,62 +1,101 @@
-import { useDispatch } from "react-redux";
-// import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+
 import { formatDistanceStrict } from 'date-fns';
 
-import scss from "./notice-category-item.module.scss";
-import noticeImage1 from "images/cat1.webp";
-import SvgInsert from "components/Svg/Svg";
-import { addNoticeToFavorite, deleteNotice } from "redux/notices/notices-operation";
+import scss from './notice-category-item.module.scss';
+import noticeImage1 from 'images/cat1.webp';
+import SvgInsert from 'components/Svg/Svg';
+import {
+  addNoticeToFavorite,
+  deleteNotice,
+} from 'redux/notices/notices-operation';
 // import { getFavoriteNotice } from "redux/notices/notices-selectors";
 // import { isLogin } from "redux/auth/auth-selectors";
+import Modal from '../ModalNotice/Modal/Modal';
+import ModalNotice from '../ModalNotice/ModalNotice';
 
-const NoticeCategoryItem = (pet) => {
+const NoticeCategoryItem = pet => {
+  const [modalShow, setModalShow] = useState(false);
 
-    const { _id, title, breed, place, birthday, price, category } = pet.pet;
+  function closeModal() {
+    setModalShow(false);
+    return console.log(modalShow);
+  }
 
-    // const isAuth = useSelector(isLogin);
-    const dispatch = useDispatch();
+  const showModal = () => {
+    setModalShow(true);
+  };
 
-    const btnAddToFavorite = (noticeId) => {
-        dispatch(addNoticeToFavorite(noticeId));
+  const { _id, title, breed, place, birthday, price, category } = pet.pet;
+
+
+const isAuth = useSelector(isLogin);
+  const dispatch = useDispatch();
+
+    const btnDeleteNotice = (noticeId) => {
+     dispatch(deleteNotice(noticeId));
     }
 
-    // const btnDeleteNotice = (noticeId) => {
-    //     dispatch(deleteNotice(noticeId));
-    // }
 
-    const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
+  const btnAddToFavorite = noticeId => {
+    dispatch(addNoticeToFavorite(noticeId));
+  };
 
-    const getPlacePet = () => {
-        const result = place.split(" ");
-        return result[0]
-    }
+  const btnDeleteNotice = noticeId => {
+    dispatch(deleteNotice(noticeId));
+  };
 
-    return (
+  const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
+
+  const getPlacePet = () => {
+    const result = place.split(' ');
+    return result[0];
+  };
+
+  return (
+    <>
+      {modalShow && (
         <>
-            <li className={scss.card_item} >
-                <img src={noticeImage1} alt="pet" className={scss.card_img} />
-                <div className={scss.card_info}>
-                    <h3 className={scss.card_info_title}>{title}</h3>
-                    <ul className={scss.card_info_list}>
-                        <li className={scss.card_info_item}>Breed: {breed ? breed : 'no information'}</li>
-                        <li className={scss.card_info_item}>Place: {getPlacePet()}</li>
-                        <li className={scss.card_info_item}>Age: {getAgePet}</li>
-                        {category === "sell" && <li className={scss.card_info_item}>Price: {price}$</li>}
-                    </ul>
-                    <div className={scss.box_btn}>
-                        <button type="button" className={scss.learn_more_btn} >Learn more</button>
-                        {/* {isAuth && <button type="button" className={scss.delete_btn} onClick={() => btnDeleteNotice(_id)}>Delete
+          <Modal onClose={closeModal}>
+            <ModalNotice id={1} onClose={closeModal} />
+          </Modal>
+        </>
+      )}
+      <li className={scss.card_item}>
+        <img src={noticeImage1} alt="pet" className={scss.card_img} />
+        <div className={scss.card_info}>
+          <h3 className={scss.card_info_title}>{title}</h3>
+          <ul className={scss.card_info_list}>
+            <li className={scss.card_info_item}>
+              Breed: {breed ? breed : 'no information'}
+            </li>
+            <li className={scss.card_info_item}>Place: {getPlacePet()}</li>
+            <li className={scss.card_info_item}>Age: {getAgePet}</li>
+            {category === 'sell' && (
+              <li className={scss.card_info_item}>Price: {price}$</li>
+            )}
+          </ul>
+          <div className={scss.box_btn}>
+            <button type="button" className={scss.learn_more_btn}>
+              Learn more
+            </button>
+            {/* {isAuth && <button type="button" className={scss.delete_btn} onClick={() => btnDeleteNotice(_id)}>Delete
                             <SvgInsert id="icon-delete"/>
                         </button>}  */}
-                        <button type="button" className={scss.add_to_favorite_btn} onClick={() => btnAddToFavorite(_id)}>
-                            <SvgInsert id="icon-heart" />
-                        </button>
-                    </div>
-                    <p className={scss.card_text}>{category}</p>
-                </div>
-            </li>
+            <button
+              type="button"
+              className={scss.add_to_favorite_btn}
+              onClick={() => btnAddToFavorite(_id)}
+            >
+              <SvgInsert id="icon-heart" />
+            </button>
+          </div>
+          <p className={scss.card_text}>{category}</p>
+        </div>
+      </li>
 
-            {/* <li className={scss.card_item}>
+      {/* <li className={scss.card_item}>
                 <img src={noticeImage2} alt="pet" className={scss.card_img} />
                 <div className={scss.card_info}>
                     <h3 className={scss.card_info_title}>Сute dog looking for a home</h3>
@@ -181,8 +220,8 @@ const NoticeCategoryItem = (pet) => {
                     <p className={scss.card_text}>Sell</p>
                 </div>
             </li> */}
-        </>
-    )
-}
+    </>
+  );
+};
 
 export default NoticeCategoryItem;
