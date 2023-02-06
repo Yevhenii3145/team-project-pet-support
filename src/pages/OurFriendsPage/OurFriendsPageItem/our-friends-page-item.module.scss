@@ -75,7 +75,7 @@ h2 {
 }
 .wrapper {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 
   @media screen and (min-width: 768px) {
     // width: 336px;
