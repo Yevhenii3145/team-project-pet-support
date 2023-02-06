@@ -2,7 +2,6 @@ import scss from "./logout.module.scss";
 import SvgInsert from "../Svg/Svg";
 import React from 'react';
 import { useDispatch } from 'react-redux';
-// import { logout } from '../../../redux/auth/auth-operations'
 import operations from '../../redux/operations';
 
 

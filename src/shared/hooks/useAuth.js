@@ -4,7 +4,6 @@ import { isLogin } from "../../redux/selectors";
 
 const useAuth = () => {
     const result = useSelector(isLogin);
-
     return result;
 }
 

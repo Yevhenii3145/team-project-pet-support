@@ -1,17 +1,23 @@
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+
 import { formatDistanceStrict } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-import scss from "./notice-category-item.module.scss";
-import noticeImage1 from "images/cat1.webp";
-import SvgInsert from "components/Svg/Svg";
-import { addNoticeToFavorite, deleteNotice } from "redux/notices/notices-operation";
-import useAuth from "shared/hooks/useAuth";
+import scss from './notice-category-item.module.scss';
+// import noticeImage1 from 'images/cat1.webp';
+import SvgInsert from 'components/Svg/Svg';
+import { addNoticeToFavorite, deleteNotice } from 'redux/notices/notices-operation';
 // import { getFavoriteNotice } from "redux/notices/notices-selectors";
+import useAuth from 'shared/hooks/useAuth';
+import Modal from '../ModalNotice/Modal/Modal';
+import ModalNotice from '../ModalNotice/ModalNotice';
 
-const NoticeCategoryItem = (pet) => {
-
+const NoticeCategoryItem = pet => {
+  
     const { _id, image, title, breed, place, birthday, price, category } = pet.pet;
+
+    const [modalShow, setModalShow] = useState(false);
 
     const isLogin = useAuth();
     const dispatch = useDispatch();
@@ -23,19 +29,34 @@ const NoticeCategoryItem = (pet) => {
         Notify.failure("You need authorization");
     }
 
-    const btnDeleteNotice = (noticeId) => {
-        dispatch(deleteNotice(noticeId));
+    function closeModal() {
+        setModalShow(false);
+        return console.log(modalShow);
     }
 
-    const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
+//   const showModal = () => {
+//     setModalShow(true);
+//   };
 
     const getPlacePet = () => {
         const result = place.split(", ");
         return result[0]
     }
+    const btnDeleteNotice = (noticeId) => {
+     dispatch(deleteNotice(noticeId));
+    }
+
+    const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
 
     return (
         <>
+            {modalShow && (
+            <>
+                <Modal onClose={closeModal}>
+                    <ModalNotice id={1} onClose={closeModal} />
+                </Modal>
+            </>
+      )}
             <li className={scss.card_item} >
                 <img src={image} alt="pet" className={scss.card_img} />
                 <div className={scss.card_info}>

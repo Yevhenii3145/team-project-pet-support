@@ -18,3 +18,8 @@ export const deleteNotice = async (noticeId) => {
     const data = await axios.delete(`/notices/${noticeId}`);
     return data;
 }
+
+export const searchNotice = async noticeId => {
+  const data = await axios.get(`/notices/notice/${noticeId}`);
+  return data;
+};
