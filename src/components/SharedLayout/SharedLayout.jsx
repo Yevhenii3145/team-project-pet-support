@@ -6,7 +6,7 @@ const SharedLayout = () => {
 
     return (
             <>
-        <section className={scss.background}>
+        <div className={scss.background}>
             <div className={base.container}>
                 <div className={scss.wrapperHome}>
                 <h1 className={scss.title}>Take good care of your small pets</h1>
@@ -15,7 +15,7 @@ const SharedLayout = () => {
                 </div>
                 </div>
             </div>
-        </section>
+        </div>
         </>
     )
 }
