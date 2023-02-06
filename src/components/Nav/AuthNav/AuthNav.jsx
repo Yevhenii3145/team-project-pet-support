@@ -1,5 +1,4 @@
 import scss from "./auth-nav.module.scss";
-import button from "../../../helpers/buttons.module.scss";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setMenuActive } from "redux/menuSlice";
