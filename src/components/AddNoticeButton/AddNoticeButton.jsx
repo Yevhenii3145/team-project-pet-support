@@ -8,6 +8,7 @@ const AddNoticeButton = () => {
   const [modalShow, setModalShow] = useState(false);
 
   const closeModal = () => {
+    // qwe
     setModalShow(false);
   };
 
@@ -28,7 +29,7 @@ const AddNoticeButton = () => {
       {modalShow && (
         <>
           <ModalAddNotice onClose={closeModal}>
-            <AddsPetContent/>
+            <AddsPetContent />
           </ModalAddNotice>
         </>
       )}
