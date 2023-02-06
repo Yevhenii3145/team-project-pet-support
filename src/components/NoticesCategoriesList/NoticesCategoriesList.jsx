@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import scss from "./notices-categories-list.module.scss";
+// import scss from "./notices-categories-list.module.scss";
 import NoticesCategoryList from "components/NoticesCategoryList/NoticesCategoryList";
 import { fetchCategoryNotices } from "redux/notices/notices-operation";
 import { getStore, getNotices } from "redux/notices/notices-selectors";

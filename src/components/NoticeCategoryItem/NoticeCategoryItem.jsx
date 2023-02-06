@@ -1,4 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+// import { useSelector } from "react-redux";
 import { formatDistanceStrict } from 'date-fns';
 
 import scss from "./notice-category-item.module.scss";
@@ -19,9 +20,9 @@ const NoticeCategoryItem = (pet) => {
         dispatch(addNoticeToFavorite(noticeId));
     }
 
-    const btnDeleteNotice = (noticeId) => {
-        dispatch(deleteNotice(noticeId));
-    }
+    // const btnDeleteNotice = (noticeId) => {
+    //     dispatch(deleteNotice(noticeId));
+    // }
 
     const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
 
