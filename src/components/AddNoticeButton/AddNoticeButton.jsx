@@ -8,7 +8,6 @@ const AddNoticeButton = () => {
   const [modalShow, setModalShow] = useState(false);
 
   const closeModal = () => {
-    // qwe
     setModalShow(false);
   };
 
