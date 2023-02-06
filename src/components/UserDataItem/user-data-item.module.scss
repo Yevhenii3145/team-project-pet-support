@@ -200,6 +200,7 @@
     position:absolute;
     content: '';
     
+    
 
 }
 
@@ -230,7 +231,7 @@
     color: $accentColor;
 
     &:hover {
-        color: #ff6101;
+        color: $accentColor;
     }
 }
 
@@ -250,7 +251,7 @@
     content: "";
     cursor: pointer;
     
-    &:hover {
+  &:hover {
             color: #ff6101;
         }
 

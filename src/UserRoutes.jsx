@@ -14,31 +14,34 @@ const NoticesPage = lazy(() => import('./pages/NoticesPage/NoticesPage'));
 const OurFriendsPage = lazy(() => import('./pages/OurFriendsPage/OurFriendsPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const UserPage = lazy(() => import('./pages/UserPage/UserPage'));
-const NoticesCategoryList = lazy(() => import('./pages/NoticesCategoryList/NoticesCategoryList'));
-// const Public = lazy(() => import('./components/Public/Public'));
-// const Private = lazy(() => import('./components/Private/Private'));
+
+
+// const NoticesCategoryList = lazy(() => import('./pages/NoticesCategoryList/NoticesCategoryList'));
+const Public = lazy(() => import('./components/Public/Public'));
+const Private = lazy(() => import('./components/Private/Private'));
+
 
 const UserRoutes = () => {
     return (
         <>
-        <Header/>
+            <Header />
             <Suspense fallback={<Progress colorScheme='green' height='32px' value={20} />} >
                 <Routes>
                     <Route path="/" element={<HomePage />}></Route>
 
-                    {/* <Route element={<Public />}> */}
-                    <Route path="/news" element={<NewsPage />} />
-                    <Route path="/notices" element={<NoticesPage />} />
-                    <Route path="/notices/:categoryName" element={<NoticesCategoryList />} />
-                    <Route path="/friends" element={<OurFriendsPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    {/* </Route> */}
+                    <Route element={<Public />}>
+                        <Route path="/news" element={<NewsPage />} />
+                        <Route path="/notices/:categoryName" element={<NoticesPage />} />
+                        {/* <Route path="/notices/:categoryName" element={<NoticesCategoriesList />} /> */}
+                        <Route path="/friends" element={<OurFriendsPage />} />
+                        <Route path="/register" element={<RegisterPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                    </Route>
 
 
-                    {/* <Route element={<Private />}> */}
-                    <Route path="/user" element={<UserPage />} />
-                    {/* </Route> */}
+                    <Route element={<Private />}>
+                        <Route path="/user" element={<UserPage />} />
+                    </Route>
 
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>

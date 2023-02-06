@@ -1,8 +1,9 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { current } from './redux/auth/auth-operation';
-import { getLoadingUserStatus } from 'redux/auth/auth-selectors';
+// import { current } from './redux/auth/auth-operation';
+import operations from './redux/operations';
+import { getLoadingUserStatus } from 'redux/selectors';
 
 
 import UserRoutes from "./UserRoutes";
@@ -15,7 +16,7 @@ export const App = () => {
   const isLoadindUser = useSelector(getLoadingUserStatus)
 
   useEffect(() => {
-    dispatch(current())
+    dispatch(operations.current())
   }, [dispatch])
 
   return (

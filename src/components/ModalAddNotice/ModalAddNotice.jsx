@@ -1,10 +1,43 @@
-// import scss from "./modal-add-notice.module.scss";
+import scss from "./modal-add-notice.module.scss";
+import React from 'react';
+import { createPortal } from 'react-dom';
+import { useEffect } from 'react';
+import SvgInsert from "components/Svg/Svg";
+const modalRoot = document.querySelector('#modal-root');
 
-const ModalAddNotice = () => {
+const ModalAddNotice = ({ onClose, children }) => {
+  useEffect(() => {
+    const handleDownInEscape = e => {
+      if (e.code === 'Escape') {
+        onClose();
+      }
+    };
 
-    return (
-        <div>ModalAddNotice</div>
-    )
-}
+    window.addEventListener('keydown', handleDownInEscape);
+    return () => {
+      return window.removeEventListener('keydown', handleDownInEscape);
+    };
+  }, [onClose]);
+
+  const handleDown = e => {
+    if (e.currentTarget === e.target) {
+      onClose();
+    }
+  };
+
+  children = React.cloneElement(children, {
+    close: onClose,
+  });
+
+  return createPortal(
+    <div className={scss.modal} onClick={handleDown}>
+      <div className={scss.modal__section}>
+        <SvgInsert id="icon-close" onClick={handleDown}/>
+        {children}
+      </div>
+    </div>,
+    modalRoot
+  );
+};
 
 export default ModalAddNotice;

@@ -6,13 +6,11 @@
     width: 75px;
     display: flex;
     justify-content: space-between;
-
-    // width: 63px;
     display: flex;
     flex-direction: row;
     height: 22px;
     margin-left: 16px;
-    // margin-left: auto;
+    margin-left: auto;
     font-family: "Manrope";
     font-style: normal;
     font-weight: 500;
@@ -24,7 +22,11 @@
     // color: $darkColor;
     // opacity: 0.6;
     border: none;
-    
+   
+   
+@media screen and (min-width: 768px) {
+    margin: 0;
+}
 }
 
 .logout_button::before {
@@ -39,14 +41,15 @@
 
 @media screen and (min-width: 768px) {
     position: absolute;
-
+    margin: 0;
     top: 455px;
     
 }
 
 @media screen and (min-width: 1280px) {
     top: 655px;
-    left: 16px;
+    margin-left: 16px;
+
 
 }
 }

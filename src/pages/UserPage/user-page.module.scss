@@ -1,6 +1,6 @@
 @import "../../helpers/variables.module.scss";
 
-.section {
+.userPage_section {
     display: block;
     width: 100%;
 
@@ -9,12 +9,25 @@
 
     }
 @media screen and (min-width: 1280px) {
-    display: flex;
-    justify-content: space-between;
-    // margin-right: 16px;
+    float: left;
+    marginRight: 12px; 
+    marginLeft: -10px; 
+    width:411px;        
 }
 }
 
+.petsData_section {
+ 
+
+@media screen and (min-width: 768px) {
+    width: 100%;
+}
+    
+@media screen and (min-width: 1280px) {
+    float: left;
+    width:821px;
+}
+}
 
 .userPage_title {
     font-family: "Manrope";
@@ -34,7 +47,6 @@
     }
 }
 
-
 .userData_box {
     display: block;
     width:100%;
@@ -52,6 +64,7 @@
     border-radius: 0 40px 40px 0;
     width: 732px;
     padding: 40px 40px 24px 32px;
+    margin: 0;
     margin-left: -32px;
     // right: 32px;
 

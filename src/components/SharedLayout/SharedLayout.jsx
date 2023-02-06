@@ -1,12 +1,12 @@
 import scss from "./shared-layout.module.scss";
 import base from "../../helpers/container.module.scss";
-import love from "../../images/heart-desktop-home.png";
+import love from "../../images/heart-desktop.svg";
 
 const SharedLayout = () => {
 
     return (
             <>
-        <section className={scss.background}>
+        <div className={scss.background}>
             <div className={base.container}>
                 <div className={scss.wrapperHome}>
                 <h1 className={scss.title}>Take good care of your small pets</h1>
@@ -15,7 +15,7 @@ const SharedLayout = () => {
                 </div>
                 </div>
             </div>
-        </section>
+        </div>
         </>
     )
 }
