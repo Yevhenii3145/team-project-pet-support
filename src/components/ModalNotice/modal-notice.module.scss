@@ -29,6 +29,10 @@ p {
   max-height: 34px;
   padding: 6px;
   border-radius: 40px;
+  cursor: pointer;
+    &:hover, &:focus{
+        background: #e6dfda;
+    }
 }
 
 .modal_notice__image_content {
