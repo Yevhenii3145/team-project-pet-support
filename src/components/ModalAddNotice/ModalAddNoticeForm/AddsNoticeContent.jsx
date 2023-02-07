@@ -1,20 +1,21 @@
 import SvgInsert from 'components/Svg/Svg';
 import { useState } from 'react';
 import scss from './modal-add-pet-pages.module.scss';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const AddsPetContent = ({ close }) => {
   const [stepOne, setStepOne] = useState(true);
-  const [petCategory, setPetCategory] = useState("");
-  const [petName, setPetName] = useState("");
-  const [petTitle, setPetTitle] = useState("");
-  const [petDate, setPetDate] = useState("");
-  const [petBird, setPetBird] = useState("");
-  const [currentRadioValue, setCurrentRadioValue] = useState("")
-  const [petLocation, setPetLocation] = useState("")
-  const [petPrice, setPetPrice] = useState("");
-  const [imageURL, setImageURL] = useState(null)
+  const [petCategory, setPetCategory] = useState('');
+  const [petName, setPetName] = useState('');
+  const [petTitle, setPetTitle] = useState('');
+  const [petDate, setPetDate] = useState('');
+  const [petBird, setPetBird] = useState('');
+  const [currentRadioValue, setCurrentRadioValue] = useState('');
+  const [petLocation, setPetLocation] = useState('');
+  const [petPrice, setPetPrice] = useState('');
+  const [imageURL, setImageURL] = useState(null);
 
-  const changeStepOne = (e) => {
+  const changeStepOne = e => {
     switch (e.currentTarget.name) {
       case 'title':
         setPetTitle(e.currentTarget.value);
@@ -37,21 +38,28 @@ const AddsPetContent = ({ close }) => {
       default:
         return;
     }
-  }
+  };
 
   const changeStep = () => {
     return setStepOne(!stepOne);
   };
 
-  const handleImageChange = (e) => {
-    const reader = new FileReader()
-    const image = e.target.files[0]
-    reader.onloadend = () => {
-      setImageURL(reader.result)
+  const handleImageChange = e => {
+    const reader = new FileReader();
+    const image = e.target.files[0];
+    if (image?.size > 5242880) {
+      Notify.warning('File is too big, please download max 5 mb!', {
+        timeout: 6000,
+      });
+      setImageURL(null);
+      return;
     }
-    reader.readAsDataURL(image)
-    return
-  }
+    reader.onloadend = () => {
+      setImageURL(reader.result);
+    };
+    reader.readAsDataURL(image);
+    return;
+  };
 
   const handleSubmitForStepOne = e => {
     e.preventDefault();
@@ -72,7 +80,7 @@ const AddsPetContent = ({ close }) => {
     const { image, comments } = form.elements;
     const data = new FormData();
     data.append('title', petTitle);
-    data.append('category', petCategory)
+    data.append('category', petCategory);
     data.append('name', petName);
     data.append('date', petDate);
     data.append('bird', petBird);
@@ -81,23 +89,23 @@ const AddsPetContent = ({ close }) => {
     data.append('price', petPrice);
     data.append('comments', comments.value);
     data.append('image', image.files[0]);
-    setPetTitle("")
-    setPetCategory("")
-    setPetBird("")
-    setPetDate("")
-    setPetName("")
-    setPetLocation("")
-    setPetPrice("")
-    setImageURL(null)
+    setPetTitle('');
+    setPetCategory('');
+    setPetBird('');
+    setPetDate('');
+    setPetName('');
+    setPetLocation('');
+    setPetPrice('');
+    setImageURL(null);
     return form.reset();
   };
 
-  const handleRadioChangeCategory = (e) => {
-    console.log("category", e.target.value)
+  const handleRadioChangeCategory = e => {
+    console.log('category', e.target.value);
     setPetCategory(e.target.value);
   };
 
-  const handleRadioChange = (e) => {
+  const handleRadioChange = e => {
     setCurrentRadioValue(e.target.value);
   };
 
@@ -106,7 +114,10 @@ const AddsPetContent = ({ close }) => {
       <h3 className={scss.modalAdds_page__tittle}>Add pet</h3>
       {stepOne && (
         <>
-          <p className={scss.modalAdds_descriptions}>Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur</p>
+          <p className={scss.modalAdds_descriptions}>
+            Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
+            consectetur
+          </p>
           <div className={scss.buttonCont}>
             <label className={scss.button}>
               lost/found
@@ -220,7 +231,11 @@ const AddsPetContent = ({ close }) => {
           onSubmit={handleSubmit}
         >
           <section>
-            <h2 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>The sex<span className={scss.star}>*</span>:</h2>
+            <h2
+              className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+            >
+              The sex<span className={scss.star}>*</span>:
+            </h2>
             <div className={scss.radioButtonSection}>
               <label className={scss.radioButton}>
                 <SvgInsert id="icon-male" />
@@ -263,7 +278,9 @@ const AddsPetContent = ({ close }) => {
             value={petLocation}
             onChange={changeStepOne}
           />
-          <label className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>
+          <label
+            className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+          >
             Price<span className={scss.star}>*</span>:
             <input
               className={scss.modalAdds_page__input}
@@ -276,7 +293,9 @@ const AddsPetContent = ({ close }) => {
             />
           </label>
           <div className={scss.add__pet__container}>
-            <p className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>
+            <p
+              className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+            >
               Load the pet’s image
             </p>
             <input
@@ -290,7 +309,12 @@ const AddsPetContent = ({ close }) => {
               onChange={handleImageChange}
             />
             <label className={scss.addspet__imgLabel} htmlFor="img"></label>
-            {imageURL && <div className={scss.addspetPhoto__container}><p>You image:</p><img src={imageURL} alt="pet" /></div>}
+            {imageURL && (
+              <div className={scss.addspetPhoto__container}>
+                <p>You image:</p>
+                <img src={imageURL} alt="pet" />
+              </div>
+            )}
             <label
               className={`${scss.modalAdds_page__label} ${scss.modalAdds_commit_box}`}
             >
