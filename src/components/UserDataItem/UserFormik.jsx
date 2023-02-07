@@ -74,7 +74,7 @@ export function UserFormik() {
                         <div className={scss.field_box}>
                             <label className={scss.userDataForm_label}>Name:</label>
                             {/* <Field type="name" name="name" placeholder={`${auth.name}`} className={scss.userDataForm_field}/> */}
-                            <Field type="name" name="name" placeholder="Name" className={scss.userDataForm_field}/>
+                            {active && active === "name" ? <Field type="name" name="name" placeholder="Name" className={scss.userDataForm_field}/> : <Field type="name" name="name" placeholder="Name" disabled className={scss.userDataForm_field}/>}
                             <ErrorMessage name="name" component="div" />
                             <button className={scss.iconEdit_btn} onClick={()=>changeIcon("name")}>
                                 {active ? toggleIcon("name") : <SvgInsert id='icon-edit'/>}
@@ -83,7 +83,7 @@ export function UserFormik() {
                         <div className={scss.field_box}>
                             <label className={scss.userDataForm_label}>Email:</label>
                             {/* <Field type="email" name="email" placeholder={`${auth.email}`} className={scss.userDataForm_field}/> */}
-                            <Field type="email" name="email" placeholder="Email"  className={scss.userDataForm_field}/>
+                            {active && active === "email" ? <Field type="email" name="email" placeholder="Email"  className={scss.userDataForm_field}/> : <Field type="email" name="email" placeholder="Email" disabled className={scss.userDataForm_field}/>}
                             <ErrorMessage name="Email" component="div" />
                             <button className={scss.iconEdit_btn} onClick={()=>changeIcon("email")}>
                                 {active ? toggleIcon("email") : <SvgInsert id='icon-edit'/>}
@@ -91,7 +91,7 @@ export function UserFormik() {
                         </div>
                         <div className={scss.field_box}>
                             <label className={scss.userDataForm_label}>Birthday:</label>
-                            <Field type="data" name="data" placeholder="Birthday" className={scss.userDataForm_field} />
+                            {active && active === "data" ? <Field type="data" name="data" placeholder="Birthday" className={scss.userDataForm_field} /> : <Field type="data" name="data" placeholder="Birthday" disabled className={scss.userDataForm_field} />}
                             {/* <Field type="data" name="data" placeholder={`${auth.birthday}`} className={scss.userDataForm_field}/> */}
                             <ErrorMessage name="data" component="div" />
                             <button className={scss.iconEdit_btn} onClick={()=>changeIcon("data")}>
@@ -101,7 +101,7 @@ export function UserFormik() {
                         <div className={scss.field_box}>
                             <label className={scss.userDataForm_label}>Phone:</label>
                             {/* <Field type="tel" name="phone" placeholder={`${auth.phone}`} className={scss.userDataForm_field}/> */}
-                            <Field type="tel" name="phone" placeholder="Phone" className={scss.userDataForm_field}/>
+                            {active && active === "phone" ? <Field type="tel" name="phone" placeholder="Phone" className={scss.userDataForm_field}/> : <Field type="tel" name="phone" placeholder="Phone" disabled className={scss.userDataForm_field}/>}
                             <ErrorMessage name="phone" component="div" />
                             <button className={scss.iconEdit_btn} onClick={()=>changeIcon("phone")}>
                                 {active ? toggleIcon("phone") : <SvgInsert id='icon-edit'/>}
@@ -110,7 +110,7 @@ export function UserFormik() {
                         <div className={scss.field_box}>
                             <label className={scss.userDataForm_label}>City:</label>
                             {/* <Field type="text" name="name" placeholder={`${auth.city}`} className={scss.userDataForm_field}/> */}
-                            <Field type="text" name="city" placeholder="City" className={scss.userDataForm_field}/>
+                            {active && active === "city" ? <Field type="text" name="city" placeholder="City" className={scss.userDataForm_field}/> : <Field type="text" name="city" placeholder="City" disabled className={scss.userDataForm_field}/>}
                             <ErrorMessage name="City" component="div" />
                             <button className={scss.iconEdit_btn} onClick={()=>changeIcon("city")}>
                                 {active ? toggleIcon("city") : <SvgInsert id='icon-edit'/>}
