@@ -38,17 +38,6 @@
   }
 }
 
-.heart {
-  fill: $lightColor;
-  opacity: 0.6;
-  stroke: $accentColor;
-
-  &:hover,
-  &:focus {
-    fill: $accentColor;
-  }
-}
-
 .heart_favorite{
   fill: $accentColor;;
 }
@@ -118,6 +107,10 @@ margin-left: auto;
 border: #111;
 }
 
+.iconDeleteNotice {
+  margin-left: 13px;
+  fill: #FF6101;
+}
 
 .google {
   display: flex;
