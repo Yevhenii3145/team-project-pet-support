@@ -44,6 +44,14 @@ margin: 0 auto 60px;
     width: 450px;
 }
 
+@media screen and (min-width: 900px) {
+    left: -66%;
+}
+
+@media screen and (min-width: 1100px) {
+    left: -63%;
+}
+
 @media screen and (min-width: 1280px) {
     top: -60px;
     left: 57%;
