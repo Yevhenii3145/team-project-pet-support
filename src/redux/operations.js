@@ -31,11 +31,12 @@ const registerNewUser = createAsyncThunk(
 );
 
 export const fetchUserData = createAsyncThunk(
-  'auth/user',
-  async (user, thunkAPI) => {
+  'auth/update',
+  async (_, thunkAPI) => {
     try {
-      const response = await axios.post('/auth/user', user);
-      return response.data;
+      const response = await axios.post('/auth/update'.then(res => {console.log(res)}));
+      console.log('response', response)
+      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -121,6 +122,35 @@ const addNotice = createAsyncThunk('notices/notice', async (dataNotice, thunkAPI
   }
 });
 
+const getUserPet = createAsyncThunk("users/{userId}/pets", async (_, { thunkAPI, getState }) => {
+  
+  const { user } = getState()
+  const id = user.userId;
+
+
+  try {
+     
+    const response = await axios.get(`users/${id}/pets`).then(result => console.log(result));
+   
+    return response;
+  } catch (error) {
+    return thunkAPI.rthunkAPIejectWithValue(error.message);
+  }
+});
+
+
+const deletePet = createAsyncThunk(
+  "users/{petId}",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await axios.post("users/{userId}", userId);
+      console.log(response)
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  });
+
 const operations = {
   registerNewUser,
   login,
@@ -128,6 +158,8 @@ const operations = {
   current,
   addPet,
   addNotice,
+  getUserPet,
+  deletePet,
 };
 
 export default operations;

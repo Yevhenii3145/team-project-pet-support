@@ -1,32 +1,57 @@
 import scss from "./pets-list.module.scss";
 import SvgInsert from "../Svg/Svg";
-
+import {getPets} from "../../redux/selectors"
+import { useSelector, useDispatch } from "react-redux";
+import {  useEffect } from 'react';
+import operations from '../../redux/operations'; 
 
 
 export function PetsList() {
      
-    // const elements = pets.map(({  id }) => {
-    //     return <li className={css.listItem} key={id}>{name}: {number}
-    //         <span className={css.deleteItem} onClick={() => onDeleteContact(id)}>Delete</span></li>
-    // })
-    //     return (
-    //        <>
-    //         <ol>{elements}</ol>
-    //     </>
-    //     )
+//   const { pets } = useSelector(getPets);
+//   console.log(pets)
+  
+//   const dispatch = useDispatch();
+    
+//   useEffect(() => {
+//     dispatch(operations.getUserPet(pets))
+//     }, [dispatch]);
+//     console.log(pets)
+    
+    const pets = [{
 
-    return (
-        <div className={scss.petsList_box} >
-            <img className={scss.petsList_photo} src="https://dummyimage.com/240x240/FDF7F2.gif&text=Photo+your+pet!" alt="" />
-            <div className={scss.petsList_text_box}>
-                <p className={scss.petsList_field}>Name: namePet</p>
-                <p className={scss.petsList_field}>Birthday:    Birthday</p>
-                <p className={scss.petsList_field}>Breed:    petBreed</p>
-                <p className={scss.petsList_field}>Comments:</p>
-                <div className={scss.petsList_boxBtn} >
-                    <button className={scss.petsList_button} type='button'><SvgInsert id='icon-delete'/></button>
-                </div>
-            </div>
-        </div>
-    )
-}
+        name: 'BFGHJ',
+        date: '12.12.2022',
+        breed: 'fghj',
+        comments: 'dsfghjkl.',
+    }]
+
+    //     const onDeletePet= (petId) => {
+//        const action = operations.deletePet(petId);
+//         // dispatch(action);
+// }
+
+    const elements = pets.map(({ name, date, breed, image, comments, petId }) => {
+        return <li className={scss.petsList_box} key={petId}>
+            <img className={scss.petsList_photo} src={image} alt="" />
+                    <div className={scss.petsList_text_box}>
+                        <p className={scss.petsList_field}>Name:  {name}</p>
+                        <p className={scss.petsList_field}>Date of birth:  {date}</p>
+                        <p className={scss.petsList_field}>Breed:  {breed} </p>
+                        <p className={scss.petsList_field}>Comments:{comments} </p>
+                        <button className={scss.petsList_button} type='button'><SvgInsert id='icon-delete'/></button>
+                    </div>
+        </li>
+    })
+    
+  return (
+    <>
+          <ol style={{ width: "100%", padding:'0'}}>
+        {elements}
+      </ol>
+    </>
+    
+)}
+    
+    
+

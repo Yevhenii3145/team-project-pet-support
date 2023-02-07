@@ -44,7 +44,35 @@ const userSlice = createSlice({
               `Something went wrong.`,
               'Okay'
             );
-          },
+        },
+        [operations.getUserPet.pending]: (store) => {
+            store.loading = false;
+        },
+        [operations.getUserPet.fulfilled]: (store, { payload }) => {
+            store.loading = false;
+            store.data = store.data.filter(data => data.userId !== payload);
+            console.log(payload)
+        },
+        [operations.getUserPet.rejected]: (store, {payload}) => {
+            store.loading = false;
+            store.error = payload;
+        },
+
+        [operations.deletePet.pending]: (store) => {
+            store.loading = false;
+        },
+        [operations.deletePet.fulfilled]: (store, { payload }) => {
+            store.loading = false;
+            store.data = store.data.filter(data => data.userId !== payload);
+            Report.warning(
+                'Are you sure you want to delete your pet?!'
+            );
+            
+        },
+        [operations.deletePet.rejected]: (store, {payload}) => {
+            store.loading = false;
+            store.error = payload;
+        },
       
     }
 })
