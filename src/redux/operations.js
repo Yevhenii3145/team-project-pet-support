@@ -32,9 +32,9 @@ const registerNewUser = createAsyncThunk(
 
 export const fetchUserData = createAsyncThunk(
   'auth/update',
-  async (_, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      const response = await axios.post('/auth/update'.then(res => {console.log(res)}));
+      const response = await axios.post('/auth/update', data);
       console.log('response', response)
       return response;
     } catch (error) {
@@ -42,6 +42,8 @@ export const fetchUserData = createAsyncThunk(
     }
   }
 );
+ 
+
 
 const login = createAsyncThunk(
   'auth/login',
@@ -122,15 +124,13 @@ const addNotice = createAsyncThunk('notices/notice', async (dataNotice, thunkAPI
   }
 });
 
-const getUserPet = createAsyncThunk("users/{userId}/pets", async (_, { thunkAPI, getState }) => {
-  
-  const { user } = getState()
-  const id = user.userId;
-
-
+const getUserPet = createAsyncThunk("users/{userId}/pets", async (_, { thunkAPI}) => {
+  // const { users } = thunkAPI.getState()
+  // const id = users.userId;
   try {
      
-    const response = await axios.get(`users/${id}/pets`).then(result => console.log(result));
+    const response= await axios.get(`users/{userId}/pets`);
+    console.log(response.data)
    
     return response;
   } catch (error) {

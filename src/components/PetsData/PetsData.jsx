@@ -1,13 +1,17 @@
 import { PetsList } from '../PetsList/PetsList';
 import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
 import AddsPetContent from '../ModalAddsPet/ModalAddPetPages/AddsPetContent';
+import {getUser} from '../../redux/selectors'
 import { useState } from 'react';
 import SvgInsert from "../Svg/Svg";
-
+import { useSelector, useDispatch } from "react-redux"
 import scss from './pets-data.module.scss';
 
 function PetsData() {
   const [modalShow, setModalShow] = useState(false);
+  
+  // const user = useSelector(getUser())
+  // console.log(user)
 
   const closeModal = () => {
     setModalShow(false);
@@ -43,10 +47,8 @@ function PetsData() {
         )}
 
         <div className={scss.overflow}>
-          <PetsList />
-          <PetsList />
-          <PetsList />
-          <PetsList />
+          <PetsList  />
+
         </div>
       </div>
     </>

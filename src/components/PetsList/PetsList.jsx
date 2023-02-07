@@ -2,16 +2,16 @@ import scss from "./pets-list.module.scss";
 import SvgInsert from "../Svg/Svg";
 import {getPets} from "../../redux/selectors"
 import { useSelector, useDispatch } from "react-redux";
-import {  useEffect } from 'react';
+// import {  useEffect } from 'react';
 import operations from '../../redux/operations'; 
 
 
-export function PetsList() {
+export function PetsList(userId) {
      
-//   const { pets } = useSelector(getPets);
-//   console.log(pets)
+  // const { pets } = useSelector(getPets());
+
   
-//   const dispatch = useDispatch();
+  // const dispatch = useDispatch();
     
 //   useEffect(() => {
 //     dispatch(operations.getUserPet(pets))
@@ -26,13 +26,13 @@ export function PetsList() {
         comments: 'dsfghjkl.',
     }]
 
-    //     const onDeletePet= (petId) => {
+//         const onDeletePet= (petId) => {
 //        const action = operations.deletePet(petId);
-//         // dispatch(action);
+//         dispatch(action);
 // }
 
-    const elements = pets.map(({ name, date, breed, image, comments, petId }) => {
-        return <li className={scss.petsList_box} key={petId}>
+    const elements = pets.map(({ name, date, breed, image, comments, userId }) => {
+        return <li className={scss.petsList_box} key={userId}>
             <img className={scss.petsList_photo} src={image} alt="" />
                     <div className={scss.petsList_text_box}>
                         <p className={scss.petsList_field}>Name:  {name}</p>
