@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import scss from './modal-add-pet-pages.module.scss';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import operations from '../../../redux/operations';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import Loader from 'components/Loader/Loader';
@@ -9,19 +10,20 @@ import SvgInsert from 'components/Svg/Svg';
 const AddsPetContent = ({ close }) => {
   const [sell, setSell] = useState(false);
   const [stepOne, setStepOne] = useState(true);
-  const [petCategory, setPetCategory] = useState("");
-  const [petName, setPetName] = useState("");
-  const [petTitle, setPetTitle] = useState("");
-  const [petDate, setPetDate] = useState("");
-  const [petBreed, setPetBreed] = useState("");
-  const [currentRadioValue, setCurrentRadioValue] = useState("")
-  const [petLocation, setPetLocation] = useState("")
+
+  const [petCategory, setPetCategory] = useState('');
+  const [petName, setPetName] = useState('');
+  const [petTitle, setPetTitle] = useState('');
+  const [petDate, setPetDate] = useState('');
+  const [petBreed, setPetBreed] = useState('');
+  const [currentRadioValue, setCurrentRadioValue] = useState('');
+  const [petLocation, setPetLocation] = useState('');
   const [petPrice, setPetPrice] = useState(Number);
-  const [imageURL, setImageURL] = useState(null)
+  const [imageURL, setImageURL] = useState(null);
   const loading = useSelector(state => state.user.loading);
   const dispatch = useDispatch();
 
-  const changeStepOne = (e) => {
+  const changeStepOne = e => {
     switch (e.currentTarget.name) {
       case 'title':
         setPetTitle(e.currentTarget.value);
@@ -44,28 +46,37 @@ const AddsPetContent = ({ close }) => {
       default:
         return;
     }
-  }
+  };
 
   const changeStep = () => {
     return setStepOne(!stepOne);
   };
 
-  const handleImageChange = (e) => {
-    const reader = new FileReader()
-    const image = e.target.files[0]
-    reader.onloadend = () => {
-      setImageURL(reader.result)
+  const handleImageChange = e => {
+    const reader = new FileReader();
+    const image = e.target.files[0];
+    if (image?.size > 5242880) {
+      Notify.warning('File is too big, please download max 5 mb!', {
+        timeout: 6000,
+      });
+      setImageURL(null);
+      return;
     }
-    reader.readAsDataURL(image)
-    return
-  }
+    reader.onloadend = () => {
+      setImageURL(reader.result);
+    };
+    reader.readAsDataURL(image);
+    return;
+  };
 
   const dateNow = new Date();
-  const formatDate = `${dateNow.getDate() < 10 ? `0${dateNow.getDate()}` : dateNow.getDate()
-    }.${dateNow.getMonth() < 10
+  const formatDate = `${
+    dateNow.getDate() < 10 ? `0${dateNow.getDate()}` : dateNow.getDate()
+  }.${
+    dateNow.getMonth() < 10
       ? `0${dateNow.getMonth() + 1}`
       : dateNow.getMonth() + 1
-    }.${dateNow.getFullYear()}`;
+  }.${dateNow.getFullYear()}`;
 
   const handleSubmitForStepOne = e => {
     e.preventDefault();
@@ -92,8 +103,10 @@ const AddsPetContent = ({ close }) => {
     const form = e.currentTarget;
     const { image, comments } = form.elements;
     const data = new FormData();
-    data.append('category', petCategory)
+
+    data.append('category', petCategory);
     data.append('title', petTitle);
+
     data.append('name', petName);
     data.append('birthday', petDate);
     data.append('breed', petBreed);
@@ -102,27 +115,28 @@ const AddsPetContent = ({ close }) => {
     data.append('price', petPrice);
     data.append('comments', comments.value);
     data.append('image', image.files[0]);
-    setPetTitle("")
-    setPetCategory("")
-    setPetBreed("")
-    setPetDate("")
-    setPetName("")
-    setPetLocation("")
-    setPetPrice("")
-    setImageURL(null)
+
+    setPetTitle('');
+    setPetCategory('');
+    setPetBreed('');
+    setPetDate('');
+    setPetName('');
+    setPetLocation('');
+    setPetPrice('');
+    setImageURL(null);
     dispatch(operations.addNotice(data));
     form.reset();
     return close();
   };
 
-  const handleRadioChangeCategory = (e) => {
+  const handleRadioChangeCategory = e => {
     setPetCategory(e.target.value);
     if (e.target.value === 'sell') {
-      setSell(true)
+      setSell(true);
     }
   };
 
-  const handleRadioChange = (e) => {
+  const handleRadioChange = e => {
     setCurrentRadioValue(e.target.value);
   };
 
@@ -133,7 +147,10 @@ const AddsPetContent = ({ close }) => {
         <h3 className={scss.modalAdds_page__tittle}>Add pet</h3>
         {stepOne && (
           <>
-            <p className={scss.modalAdds_descriptions}>Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur</p>
+            <p className={scss.modalAdds_descriptions}>
+              Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
+              amet, consectetur
+            </p>
             <div className={scss.buttonCont}>
               <label className={scss.button}>
                 lost/found
@@ -248,7 +265,11 @@ const AddsPetContent = ({ close }) => {
             onSubmit={handleSubmit}
           >
             <section>
-              <h2 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>The sex<span className={scss.star}>*</span>:</h2>
+              <h2
+                className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+              >
+                The sex<span className={scss.star}>*</span>:
+              </h2>
               <div className={scss.radioButtonSection}>
                 <label className={scss.radioButton}>
                   <SvgInsert id="icon-male" />
@@ -292,19 +313,25 @@ const AddsPetContent = ({ close }) => {
               value={petLocation}
               onChange={changeStepOne}
             />
-            {sell && <label className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>
-              Price<span className={scss.star}>*</span>:
-              <input
-                className={scss.modalAdds_page__input}
-                type="number"
-                name="price"
-                placeholder="Type date of birth"
-                value={petPrice}
-                onChange={changeStepOne}
-              />
-            </label>}
+            {sell && (
+              <label
+                className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+              >
+                Price<span className={scss.star}>*</span>:
+                <input
+                  className={scss.modalAdds_page__input}
+                  type="number"
+                  name="price"
+                  placeholder="Type date of birth"
+                  value={petPrice}
+                  onChange={changeStepOne}
+                />
+              </label>
+            )}
             <div className={scss.add__pet__container}>
-              <p className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>
+              <p
+                className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
+              >
                 Load the pet’s image
               </p>
               <input
@@ -318,10 +345,12 @@ const AddsPetContent = ({ close }) => {
                 onChange={handleImageChange}
               />
               <label className={scss.addspet__imgLabel} htmlFor="img"></label>
-              {imageURL &&
+              {imageURL && (
                 <div className={scss.addspetPhoto__container}>
-                  <p>You image:</p><img src={imageURL} alt="pet" />
-                </div>}
+                  <p>You image:</p>
+                  <img src={imageURL} alt="pet" />
+                </div>
+              )}
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_commit_box}`}
               >

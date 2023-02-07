@@ -5,6 +5,7 @@ import operations from '../../../redux/operations';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import Loader from 'components/Loader/Loader';
 import SvgInsert from '../../Svg/Svg';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const AddsPetContent = ({ close }) => {
   const [stepOne, setStepOne] = useState(true);
@@ -41,6 +42,13 @@ const AddsPetContent = ({ close }) => {
   const handleImageChange = e => {
     const reader = new FileReader();
     const image = e.target.files[0];
+    if (image?.size > 5242880) {
+      Notify.warning('File is too big, please download max 5 mb!', {
+        timeout: 6000,
+      });
+      setImageURL(null);
+      return;
+    }
     reader.onloadend = () => {
       setImageURL(reader.result);
     };
