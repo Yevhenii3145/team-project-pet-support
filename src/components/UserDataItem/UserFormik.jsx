@@ -4,21 +4,75 @@ import SvgInsert from "../Svg/Svg";
 // import style from "../Svg/svg.module.scss"
 import { useState } from 'react';
 import React from 'react';
+import { getUser } from "../../redux/selectors"
+import { useSelector} from "react-redux";
+import {  useEffect, useDispatch } from 'react';
+import operations from "redux/operations";
 
-// import { fetchUserData } from "../../redux/operations";
+;
 // import {useEffect} from "react";
-// import {useDispatch } from "react-redux";
+
 
 
 export function UserFormik() {
-    // const { auth } = auth.user;
+
+    //   const [userName, setUserName] = useState('');
+    // const [userEmail, setUserEmail] = useState('');
+    // const [userDate, setUserDate] = useState('');
+    // const [userPhone, setUserPhone] = useState('');
+    // const [userCity, setUserCity] = useState('');
+
+ const user = useSelector(getUser)
+    console.log(user.name)
 
     // const dispatch = useDispatch();
 
     // useEffect(()=> {
-    //     dispatch(fetchUserData())
+    //     dispatch(operations.fetchUserData())
     // }, [dispatch])
 
+    const userSchema = {
+        name: user.name,
+        email: user.email,
+        date: user.date,
+        phone: user.phone,
+        city: user.city,
+
+    }
+//     const onClick = (values) => {
+//         const form = values.currentTarget;
+//         const { name, email, date, phone, city } = form.elements;
+//         setUserName(name.value);
+//         setUserEmail(email.value);
+//         setUserDate(date.value);
+//         setUserPhone(phone.value);
+//        setUserCity(city.value);
+//        const data = new FormData();
+//        data.append('name', userName);
+//        data.append('email', userEmail);
+//        data.append('date', userDate);
+//        data.append('phone', userPhone);
+//        data.append('city', userCity);
+//        console.log(userName) 
+// }
+
+    // const onClick = () => {
+    //     console.log(user.city)
+    // }
+        
+    
+    const onSubmit = (values, { setSubmitting }) => {
+         const form = values.currentTarget;
+        const { name} = form.elements;
+        // setUserName(name.value);
+        console.log(values)
+        setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+        }, 400);
+
+    }
+  
 
     const [active, setActive] = useState("");
 
@@ -42,34 +96,10 @@ export function UserFormik() {
 
     return (
                      <Formik
-                initialValues={{ name: "", email: "", birthday: "", phone: "", city: ""}}
-                    validate={values => {
-                    const errors = {};
-                    if (!values.email) {
-                    // errors.email = 'Required';
-                    } else if (
-                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                    ) {
-                    errors.email = 'The email must have more than two characters';
-                    }
-                    if (!values.phone) {
-                    // errors.phone = 'Required';
-                    } else if (
-                    !/^\+380\d{3}\d{2}\d{2}\d{2}$/.test(values.phone)
-                    ) {
-                    errors.photo = 'The email must have more than two characters';
-                    }
-                    return errors;
-                }}
-                onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                    }, 400);
-                }}
+                initialValues={{userSchema}}
+                onSubmit={onSubmit} 
                 >
                 {({ isSubmitting }) => (
-                
                 <Form className={scss.userDataForm_box} >
                         <div className={scss.field_box}>
                             <label className={scss.userDataForm_label}>Name:</label>
@@ -123,15 +153,3 @@ export function UserFormik() {
     )
 
 }
-
-
-// export default UserDataItem 
-
-
-
-// ContactsItem.propTypes = {
-//     items: PropTypes.arrayOf(PropTypes.shape({
-//         name: PropTypes.string.isRequired,
-//         number: PropTypes.string.isRequired,
-//     }))
-// }

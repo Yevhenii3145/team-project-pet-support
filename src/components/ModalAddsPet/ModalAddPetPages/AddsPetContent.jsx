@@ -72,6 +72,7 @@ const AddsPetContent = ({ close }) => {
     setPetName(name.value);
     setPetDate(date.value);
     setPetBreed(breed.value);
+     console.log(petBreed)
     if (new Date(petDate) >= new Date(formatDate)) {
       return Report.info(
         'Pet Info',
