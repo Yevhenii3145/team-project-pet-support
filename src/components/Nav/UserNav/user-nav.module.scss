@@ -38,11 +38,13 @@ background-color: $accentColor;
     font-size: 16px;
     margin: 0 0 0 auto;
     position: relative;
-    top: 11px;
+    top: 15px;
+    margin-right: 20px;
 }
 
-@media screen and (min-width: 768px) {
-    top: -13px;
+@media screen and (min-width: 1280px) {
+    top: 11px;
+    margin-right: 0;
 }
 }
 
