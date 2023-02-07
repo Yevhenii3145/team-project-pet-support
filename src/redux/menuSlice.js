@@ -22,7 +22,8 @@ export const authSlice = createSlice({
     user: {},
     token: null,
     isLogin: false,
-    loading: false
+    loading: false,
+    userId: ""
   },
   extraReducers: {
     [operations.registerNewUser.pending](state, action) {
@@ -55,6 +56,7 @@ export const authSlice = createSlice({
             store.user = payload.user;
             store.token = payload.token;
             store.isLogin = true;
+            store.userId = payload.userId;
         },
         [operations.login.rejected]: (store, { payload }) => {
             console.log('payload', payload)
