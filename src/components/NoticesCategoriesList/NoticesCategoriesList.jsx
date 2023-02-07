@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import NoticesCategoryList from "components/NoticesCategoryList/NoticesCategoryList";
 import { fetchCategoryNotices } from "redux/notices/notices-operation";
 import { getStore, getNotices } from "redux/notices/notices-selectors";
+import Loader from 'components/Loader/Loader';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const NoticesCategoriesList = () => {
 
@@ -20,9 +22,9 @@ const NoticesCategoriesList = () => {
 
     return (
         <>
-            {loading && "Loading!"}
+            {loading && <Loader/>}
             {pets && <NoticesCategoryList pets={pets.data} />}
-            {error && "Oops, something went wrong" }
+            {error && Notify.failure("Oops, something went wrong") }
         </>
     )
 }
