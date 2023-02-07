@@ -2,7 +2,7 @@ import scss from "./user-data-item.module.scss";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import SvgInsert from "../Svg/Svg";
 // import style from "../Svg/svg.module.scss"
-// import { useState } from 'react';
+import { useState } from 'react';
 import React from 'react';
 
 // import { fetchUserData } from "../../redux/operations";
@@ -19,39 +19,25 @@ export function UserFormik() {
     //     dispatch(fetchUserData())
     // }, [dispatch])
 
-  
-class Toggle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {isToggleOn: true, isId:"icon-edit"};
- console.log(this.state.isId)
-    // Эта привязка обязательна для работы `this` в колбэке.
-      this.handleClick = this.handleClick.bind(this);
-      
-  }
 
-  handleClick() {
-    this.setState(prevState => ({
-        isToggleOn: !prevState.isToggleOn,
-        isId:'icon-done',
-    }));
-      
+    const [active, setActive] = useState("");
+
+    const changeIcon = (name) => {
+        if(active === name) {
+            return setActive("")
+        }
+        setActive(name)
     }
-    
-   
-    render() {
-       
-        const id = this.state.isId;
-        console.log(id)
-       
-    return (
-        <button onClick={this.handleClick} className={scss.iconEdit_btn} >
-            {!this.state.isToggleOn  ? <SvgInsert id={`${id}`}/> : <SvgInsert id='icon-edit-active'/> }
-      </button>
-               
-    );
-  }
-}
+
+    const toggleIcon = (name) => {
+        console.log(active);
+        console.log(name);
+        if(active === name) {
+            return (<SvgInsert id="icon-done"/>)
+        } else {
+            return (<SvgInsert id="icon-edit-active"/>)
+        }
+    }
    
 
     return (
@@ -90,35 +76,45 @@ class Toggle extends React.Component {
                             {/* <Field type="name" name="name" placeholder={`${auth.name}`} className={scss.userDataForm_field}/> */}
                             <Field type="name" name="name" placeholder="Name" className={scss.userDataForm_field}/>
                             <ErrorMessage name="name" component="div" />
-                       <Toggle /> 
+                            <button className={scss.iconEdit_btn} onClick={()=>changeIcon("name")}>
+                                {active ? toggleIcon("name") : <SvgInsert id='icon-edit'/>}
+                            </button> 
                         </div>
                         <div className={scss.field_box}>
                             <label className={scss.userDataForm_label}>Email:</label>
                             {/* <Field type="email" name="email" placeholder={`${auth.email}`} className={scss.userDataForm_field}/> */}
                             <Field type="email" name="email" placeholder="Email"  className={scss.userDataForm_field}/>
                             <ErrorMessage name="Email" component="div" />
-                            <Toggle/>
+                            <button className={scss.iconEdit_btn} onClick={()=>changeIcon("email")}>
+                                {active ? toggleIcon("email") : <SvgInsert id='icon-edit'/>}
+                            </button>
                         </div>
                         <div className={scss.field_box}>
                             <label className={scss.userDataForm_label}>Birthday:</label>
                             <Field type="data" name="data" placeholder="Birthday" className={scss.userDataForm_field} />
                             {/* <Field type="data" name="data" placeholder={`${auth.birthday}`} className={scss.userDataForm_field}/> */}
                             <ErrorMessage name="data" component="div" />
-                            <Toggle/>          
+                            <button className={scss.iconEdit_btn} onClick={()=>changeIcon("data")}>
+                                {active ? toggleIcon("data") : <SvgInsert id='icon-edit'/>}
+                            </button>         
                         </div>
                         <div className={scss.field_box}>
                             <label className={scss.userDataForm_label}>Phone:</label>
                             {/* <Field type="tel" name="phone" placeholder={`${auth.phone}`} className={scss.userDataForm_field}/> */}
                             <Field type="tel" name="phone" placeholder="Phone" className={scss.userDataForm_field}/>
                             <ErrorMessage name="phone" component="div" />
-                            <Toggle/>
+                            <button className={scss.iconEdit_btn} onClick={()=>changeIcon("phone")}>
+                                {active ? toggleIcon("phone") : <SvgInsert id='icon-edit'/>}
+                            </button>
                         </div>
                         <div className={scss.field_box}>
                             <label className={scss.userDataForm_label}>City:</label>
                             {/* <Field type="text" name="name" placeholder={`${auth.city}`} className={scss.userDataForm_field}/> */}
-                            <Field type="text" name="name" placeholder="City" className={scss.userDataForm_field}/>
+                            <Field type="text" name="city" placeholder="City" className={scss.userDataForm_field}/>
                             <ErrorMessage name="City" component="div" />
-                            <Toggle/>           
+                            <button className={scss.iconEdit_btn} onClick={()=>changeIcon("city")}>
+                                {active ? toggleIcon("city") : <SvgInsert id='icon-edit'/>}
+                            </button>          
                         </div>
 
             </Form>   
