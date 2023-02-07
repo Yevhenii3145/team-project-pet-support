@@ -23,7 +23,7 @@ export const authSlice = createSlice({
     token: null,
     isLogin: false,
     loading: false,
-    userId: ""
+    userId: localStorage.getItem("userId")
   },
   extraReducers: {
     [operations.registerNewUser.pending](state, action) {
@@ -57,6 +57,7 @@ export const authSlice = createSlice({
             store.token = payload.token;
             store.isLogin = true;
             store.userId = payload.userId;
+            localStorage.setItem("userId", payload.userId)
         },
         [operations.login.rejected]: (store, { payload }) => {
             console.log('payload', payload)
@@ -73,6 +74,7 @@ export const authSlice = createSlice({
             store.user = {};
             store.token = "";
             store.isLogin = false;
+            localStorage.removeItem("userId")
         },
         [operations.logout.rejected]: (store, {payload}) => {
             store.loading = false;
