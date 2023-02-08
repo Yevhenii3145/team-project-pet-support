@@ -1,155 +1,228 @@
-import scss from "./user-data-item.module.scss";
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import SvgInsert from "../Svg/Svg";
-// import style from "../Svg/svg.module.scss"
-import { useState } from 'react';
-import React from 'react';
-import { getUser } from "../../redux/selectors"
-import { useSelector} from "react-redux";
-import {  useEffect, useDispatch } from 'react';
-import operations from "redux/operations";
-
-;
-// import {useEffect} from "react";
-
-
+import scss from './user-data-item.module.scss';
+import SvgInsert from '../Svg/Svg';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import operations from 'redux/operations';
 
 export function UserFormik() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(operations.current);
+  }, [dispatch]);
+  const user = useSelector(state => state.auth.user);
+  const date = new Date(user.birthday);
+  const formatDate = `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth()+1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1}.${date.getFullYear()}`
+  const [userName, setUserName] = useState(user.name);
+  const [userEmail, setUserEmail] = useState(user.email);
+  const [userBirthday, setUserBirthday] = useState(
+    user.birthday ? formatDate : '00.00.0000'
+  );
+  const [userPhone, setUserPhone] = useState(user.phone);
+  const [userCity, setUserCity] = useState(user.city);
 
-    //   const [userName, setUserName] = useState('');
-    // const [userEmail, setUserEmail] = useState('');
-    // const [userDate, setUserDate] = useState('');
-    // const [userPhone, setUserPhone] = useState('');
-    // const [userCity, setUserCity] = useState('');
+  const handleChange = e => {
+    switch (e.currentTarget.name) {
+      case 'name':
+        setUserName(e.currentTarget.value);
+        break;
 
- const user = useSelector(getUser)
-    console.log(user.name)
+      case 'birthday':
+        setUserBirthday(e.currentTarget.value);
+        break;
 
-    // const dispatch = useDispatch();
+      case 'email':
+        setUserEmail(e.currentTarget.value);
+        break;
 
-    // useEffect(()=> {
-    //     dispatch(operations.fetchUserData())
-    // }, [dispatch])
+      case 'phone':
+        setUserPhone(e.currentTarget.value);
+        break;
 
-    const userSchema = {
-        name: user.name,
-        email: user.email,
-        date: user.date,
-        phone: user.phone,
-        city: user.city,
+      case 'city':
+        setUserCity(e.currentTarget.value);
+        break;
 
+      default:
+        return;
     }
-//     const onClick = (values) => {
-//         const form = values.currentTarget;
-//         const { name, email, date, phone, city } = form.elements;
-//         setUserName(name.value);
-//         setUserEmail(email.value);
-//         setUserDate(date.value);
-//         setUserPhone(phone.value);
-//        setUserCity(city.value);
-//        const data = new FormData();
-//        data.append('name', userName);
-//        data.append('email', userEmail);
-//        data.append('date', userDate);
-//        data.append('phone', userPhone);
-//        data.append('city', userCity);
-//        console.log(userName) 
-// }
+  };
 
-    // const onClick = () => {
-    //     console.log(user.city)
-    // }
-        
-    
-    const onSubmit = (values, { setSubmitting }) => {
-         const form = values.currentTarget;
-        const { name} = form.elements;
-        // setUserName(name.value);
-        console.log(values)
-        setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-        }, 400);
+  const [active, setActive] = useState('');
 
+  const changeIcon = name => {
+    if (active === name) {
+      return setActive('');
     }
-  
+    setActive(name);
+  };
 
-    const [active, setActive] = useState("");
-
-    const changeIcon = (name) => {
-        if(active === name) {
-            return setActive("")
-        }
-        setActive(name)
+  const toggleIcon = name => {
+    if (active === name) {
+      return <SvgInsert id="icon-done" />;
+    } else {
+      return <SvgInsert id="icon-edit-active" />;
     }
+  };
 
-    const toggleIcon = (name) => {
-        console.log(active);
-        console.log(name);
-        if(active === name) {
-            return (<SvgInsert id="icon-done"/>)
-        } else {
-            return (<SvgInsert id="icon-edit-active"/>)
-        }
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const { name, email, birthday, phone, city } = form.elements;
+    if (name.value !== user.name) {
+      dispatch(operations.updateUser({ name: name.value }));
     }
-   
+    if (email.value !== user.email) {
+      dispatch(operations.updateUser({ email: email.value }));
+    }
+    if (birthday.value !== user.birthday && birthday.value !== '00.00.0000') {
+      console.log(user.birthday);
+      dispatch(operations.updateUser({ birthday: birthday.value }));
+    }
+    if (phone.value !== user.phone) {
+      dispatch(operations.updateUser({ phone: phone.value }));
+    }
+    if (city.value !== user.city) {
+      dispatch(operations.updateUser({ city: city.value }));
+    }
+  };
 
-    return (
-                     <Formik
-                initialValues={{userSchema}}
-                onSubmit={onSubmit} 
-                >
-                {({ isSubmitting }) => (
-                <Form className={scss.userDataForm_box} >
-                        <div className={scss.field_box}>
-                            <label className={scss.userDataForm_label}>Name:</label>
-                            {/* <Field type="name" name="name" placeholder={`${auth.name}`} className={scss.userDataForm_field}/> */}
-                            {active && active === "name" ? <Field type="name" name="name" placeholder="Name" className={scss.userDataForm_field}/> : <Field type="name" name="name" placeholder="Name" disabled className={scss.userDataForm_field}/>}
-                            <ErrorMessage name="name" component="div" />
-                            <button className={scss.iconEdit_btn} onClick={()=>changeIcon("name")}>
-                                {active ? toggleIcon("name") : <SvgInsert id='icon-edit'/>}
-                            </button> 
-                        </div>
-                        <div className={scss.field_box}>
-                            <label className={scss.userDataForm_label}>Email:</label>
-                            {/* <Field type="email" name="email" placeholder={`${auth.email}`} className={scss.userDataForm_field}/> */}
-                            {active && active === "email" ? <Field type="email" name="email" placeholder="Email"  className={scss.userDataForm_field}/> : <Field type="email" name="email" placeholder="Email" disabled className={scss.userDataForm_field}/>}
-                            <ErrorMessage name="Email" component="div" />
-                            <button className={scss.iconEdit_btn} onClick={()=>changeIcon("email")}>
-                                {active ? toggleIcon("email") : <SvgInsert id='icon-edit'/>}
-                            </button>
-                        </div>
-                        <div className={scss.field_box}>
-                            <label className={scss.userDataForm_label}>Birthday:</label>
-                            {active && active === "data" ? <Field type="data" name="data" placeholder="Birthday" className={scss.userDataForm_field} /> : <Field type="data" name="data" placeholder="Birthday" disabled className={scss.userDataForm_field} />}
-                            {/* <Field type="data" name="data" placeholder={`${auth.birthday}`} className={scss.userDataForm_field}/> */}
-                            <ErrorMessage name="data" component="div" />
-                            <button className={scss.iconEdit_btn} onClick={()=>changeIcon("data")}>
-                                {active ? toggleIcon("data") : <SvgInsert id='icon-edit'/>}
-                            </button>         
-                        </div>
-                        <div className={scss.field_box}>
-                            <label className={scss.userDataForm_label}>Phone:</label>
-                            {/* <Field type="tel" name="phone" placeholder={`${auth.phone}`} className={scss.userDataForm_field}/> */}
-                            {active && active === "phone" ? <Field type="tel" name="phone" placeholder="Phone" className={scss.userDataForm_field}/> : <Field type="tel" name="phone" placeholder="Phone" disabled className={scss.userDataForm_field}/>}
-                            <ErrorMessage name="phone" component="div" />
-                            <button className={scss.iconEdit_btn} onClick={()=>changeIcon("phone")}>
-                                {active ? toggleIcon("phone") : <SvgInsert id='icon-edit'/>}
-                            </button>
-                        </div>
-                        <div className={scss.field_box}>
-                            <label className={scss.userDataForm_label}>City:</label>
-                            {/* <Field type="text" name="name" placeholder={`${auth.city}`} className={scss.userDataForm_field}/> */}
-                            {active && active === "city" ? <Field type="text" name="city" placeholder="City" className={scss.userDataForm_field}/> : <Field type="text" name="city" placeholder="City" disabled className={scss.userDataForm_field}/>}
-                            <ErrorMessage name="City" component="div" />
-                            <button className={scss.iconEdit_btn} onClick={()=>changeIcon("city")}>
-                                {active ? toggleIcon("city") : <SvgInsert id='icon-edit'/>}
-                            </button>          
-                        </div>
-
-            </Form>   
-                )}
-        </Formik>
-    )
-
+  return (
+    <form className={scss.userDataForm_box} onSubmit={handleSubmit}>
+      <div className={scss.field_box}>
+        <label className={scss.userDataForm_label}>Name:</label>
+        {active && active === 'name' ? (
+          <input
+            onChange={handleChange}
+            type="name"
+            name="name"
+            value={userName}
+            className={scss.userDataForm_field}
+          />
+        ) : (
+          <input
+            onChange={handleChange}
+            type="name"
+            name="name"
+            value={userName}
+            disabled
+            className={scss.userDataForm_field}
+          />
+        )}
+        <button
+          className={scss.iconEdit_btn}
+          onClick={() => changeIcon('name')}
+        >
+          {active ? toggleIcon('name') : <SvgInsert id="icon-edit" />}
+        </button>
+      </div>
+      <div className={scss.field_box}>
+        <label className={scss.userDataForm_label}>Email:</label>
+        {active && active === 'email' ? (
+          <input
+            onChange={handleChange}
+            type="email"
+            name="email"
+            value={userEmail}
+            className={scss.userDataForm_field}
+          />
+        ) : (
+          <input
+            onChange={handleChange}
+            type="email"
+            name="email"
+            value={userEmail}
+            disabled
+            className={scss.userDataForm_field}
+          />
+        )}
+        <button
+          className={scss.iconEdit_btn}
+          onClick={() => changeIcon('email')}
+        >
+          {active ? toggleIcon('email') : <SvgInsert id="icon-edit" />}
+        </button>
+      </div>
+      <div className={scss.field_box}>
+        <label className={scss.userDataForm_label}>Birthday:</label>
+        {active && active === 'birthday' ? (
+          <input
+            onChange={handleChange}
+            type="text"
+            name="birthday"
+            value={userBirthday}
+            className={scss.userDataForm_field}
+          />
+        ) : (
+          <input
+            onChange={handleChange}
+            type="text"
+            name="birthday"
+            value={userBirthday}
+            disabled
+            className={scss.userDataForm_field}
+          />
+        )}
+        <button
+          className={scss.iconEdit_btn}
+          onClick={() => changeIcon('birthday')}
+        >
+          {active ? toggleIcon('birthday') : <SvgInsert id="icon-edit" />}
+        </button>
+      </div>
+      <div className={scss.field_box}>
+        <label className={scss.userDataForm_label}>Phone:</label>
+        {active && active === 'phone' ? (
+          <input
+            onChange={handleChange}
+            type="tel"
+            name="phone"
+            value={userPhone}
+            className={scss.userDataForm_field}
+          />
+        ) : (
+          <input
+            onChange={handleChange}
+            type="tel"
+            name="phone"
+            value={userPhone}
+            disabled
+            className={scss.userDataForm_field}
+          />
+        )}
+        <button
+          className={scss.iconEdit_btn}
+          onClick={() => changeIcon('phone')}
+        >
+          {active ? toggleIcon('phone') : <SvgInsert id="icon-edit" />}
+        </button>
+      </div>
+      <div className={scss.field_box}>
+        <label className={scss.userDataForm_label}>City:</label>
+        {active && active === 'city' ? (
+          <input
+            onChange={handleChange}
+            type="text"
+            name="city"
+            value={userCity}
+            className={scss.userDataForm_field}
+          />
+        ) : (
+          <input
+            onChange={handleChange}
+            type="text"
+            name="city"
+            value={userCity}
+            disabled
+            className={scss.userDataForm_field}
+          />
+        )}
+        <button
+          className={scss.iconEdit_btn}
+          onClick={() => changeIcon('city')}
+        >
+          {active ? toggleIcon('city') : <SvgInsert id="icon-edit" />}
+        </button>
+      </div>
+    </form>
+  );
 }

@@ -17,7 +17,7 @@ const ModalNotice = ({ id, onClose }) => {
     dispatch(getAllFavorites());
   }, [id, dispatch]);
 
-  const loading = useSelector(state => state.auth.loading);
+  const loading = useSelector(state => state.notices.loading);
   const notice = useSelector(state => state.notices.notice);
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   const isFavorite = favoriteNotices?.some(notice => notice._id === id);
