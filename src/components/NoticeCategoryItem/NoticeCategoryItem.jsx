@@ -39,9 +39,9 @@ const NoticeCategoryItem = ({ pet }) => {
         return console.log(modalShow);
     }
 
-//   const showModal = () => {
-//     setModalShow(true);
-//   };
+  const showModal = () => {
+    setModalShow(true);
+  };
 
     const getPlacePet = () => {
         const result = location.split(", ");
@@ -58,11 +58,11 @@ const NoticeCategoryItem = ({ pet }) => {
             {modalShow && (
             <>
                 <Modal onClose={closeModal}>
-                    <ModalNotice id={1} onClose={closeModal} />
+                    <ModalNotice id={_id} onClose={closeModal} />
                 </Modal>
             </>
       )}
-            <li className={scss.card_item} >
+            <li className={scss.card_item} onClick={showModal}>
                 <img src={image} alt="pet" className={scss.card_img} />
                 <div className={scss.card_info}>
                     <h3 className={scss.card_info_title}>{title}</h3>
