@@ -14,7 +14,7 @@ import Modal from '../ModalNotice/Modal/Modal';
 import ModalNotice from '../ModalNotice/ModalNotice';
 
 const NoticeCategoryItem = ({ pet }) => {
-    
+
     const { _id, image, title, breed, location, birthday, price, category, owner } = pet;
 
     const [modalShow, setModalShow] = useState(false);
@@ -36,9 +36,9 @@ const NoticeCategoryItem = ({ pet }) => {
         return console.log(modalShow);
     }
 
-//   const showModal = () => {
-//     setModalShow(true);
-//   };
+  const showModal = () => {
+    setModalShow(true);
+  };
 
     const getPlacePet = () => {
         const result = location.split(", ");
@@ -55,16 +55,16 @@ const NoticeCategoryItem = ({ pet }) => {
             {modalShow && (
             <>
                 <Modal onClose={closeModal}>
-                    <ModalNotice id={1} onClose={closeModal} />
+                    <ModalNotice id={_id} onClose={closeModal} />
                 </Modal>
             </>
       )}
-            <li className={scss.card_item} >
+            <li className={scss.card_item} onClick={showModal}>
                 <img src={image} alt="pet" className={scss.card_img} />
                 <div className={scss.card_info}>
                     <h3 className={scss.card_info_title}>{title}</h3>
                     <ul className={scss.card_info_list}>
-                        <li className={scss.card_info_item}> 
+                        <li className={scss.card_info_item}>
                             <p className={scss.card_info_item_text}>Breed:</p>
                             <p>{breed ? breed : 'no information'}</p>
                         </li>
@@ -76,7 +76,7 @@ const NoticeCategoryItem = ({ pet }) => {
                             <p className={scss.card_info_item_text}>Age:</p>
                             <p>{birthday}</p>
                         </li>
-                        {category === "sell" && <li className={scss.card_info_item}> 
+                        {category === "sell" && <li className={scss.card_info_item}>
                             <p className={scss.card_info_item_text}>Price:</p>
                             <p>{price}$</p>
                         </li>}
@@ -85,7 +85,7 @@ const NoticeCategoryItem = ({ pet }) => {
                         <button type="button" className={scss.learn_more_btn} >Learn more</button>
                         {isLogin && userId === owner && <button type="button" className={scss.delete_btn} onClick={() => btnDeleteNotice(_id)}>Delete
                             <SvgInsert id="icon-delete-notice"/>
-                        </button>} 
+                        </button>}
                         <button type="button" className={scss.add_to_favorite_btn} onClick={() => btnAddToFavorite(_id)}>
                             <SvgInsert id="icon-heart" />
                         </button>

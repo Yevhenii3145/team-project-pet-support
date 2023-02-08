@@ -1,26 +1,26 @@
-@import "helpers/variables.module.scss";
+@import 'helpers/variables.module.scss';
 
 .list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  gap: 12px;
 }
 
 .link {
-    display: block;
-    padding: 8px 28px;
+  display: block;
+  padding: 8px 28px;
 
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.36;
-    letter-spacing: 0.04em;
-    color: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.36;
+  letter-spacing: 0.04em;
+  color: inherit;
 
-    background-color: $lightColor;
-    border: 2px solid $accentColor;
-    border-radius: 40px;
+  background-color: $lightColor;
+  border: 2px solid $accentColor;
+  border-radius: 40px;
 
     &:hover, :focus {
         background-color: $accentColor;
@@ -29,8 +29,8 @@
 }
 
 .link.active {
-    background-color: $accentColor;
-    color: $lightColor;
+  background-color: $accentColor;
+  color: $lightColor;
 }
 
 // ============== Tablet ======================
@@ -52,9 +52,11 @@
 
 // ============== Desktop ======================
 
-@media screen and (min-width: 1280px){
-    .item_order {
-        order: -1;
-    }
-
+@media screen and (min-width: 1280px) {
+  .list {
+    width: 850px;
+  }
+  .item_order {
+    order: -1;
+  }
 }

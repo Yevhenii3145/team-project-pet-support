@@ -70,13 +70,11 @@ const AddsPetContent = ({ close }) => {
   };
 
   const dateNow = new Date();
-  const formatDate = `${
-    dateNow.getDate() < 10 ? `0${dateNow.getDate()}` : dateNow.getDate()
-  }.${
-    dateNow.getMonth() < 10
+  const formatDate = `${dateNow.getDate() < 10 ? `0${dateNow.getDate()}` : dateNow.getDate()
+    }.${dateNow.getMonth() < 10
       ? `0${dateNow.getMonth() + 1}`
       : dateNow.getMonth() + 1
-  }.${dateNow.getFullYear()}`;
+    }.${dateNow.getFullYear()}`;
 
   const handleSubmitForStepOne = e => {
     e.preventDefault();
@@ -166,6 +164,7 @@ const AddsPetContent = ({ close }) => {
               <label className={scss.button}>
                 in good hands
                 <input
+                required
                   name="petCategory"
                   value="in-good-hands"
                   type="radio"
@@ -176,6 +175,7 @@ const AddsPetContent = ({ close }) => {
               <label className={scss.button}>
                 sell
                 <input
+                required
                   name="petCategory"
                   value="sell"
                   type="radio"
@@ -195,6 +195,8 @@ const AddsPetContent = ({ close }) => {
                 name="title"
                 placeholder="Type name pet"
                 type="text"
+                minLength="2"
+                maxLength="48"
                 required
                 value={petTitle}
                 onChange={changeStepOne}
@@ -209,6 +211,8 @@ const AddsPetContent = ({ close }) => {
                 name="name"
                 placeholder="Type name pet"
                 type="text"
+                minLength="2"
+                maxLength="16"
                 required
                 value={petName}
                 onChange={changeStepOne}
@@ -222,6 +226,8 @@ const AddsPetContent = ({ close }) => {
                 className={scss.modalAdds_page__input}
                 name="date"
                 type="text"
+                pattern="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"
+                title="Date must be in the format: DD.MM.YYYY or DD/MM/YYYY or DD-MM-YYYY"
                 placeholder="Type date of birth"
                 required
                 value={petDate}
@@ -237,6 +243,8 @@ const AddsPetContent = ({ close }) => {
                 type="text"
                 name="breed"
                 placeholder="Type breed"
+                minLength="2"
+                maxLength="24"
                 required
                 value={petBreed}
                 onChange={changeStepOne}
@@ -289,6 +297,7 @@ const AddsPetContent = ({ close }) => {
                   <SvgInsert id="icon-female" />
                   Female
                   <input
+                  required
                     className={scss.radioButtonInput}
                     type="radio"
                     // checked={currentRadioValue}
@@ -308,7 +317,7 @@ const AddsPetContent = ({ close }) => {
               className={scss.modalAdds_page__input}
               type="text"
               name="location"
-              placeholder="Type name pet"
+              placeholder="City, region"
               required
               value={petLocation}
               onChange={changeStepOne}
@@ -322,7 +331,9 @@ const AddsPetContent = ({ close }) => {
                   className={scss.modalAdds_page__input}
                   type="number"
                   name="price"
-                  placeholder="Type date of birth"
+                  min="1"
+                  required
+                  placeholder="Type price"
                   value={petPrice}
                   onChange={changeStepOne}
                 />
@@ -362,6 +373,7 @@ const AddsPetContent = ({ close }) => {
                 name="comments"
                 placeholder="Type breed"
                 required
+                readonly
                 minLength="8"
                 maxLength="120"
               />

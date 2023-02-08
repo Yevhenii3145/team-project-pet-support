@@ -5,13 +5,20 @@ import axios from 'axios';
 import { useState } from 'react';
 import { RiSave3Fill } from 'react-icons/ri';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import operations from "redux/operations";
+import {  useDispatch } from 'react-redux';
+
 
 export default function UserDataItem() {
+
+
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
   const [avatar, setAvatar] = useState({});
   const [imagePreviewUrl, setImagePreviewUrl] = useState(defaultImg);
   const [editPhoto, setEditPhoto] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleSubmit = () => {
     const formData = new FormData();
@@ -49,13 +56,10 @@ export default function UserDataItem() {
       setEditPhoto(true);
     };
     reader.readAsDataURL(file);
+    dispatch(operations.updateUserAvatar(file));
+
     return;
   };
-
-  // const onClick = () => {
-  //     console.log('sdfgh');
-
-  //     }
 
   return (
     <div className={scss.userItem_container}>

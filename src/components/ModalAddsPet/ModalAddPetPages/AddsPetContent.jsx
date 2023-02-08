@@ -93,6 +93,8 @@ const AddsPetContent = ({ close }) => {
     data.append('breed', petBreed);
     data.append('comments', comments.value);
     data.append('image', image.files[0]);
+    console.log(image.files[0])
+    console.log("yyyy")
     setPetBreed('');
     setPetDate('');
     setPetName('');
@@ -101,6 +103,16 @@ const AddsPetContent = ({ close }) => {
     form.reset();
     return close();
   };
+
+  const validateFile = () => {
+    if(!imageURL){
+      Report.warning(
+        'Pet Warning',
+        'Please add a photo.',
+        'Okay',
+        );
+    }
+  }
 
   return (
     <>
@@ -191,6 +203,7 @@ const AddsPetContent = ({ close }) => {
                 accept="image/png, image/jpeg, image/jpg, image/webp"
                 id="img"
                 required
+                title='is required'
                 multiple
                 onChange={handleImageChange}
               />
@@ -219,6 +232,7 @@ const AddsPetContent = ({ close }) => {
                 <button
                   className={`${scss.button__primary_main} ${scss.modalAdds_page__button}`}
                   type="submit"
+                  onClick={validateFile}
                 >
                   Done
                 </button>

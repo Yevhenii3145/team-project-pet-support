@@ -1,7 +1,10 @@
 import { PetsList } from '../PetsList/PetsList';
 import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
 import AddsPetContent from '../ModalAddsPet/ModalAddPetPages/AddsPetContent';
-import {getUser} from '../../redux/selectors'
+import { getPets, getUserId } from '../../redux/selectors';
+import operations from "../../redux/operations";
+import {  useEffect } from 'react';
+import Loader from 'components/Loader/Loader';
 import { useState } from 'react';
 import SvgInsert from "../Svg/Svg";
 import { useSelector, useDispatch } from "react-redux"
@@ -9,10 +12,22 @@ import scss from './pets-data.module.scss';
 
 function PetsData() {
   const [modalShow, setModalShow] = useState(false);
-  
-  // const user = useSelector(getUser())
-  // console.log(user)
 
+  const pets = useSelector(getPets);
+  console.log(pets)
+
+  const UserId = useSelector(getUserId);
+   console.log(UserId)
+  
+  const loading = useSelector(state => state.user.loading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(operations.getUserPet())
+  }, [dispatch]);
+
+console.log(pets)
+  
   const closeModal = () => {
     setModalShow(false);
   };
@@ -23,10 +38,10 @@ function PetsData() {
 
   return (
     <>
+      {loading && <Loader />}
       <div className={scss.petsData_title_box}>
-        {/* <div className={scss.petsData_title_box}> */}
           <h2 className={scss.petsData_title}>My pets:</h2>
-        {/* </div> */}
+
         <div className={scss.addPetModal_buttonBox}>
           <button
             className={scss.addPetModal_button}
@@ -47,7 +62,7 @@ function PetsData() {
         )}
 
         <div className={scss.overflow}>
-          <PetsList  />
+          <PetsList pets={pets} />
 
         </div>
       </div>
