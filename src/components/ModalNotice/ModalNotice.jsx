@@ -24,6 +24,8 @@ const ModalNotice = ({ id, onClose }) => {
   const [deleteContent, setDeleteContent] = useState('Remove');
   const [addedContent, setAddedContent] = useState('Add to');
 
+  console.log(notice)
+
   const handleClickToFavorite = noticeId => {
     dispatch(addNoticeToFavorite(noticeId));
     if (isFavorite) {

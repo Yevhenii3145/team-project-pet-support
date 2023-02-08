@@ -8,7 +8,7 @@ const initialState = {
     error: null,
     isNotisFavorite: false,
     noticeId: "",
-    notice: null,
+    notice: {},
 }
 
 const noticesSlice = createSlice({
