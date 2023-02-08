@@ -149,8 +149,6 @@ const getUserPet = createAsyncThunk("users/{userId}/pets", async (_, { thunkAPI}
   }
 });
 
-
-      return response;
     } catch (error) {
       return thunkAPI.rthunkAPIejectWithValue(error.message);
     }
