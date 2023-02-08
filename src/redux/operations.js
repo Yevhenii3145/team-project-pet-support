@@ -6,7 +6,7 @@ const {REACT_APP_BASE_URL} = process.env;
 console.log(REACT_APP_BASE_URL)
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
-//axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGNmZWRiMWE2Y2I0ZjlkNTJlOTYwZSIsImlhdCI6MTY3NTUzMjE0NCwiZXhwIjoxNjc1NjE0OTQ0fQ.TCE19oHh_jueRFQFEjnQp7ydbK-1FbsYf46jW8PcW74`;
+axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGNmZWRiMWE2Y2I0ZjlkNTJlOTYwZSIsImlhdCI6MTY3NTUzMjE0NCwiZXhwIjoxNjc1NjE0OTQ0fQ.TCE19oHh_jueRFQFEjnQp7ydbK-1FbsYf46jW8PcW74`;
 
 const setAuthHeader = (token) => {
     if (token) {
@@ -124,14 +124,29 @@ const addNotice = createAsyncThunk('notices/notice', async (dataNotice, thunkAPI
   }
 });
 
-const getUserPet = createAsyncThunk("users/{userId}/pets", async (_, { thunkAPI}) => {
-  // const { users } = thunkAPI.getState()
-  // const id = users.userId;
+const updateUserAvatar = createAsyncThunk("users/update/avatar", async (file, { thunkAPI}) => {
+  const formData = new FormData();
+  formData.append('image', file)
+  
   try {
-     
-    const response= await axios.get(`users/{userId}/pets`);
+    const response = await axios.patch(`users/update/avatar`, formData);
     console.log(response.data)
-   
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rthunkAPIejectWithValue(error.message);
+  }
+});
+
+const getUserPet = createAsyncThunk("users/{userId}/pets", async (_, { thunkAPI}) => {
+  const state = thunkAPI.getState()
+  const persistedToken = state.auth.token
+  const id = state.auth.userId;
+   console.log(id)
+  
+  try {
+      setAuthHeader(persistedToken);
+    const response = await axios.get(`users/${id}/pets`);
+    console.log(response.data)
     return response;
   } catch (error) {
     return thunkAPI.rthunkAPIejectWithValue(error.message);
@@ -141,15 +156,17 @@ const getUserPet = createAsyncThunk("users/{userId}/pets", async (_, { thunkAPI}
 
 const deletePet = createAsyncThunk(
   "users/{petId}",
-  async (userId, { rejectWithValue }) => {
+  async (petId, { rejectWithValue }) => {
     try {
-      const response = await axios.post("users/{userId}", userId);
+      const response = await axios.post("users/{petId}", petId);
       console.log(response)
       return response;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   });
+
+
 
 const operations = {
   registerNewUser,
@@ -160,6 +177,7 @@ const operations = {
   addNotice,
   getUserPet,
   deletePet,
+  updateUserAvatar,
 };
 
 export default operations;
