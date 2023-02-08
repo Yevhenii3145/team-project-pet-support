@@ -40,9 +40,8 @@ console.log(pets)
     <>
       {loading && <Loader />}
       <div className={scss.petsData_title_box}>
-        {/* <div className={scss.petsData_title_box}> */}
           <h2 className={scss.petsData_title}>My pets:</h2>
-        {/* </div> */}
+
         <div className={scss.addPetModal_buttonBox}>
           <button
             className={scss.addPetModal_button}

@@ -1,16 +1,11 @@
 import scss from "./pets-list.module.scss";
 import SvgInsert from "../Svg/Svg";
-import {getPets} from "../../redux/selectors"
-import { useSelector, useDispatch } from "react-redux";
-import {  useEffect } from 'react';
+import { useDispatch } from "react-redux";
 import operations from '../../redux/operations'; 
 
 
-export function PetsList() {
+export function PetsList({pets}) {
      
-  const pets = useSelector(getPets);
-  console.log(pets)
-
   
   const dispatch = useDispatch();
     
@@ -28,7 +23,7 @@ export function PetsList() {
                         <p className={scss.petsList_field}>Date of birth:  {date}</p>
                         <p className={scss.petsList_field}>Breed:  {breed} </p>
                         <p className={scss.petsList_field}>Comments:{comments} </p>
-                        <button className={scss.petsList_button} type='button'><SvgInsert id='icon-delete'/></button>
+            <button className={scss.petsList_button} onClick={onDeletePet} type='button'><SvgInsert id='icon-delete'/></button>
                     </div>
         </li>
     })
