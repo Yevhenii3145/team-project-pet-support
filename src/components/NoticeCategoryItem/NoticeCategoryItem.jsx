@@ -48,7 +48,7 @@ const NoticeCategoryItem = ({ pet }) => {
      dispatch(deleteNotice(noticeId));
     }
 
-    const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
+    // const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
 
     return (
         <>
@@ -74,7 +74,7 @@ const NoticeCategoryItem = ({ pet }) => {
                         </li>
                         <li className={scss.card_info_item}>
                             <p className={scss.card_info_item_text}>Age:</p>
-                            <p>{getAgePet}</p>
+                            <p>{birthday}</p>
                         </li>
                         {category === "sell" && <li className={scss.card_info_item}> 
                             <p className={scss.card_info_item_text}>Price:</p>
