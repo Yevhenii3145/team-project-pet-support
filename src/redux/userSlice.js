@@ -18,11 +18,11 @@ const userSlice = createSlice({
     initialState,
     extraReducers: {
         
-        [fetchUserData.fulfilled]: (store, {payload}) => {
-            store.items = payload;
+        [fetchUserData.fulfilled]: (state, {payload}) => {
+            state.items = payload;
         },
-        [fetchUserData.rejected]: (store, {payload}) => {
-            store.error = payload;
+        [fetchUserData.rejected]: (state, {payload}) => {
+            state.error = payload;
         },
 
         [operations.addPet.pending]: (state, action) => {
@@ -30,7 +30,7 @@ const userSlice = createSlice({
           },
         [operations.addPet.fulfilled]: (state, action) => {
             state.loading = false;
-            //state.pets.push(action.payload);
+            state.pets.push(action.payload);
             Report.success(
                 'Success',
                 `${action.payload.name} added successfully.`,
@@ -45,33 +45,46 @@ const userSlice = createSlice({
               'Okay'
             );
         },
-        [operations.getUserPet.pending]: (store) => {
-            store.loading = false;
+        [operations.getUserPet.pending]: (state) => {
+           state.loading = false;
         },
-        [operations.getUserPet.fulfilled]: (store, { payload }) => {
-            store.loading = false;
-            store.data = store.data.filter(data => data.userId !== payload);
-            console.log(payload)
+        [operations.getUserPet.fulfilled]: (state, {payload}) => {
+            state.loading = false;
+            state.pets = payload;
+            console.log('payload pets',payload)
         },
-        [operations.getUserPet.rejected]: (store, {payload}) => {
-            store.loading = false;
-            store.error = payload;
+        [operations.getUserPet.rejected]: (state, {payload}) => {
+            state.loading = false;
+            state.error = payload;
         },
 
-        [operations.deletePet.pending]: (store) => {
-            store.loading = false;
+        [operations.deletePet.pending]: (state) => {
+            state.loading = false;
         },
-        [operations.deletePet.fulfilled]: (store, { payload }) => {
-            store.loading = false;
-            store.data = store.data.filter(data => data.userId !== payload);
+        [operations.deletePet.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.data = state.data.filter(data => data.petId !== payload);
             Report.warning(
                 'Are you sure you want to delete your pet?!'
             );
             
         },
-        [operations.deletePet.rejected]: (store, {payload}) => {
-            store.loading = false;
-            store.error = payload;
+        [operations.deletePet.rejected]: (state, {payload}) => {
+            state.loading = false;
+            state.error = payload;
+        },
+        
+        [operations.updateUserAvatar.pending]: (state) => {
+            state.loading = false;
+        },
+        [operations.updateUserAvatar.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.user.avatarURL = payload.avatarURL;
+            
+        },
+        [operations.updateUserAvatar.rejected]: (state, {payload}) => {
+            state.loading = false;
+            state.error = payload;
         },
       
     }
