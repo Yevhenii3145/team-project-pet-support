@@ -118,45 +118,44 @@ const addNotice = createAsyncThunk(
   }
 );
 
+const updateUserAvatar = createAsyncThunk(
+  'auth/update/avatar',
+  async (file, { thunkAPI }) => {
+    const formData = new FormData();
+    formData.append('avatarURL', file);
 
-
-const updateUserAvatar = createAsyncThunk("users/update/avatar", async (file, { thunkAPI}) => {
-  const formData = new FormData();
-  formData.append('image', file)
-  
-  try {
-    const response = await axios.patch(`users/update/avatar`, formData);
-    console.log(response.data)
-    return response.data;
-  } catch (error) {
-    return thunkAPI.thunkAPI.rejectWithValue(error.message);
+    try {
+      const response = await axios.patch(`auth/update/avatar`, formData);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);
 
-const getUserPet = createAsyncThunk("users/{userId}/pets", async (_, { thunkAPI}) => {
-  const state = thunkAPI.getState()
-  const persistedToken = state.auth.token
+const getUserPet = createAsyncThunk('users/pets', async (_, { thunkAPI }) => {
+  const state = thunkAPI.getState();
+  const persistedToken = state.auth.token;
   // const id = state.auth.userId;
   //  console.log(id)
-  
+
   try {
-      setAuthHeader(persistedToken);
-    const response = await axios.get(`users/pets`);
-    console.log(response.data)
+    setAuthHeader(persistedToken);
+    const response = await axios.get('users/pets');
+    console.log(response.data);
     return response;
   } catch (error) {
     return thunkAPI.rthunkAPIejectWithValue(error.message);
   }
 });
 
-
 const deletePet = createAsyncThunk(
-
-  "users/{petId}",
+  'users/{petId}',
   async (petId, { rejectWithValue }) => {
     try {
-      const response = await axios.post("users/{petId}", petId);
-      console.log(response)
+      const response = await axios.post('users/{petId}', petId);
+      console.log(response);
 
       return response;
     } catch (error) {
@@ -179,8 +178,6 @@ const updateUser = createAsyncThunk('user/update', async (data, thunkAPI) => {
   }
 });
 
-
-
 const operations = {
   registerNewUser,
   login,
@@ -191,7 +188,7 @@ const operations = {
   getUserPet,
   deletePet,
   updateUser,
-  updateUserAvatar
+  updateUserAvatar,
 };
 
 export default operations;
