@@ -129,19 +129,19 @@ const updateUserAvatar = createAsyncThunk("users/update/avatar", async (file, { 
     console.log(response.data)
     return response.data;
   } catch (error) {
-    return thunkAPI.rthunkAPIejectWithValue(error.message);
+    return thunkAPI.thunkAPI.rejectWithValue(error.message);
   }
 });
 
 const getUserPet = createAsyncThunk("users/{userId}/pets", async (_, { thunkAPI}) => {
   const state = thunkAPI.getState()
   const persistedToken = state.auth.token
-  const id = state.auth.userId;
-   console.log(id)
+  // const id = state.auth.userId;
+  //  console.log(id)
   
   try {
       setAuthHeader(persistedToken);
-    const response = await axios.get(`users/${id}/pets`);
+    const response = await axios.get(`users/pets`);
     console.log(response.data)
     return response;
   } catch (error) {

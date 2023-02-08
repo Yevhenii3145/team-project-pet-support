@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { RiSave3Fill } from 'react-icons/ri';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import operations from "redux/operations";
-import {  useDispatch } from 'react';
+import {  useDispatch } from 'react-redux';
 
 
 export default function UserDataItem() {

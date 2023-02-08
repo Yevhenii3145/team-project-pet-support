@@ -1,19 +1,19 @@
 import scss from "./pets-list.module.scss";
 import SvgInsert from "../Svg/Svg";
-import { useDispatch } from "react-redux";
-import operations from '../../redux/operations'; 
+// import { useDispatch } from "react-redux";
+// import operations from '../../redux/operations'; 
 
 
 export function PetsList({pets}) {
      
   
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
     
  
-        const onDeletePet= (petId) => {
-       const action = operations.deletePet(petId);
-        dispatch(action);
-}
+//         const onDeletePet= (petId) => {
+//        const action = operations.deletePet(petId);
+//         dispatch(action);
+// }
 
     const elements = pets.map(({ name, date, breed, image, comments, petId }) => {
         return <li className={scss.petsList_box} key={petId}>
@@ -23,7 +23,7 @@ export function PetsList({pets}) {
                         <p className={scss.petsList_field}>Date of birth:  {date}</p>
                         <p className={scss.petsList_field}>Breed:  {breed} </p>
                         <p className={scss.petsList_field}>Comments:{comments} </p>
-            <button className={scss.petsList_button} onClick={onDeletePet} type='button'><SvgInsert id='icon-delete'/></button>
+            <button className={scss.petsList_button} type='button'><SvgInsert id='icon-delete'/></button>
                     </div>
         </li>
     })
