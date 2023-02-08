@@ -333,7 +333,7 @@ const AddsPetContent = ({ close }) => {
                   name="price"
                   min="1"
                   required
-                  placeholder="Type date of birth"
+                  placeholder="Type price"
                   value={petPrice}
                   onChange={changeStepOne}
                 />
