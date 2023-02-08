@@ -53,7 +53,7 @@ export const authSlice = createSlice({
     [operations.login.fulfilled]: (store, { payload }) => {
       console.log('payload', payload);
       store.loading = false;
-      store.user = payload.user;
+      store.user = payload;
       store.token = payload.token;
       store.isLogin = true;
       store.userId = payload.userId;
@@ -83,6 +83,7 @@ export const authSlice = createSlice({
     [operations.current.pending]: store => {
       store.isLoadingUser = true;
       store.error = null;
+      store.user = {};
     },
     [operations.current.fulfilled]: (store, { payload }) => {
       store.isLoadingUser = false;

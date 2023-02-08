@@ -10,8 +10,9 @@ export function UserFormik() {
     dispatch(operations.current);
   }, [dispatch]);
   const user = useSelector(state => state.auth.user);
-  const date = new Date(user.birthday);
-  const formatDate = `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth()+1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1}.${date.getFullYear()}`
+  console.log(user)
+  const date = user.birthday !== undefined ? new Date(user.birthday) : "00.00.0000";
+  const formatDate =user.birthday ? `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth()+1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1}.${date.getFullYear()}` : "00.00.0000"
   const [userName, setUserName] = useState(user.name);
   const [userEmail, setUserEmail] = useState(user.email);
   const [userBirthday, setUserBirthday] = useState(
@@ -87,6 +88,7 @@ export function UserFormik() {
   };
 
   return (
+    user && <>
     <form className={scss.userDataForm_box} onSubmit={handleSubmit}>
       <div className={scss.field_box}>
         <label className={scss.userDataForm_label}>Name:</label>
@@ -224,5 +226,6 @@ export function UserFormik() {
         </button>
       </div>
     </form>
+    </>
   );
 }
