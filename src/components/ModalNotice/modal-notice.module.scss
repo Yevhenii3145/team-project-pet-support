@@ -135,6 +135,7 @@ p {
   font-size: 16px;
   line-height: 22px;
   align-items: center;
+  text-align: center;
   letter-spacing: 0.04em;
   &:last-child {
     margin-top: 12px;
@@ -146,10 +147,6 @@ p {
   &:focus > svg {
     fill: $lightColor;
   }
-}
-
-.modal_notice__button_contact {
-  color: currentcolor;
 }
 
 @media screen and (min-width: 768px) {
