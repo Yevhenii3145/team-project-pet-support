@@ -149,11 +149,6 @@ const getUserPet = createAsyncThunk("users/{userId}/pets", async (_, { thunkAPI}
   }
 });
 
-    } catch (error) {
-      return thunkAPI.rthunkAPIejectWithValue(error.message);
-    }
-  }
-);
 
 const deletePet = createAsyncThunk(
 
