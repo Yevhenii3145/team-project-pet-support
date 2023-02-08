@@ -3,7 +3,7 @@ import { fetchCategoryNotices, addNoticeToFavorite, deleteNotice, searchNotice }
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const initialState = {
-    items: null,
+    items: [],
     loading: false,
     error: null,
     isNotisFavorite: false,
@@ -20,7 +20,7 @@ const noticesSlice = createSlice({
         },
         [fetchCategoryNotices.fulfilled]: (store, action) => {
             store.loading = false;
-            store.items = action.payload;
+            store.items = action.payload.data;
         },
         [fetchCategoryNotices.rejected]: (store, action) => {
             store.loading = false;

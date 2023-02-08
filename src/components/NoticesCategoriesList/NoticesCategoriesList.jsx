@@ -23,7 +23,7 @@ const NoticesCategoriesList = () => {
     return (
         <>
             {loading && <Loader/>}
-            {pets && <NoticesCategoryList pets={pets.data} />}
+            {pets && <NoticesCategoryList pets={pets} />}
             {error && Notify.failure("Oops, something went wrong") }
         </>
     )

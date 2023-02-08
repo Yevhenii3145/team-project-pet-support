@@ -1,4 +1,4 @@
-import {useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
 import { formatDistanceStrict } from 'date-fns';
@@ -12,7 +12,6 @@ import { addNoticeToFavorite, deleteNotice } from 'redux/notices/notices-operati
 import useAuth from 'shared/hooks/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
 import ModalNotice from '../ModalNotice/ModalNotice';
-import { getUserId } from 'redux/selectors';
 
 const NoticeCategoryItem = ({ pet }) => {
     
@@ -22,10 +21,8 @@ const NoticeCategoryItem = ({ pet }) => {
 
     const isLogin = useAuth();
     const dispatch = useDispatch();
-    // const user = useSelector(getUser);
-    const userId = useSelector(getUserId);
-    // console.log(user.userId)
-    console.log(userId)
+
+    const userId = localStorage.getItem("userId");
 
     const btnAddToFavorite = (noticeId) => {
         if (isLogin) {
