@@ -3,28 +3,23 @@ import SvgInsert from '../Svg/Svg';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  searchNotice,
   getAllFavorites,
   addNoticeToFavorite,
 } from '../../redux/notices/notices-operation';
 import Loader from 'components/Loader/Loader';
 import { useEffect, useState } from 'react';
 
-const ModalNotice = ({ id, onClose }) => {
+const ModalNotice = ({ id, onClose, notice }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(searchNotice(id));
     dispatch(getAllFavorites());
-  }, [id, dispatch]);
+  }, [dispatch]);
 
   const loading = useSelector(state => state.notices.loading);
-  const notice = useSelector(state => state.notices.notice);
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   const isFavorite = favoriteNotices?.some(notice => notice._id === id);
   const [deleteContent, setDeleteContent] = useState('Remove');
   const [addedContent, setAddedContent] = useState('Add to');
-
-  console.log(notice)
 
   const handleClickToFavorite = noticeId => {
     dispatch(addNoticeToFavorite(noticeId));

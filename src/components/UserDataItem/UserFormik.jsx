@@ -3,24 +3,69 @@ import SvgInsert from '../Svg/Svg';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import operations from 'redux/operations';
+import axios from 'axios';
+
+const { REACT_APP_BASE_URL } = process.env;
+axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
 export function UserFormik() {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth.user);
-  useEffect(() => {
-    dispatch(operations.current);
-  }, [dispatch]);
+  const [user, setUser] = useState({});
+  const userInStore = useSelector(state => state.auth.user);
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userBirthday, setUserBirthday] = useState('');
+  const [userPhone, setUserPhone] = useState('');
+  const [userCity, setUserCity] = useState('');
 
-  console.log(user)
-  const date = user.birthday !== undefined ? new Date(user.birthday) : "00.00.0000";
-  const formatDate = user.birthday ? `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}.${date.getFullYear()}` : "00.00.0000"
-  const [userName, setUserName] = useState(user.name);
-  const [userEmail, setUserEmail] = useState(user.email);
-  const [userBirthday, setUserBirthday] = useState(
-    user.birthday ? formatDate : '00.00.0000'
-  );
-  const [userPhone, setUserPhone] = useState(user.phone);
-  const [userCity, setUserCity] = useState(user.city);
+  useEffect(() => {
+    if (userInStore.token !== undefined) {
+      fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${userInStore.token}`,
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          setUser(data);
+          setUserName(data.name);
+          setUserEmail(data.email);
+          setUserBirthday('00.00.0000');
+          setUserPhone(data.phone);
+          setUserCity(data.city);
+        })
+        .catch(error => console.log(error));
+      return;
+    } else {
+      setUser(userInStore);
+      setUserName(userInStore.name);
+      setUserEmail(userInStore.email);
+      setUserBirthday(
+        userInStore.birthday !== undefined ? userInStore.birthday : '00.00.0000'
+      );
+      setUserPhone(userInStore.phone);
+      setUserCity(userInStore.city);
+    }
+  }, [userInStore]);
+  //const user = userInStore.token !== undefined ? userInPromises : userInStore;
+  // const userAfterLogin = useSelector(state => state.auth.user);
+  // const token = userAfterLogin.token;
+  // const [userInPromises, setUserInPromises] = useState(undefined)
+  // console.log(token)
+
+  // const indentificateUser = async () =>{
+  //     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  //     const response = await axios.get('/users/current');
+  //     return setUserInPromises(response.data);
+  // }
+  // useEffect(()=>{
+  //   indentificateUser()
+  // }, [])
+  // const user = token === undefined ? userAfterLogin : userInPromises;
+  //console.log(user)
+  //const date = user.birthday !== undefined ? new Date(user.birthday) : "00.00.0000";
+  //const formatDate = user.birthday ? `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}.${date.getFullYear()}` : "00.00.0000"
 
   const handleChange = e => {
     switch (e.currentTarget.name) {
@@ -70,26 +115,58 @@ export function UserFormik() {
     e.preventDefault();
     const form = e.currentTarget;
     const { name, email, birthday, phone, city } = form.elements;
-    if (name.value !== user.name) {
-      dispatch(operations.updateUser({ name: name.value }));
+    console.log(e.currentTarget)
+    console.log(e.target)
+    // console.log(form.elements.value)
+    if(e.currentTarget.elements === 'name'){
+      console.log("name")
     }
-    if (email.value !== user.email) {
-      dispatch(operations.updateUser({ email: email.value }));
+
+    switch (form){
+      case form.elements.name:
+        console.log("name")
+        dispatch(operations.updateUser({ name: name.value }));
+        break;
+
+      case email:
+        dispatch(operations.updateUser({ name: name.value }));
+        break;
+
+      case birthday:
+        dispatch(operations.updateUser({ birthday: birthday.value }));
+        break
+
+      case phone:
+        dispatch(operations.updateUser({ phone: phone.value }));
+        break;
+
+      case city:
+        dispatch(operations.updateUser({ city: city.value }));
+        break;
+
+        default:
+          return;
     }
-    if (birthday.value !== user.birthday && birthday.value !== '00.00.0000') {
-      console.log(user.birthday);
-      dispatch(operations.updateUser({ birthday: birthday.value }));
-    }
-    if (phone.value !== user.phone) {
-      dispatch(operations.updateUser({ phone: phone.value }));
-    }
-    if (city.value !== user.city) {
-      dispatch(operations.updateUser({ city: city.value }));
-    }
+    // if (name.value !== userName) {
+    //   dispatch(operations.updateUser({ name: name.value }));
+    // }
+    // if (email.value !== userEmail) {
+    //   dispatch(operations.updateUser({ email: email.value }));
+    // }
+    // if (birthday.value !== user.birthday && birthday.value !== '00.00.0000') {
+    //   console.log(userBirthday);
+    //   dispatch(operations.updateUser({ birthday: birthday.value }));
+    // }
+    // if (phone.value !== userPhone) {
+    //   dispatch(operations.updateUser({ phone: phone.value }));
+    // }
+    // if (city.value !== userCity) {
+    //   dispatch(operations.updateUser({ city: city.value }));
+    // }
   };
 
   return (
-    user && <>
+    <>
       <form className={scss.userDataForm_box} onSubmit={handleSubmit}>
         <div className={scss.field_box}>
           <label className={scss.userDataForm_label}>Name:</label>

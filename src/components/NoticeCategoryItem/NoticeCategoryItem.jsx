@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import {useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 
 import { formatDistanceStrict } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -7,7 +7,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import scss from './notice-category-item.module.scss';
 // import noticeImage1 from 'images/cat1.webp';
 import SvgInsert from 'components/Svg/Svg';
-import { addNoticeToFavorite, deleteNotice } from 'redux/notices/notices-operation';
+import { addNoticeToFavorite, deleteNotice , searchNotice, getAllFavorites,} from 'redux/notices/notices-operation';
 // import { getFavoriteNotice } from "redux/notices/notices-selectors";
 import useAuth from 'shared/hooks/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
@@ -16,13 +16,21 @@ import ModalNotice from '../ModalNotice/ModalNotice';
 const NoticeCategoryItem = ({ pet }) => {
 
     const { _id, image, title, breed, location, birthday, price, category, owner } = pet;
-
     const [modalShow, setModalShow] = useState(false);
-
-    const isLogin = useAuth();
     const dispatch = useDispatch();
 
-    const userId = localStorage.getItem("userId");
+    const localStorageUserId = localStorage.getItem("userId");
+
+    useEffect(() => {
+        dispatch(searchNotice(_id));
+        dispatch(getAllFavorites());
+      }, [_id, dispatch]);
+    const isLogin = useAuth();
+    const noticeInfo = useSelector(state => state.notices.notice);
+    // const user = useSelector(getUser);
+    // const userId = useSelector(getUserId);
+    // console.log(user.userId)
+    // console.log(userId)
 
     const btnAddToFavorite = (noticeId) => {
         if (isLogin) {
@@ -55,7 +63,7 @@ const NoticeCategoryItem = ({ pet }) => {
             {modalShow && (
             <>
                 <Modal onClose={closeModal}>
-                    <ModalNotice id={_id} onClose={closeModal} />
+                    <ModalNotice id={_id} onClose={closeModal} notice={noticeInfo}/>
                 </Modal>
             </>
       )}
@@ -83,7 +91,7 @@ const NoticeCategoryItem = ({ pet }) => {
                     </ul>
                     <div className={scss.box_btn}>
                         <button type="button" className={scss.learn_more_btn} onClick={showModal}>Learn more</button>
-                        {isLogin && userId === owner && <button type="button" className={scss.delete_btn} onClick={() => btnDeleteNotice(_id)}>Delete
+                        {isLogin && localStorageUserId === owner && <button type="button" className={scss.delete_btn} onClick={() => btnDeleteNotice(_id)}>Delete
                             <SvgInsert id="icon-delete-notice"/>
                         </button>}
                         <button type="button" className={scss.add_to_favorite_btn} onClick={() => btnAddToFavorite(_id)}>
