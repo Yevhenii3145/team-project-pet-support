@@ -12,13 +12,15 @@ import { addNoticeToFavorite, deleteNotice , searchNotice, getAllFavorites,} fro
 import useAuth from 'shared/hooks/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
 import ModalNotice from '../ModalNotice/ModalNotice';
-import { getUserId } from 'redux/selectors';
 
 const NoticeCategoryItem = ({ pet }) => {
 
     const { _id, image, title, breed, location, birthday, price, category, owner } = pet;
     const [modalShow, setModalShow] = useState(false);
     const dispatch = useDispatch();
+
+    const localStorageUserId = localStorage.getItem("userId");
+
     useEffect(() => {
         dispatch(searchNotice(_id));
         dispatch(getAllFavorites());
@@ -26,9 +28,9 @@ const NoticeCategoryItem = ({ pet }) => {
     const isLogin = useAuth();
     const noticeInfo = useSelector(state => state.notices.notice);
     // const user = useSelector(getUser);
-    const userId = useSelector(getUserId);
+    // const userId = useSelector(getUserId);
     // console.log(user.userId)
-    console.log(userId)
+    // console.log(userId)
 
     const btnAddToFavorite = (noticeId) => {
         if (isLogin) {
@@ -65,7 +67,7 @@ const NoticeCategoryItem = ({ pet }) => {
                 </Modal>
             </>
       )}
-            <li className={scss.card_item} onClick={showModal}>
+            <li className={scss.card_item} >
                 <img src={image} alt="pet" className={scss.card_img} />
                 <div className={scss.card_info}>
                     <h3 className={scss.card_info_title}>{title}</h3>
@@ -88,8 +90,8 @@ const NoticeCategoryItem = ({ pet }) => {
                         </li>}
                     </ul>
                     <div className={scss.box_btn}>
-                        <button type="button" className={scss.learn_more_btn} >Learn more</button>
-                        {isLogin && userId === owner && <button type="button" className={scss.delete_btn} onClick={() => btnDeleteNotice(_id)}>Delete
+                        <button type="button" className={scss.learn_more_btn} onClick={showModal}>Learn more</button>
+                        {isLogin && localStorageUserId === owner && <button type="button" className={scss.delete_btn} onClick={() => btnDeleteNotice(_id)}>Delete
                             <SvgInsert id="icon-delete-notice"/>
                         </button>}
                         <button type="button" className={scss.add_to_favorite_btn} onClick={() => btnAddToFavorite(_id)}>

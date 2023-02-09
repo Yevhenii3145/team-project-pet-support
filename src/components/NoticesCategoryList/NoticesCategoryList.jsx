@@ -5,7 +5,7 @@ import NoticeCategoryItem from "components/NoticeCategoryItem/NoticeCategoryItem
 
 const NoticesCategoryList = ({ pets }) => {
 
-    console.log(pets)
+    // console.log(pets)
 
     return(
         <ul className={scss.card_list}>

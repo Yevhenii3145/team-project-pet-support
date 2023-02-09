@@ -15,7 +15,7 @@ const NoticesCategoriesList = () => {
     const pets = useSelector(getNotices);
     const { loading, error } = useSelector(getStore);
     const dispatch = useDispatch(); 
-
+    
     useEffect(() => {
         dispatch(fetchCategoryNotices(categoryName))
     }, [dispatch, categoryName])
@@ -23,7 +23,7 @@ const NoticesCategoriesList = () => {
     return (
         <>
             {loading && <Loader/>}
-            {pets && <NoticesCategoryList pets={pets.data} />}
+            {pets && <NoticesCategoryList pets={pets} />}
             {error && Notify.failure("Oops, something went wrong") }
         </>
     )
