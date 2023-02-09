@@ -15,9 +15,7 @@ const NoticesCategoriesList = () => {
     const pets = useSelector(getNotices);
     const { loading, error } = useSelector(getStore);
     const dispatch = useDispatch(); 
-
-    console.log(pets)
-
+    
     useEffect(() => {
         dispatch(fetchCategoryNotices(categoryName))
     }, [dispatch, categoryName])

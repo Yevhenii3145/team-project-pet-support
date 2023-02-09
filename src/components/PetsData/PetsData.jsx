@@ -1,7 +1,7 @@
 import { PetsList } from '../PetsList/PetsList';
 import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
 import AddsPetContent from '../ModalAddsPet/ModalAddPetPages/AddsPetContent';
-import { getPets, getUserId } from '../../redux/selectors';
+// import { getPets, getUserId } from '../../redux/selectors';
 import operations from "../../redux/operations";
 import { useEffect } from 'react';
 import Loader from 'components/Loader/Loader';
@@ -16,8 +16,8 @@ function PetsData() {
   const pets = useSelector(state => state.user.pets);
   console.log(pets);
 
-  const UserId = useSelector(getUserId);
-  console.log(UserId)
+  // const UserId = useSelector(getUserId);
+  // console.log(UserId)
 
   const loading = useSelector(state => state.user.loading);
   const dispatch = useDispatch();

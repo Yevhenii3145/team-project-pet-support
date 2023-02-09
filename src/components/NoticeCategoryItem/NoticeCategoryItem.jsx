@@ -48,7 +48,7 @@ const NoticeCategoryItem = ({ pet }) => {
      dispatch(deleteNotice(noticeId));
     }
 
-    // const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
+    const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
 
     return (
         <>
@@ -59,7 +59,7 @@ const NoticeCategoryItem = ({ pet }) => {
                 </Modal>
             </>
       )}
-            <li className={scss.card_item} onClick={showModal}>
+            <li className={scss.card_item} >
                 <img src={image} alt="pet" className={scss.card_img} />
                 <div className={scss.card_info}>
                     <h3 className={scss.card_info_title}>{title}</h3>
@@ -74,7 +74,7 @@ const NoticeCategoryItem = ({ pet }) => {
                         </li>
                         <li className={scss.card_info_item}>
                             <p className={scss.card_info_item_text}>Age:</p>
-                            <p>{birthday}</p>
+                            <p>{getAgePet}</p>
                         </li>
                         {category === "sell" && <li className={scss.card_info_item}>
                             <p className={scss.card_info_item_text}>Price:</p>
@@ -82,7 +82,7 @@ const NoticeCategoryItem = ({ pet }) => {
                         </li>}
                     </ul>
                     <div className={scss.box_btn}>
-                        <button type="button" className={scss.learn_more_btn} >Learn more</button>
+                        <button type="button" className={scss.learn_more_btn} onClick={showModal}>Learn more</button>
                         {isLogin && userId === owner && <button type="button" className={scss.delete_btn} onClick={() => btnDeleteNotice(_id)}>Delete
                             <SvgInsert id="icon-delete-notice"/>
                         </button>}
