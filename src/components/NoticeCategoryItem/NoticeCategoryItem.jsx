@@ -1,5 +1,5 @@
 import {useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { formatDistanceStrict } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -7,7 +7,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import scss from './notice-category-item.module.scss';
 // import noticeImage1 from 'images/cat1.webp';
 import SvgInsert from 'components/Svg/Svg';
-import { addNoticeToFavorite, deleteNotice } from 'redux/notices/notices-operation';
+import { addNoticeToFavorite, deleteNotice , searchNotice, getAllFavorites,} from 'redux/notices/notices-operation';
 // import { getFavoriteNotice } from "redux/notices/notices-selectors";
 import useAuth from 'shared/hooks/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
@@ -17,11 +17,14 @@ import { getUserId } from 'redux/selectors';
 const NoticeCategoryItem = ({ pet }) => {
 
     const { _id, image, title, breed, location, birthday, price, category, owner } = pet;
-
     const [modalShow, setModalShow] = useState(false);
-
-    const isLogin = useAuth();
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(searchNotice(_id));
+        dispatch(getAllFavorites());
+      }, [_id, dispatch]);
+    const isLogin = useAuth();
+    const noticeInfo = useSelector(state => state.notices.notice);
     // const user = useSelector(getUser);
     const userId = useSelector(getUserId);
     // console.log(user.userId)
@@ -58,7 +61,7 @@ const NoticeCategoryItem = ({ pet }) => {
             {modalShow && (
             <>
                 <Modal onClose={closeModal}>
-                    <ModalNotice id={_id} onClose={closeModal} />
+                    <ModalNotice id={_id} onClose={closeModal} notice={noticeInfo}/>
                 </Modal>
             </>
       )}
