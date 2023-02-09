@@ -89,7 +89,10 @@ export const authSlice = createSlice({
       store.isLoadingUser = false;
       store.user = payload;
       store.isLogin = true;
+
+      console.log(store.user);
     },
+
     [operations.current.rejected]: (store, { payload }) => {
       store.isLoadingUser = false;
       store.error = payload;
@@ -99,24 +102,24 @@ export const authSlice = createSlice({
     },
     [operations.updateUser.fulfilled]: (store, action) => {
       store.loading = false;
-      for (const key in action.payload){
+      for (const key in action.payload) {
         switch (key) {
           case 'name':
             store.user.name = action.payload.name;
             break;
-  
+
           case 'birthday':
             store.user.birthday = action.payload.birthday;
             break;
           case 'email':
             store.user.email = action.payload.email;
             break;
-  
+
           case 'phone':
             store.user.phone = action.payload.phone;
-            console.log(store.user.phone)
+            console.log(store.user.phone);
             break;
-  
+
           case 'city':
             store.user.city = action.payload.city;
             break;

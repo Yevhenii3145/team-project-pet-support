@@ -6,13 +6,14 @@ import operations from 'redux/operations';
 
 export function UserFormik() {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.user);
   useEffect(() => {
     dispatch(operations.current);
   }, [dispatch]);
-  const user = useSelector(state => state.auth.user);
+
   console.log(user)
   const date = user.birthday !== undefined ? new Date(user.birthday) : "00.00.0000";
-  const formatDate =user.birthday ? `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth()+1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1}.${date.getFullYear()}` : "00.00.0000"
+  const formatDate = user.birthday ? `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}.${date.getFullYear()}` : "00.00.0000"
   const [userName, setUserName] = useState(user.name);
   const [userEmail, setUserEmail] = useState(user.email);
   const [userBirthday, setUserBirthday] = useState(
@@ -89,143 +90,143 @@ export function UserFormik() {
 
   return (
     user && <>
-    <form className={scss.userDataForm_box} onSubmit={handleSubmit}>
-      <div className={scss.field_box}>
-        <label className={scss.userDataForm_label}>Name:</label>
-        {active && active === 'name' ? (
-          <input
-            onChange={handleChange}
-            type="name"
-            name="name"
-            value={userName}
-            className={scss.userDataForm_field}
-          />
-        ) : (
-          <input
-            onChange={handleChange}
-            type="name"
-            name="name"
-            value={userName}
-            disabled
-            className={scss.userDataForm_field}
-          />
-        )}
-        <button
-          className={scss.iconEdit_btn}
-          onClick={() => changeIcon('name')}
-        >
-          {active ? toggleIcon('name') : <SvgInsert id="icon-edit" />}
-        </button>
-      </div>
-      <div className={scss.field_box}>
-        <label className={scss.userDataForm_label}>Email:</label>
-        {active && active === 'email' ? (
-          <input
-            onChange={handleChange}
-            type="email"
-            name="email"
-            value={userEmail}
-            className={scss.userDataForm_field}
-          />
-        ) : (
-          <input
-            onChange={handleChange}
-            type="email"
-            name="email"
-            value={userEmail}
-            disabled
-            className={scss.userDataForm_field}
-          />
-        )}
-        <button
-          className={scss.iconEdit_btn}
-          onClick={() => changeIcon('email')}
-        >
-          {active ? toggleIcon('email') : <SvgInsert id="icon-edit" />}
-        </button>
-      </div>
-      <div className={scss.field_box}>
-        <label className={scss.userDataForm_label}>Birthday:</label>
-        {active && active === 'birthday' ? (
-          <input
-            onChange={handleChange}
-            type="text"
-            name="birthday"
-            value={userBirthday}
-            className={scss.userDataForm_field}
-          />
-        ) : (
-          <input
-            onChange={handleChange}
-            type="text"
-            name="birthday"
-            value={userBirthday}
-            disabled
-            className={scss.userDataForm_field}
-          />
-        )}
-        <button
-          className={scss.iconEdit_btn}
-          onClick={() => changeIcon('birthday')}
-        >
-          {active ? toggleIcon('birthday') : <SvgInsert id="icon-edit" />}
-        </button>
-      </div>
-      <div className={scss.field_box}>
-        <label className={scss.userDataForm_label}>Phone:</label>
-        {active && active === 'phone' ? (
-          <input
-            onChange={handleChange}
-            type="tel"
-            name="phone"
-            value={userPhone}
-            className={scss.userDataForm_field}
-          />
-        ) : (
-          <input
-            onChange={handleChange}
-            type="tel"
-            name="phone"
-            value={userPhone}
-            disabled
-            className={scss.userDataForm_field}
-          />
-        )}
-        <button
-          className={scss.iconEdit_btn}
-          onClick={() => changeIcon('phone')}
-        >
-          {active ? toggleIcon('phone') : <SvgInsert id="icon-edit" />}
-        </button>
-      </div>
-      <div className={scss.field_box}>
-        <label className={scss.userDataForm_label}>City:</label>
-        {active && active === 'city' ? (
-          <input
-            onChange={handleChange}
-            type="text"
-            name="city"
-            value={userCity}
-            className={scss.userDataForm_field}
-          />
-        ) : (
-          <input
-            onChange={handleChange}
-            type="text"
-            name="city"
-            value={userCity}
-            disabled
-            className={scss.userDataForm_field}
-          />
-        )}
-        <button
-          className={scss.iconEdit_btn}
-          onClick={() => changeIcon('city')}
-        >
-          {active ? toggleIcon('city') : <SvgInsert id="icon-edit" />}
-        </button>
-      </div>
-    </form>
+      <form className={scss.userDataForm_box} onSubmit={handleSubmit}>
+        <div className={scss.field_box}>
+          <label className={scss.userDataForm_label}>Name:</label>
+          {active && active === 'name' ? (
+            <input
+              onChange={handleChange}
+              type="name"
+              name="name"
+              value={userName}
+              className={scss.userDataForm_field}
+            />
+          ) : (
+            <input
+              onChange={handleChange}
+              type="name"
+              name="name"
+              value={userName}
+              disabled
+              className={scss.userDataForm_field}
+            />
+          )}
+          <button
+            className={scss.iconEdit_btn}
+            onClick={() => changeIcon('name')}
+          >
+            {active ? toggleIcon('name') : <SvgInsert id="icon-edit" />}
+          </button>
+        </div>
+        <div className={scss.field_box}>
+          <label className={scss.userDataForm_label}>Email:</label>
+          {active && active === 'email' ? (
+            <input
+              onChange={handleChange}
+              type="email"
+              name="email"
+              value={userEmail}
+              className={scss.userDataForm_field}
+            />
+          ) : (
+            <input
+              onChange={handleChange}
+              type="email"
+              name="email"
+              value={userEmail}
+              disabled
+              className={scss.userDataForm_field}
+            />
+          )}
+          <button
+            className={scss.iconEdit_btn}
+            onClick={() => changeIcon('email')}
+          >
+            {active ? toggleIcon('email') : <SvgInsert id="icon-edit" />}
+          </button>
+        </div>
+        <div className={scss.field_box}>
+          <label className={scss.userDataForm_label}>Birthday:</label>
+          {active && active === 'birthday' ? (
+            <input
+              onChange={handleChange}
+              type="text"
+              name="birthday"
+              value={userBirthday}
+              className={scss.userDataForm_field}
+            />
+          ) : (
+            <input
+              onChange={handleChange}
+              type="text"
+              name="birthday"
+              value={userBirthday}
+              disabled
+              className={scss.userDataForm_field}
+            />
+          )}
+          <button
+            className={scss.iconEdit_btn}
+            onClick={() => changeIcon('birthday')}
+          >
+            {active ? toggleIcon('birthday') : <SvgInsert id="icon-edit" />}
+          </button>
+        </div>
+        <div className={scss.field_box}>
+          <label className={scss.userDataForm_label}>Phone:</label>
+          {active && active === 'phone' ? (
+            <input
+              onChange={handleChange}
+              type="tel"
+              name="phone"
+              value={userPhone}
+              className={scss.userDataForm_field}
+            />
+          ) : (
+            <input
+              onChange={handleChange}
+              type="tel"
+              name="phone"
+              value={userPhone}
+              disabled
+              className={scss.userDataForm_field}
+            />
+          )}
+          <button
+            className={scss.iconEdit_btn}
+            onClick={() => changeIcon('phone')}
+          >
+            {active ? toggleIcon('phone') : <SvgInsert id="icon-edit" />}
+          </button>
+        </div>
+        <div className={scss.field_box}>
+          <label className={scss.userDataForm_label}>City:</label>
+          {active && active === 'city' ? (
+            <input
+              onChange={handleChange}
+              type="text"
+              name="city"
+              value={userCity}
+              className={scss.userDataForm_field}
+            />
+          ) : (
+            <input
+              onChange={handleChange}
+              type="text"
+              name="city"
+              value={userCity}
+              disabled
+              className={scss.userDataForm_field}
+            />
+          )}
+          <button
+            className={scss.iconEdit_btn}
+            onClick={() => changeIcon('city')}
+          >
+            {active ? toggleIcon('city') : <SvgInsert id="icon-edit" />}
+          </button>
+        </div>
+      </form>
     </>
   );
 }

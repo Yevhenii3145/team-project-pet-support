@@ -3,7 +3,7 @@ import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
 import AddsPetContent from '../ModalAddsPet/ModalAddPetPages/AddsPetContent';
 import { getPets, getUserId } from '../../redux/selectors';
 import operations from "../../redux/operations";
-import {  useEffect } from 'react';
+import { useEffect } from 'react';
 import Loader from 'components/Loader/Loader';
 import { useState } from 'react';
 import SvgInsert from "../Svg/Svg";
@@ -13,12 +13,12 @@ import scss from './pets-data.module.scss';
 function PetsData() {
   const [modalShow, setModalShow] = useState(false);
 
-  const pets = useSelector(getPets);
-  console.log(pets)
+  const pets = useSelector(state => state.user.pets);
+  console.log(pets);
 
   const UserId = useSelector(getUserId);
-   console.log(UserId)
-  
+  console.log(UserId)
+
   const loading = useSelector(state => state.user.loading);
   const dispatch = useDispatch();
 
@@ -26,8 +26,8 @@ function PetsData() {
     dispatch(operations.getUserPet())
   }, [dispatch]);
 
-console.log(pets)
-  
+  console.log(pets)
+
   const closeModal = () => {
     setModalShow(false);
   };
@@ -40,7 +40,7 @@ console.log(pets)
     <>
       {loading && <Loader />}
       <div className={scss.petsData_title_box}>
-          <h2 className={scss.petsData_title}>My pets:</h2>
+        <h2 className={scss.petsData_title}>My pets:</h2>
 
         <div className={scss.addPetModal_buttonBox}>
           <button
@@ -48,7 +48,7 @@ console.log(pets)
             type="button"
             onClick={showModal}
           >
-            Add pet <SvgInsert id='icon-add-pet'/>
+            Add pet <SvgInsert id='icon-add-pet' />
           </button>
         </div>
       </div>

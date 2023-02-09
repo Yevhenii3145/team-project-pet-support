@@ -6,19 +6,24 @@ import { useState } from 'react';
 import { RiSave3Fill } from 'react-icons/ri';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import operations from "redux/operations";
-import {  useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from "../../redux/selectors"
 
 export default function UserDataItem() {
+  const dispatch = useDispatch();
 
+  const user = useSelector(state => state.auth.user);
 
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
   const [avatar, setAvatar] = useState({});
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(defaultImg);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(user.avatarURL ? user.avatarURL : defaultImg);
   const [editPhoto, setEditPhoto] = useState(false);
 
-  const dispatch = useDispatch();
+  // const user = useSelector(getUser);
+  console.log(user);
+
+
 
   const handleSubmit = () => {
     const formData = new FormData();
@@ -31,11 +36,11 @@ export default function UserDataItem() {
     };
 
     axios
-      .patch('/avatar', formData, config)
+      .patch('/auth/update/avatar', formData, config)
       .then(res => {
         console.log(res);
       })
-      .catch(error => {});
+      .catch(error => { });
 
     setEditPhoto(false);
   };

@@ -33,7 +33,7 @@ const schemasForStepSecond = Yup.object().shape({
     'Is not correct format, must "City, Region"'
   ),
   number: Yup.string()
-  .matches(/[0-9]/, 'Field must contain only numbers!')
+    .matches(/[0-9]/, 'Field must contain only numbers!')
     .required()
     .min(12, 'Is not correct format, must 380xxxxxxxxx!')
     .max(12, 'Is not correct format, must 380xxxxxxxxx!'),
@@ -94,10 +94,10 @@ const AuthForm = () => {
   const handleSubmitForLogin = (values, actions) => {
     console.log("values", values);
     user = {
-        email: values.email,
-        password: values.password,
-        
-      };
+      email: values.email,
+      password: values.password,
+
+    };
     console.log(user);
     actions.resetForm();
     return onLogin(user)
