@@ -18,6 +18,14 @@ export function UserFormik() {
   const [userPhone, setUserPhone] = useState('');
   const [userCity, setUserCity] = useState('');
 
+  //const date = userInStore.birthday !== undefined ? new Date(userInStore.birthday) : "00.00.0000";
+  //const formatDate = userInStore.birthday ? `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}.${date.getFullYear()}` : "00.00.0000"
+
+  const formatDate = (date) =>{
+    const dateFormat = new Date(date)
+    return `${dateFormat.getDate() < 10 ? `0${dateFormat.getDate()}` : dateFormat.getDate()}.${dateFormat.getMonth() + 1 < 10 ? `0${dateFormat.getMonth() + 1}` : dateFormat.getMonth() + 1}.${dateFormat.getFullYear()}`
+  }
+
   useEffect(() => {
     if (userInStore.token !== undefined) {
       fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
@@ -31,7 +39,7 @@ export function UserFormik() {
           setUser(data);
           setUserName(data.name);
           setUserEmail(data.email);
-          setUserBirthday('00.00.0000');
+          setUserBirthday(data.birthday !== undefined ? formatDate(data.birthday) : '00.00.0000');
           setUserPhone(data.phone);
           setUserCity(data.city);
         })
@@ -41,31 +49,12 @@ export function UserFormik() {
       setUser(userInStore);
       setUserName(userInStore.name);
       setUserEmail(userInStore.email);
-      setUserBirthday(
-        userInStore.birthday !== undefined ? userInStore.birthday : '00.00.0000'
-      );
+      setUserBirthday(userInStore.birthday !== undefined ? formatDate(userInStore.birthday) : "00.00.0000");
       setUserPhone(userInStore.phone);
       setUserCity(userInStore.city);
     }
   }, [userInStore]);
-  //const user = userInStore.token !== undefined ? userInPromises : userInStore;
-  // const userAfterLogin = useSelector(state => state.auth.user);
-  // const token = userAfterLogin.token;
-  // const [userInPromises, setUserInPromises] = useState(undefined)
-  // console.log(token)
 
-  // const indentificateUser = async () =>{
-  //     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  //     const response = await axios.get('/users/current');
-  //     return setUserInPromises(response.data);
-  // }
-  // useEffect(()=>{
-  //   indentificateUser()
-  // }, [])
-  // const user = token === undefined ? userAfterLogin : userInPromises;
-  //console.log(user)
-  //const date = user.birthday !== undefined ? new Date(user.birthday) : "00.00.0000";
-  //const formatDate = user.birthday ? `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}.${date.getFullYear()}` : "00.00.0000"
 
   const handleChange = e => {
     switch (e.currentTarget.name) {
@@ -115,54 +104,21 @@ export function UserFormik() {
     e.preventDefault();
     const form = e.currentTarget;
     const { name, email, birthday, phone, city } = form.elements;
-    console.log(e.currentTarget)
-    console.log(e.target)
-    // console.log(form.elements.value)
-    if(e.currentTarget.elements === 'name'){
-      console.log("name")
+    if (name.value !== user.name) {
+      dispatch(operations.updateUser({ name: name.value }));
     }
-
-    switch (form){
-      case form.elements.name:
-        console.log("name")
-        dispatch(operations.updateUser({ name: name.value }));
-        break;
-
-      case email:
-        dispatch(operations.updateUser({ name: name.value }));
-        break;
-
-      case birthday:
-        dispatch(operations.updateUser({ birthday: birthday.value }));
-        break
-
-      case phone:
-        dispatch(operations.updateUser({ phone: phone.value }));
-        break;
-
-      case city:
-        dispatch(operations.updateUser({ city: city.value }));
-        break;
-
-        default:
-          return;
+    if (email.value !== user.email) {
+      dispatch(operations.updateUser({ email: email.value }));
     }
-    // if (name.value !== userName) {
-    //   dispatch(operations.updateUser({ name: name.value }));
-    // }
-    // if (email.value !== userEmail) {
-    //   dispatch(operations.updateUser({ email: email.value }));
-    // }
-    // if (birthday.value !== user.birthday && birthday.value !== '00.00.0000') {
-    //   console.log(userBirthday);
-    //   dispatch(operations.updateUser({ birthday: birthday.value }));
-    // }
-    // if (phone.value !== userPhone) {
-    //   dispatch(operations.updateUser({ phone: phone.value }));
-    // }
-    // if (city.value !== userCity) {
-    //   dispatch(operations.updateUser({ city: city.value }));
-    // }
+    if (userInStore.birthday && userInStore.birthday !== birthday.value) {
+      dispatch(operations.updateUser({ birthday: `"${birthday.value}"` }));
+    }
+    if (phone.value !== user.phone) {
+      dispatch(operations.updateUser({ phone: phone.value }));
+    }
+    if (city.value !== user.city) {
+      dispatch(operations.updateUser({ city: city.value }));
+    }
   };
 
   return (
