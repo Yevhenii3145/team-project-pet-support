@@ -14,6 +14,11 @@ export const addNoticeToFavorite = async (noticeId) => {
     return data;
 }
 
+// export const getNoticesFavorite = async () => {
+//     const data = await axios.get("/notices/favorite");
+//     return data;
+// }
+
 export const deleteNotice = async (noticeId) => {
     const data = await axios.delete(`/notices/${noticeId}`);
     return data;

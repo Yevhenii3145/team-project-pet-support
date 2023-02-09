@@ -9,6 +9,7 @@ const initialState = {
     isNotisFavorite: false,
     noticeId: "",
     notice: {},
+    favoriteNotices: null
 }
 
 const noticesSlice = createSlice({
@@ -30,9 +31,9 @@ const noticesSlice = createSlice({
         [addNoticeToFavorite.pending]: store => {
             store.loading = true;
         },
-        [addNoticeToFavorite.fulfilled]: (store) => {
+        [addNoticeToFavorite.fulfilled]: (store, action) => {
             store.loading = false;
-            store.isNotisFavorite === false ? store.isNotisFavorite = true : store.isNotisFavorite = false;
+            store.isNotisFavorite = store.items.some(item => item._id === action.payload)
         },
         [addNoticeToFavorite.rejected]: (store, action) => {
             store.loading = false;
@@ -45,7 +46,7 @@ const noticesSlice = createSlice({
         [getAllFavorites.fulfilled]: (state, action) => {
             state.loading = false;
             state.favoriteNotices = action.payload;
-            console.log(state.favoriteNotices)
+            console.log(action.payload)
           },
         [getAllFavorites.rejected]: (state, action) => {
             state.loading = false;

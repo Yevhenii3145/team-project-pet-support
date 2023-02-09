@@ -30,6 +30,18 @@ export const addNoticeToFavorite = createAsyncThunk(
   }
 );
 
+// export const getNoticesFavorite = createAsyncThunk(
+//   'notices/fetchFavoriteNotices',
+//   async (_, thunkAPI) => {
+//     try {
+//       const data = await api.getNoticesFavorite();
+//       return data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// );
+
 export const deleteNotice = createAsyncThunk(
   'notices/deleteNotice',
   async (noticeId, thunkAPI) => {
