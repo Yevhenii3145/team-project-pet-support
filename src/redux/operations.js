@@ -126,27 +126,23 @@ const updateUserAvatar = createAsyncThunk(
 
     try {
       const response = await axios.patch(`auth/update/avatar`, formData);
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     } catch (error) {
-      return thunkAPI.thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-const getUserPet = createAsyncThunk('users/pets', async (_, { thunkAPI }) => {
-  const state = thunkAPI.getState();
-  const persistedToken = state.auth.token;
-  // const id = state.auth.userId;
-  //  console.log(id)
-
+const getUserPet = createAsyncThunk('users/pets', async (_, thunkAPI) => {
   try {
-    setAuthHeader(persistedToken);
-    const response = await axios.get('users/pets');
-    console.log(response.data);
-    return response;
+    const response = await axios.get('/users/pets');
+    // console.log('response.data', response.data);
+    return response.data;
   } catch (error) {
-    return thunkAPI.rthunkAPIejectWithValue(error.message);
+    // console.log(error);
+    // console.log(error.message);
+    return thunkAPI.rejectWithValue(error.message);
   }
 });
 
