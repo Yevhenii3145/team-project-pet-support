@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import * as api from "../shared/api/userApi";
 
 const { REACT_APP_BASE_URL } = process.env;
 console.log(REACT_APP_BASE_URL);
@@ -137,28 +138,43 @@ const updateUserAvatar = createAsyncThunk(
 const getUserPet = createAsyncThunk('users/pets', async (_, thunkAPI) => {
   try {
     const response = await axios.get('/users/pets');
-    // console.log('response.data', response.data);
     return response.data;
   } catch (error) {
-    // console.log(error);
-    // console.log(error.message);
     return thunkAPI.rejectWithValue(error.message);
   }
 });
 
-const deletePet = createAsyncThunk(
-  'users/{petId}',
-  async (petId, { rejectWithValue }) => {
-    try {
-      const response = await axios.post('users/{petId}', petId);
-      console.log(response);
+// const deletePet = createAsyncThunk(
+//   'users/{petId}',
+//   async (petId, { thunkAPI }) => {
+//     try {
 
-      return response;
+//       console.log("response");
+//       const response = await axios.delete(`/users/${petId}`, petId);
+//       console.log("response");
+
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+export const deletePet  = createAsyncThunk(
+  'users/{petId}',
+  async (petId, thunkAPI) => {
+    try {
+
+      await api.deleteUserPet(petId);
+      return petId;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
+
+
+
 
 const updateUser = createAsyncThunk('user/update', async (data, thunkAPI) => {
   try {
