@@ -2,47 +2,69 @@ import scss from './user-data-item.module.scss';
 import { UserFormik } from './UserFormik';
 import SvgInsert from '../Svg/Svg';
 import axios from 'axios';
-import { useState } from 'react';
 import { RiSave3Fill } from 'react-icons/ri';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import operations from "redux/operations";
 import { useDispatch, useSelector } from 'react-redux';
 
 
+
+
 export default function UserDataItem() {
   const dispatch = useDispatch();
+  // const [user, setUser] = useState({});
+  // const userInStore = useSelector(state => state.auth.user);
 
-  const user = useSelector(state => state.auth.user);
 
+  const user= useSelector(state => state.auth.user);
+  
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
-  const [avatar, setAvatar] = useState({});
+  const [avatarURL, setAvatar] = useState({});
+
   const [imagePreviewUrl, setImagePreviewUrl] = useState(user.avatarURL ? user.avatarURL : defaultImg);
   const [editPhoto, setEditPhoto] = useState(false);
+    
 
-  // const user = useSelector(getUser);
-  console.log(user);
+  useEffect(() => {
+    dispatch(operations.current())
+  }, [dispatch]);
 
-
-
+  //   if (userInStore.token !== undefined) {
+  //     fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: `Bearer ${userInStore.token}`,
+  //       },
+  //     })
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         setUser(data);
+  //         setAvatar(data.avatarURL);
+  //         console.log('avatar', data.avatarURL)
+  //       })
+  //       .catch(error => console.log(error));
+  //     return;
+  //   } else {
+  //     setUser(userInStore);
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //     setAvatar(userInStore.avatarUR);
+  //     setImagePreviewUrl(reader.result);
+  //     reader.readAsDataURL(userInStore.avatarUR);
+  //     setEditPhoto(true);
+  //   };
+      
+  //     console.log('avatar', userInStore.avatarURL)
+  //   }
+  // }, [userInStore]);
+    
+    
+    
+    
   const handleSubmit = () => {
     const formData = new FormData();
-    console.log(avatar);
-    formData.append('file', avatar);
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-
-    axios
-      .patch('/auth/update/avatar', formData, config)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(error => { });
-
-    setEditPhoto(false);
+    formData.append('file', avatarURL);
   };
 
   const handleImageChange = e => {
@@ -62,6 +84,7 @@ export default function UserDataItem() {
     };
     reader.readAsDataURL(file);
     dispatch(operations.updateUserAvatar(file));
+    console.log('avatar', avatarURL)
 
     return;
   };
@@ -103,19 +126,9 @@ export default function UserDataItem() {
           )}
         </div>
       </div>
-      {/* <div className={scss.userDataForm_box}> */}
       <UserFormik />
-      {/* </div> */}
     </div>
   );
 }
 
-// const elements = contacts.map(({ name, number, id }) => {
-//     return <li className={css.listItem} key={id}>{name}: {number}
-//         <span className={css.deleteItem} onClick={() => onDeleteContact(id)}>Delete</span></li>
-// })
-//     return (
-//        <>
-//         <ol>{elements}</ol>
-//     </>
-//     )
+

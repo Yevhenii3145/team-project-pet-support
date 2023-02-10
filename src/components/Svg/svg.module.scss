@@ -132,10 +132,25 @@ border: #111;
   border: 1px solid $accentColor;
   border-radius: 40px;
 
+  &:hover, &:focus {
+    background-color:rgba($color: #FF6101, $alpha: 0.15);
+    border: 2px solid $accentColor;
+  }
+  
+
   @media screen and (min-width: 768px) {
     display: inline-block;
     margin: 0 auto 0;
   }
 }
 
+.iconAccount {
+  fill: $lightColor;
+}
 
+.iconDelete {
+  &:hover,
+  &:focus {
+    fill: $accentColor;
+}
+}
