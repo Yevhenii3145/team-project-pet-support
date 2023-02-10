@@ -61,13 +61,12 @@ const userSlice = createSlice({
         [operations.deletePet.pending]: (state) => {
             state.loading = false;
         },
-        [operations.deletePet.fulfilled]: (state, { payload }) => {
+        [operations.deletePet.fulfilled]: (state, action) => {
             state.loading = false;
-            state.data = state.data.filter(data => data.petId !== payload);
-            Report.warning(
+            state.pets = state.pets.filter(pet => pet._id !== action.payload);
+                Report.warning(
                 'Are you sure you want to delete your pet?!'
             );
-            
         },
         [operations.deletePet.rejected]: (state, {payload}) => {
             state.loading = false;

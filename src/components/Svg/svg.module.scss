@@ -139,3 +139,9 @@ border: #111;
 }
 
 
+.iconDelete {
+  &:hover,
+  &:focus {
+    fill: $accentColor;
+}
+}

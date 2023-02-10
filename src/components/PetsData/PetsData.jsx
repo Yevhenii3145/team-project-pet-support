@@ -14,10 +14,6 @@ function PetsData() {
   const [modalShow, setModalShow] = useState(false);
 
   const pets = useSelector(state => state.user.pets);
-  console.log(pets);
-
-  // const UserId = useSelector(getUserId);
-  // console.log(UserId)
 
   const loading = useSelector(state => state.user.loading);
   const dispatch = useDispatch();
@@ -25,8 +21,6 @@ function PetsData() {
   useEffect(() => {
     dispatch(operations.getUserPet())
   }, [dispatch]);
-
-  console.log(pets)
 
   const closeModal = () => {
     setModalShow(false);

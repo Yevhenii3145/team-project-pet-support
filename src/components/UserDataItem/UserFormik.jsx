@@ -121,6 +121,10 @@ export function UserFormik() {
     }
   };
 
+//   const getClassActive = ({ isActive }) => {
+//     return isActive ? `${css.link} ${css.active}` : `${css.link}`;
+// }
+
   return (
     <>
       <form className={scss.userDataForm_box} onSubmit={handleSubmit}>
