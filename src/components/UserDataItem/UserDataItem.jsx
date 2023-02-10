@@ -7,7 +7,7 @@ import { RiSave3Fill } from 'react-icons/ri';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import operations from "redux/operations";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from "../../redux/selectors"
+
 
 export default function UserDataItem() {
   const dispatch = useDispatch();
