@@ -18,9 +18,7 @@ export function UserFormik() {
   const [userPhone, setUserPhone] = useState('');
   const [userCity, setUserCity] = useState('');
 
-  //const date = userInStore.birthday !== undefined ? new Date(userInStore.birthday) : "00.00.0000";
-  //const formatDate = userInStore.birthday ? `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}.${date.getFullYear()}` : "00.00.0000"
-
+  
   const formatDate = (date) =>{
     const dateFormat = new Date(date)
     return `${dateFormat.getDate() < 10 ? `0${dateFormat.getDate()}` : dateFormat.getDate()}.${dateFormat.getMonth() + 1 < 10 ? `0${dateFormat.getMonth() + 1}` : dateFormat.getMonth() + 1}.${dateFormat.getFullYear()}`
@@ -121,9 +119,6 @@ export function UserFormik() {
     }
   };
 
-//   const getClassActive = ({ isActive }) => {
-//     return isActive ? `${css.link} ${css.active}` : `${css.link}`;
-// }
 
   return (
     <>

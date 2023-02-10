@@ -33,7 +33,7 @@ export function PetsList({ pets }) {
       </li>
     );
   });
-// setUserBirthday(userInStore.birthday !== undefined ? formatDate(userInStore.birthday) : "00.00.0000");
+
   return (
     <>
       <ol style={{ width: '100%', padding: '0' }}>{elements}</ol>
