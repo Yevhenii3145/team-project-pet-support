@@ -10,4 +10,14 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+
+    &:first-child {
+        height: 42px;
+    }
+
+    @media screen and (min-width: 768px) {
+        &:first-child {
+            height: 48px;
+        }
+    }
 }
