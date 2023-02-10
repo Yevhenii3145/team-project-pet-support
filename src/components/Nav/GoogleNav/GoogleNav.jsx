@@ -11,7 +11,7 @@ const GoogleAuth = () => {
     const dispatch = useDispatch();
 
     return (
-        <>
+        <div className={scss.googleBox}>
         <p className={scss.googleDecs}>Or sign in with</p>
         {isActive === true ? <a href={`${REACT_APP_BASE_URL}/api/auth/google`} className={scss.googleLink} onClick={()=>dispatch(setMenuActive(!isActive))}>
         <SvgInsert id="icon-google"/>
@@ -21,7 +21,7 @@ const GoogleAuth = () => {
         <SvgInsert id="icon-google"/>
         <p className={scss.googleDecs}>Google</p>
         </a>}
-        </>
+        </div>
     )
 }
 

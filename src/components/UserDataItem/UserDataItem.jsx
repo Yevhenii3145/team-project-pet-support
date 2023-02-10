@@ -6,10 +6,9 @@ import { RiSave3Fill } from 'react-icons/ri';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import operations from "redux/operations";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useState} from 'react';
-const { REACT_APP_BASE_URL } = process.env;
-axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
+
+
+
 
 export default function UserDataItem() {
   const dispatch = useDispatch();
