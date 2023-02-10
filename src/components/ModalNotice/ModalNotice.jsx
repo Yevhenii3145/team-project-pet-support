@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   getAllFavorites,
   addNoticeToFavorite,
+  searchNotice
 } from '../../redux/notices/notices-operation';
 import Loader from 'components/Loader/Loader';
 import { useEffect, useState } from 'react';
@@ -13,7 +14,10 @@ const ModalNotice = ({ id, onClose, notice }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllFavorites());
-  }, [dispatch]);
+    dispatch(searchNotice(id));
+  }, [dispatch, id]);
+
+  console.log(id)
 
   const loading = useSelector(state => state.notices.loading);
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
