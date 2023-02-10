@@ -62,6 +62,12 @@ margin: 0 auto 60px;
 }
 
 .linkWrapper {
+    &>  a[aria-current] {
+        font-weight: 700;
+        color: #F59256;
+        text-decoration: underline;
+    }
+
     @media screen and (min-width: 1280px) {
         display: flex;
         position: fixed;
@@ -109,10 +115,6 @@ cursor: pointer;
 
 }
 
-a[aria-current] {
-    font-weight: 700;
-    color: #F59256;
-    text-decoration: underline;
-}
+
 
 
