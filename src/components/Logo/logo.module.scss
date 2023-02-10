@@ -21,3 +21,13 @@
         }
     }
 }
+
+.logo {
+    padding: 0;
+    margin: 0;
+    height: 42px;
+
+    @media screen and (min-width: 768px) {
+        height: 48px;
+    }
+}
