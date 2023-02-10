@@ -22,9 +22,9 @@ const NoticeCategoryItem = ({ pet }) => {
     const localStorageUserId = localStorage.getItem("userId");
 
     useEffect(() => {
-        dispatch(searchNotice(_id));
+        dispatch(searchNotice(pet._id));
         dispatch(getAllFavorites());
-      }, [_id, dispatch]);
+      }, [pet._id, dispatch]);
     const isLogin = useAuth();
     const noticeInfo = useSelector(state => state.notices.notice);
     // const user = useSelector(getUser);
@@ -63,11 +63,11 @@ const NoticeCategoryItem = ({ pet }) => {
             {modalShow && (
             <>
                 <Modal onClose={closeModal}>
-                    <ModalNotice id={_id} onClose={closeModal} notice={noticeInfo}/>
+                    <ModalNotice id={pet._id} onClose={closeModal} notice={noticeInfo}/>
                 </Modal>
             </>
       )}
-            <li className={scss.card_item} >
+            <li className={scss.card_item}>
                 <img src={image} alt="pet" className={scss.card_img} />
                 <div className={scss.card_info}>
                     <h3 className={scss.card_info_title}>{title}</h3>
