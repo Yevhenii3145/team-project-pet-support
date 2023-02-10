@@ -2,6 +2,7 @@ import scss from './auth-form.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import operations from '../../redux/operations';
+import GoogleAuth from "../Nav/GoogleNav/GoogleNav"
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Loader from 'components/Loader/Loader';
@@ -160,6 +161,7 @@ const AuthForm = () => {
                 >
                   Next
                 </button>
+                <GoogleAuth/>
               </Form>
             </Formik>
           ) : (
@@ -213,7 +215,8 @@ const AuthForm = () => {
                   type="submit"
                 >
                   Register
-                </button>
+                  </button>
+                <GoogleAuth/>
               </Form>
             </Formik>
           )}
@@ -261,6 +264,7 @@ const AuthForm = () => {
               >
                 Login
               </button>
+              <GoogleAuth/>
             </Form>
           </Formik>
           <p className={scss.form__description}>
