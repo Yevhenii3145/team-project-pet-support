@@ -12,7 +12,7 @@ const dispatch = useDispatch();
 
     return (
         <div className={scss.logoWrapper}>
-        <NavLink to="/">
+        <NavLink to="/" className={scss.logo}>
             <SvgInsert id="icon-logo" />
         </NavLink>
             {isActive === false
