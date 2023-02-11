@@ -1,11 +1,11 @@
+import { Outlet } from "react-router-dom";
+
 import scss from "./notices-page.module.scss";
 import container from "helpers/container.module.scss";
 import NoticesCategoriesNav from "components/NoticesCategoriesNav/NoticesCategoriesNav";
 
-// import NoticeCategoryItem from "components/NoticeCategoryItem/NoticeCategoryItem";
 import NoticesSearch from "components/NoticesSearch/NoticesSearch";
 import AddNoticeButton from "components/AddNoticeButton/AddNoticeButton";
-import NoticesCategoriesList from "components/NoticesCategoriesList/NoticesCategoriesList";
 
 
 const NoticesPage = () => {
@@ -16,7 +16,7 @@ const NoticesPage = () => {
                 <NoticesSearch/>
                 <AddNoticeButton/>
                 <NoticesCategoriesNav />
-                <NoticesCategoriesList />
+                <Outlet />
             </div>
         </main>
     )

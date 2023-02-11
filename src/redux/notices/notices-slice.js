@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchCategoryNotices, addNoticeToFavorite, deleteNotice, searchNotice, getAllFavorites } from "./notices-operation";
 import { Report } from 'notiflix/build/notiflix-report-aio';
+import operations from 'redux/operations';
 
 const initialState = {
     items: [],
@@ -46,7 +47,6 @@ const noticesSlice = createSlice({
         [getAllFavorites.fulfilled]: (state, action) => {
             state.loading = false;
             state.favoriteNotices = action.payload;
-            console.log(action.payload)
           },
         [getAllFavorites.rejected]: (state, action) => {
             state.loading = false;
@@ -82,6 +82,18 @@ const noticesSlice = createSlice({
               'Okay'
             );
           },
+          
+        [operations.addNotice.pending]: store => {
+            store.loading = true;
+        },
+        [operations.addNotice.fulfilled]: (store, action) => {
+            store.loading = false;
+            store.items.unshift(action.payload);
+        },
+        [operations.addNotice.rejected]: (store, action) => {
+            store.loading = false;
+            store.error = action.payload;
+        },
     }
 })
 
