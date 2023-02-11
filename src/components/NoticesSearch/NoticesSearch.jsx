@@ -1,7 +1,7 @@
 import scss from './notices-search.module.scss';
 import SvgInsert from 'components/Svg/Svg';
 import { useState } from 'react';
-// import axios from "axios";
+//  import axios from "axios";
 // import { format } from 'date-fns';
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getSearch } from '../../redux/notices/notices-operation';
