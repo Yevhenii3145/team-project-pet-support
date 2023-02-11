@@ -4,6 +4,7 @@ import EllipsisText from 'react-ellipsis-text';
 import scss from './our-friends-page-item.module.scss';
 import OurFriendsPageItemPopup from './OurFriendsPageItemPopup/OurFriendsPageItemPopup';
 import defaultImg from '../../../images/default_logo_friends.jpg';
+import { format } from 'date-fns';
 
 const OurFriendsPageItem = ({
   title,
@@ -32,6 +33,26 @@ const OurFriendsPageItem = ({
   const normalPhone = phone !== '--------------------------';
   const phoneLink = `tel:${phone}`;
   const normalFoto = foto !== null;
+
+  function handleTime() {
+    if (normalTime) {
+      const startTime = start.split(':');
+      // minutes are worth 60 seconds. Hours are worth 60 minutes.
+      const secondsStart = startTime[0] * 60 * 60 + startTime[1] * 60;
+
+      const endTime = end.split(':');
+      const secondsEnd = endTime[0] * 60 * 60 + endTime[1] * 60;
+      const timeNow = new Date();
+      const nowH = String(timeNow).slice(16, 18);
+      const nowM = String(timeNow).slice(19, 21);
+      const nowS = String(timeNow).slice(22, 24);
+      const secondsNow = nowH * 60 * 60 + nowM * 60 + nowS;
+      if (secondsNow >= secondsStart && secondsNow <= secondsEnd) {
+        return 'open';
+      }
+      return 'close';
+    }
+  }
 
   return (
     <li className={scss.card_item} onClick={closeModal}>
@@ -71,16 +92,20 @@ const OurFriendsPageItem = ({
           >
             <p>
               Time: <br />
-              <span
-                className={normalTime ? '' : scss.empty_data}
-                onClick={() => {
-                  normalTime
-                    ? setPopupActive(!popupActive)
-                    : setPopupActive(popupActive);
-                }}
-              >
-                {start}-{end}
-              </span>
+              {normalTime && (
+                <span
+                  onClick={() => {
+                    setPopupActive(!popupActive);
+                  }}
+                >
+                  {start}-{end} ( {handleTime()} )
+                </span>
+              )}
+              {!normalTime && (
+                <span className={scss.empty_data}>
+                  {start}-{end}
+                </span>
+              )}
             </p>
             <OurFriendsPageItemPopup
               active={popupActive}
