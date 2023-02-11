@@ -2,6 +2,7 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Yevhenii3145.github.io/team-project-pet-support/",
   "dependencies": {
     "@chakra-ui/react": "^2.4.9",
     "@reduxjs/toolkit": "^1.9.2",
