@@ -10,7 +10,8 @@ const initialState = {
     loading: false,
     userId: "",
     pets: [],
-    token: null
+    token: null,
+    avatarURL: null,
 }
 
 const userSlice = createSlice({

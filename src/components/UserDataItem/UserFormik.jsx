@@ -38,7 +38,7 @@ export function UserFormik() {
           setUserName(data.name);
           setUserEmail(data.email);
           setUserBirthday(data.birthday !== undefined ? formatDate(data.birthday) : '00.00.0000');
-          console.log("data.birt", data.birthday)
+  
           setUserPhone(data.phone);
           setUserCity(data.city);
         })
@@ -132,7 +132,7 @@ export function UserFormik() {
               type="name"
               name="name"
               value={userName}
-              className={scss.userDataForm_field_active}
+              className={`{scss.userDataForm_field_active}`}
             />
           ) : (
             <input

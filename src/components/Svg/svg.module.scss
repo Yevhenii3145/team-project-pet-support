@@ -77,12 +77,16 @@
 
 
 .iconAddPet{
+  box-sizing: content-box;
+  background-color: $accentColor;
+  border-radius: 50%;
+
   @media (min-width: 768px) {
-    background-color: $accentColor;
+    
     padding: 7px;
-    border-radius: 50px;
     margin-left: 12px;
     cursor: pointer;
+    
   }
 }
 

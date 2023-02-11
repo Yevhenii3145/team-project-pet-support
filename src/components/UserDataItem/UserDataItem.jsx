@@ -2,17 +2,22 @@ import scss from './user-data-item.module.scss';
 import { UserFormik } from './UserFormik';
 import SvgInsert from '../Svg/Svg';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { useSelector, useDispatch } from 'react-redux';
+import operations from 'redux/operations';
 
 export default function UserDataItem() {
   
   const user = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
+  console.log(user)
+  
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
   const [avatarURL, setAvatar] = useState({});
   const [imagePreviewUrl, setImagePreviewUrl] = useState(user.avatarURL ? user.avatarURL : defaultImg);
-
+console.log(user.avatarURL)
 
 
   const handleImageChange = e => {
@@ -31,6 +36,7 @@ export default function UserDataItem() {
 
     };
     reader.readAsDataURL(file);
+    dispatch(operations.updateUserAvatar(file));
     return;
   };
 

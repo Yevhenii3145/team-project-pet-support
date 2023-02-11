@@ -9,6 +9,10 @@
     border-radius: 20px;
     padding-top: 16px;
 
+    &:not(:last-child) {
+    margin-bottom: 20px;
+}
+
 @media screen and (min-width: 768px) {
     display: flex;
     padding: 20px;
@@ -54,6 +58,7 @@
     padding-bottom: 40px;
     padding-left: 20px;
     position: relative;
+    width: 235px;
     // z-index: 6;
 
 @media screen and (min-width: 768px) {
@@ -67,8 +72,11 @@
 }
 }
 
-.petsList_field{
+.petsList_field {
     text-align: left;
+    white-space: pre-wrap;
+    text-align: justify;
+    hyphens: auto;
     color: #111111;
     margin-top: 10px;
     background-color: $lightColor;
@@ -77,6 +85,15 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 1.33;
+    
+
+@media screen and (min-width: 768px) {
+    width: 471px;
+  }
+
+@media screen and (min-width: 1280px) {
+    width: 580px;
+  }
 }
 
 .petsList_button {
