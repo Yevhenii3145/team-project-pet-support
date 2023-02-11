@@ -1,71 +1,55 @@
 import scss from './user-data-item.module.scss';
 import { UserFormik } from './UserFormik';
 import SvgInsert from '../Svg/Svg';
-import axios from 'axios';
-import { RiSave3Fill } from 'react-icons/ri';
+import { useState, useEffect } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import operations from "redux/operations";
 import { useDispatch, useSelector } from 'react-redux';
+  import axios from 'axios';
 
+const { REACT_APP_BASE_URL } = process.env;
+axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
 
 
 export default function UserDataItem() {
   const dispatch = useDispatch();
-  // const [user, setUser] = useState({});
-  // const userInStore = useSelector(state => state.auth.user);
+  const [user, setUser] = useState({});
+  const userInStore = useSelector(state => state.auth.user);
 
 
-  const user= useSelector(state => state.auth.user);
+  // const user= useSelector(state => state.auth.user);
   
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
   const [avatarURL, setAvatar] = useState({});
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState(user.avatarURL ? user.avatarURL : defaultImg);
-  const [editPhoto, setEditPhoto] = useState(false);
+
     
 
   useEffect(() => {
-    dispatch(operations.current())
-  }, [dispatch]);
+    if (userInStore.token !== undefined) {
+      fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${userInStore.token}`,
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+      setUser(data);
+      setAvatar(data.avatarURL);
+      console.log('avatar', data.avatarURL)
+        })
+        .catch(error => console.log(error));
+      return;
+    } else {
+      setUser(userInStore);
+      console.log('avatar', userInStore.avatarURL)
 
-  //   if (userInStore.token !== undefined) {
-  //     fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
-  //       method: 'GET',
-  //       headers: {
-  //         Authorization: `Bearer ${userInStore.token}`,
-  //       },
-  //     })
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         setUser(data);
-  //         setAvatar(data.avatarURL);
-  //         console.log('avatar', data.avatarURL)
-  //       })
-  //       .catch(error => console.log(error));
-  //     return;
-  //   } else {
-  //     setUser(userInStore);
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //     setAvatar(userInStore.avatarUR);
-  //     setImagePreviewUrl(reader.result);
-  //     reader.readAsDataURL(userInStore.avatarUR);
-  //     setEditPhoto(true);
-  //   };
-      
-  //     console.log('avatar', userInStore.avatarURL)
-  //   }
-  // }, [userInStore]);
-    
-    
-    
-    
-  const handleSubmit = () => {
-    const formData = new FormData();
-    formData.append('file', avatarURL);
-  };
+     }
+  }, [userInStore]);
 
   const handleImageChange = e => {
     const reader = new FileReader();
@@ -80,11 +64,10 @@ export default function UserDataItem() {
     reader.onloadend = () => {
       setAvatar(file);
       setImagePreviewUrl(reader.result);
-      setEditPhoto(true);
     };
     reader.readAsDataURL(file);
     dispatch(operations.updateUserAvatar(file));
-    console.log('avatar', avatarURL)
+  
 
     return;
   };
@@ -98,7 +81,6 @@ export default function UserDataItem() {
           alt=""
         />
         <div className={scss.userItem_box_btnPhoto}>
-          {!editPhoto && (
             <>
               <input
                 className={scss.userItem_input_edit_photo}
@@ -113,17 +95,6 @@ export default function UserDataItem() {
                 Edit photo
               </label>
             </>
-          )}
-          {editPhoto && (
-            <button
-              className={scss.userItem_button}
-              type="submit"
-              onClick={() => handleSubmit()}
-            >
-              <RiSave3Fill size={20} className={scss.userItem_button_icon} />
-              Save edit
-            </button>
-          )}
         </div>
       </div>
       <UserFormik />
