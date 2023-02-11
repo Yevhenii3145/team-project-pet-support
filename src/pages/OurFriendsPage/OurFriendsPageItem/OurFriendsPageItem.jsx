@@ -19,14 +19,6 @@ const OurFriendsPageItem = ({
   day,
 }) => {
   const [popupActive, setPopupActive] = useState(false);
-  // const [skrin, setSkrin] = useState(
-  //     window.matchMedia('(min-width: 768px)').skrin
-  // );
-  // useEffect(() => {
-  //     window
-  //         .matchMedia('(min-width: 768px)')
-  //         .addEventListener('change', e => setSkrin(e.skrin));
-  // }, [skrin, setSkrin]);
 
   const closeModal = () => {
     if (popupActive) {
@@ -34,6 +26,7 @@ const OurFriendsPageItem = ({
     }
   };
 
+  const normalTime = start !== '------------';
   const normalEmail = email !== '-------------------------';
   const normalAddress = address !== '-------------------------';
   const normalPhone = phone !== '--------------------------';
@@ -71,14 +64,19 @@ const OurFriendsPageItem = ({
           <div
             className={scss.orient_popup}
             onClick={() => {
-              setPopupActive(!popupActive);
+              normalTime
+                ? setPopupActive(!popupActive)
+                : setPopupActive(popupActive);
             }}
           >
             <p>
               Time: <br />
               <span
+                className={normalTime ? '' : scss.empty_data}
                 onClick={() => {
-                  setPopupActive(!popupActive);
+                  normalTime
+                    ? setPopupActive(!popupActive)
+                    : setPopupActive(popupActive);
                 }}
               >
                 {start}-{end}
@@ -108,7 +106,9 @@ const OurFriendsPageItem = ({
                 />
               </a>
             )}
-            {!normalAddress && <span>{address}</span>}
+            {!normalAddress && (
+              <span className={scss.empty_data}>{address}</span>
+            )}
           </p>
 
           <p className={scss.mar}>
@@ -122,14 +122,14 @@ const OurFriendsPageItem = ({
                 />
               </a>
             )}
-            {!normalEmail && <span>{email}</span>}
+            {!normalEmail && <span className={scss.empty_data}>{email}</span>}
           </p>
 
           <p className={scss.mar}>
             Phone:
             <br />
             {normalPhone && <a href={phoneLink}>{phone}</a>}
-            {!normalPhone && <span>{phone}</span>}
+            {!normalPhone && <span className={scss.empty_data}>{phone}</span>}
           </p>
         </div>
       </div>
