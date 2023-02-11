@@ -6,14 +6,14 @@ import { useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export default function UserDataItem() {
-  
   const user = useSelector(state => state.auth.user);
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
   const [avatarURL, setAvatar] = useState({});
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(user.avatarURL ? user.avatarURL : defaultImg);
-
-
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(
+    user.avatarURL ? user.avatarURL : defaultImg
+  );
+  console.log(avatarURL);
 
   const handleImageChange = e => {
     const reader = new FileReader();
@@ -28,12 +28,10 @@ export default function UserDataItem() {
     reader.onloadend = () => {
       setAvatar(file);
       setImagePreviewUrl(reader.result);
-
     };
     reader.readAsDataURL(file);
     return;
   };
-
 
   return (
     <div className={scss.userItem_container}>
@@ -44,28 +42,24 @@ export default function UserDataItem() {
           alt=""
         />
         <div className={scss.userItem_box_btnPhoto}>
-          
-            <>
-              <input
-                className={scss.userItem_input_edit_photo}
-                type="file"
-                name="file"
-                accept="image/png, image/jpeg, image/jpg, image/webp"
-                id="file"
-                onChange={e => handleImageChange(e)}
-              />
-              <label htmlFor="file" className={scss.userItem_edit_photo}>
-                <SvgInsert id="icon-edit-avatar" />
-                Edit photo
-              </label>
-            </>
+          <>
+            <input
+              className={scss.userItem_input_edit_photo}
+              type="file"
+              name="file"
+              accept="image/png, image/jpeg, image/jpg, image/webp"
+              id="file"
+              onChange={e => handleImageChange(e)}
+            />
+            <label htmlFor="file" className={scss.userItem_edit_photo}>
+              <SvgInsert id="icon-edit-avatar" />
+              Edit photo
+            </label>
+          </>
         </div>
       </div>
 
       <UserFormik />
-
     </div>
   );
 }
-
-
