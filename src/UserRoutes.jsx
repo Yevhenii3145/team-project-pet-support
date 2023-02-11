@@ -16,7 +16,7 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const UserPage = lazy(() => import('./pages/UserPage/UserPage'));
 
 
-// const NoticesCategoryList = lazy(() => import('./pages/NoticesCategoryList/NoticesCategoryList'));
+const NoticesCategoriesList = lazy(() => import('./components/NoticesCategoriesList/NoticesCategoriesList'));
 const Public = lazy(() => import('./components/Public/Public'));
 const Private = lazy(() => import('./components/Private/Private'));
 
@@ -29,8 +29,9 @@ const UserRoutes = () => {
                 <Routes>
                     <Route path="/" element={<HomePage />}></Route>
                     <Route path="/news" element={<NewsPage />} />
-                    <Route path="/notices/:categoryName" element={<NoticesPage />} />
-                    {/* <Route path="/notices/:categoryName" element={<NoticesCategoriesList />} /> */}
+                    <Route path="/notices" element={<NoticesPage />} >
+                        <Route path=":categoryName" element={<NoticesCategoriesList />} />
+                    </Route>
                     <Route path="/friends" element={<OurFriendsPage />} />
 
                     <Route element={<Public />}>

@@ -18,9 +18,7 @@ export function UserFormik() {
   const [userPhone, setUserPhone] = useState('');
   const [userCity, setUserCity] = useState('');
 
-  //const date = userInStore.birthday !== undefined ? new Date(userInStore.birthday) : "00.00.0000";
-  //const formatDate = userInStore.birthday ? `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}.${date.getFullYear()}` : "00.00.0000"
-
+  
   const formatDate = (date) =>{
     const dateFormat = new Date(date)
     return `${dateFormat.getDate() < 10 ? `0${dateFormat.getDate()}` : dateFormat.getDate()}.${dateFormat.getMonth() + 1 < 10 ? `0${dateFormat.getMonth() + 1}` : dateFormat.getMonth() + 1}.${dateFormat.getFullYear()}`
@@ -40,6 +38,7 @@ export function UserFormik() {
           setUserName(data.name);
           setUserEmail(data.email);
           setUserBirthday(data.birthday !== undefined ? formatDate(data.birthday) : '00.00.0000');
+          console.log("data.birt", data.birthday)
           setUserPhone(data.phone);
           setUserCity(data.city);
         })
@@ -49,7 +48,8 @@ export function UserFormik() {
       setUser(userInStore);
       setUserName(userInStore.name);
       setUserEmail(userInStore.email);
-      setUserBirthday(userInStore.birthday !== undefined ? formatDate(userInStore.birthday) : "00.00.0000");
+      setUserBirthday(userInStore.birthday !== undefined ? formatDate(userInStore.birthday) : '00.00.0000');
+      console.log("userInStore.birt", userInStore.birthday)
       setUserPhone(userInStore.phone);
       setUserCity(userInStore.city);
     }
@@ -110,7 +110,7 @@ export function UserFormik() {
     if (email.value !== user.email) {
       dispatch(operations.updateUser({ email: email.value }));
     }
-    if (userInStore.birthday && userInStore.birthday !== birthday.value) {
+    if (birthday.value && userInStore.birthday !== birthday.value) {
       dispatch(operations.updateUser({ birthday: `"${birthday.value}"` }));
     }
     if (phone.value !== user.phone) {
@@ -120,6 +120,7 @@ export function UserFormik() {
       dispatch(operations.updateUser({ city: city.value }));
     }
   };
+
 
   return (
     <>

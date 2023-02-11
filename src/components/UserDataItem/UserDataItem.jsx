@@ -1,49 +1,55 @@
 import scss from './user-data-item.module.scss';
 import { UserFormik } from './UserFormik';
 import SvgInsert from '../Svg/Svg';
-import axios from 'axios';
-import { useState } from 'react';
-import { RiSave3Fill } from 'react-icons/ri';
+import { useState, useEffect } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import operations from "redux/operations";
 import { useDispatch, useSelector } from 'react-redux';
+  import axios from 'axios';
+
+const { REACT_APP_BASE_URL } = process.env;
+axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
+
 
 
 export default function UserDataItem() {
   const dispatch = useDispatch();
+  const [user, setUser] = useState({});
+  const userInStore = useSelector(state => state.auth.user);
 
-  const user = useSelector(state => state.auth.user);
 
+  // const user= useSelector(state => state.auth.user);
+  
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
-  const [avatar, setAvatar] = useState({});
+  const [avatarURL, setAvatar] = useState({});
+
   const [imagePreviewUrl, setImagePreviewUrl] = useState(user.avatarURL ? user.avatarURL : defaultImg);
-  const [editPhoto, setEditPhoto] = useState(false);
 
-  // const user = useSelector(getUser);
-  console.log(user);
+    
 
-
-
-  const handleSubmit = () => {
-    const formData = new FormData();
-    console.log(avatar);
-    formData.append('file', avatar);
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-
-    axios
-      .patch('/auth/update/avatar', formData, config)
-      .then(res => {
-        console.log(res);
+  useEffect(() => {
+    if (userInStore.token !== undefined) {
+      fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${userInStore.token}`,
+        },
       })
-      .catch(error => { });
+      .then(response => response.json())
+      .then(data => {
+      setUser(data);
+      setAvatar(data.avatarURL);
+      console.log('avatar', data.avatarURL)
+        })
+        .catch(error => console.log(error));
+      return;
+    } else {
+      setUser(userInStore);
+      console.log('avatar', userInStore.avatarURL)
 
-    setEditPhoto(false);
-  };
+     }
+  }, [userInStore]);
 
   const handleImageChange = e => {
     const reader = new FileReader();
@@ -58,10 +64,10 @@ export default function UserDataItem() {
     reader.onloadend = () => {
       setAvatar(file);
       setImagePreviewUrl(reader.result);
-      setEditPhoto(true);
     };
     reader.readAsDataURL(file);
     dispatch(operations.updateUserAvatar(file));
+  
 
     return;
   };
@@ -75,7 +81,6 @@ export default function UserDataItem() {
           alt=""
         />
         <div className={scss.userItem_box_btnPhoto}>
-          {!editPhoto && (
             <>
               <input
                 className={scss.userItem_input_edit_photo}
@@ -90,32 +95,11 @@ export default function UserDataItem() {
                 Edit photo
               </label>
             </>
-          )}
-          {editPhoto && (
-            <button
-              className={scss.userItem_button}
-              type="submit"
-              onClick={() => handleSubmit()}
-            >
-              <RiSave3Fill size={20} className={scss.userItem_button_icon} />
-              Save edit
-            </button>
-          )}
         </div>
       </div>
-      {/* <div className={scss.userDataForm_box}> */}
       <UserFormik />
-      {/* </div> */}
     </div>
   );
 }
 
-// const elements = contacts.map(({ name, number, id }) => {
-//     return <li className={css.listItem} key={id}>{name}: {number}
-//         <span className={css.deleteItem} onClick={() => onDeleteContact(id)}>Delete</span></li>
-// })
-//     return (
-//        <>
-//         <ol>{elements}</ol>
-//     </>
-//     )
+

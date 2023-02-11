@@ -41,13 +41,6 @@
 }
 }
 
-// .userItem__yourPhoto {
-//     display: block;
-//     margin-left: auto;
-//     margin-right: auto;
-//     border-radius: 50%;
-// }
-
 .userItem_box_btnPhoto {
     display: flex;
     justify-content: space-between;
@@ -141,16 +134,21 @@
     letter-spacing: 0.04em;
     color: rgba(17, 17, 17, 0.6);
     padding: 0;
+    cursor: pointer;
 
-            @media screen and (min-width: 768px) {
-                font-size: 18px;
-                line-height: 1.33;
-                }
+    &:focus {
+        border-color: $accentColor;
+    }
+
+@media screen and (min-width: 768px) {
+    font-size: 18px;
+    line-height: 1.33;
+    }
      
 
-            @media screen and (min-width: 1280px) {
+@media screen and (min-width: 1280px) {
 
-            }
+}
 }
 
 .userDataForm_field_active {

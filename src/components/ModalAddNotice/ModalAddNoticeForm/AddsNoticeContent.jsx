@@ -166,7 +166,7 @@ const AddsPetContent = ({ close }) => {
                 <input
                 required
                   name="petCategory"
-                  value="in-good-hands"
+                  value="for-free"
                   type="radio"
                   className={scss.radioButtonInput}
                   onChange={handleRadioChangeCategory}
@@ -373,7 +373,6 @@ const AddsPetContent = ({ close }) => {
                 name="comments"
                 placeholder="Type breed"
                 required
-                readonly
                 minLength="8"
                 maxLength="120"
               />

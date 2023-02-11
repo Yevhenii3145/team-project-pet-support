@@ -19,17 +19,16 @@
   &:focus {
     background: $accentColor;
     color: $lightColor;
-    border: 0;
   }
 }
 
 .button__primary_main {
   padding: 10px 28px;
   background: $accentColor;
-  border: 0;
   border-radius: 40px;
   color: $lightColor;
   letter-spacing: 0.04em;
+  border: 2px solid $accentColor;
 
   font-style: normal;
   font-weight: 500;
@@ -41,7 +40,6 @@
   &:hover,
   &:focus {
     background: transparent;
-    border: 2px solid $accentColor;
     color: $darkColor;
   }
 }
