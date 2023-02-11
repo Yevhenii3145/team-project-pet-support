@@ -83,3 +83,18 @@ export const getAllFavorites = createAsyncThunk(
     }
   }
 );
+
+export const getSearch = createAsyncThunk(
+  'notices/search',
+  async (search, thunkAPI) => {
+    try {
+      const response = await api.getSearch(search);
+      console.log('response.data', response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      console.log(error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
