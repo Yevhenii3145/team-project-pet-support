@@ -39,6 +39,7 @@
 }
 
 .get_searct_btn {
+  cursor: pointer;
   background-color: transparent;
   border: none;
   width: 25px;
@@ -53,8 +54,11 @@
     @media (min-width: 1280px) {
       right: 332px;
     }
-  
-  // padding-left: 50px;
-  // width: 44px;
-  // margin-right: 30px;
+
+            &:hover,
+            &:focus {
+              stroke: $accentColor;
+              fill: $accentColor;
+            }
+
 }
