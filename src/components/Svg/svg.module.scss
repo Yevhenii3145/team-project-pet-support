@@ -109,6 +109,14 @@
   }
 }
 
+.iconEditAvatar {
+  cursor: pointer;
+    &:hover,
+    &:focus {
+      fill: $accentColor;
+    }
+}
+
 .iconClose{
   display: block;
 width: 16px;
@@ -154,3 +162,4 @@ border: #111;
     fill: $accentColor;
 }
 }
+
