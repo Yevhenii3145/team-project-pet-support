@@ -28,7 +28,7 @@ const NoticesCategoriesList = () => {
   return (
     <>
       {loading && <Loader />}
-      {pets && <NoticesCategoryList pets={pets} />}
+      {pets && <NoticesCategoryList pets={pets} categoryNotices={categoryName} />}
       {error && Notify.failure('Oops, something went wrong')}
     </>
   );
