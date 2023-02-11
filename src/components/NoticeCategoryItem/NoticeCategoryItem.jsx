@@ -51,9 +51,11 @@ const NoticeCategoryItem = ({ pet }) => {
 
   function closeModal() {
     setModalShow(false);
+    document.body.style.overflow = 'visible';
   }
 
   const showModal = () => {
+    document.body.style.overflow = 'hidden'; 
     setModalShow(true);
     dispatch(searchNotice(pet._id));
   };
