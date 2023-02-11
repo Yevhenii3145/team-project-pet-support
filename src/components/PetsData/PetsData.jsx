@@ -24,10 +24,12 @@ function PetsData() {
 
   const closeModal = () => {
     setModalShow(false);
+    document.body.style.overflow = 'visible';
   };
 
   const showModal = () => {
     setModalShow(true);
+    document.body.style.overflow = 'hidden';
   };
 
   return (
