@@ -71,6 +71,7 @@ const NoticesSearch = () => {
       <button type="button" className={scss.get_searct_btn} onClick={() => btnGetSearch(search)}>
         <SvgInsert id="icon-search" />
       </button>
+      
       {/* {inputValue && (
         <div onClick={() => reset()}>
           <SvgInsert id="icon-reset-search" />
