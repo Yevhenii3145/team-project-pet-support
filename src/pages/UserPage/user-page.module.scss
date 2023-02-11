@@ -1,5 +1,19 @@
 @import "../../helpers/variables.module.scss";
 
+.userPage_container {
+    margin-top: 61px;
+
+@media screen and (min-width: 768px) {
+    display: block;
+    margin-top: 88px;
+}
+    
+@media screen and (min-width: 1280px) {
+    margin-top: 58px;
+}
+  
+}
+
 .userPage_section {
     display: block;
     width: 100%;

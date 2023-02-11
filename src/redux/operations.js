@@ -144,21 +144,6 @@ const getUserPet = createAsyncThunk('users/pets', async (_, thunkAPI) => {
   }
 });
 
-// const deletePet = createAsyncThunk(
-//   'users/{petId}',
-//   async (petId, { thunkAPI }) => {
-//     try {
-
-//       console.log("response");
-//       const response = await axios.delete(`/users/${petId}`, petId);
-//       console.log("response");
-
-//       return response;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
 
 export const deletePet  = createAsyncThunk(
   'users/{petId}',
@@ -174,18 +159,13 @@ export const deletePet  = createAsyncThunk(
 );
 
 
-
-
 const updateUser = createAsyncThunk('user/update', async (data, thunkAPI) => {
   try {
     const response = await axios.patch(
       `/auth/update?${Object.keys(data)}=${Object.values(data)}`
     );
-    console.log('response.data update', response.data);
     return response.data;
   } catch (error) {
-    console.log('update', error);
-    console.log('update', error.message);
     return thunkAPI.rejectWithValue(error.message);
   }
 });

@@ -49,7 +49,6 @@ export function UserFormik() {
       setUserName(userInStore.name);
       setUserEmail(userInStore.email);
       setUserBirthday(userInStore.birthday !== undefined ? formatDate(userInStore.birthday) : '00.00.0000');
-      console.log("userInStore.birt", userInStore.birthday)
       setUserPhone(userInStore.phone);
       setUserCity(userInStore.city);
     }
@@ -133,7 +132,7 @@ export function UserFormik() {
               type="name"
               name="name"
               value={userName}
-              className={scss.userDataForm_field}
+              className={scss.userDataForm_field_active}
             />
           ) : (
             <input
@@ -160,7 +159,7 @@ export function UserFormik() {
               type="email"
               name="email"
               value={userEmail}
-              className={scss.userDataForm_field}
+              className={scss.userDataForm_field_active}
             />
           ) : (
             <input
@@ -187,7 +186,7 @@ export function UserFormik() {
               type="text"
               name="birthday"
               value={userBirthday}
-              className={scss.userDataForm_field}
+              className={scss.userDataForm_field_active}
             />
           ) : (
             <input
@@ -214,7 +213,7 @@ export function UserFormik() {
               type="tel"
               name="phone"
               value={userPhone}
-              className={scss.userDataForm_field}
+              className={scss.userDataForm_field_active}
             />
           ) : (
             <input
@@ -241,7 +240,7 @@ export function UserFormik() {
               type="text"
               name="city"
               value={userCity}
-              className={scss.userDataForm_field}
+              className={scss.userDataForm_field_active}
             />
           ) : (
             <input
