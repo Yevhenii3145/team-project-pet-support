@@ -51,7 +51,7 @@ const userSlice = createSlice({
         [operations.getUserPet.fulfilled]: (state, {payload}) => {
             state.loading = false;
             state.pets = payload;
-            console.log('payload pets',payload)
+        
         },
         [operations.getUserPet.rejected]: (state, {payload}) => {
             state.loading = false;

@@ -1,55 +1,19 @@
 import scss from './user-data-item.module.scss';
 import { UserFormik } from './UserFormik';
 import SvgInsert from '../Svg/Svg';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import operations from "redux/operations";
-import { useDispatch, useSelector } from 'react-redux';
-  import axios from 'axios';
-
-const { REACT_APP_BASE_URL } = process.env;
-axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
-
-
 
 export default function UserDataItem() {
-  const dispatch = useDispatch();
-  const [user, setUser] = useState({});
-  const userInStore = useSelector(state => state.auth.user);
-
-
-  // const user= useSelector(state => state.auth.user);
   
+  const user = useSelector(state => state.auth.user);
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
   const [avatarURL, setAvatar] = useState({});
-
   const [imagePreviewUrl, setImagePreviewUrl] = useState(user.avatarURL ? user.avatarURL : defaultImg);
 
-    
 
-  useEffect(() => {
-    if (userInStore.token !== undefined) {
-      fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${userInStore.token}`,
-        },
-      })
-      .then(response => response.json())
-      .then(data => {
-      setUser(data);
-      setAvatar(data.avatarURL);
-      console.log('avatar', data.avatarURL)
-        })
-        .catch(error => console.log(error));
-      return;
-    } else {
-      setUser(userInStore);
-      console.log('avatar', userInStore.avatarURL)
-
-     }
-  }, [userInStore]);
 
   const handleImageChange = e => {
     const reader = new FileReader();
@@ -64,13 +28,12 @@ export default function UserDataItem() {
     reader.onloadend = () => {
       setAvatar(file);
       setImagePreviewUrl(reader.result);
+
     };
     reader.readAsDataURL(file);
-    dispatch(operations.updateUserAvatar(file));
-  
-
     return;
   };
+
 
   return (
     <div className={scss.userItem_container}>
@@ -81,6 +44,7 @@ export default function UserDataItem() {
           alt=""
         />
         <div className={scss.userItem_box_btnPhoto}>
+          
             <>
               <input
                 className={scss.userItem_input_edit_photo}
@@ -97,7 +61,9 @@ export default function UserDataItem() {
             </>
         </div>
       </div>
+
       <UserFormik />
+
     </div>
   );
 }
