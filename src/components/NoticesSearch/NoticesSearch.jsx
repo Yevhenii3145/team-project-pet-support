@@ -2,40 +2,47 @@
 import scss from "./notices-search.module.scss";
 import SvgInsert from 'components/Svg/Svg';
 import { useState, useEffect } from "react";
-// import axios from "axios";
+import axios from "axios";
 // import { format } from 'date-fns';
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import {getSearch} from "../../redux/notices/notices-operation"
+import { useDispatch } from 'react-redux';
 
+const { REACT_APP_BASE_URL } = process.env;
+console.log(REACT_APP_BASE_URL);
 
 const NoticesSearch = () => {
   // const [data, setData] = useState([]);
   const [search, setSearch] = useState('')
-  const [inputValue, setInputValue] = useState(false);
+  const dispatch = useDispatch();
+  // const [inputValue, setInputValue] = useState(false);
 
 
   // const getSearch = async () => {
   //   const response = await axios.get(
-  //     'http//localhost:4001/notices/search?keyword={e.currentTarget.value}'
+  //     `${REACT_APP_BASE_URL}/api/notices/search?keyword=${search}`
   //   );
+  //   // setSearch('');
+  //   console.log("response.data", response.data)
   //   return response.data;
   // };
-  // console.log(getSearch)
-
-// "/notices/search?keyword={yourKeyword}"
-// localhost:4001
 
   const handleChange = e => {
     console.log(e.currentTarget.value)
     setSearch(e.currentTarget.value);
   };
 
-  useEffect(() => {
-    search.length > 0 ? setInputValue(true) : setInputValue(false);
-  }, [search.length]);
+  
+  const btnGetSearch = (search) => {
+     dispatch(getSearch(search));
+    }
+  // useEffect(() => {
+  //   search.length > 0 ? setInputValue(true) : setInputValue(false);
+  // }, [search.length]);
 
-  const reset = (e) => {
-    setSearch('');
-  };
+  // const reset = (e) => {
+  //   setSearch('');
+  // };
 
   // function noticesSearch() {
   //   if (!search) {
@@ -61,11 +68,15 @@ const NoticesSearch = () => {
         onInput={handleChange}
         value={search}
       />
-      {inputValue && (
+      <button type="button" className={scss.get_searct_btn} onClick={() => btnGetSearch(search)}>
+        <SvgInsert id="icon-search" />
+      </button>
+      {/* {inputValue && (
         <div onClick={() => reset()}>
           <SvgInsert id="icon-reset-search" />
-        </div>)}
-      {!inputValue && <SvgInsert id="icon-search" />}
+        </div>)} */}
+      
+      {/* {!inputValue && <SvgInsert id="icon-search" />} */}
     </div>
   )
 }
