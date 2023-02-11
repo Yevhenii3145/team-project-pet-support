@@ -9,7 +9,7 @@ const initialState = {
     error: null,
     isNotisFavorite: false,
     noticeId: "",
-    notice: {},
+    notice: null,
     favoriteNotices: null
 }
 
@@ -35,6 +35,7 @@ const noticesSlice = createSlice({
         [addNoticeToFavorite.fulfilled]: (store, action) => {
             store.loading = false;
             store.isNotisFavorite = store.items.some(item => item._id === action.payload)
+            
         },
         [addNoticeToFavorite.rejected]: (store, action) => {
             store.loading = false;
