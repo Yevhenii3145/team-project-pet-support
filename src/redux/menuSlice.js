@@ -93,8 +93,6 @@ export const authSlice = createSlice({
       store.isLoadingUser = false;
       store.user = payload;
       store.isLogin = true;
-
-      console.log(store.user);
     },
 
     [operations.current.rejected]: (store, { payload }) => {
