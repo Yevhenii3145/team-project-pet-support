@@ -4,7 +4,6 @@ import EllipsisText from 'react-ellipsis-text';
 import scss from './our-friends-page-item.module.scss';
 import OurFriendsPageItemPopup from './OurFriendsPageItemPopup/OurFriendsPageItemPopup';
 import defaultImg from '../../../images/default_logo_friends.jpg';
-import { format } from 'date-fns';
 
 const OurFriendsPageItem = ({
   title,
