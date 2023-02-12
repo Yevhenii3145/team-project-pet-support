@@ -37,14 +37,13 @@ function PetsData() {
       {loading && <Loader />}
       <div className={scss.petsData_title_box}>
         <h2 className={scss.petsData_title}>My pets:</h2>
-
         <div className={scss.addPetModal_buttonBox}>
           <button
             className={scss.addPetModal_button}
             type="button"
             onClick={showModal}
           >
-            Add pet <SvgInsert id='icon-add-pet' />
+            Add pet <SvgInsert className={scss.iconAddPet} id='icon-add-pet' />
           </button>
         </div>
       </div>

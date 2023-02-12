@@ -81,6 +81,7 @@
 .userDataForm_box {
     display: block;
     margin-bottom: 44px;
+    
 
 @media screen and (min-width: 768px) {
     width: 379px;
@@ -172,6 +173,10 @@
 
 }
 
+.userDataForm_field_input {
+    width: 56px;
+}
+
 .iconEdit_btn {
     position: relative;
     display: flex;
@@ -212,14 +217,17 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33;
+    width: 60px;
     min-width: 56px;
     margin-right: 26px;
+
 
 @media screen and (min-width: 768px) {
     font-size: 18px;
     line-height: 1.33;
     min-width: 83px;
     margin-right: 36px;
+
 }
     
 @media screen and (min-width: 1280px) {

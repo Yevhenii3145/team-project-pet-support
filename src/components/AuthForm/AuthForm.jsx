@@ -107,7 +107,6 @@ const AuthForm = () => {
     user = {
       email: values.email,
       password: values.password,
-
     };
     console.log(user);
     actions.resetForm();
@@ -119,6 +118,15 @@ const AuthForm = () => {
     if (!stepOne) {
       return setStepOne(true);
     }
+  };
+
+  const btnAuthVerify = (values, actions) => {
+    user = {
+      email: values.email,
+      password: values.password,
+    };
+    console.log("user", user);
+    return dispatch(operations.authVerify(user));
   };
 
   return (
@@ -275,13 +283,89 @@ const AuthForm = () => {
               >
                 Login
               </button>
+              <p className={scss.form__description}>
+                Resend verification email? Click {' '}
+                
+                <NavLink to="/verify" className={scss.description__nav}>
+              here
+            </NavLink>
+            {/* <button type="button" className={scss.get_searct_btn} onClick={() => btnAuthVerify()}>
+              Тут
+                </button> */}
+              </p>
+              {/* `${REACT_APP_BASE_URL}/api/auth/verify` */}
+
+              {/* <a href="#"  onClick={() => btnAuthVerify(user)}>
+                <p className={scss.googleDecs}>тут</p>
+              </a> */}
+
               <GoogleAuth/>
             </Form>
           </Formik>
+          
           <p className={scss.form__description}>
             Don't have an account?{' '}
             <NavLink to="/register" className={scss.description__nav}>
               Register
+            </NavLink>
+          </p>
+        </>
+      )}
+      {page === '/verify' && (
+        <>
+          <Formik
+            validationSchema={schemasForLogin}
+            initialValues={initialValue}
+            onSubmit={btnAuthVerify}
+          >
+            <Form className={scss.form__container} autoComplete="off">
+              <Field
+                className={scss.form__input}
+                type="email"
+                name="email"
+                placeholder="Email"
+              />
+              <ErrorMessage
+                name="email"
+                render={msg => Notify.warning(`${msg}`)}
+              />
+              <Field
+                className={`${scss.form__input} ${scss.form__login__input}`}
+                type="password"
+                name="password"
+                placeholder="Password"
+                validate={validatePassword}
+              />
+              <ErrorMessage
+                name="password"
+                render={msg => Notify.warning(`${msg}`)}
+              />
+
+              <button
+                className={`${scss.button__primary_main} ${scss.form__button}`}
+                type="submit"
+              >
+                Verify
+              </button>
+              {/* <p className={scss.form__description}>
+                Повторно отправить письмо верификации? Нажмите {' '} */}
+                
+            {/* <button type="button" className={scss.get_searct_btn} onClick={() => btnAuthVerify()}>
+              Тут
+                </button> */}
+              {/* </p> */}
+              {/* `${REACT_APP_BASE_URL}/api/auth/verify` */}
+              {/* <a href="#"  onClick={() => btnAuthVerify(user)}>
+        <p className={scss.googleDecs}>тут</p>
+        </a> */}
+              {/* <GoogleAuth/> */}
+            </Form>
+          </Formik>
+          
+          <p className={scss.form__description}>
+            Go to back?{' '}
+            <NavLink to="/login" className={scss.description__nav}>
+              Login
             </NavLink>
           </p>
         </>
