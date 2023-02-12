@@ -94,7 +94,9 @@
   padding: 10px;
 
   @media (min-width: 768px) {
-    // box-sizing: content-box;
+    width: 24px;
+    height: 24px;
+    box-sizing: content-box;
     padding: 10px;
     margin-left: 12px;
     cursor: pointer;
