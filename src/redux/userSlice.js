@@ -10,7 +10,8 @@ const initialState = {
     loading: false,
     userId: "",
     pets: [],
-    token: null
+    token: null,
+    avatar: null,
 }
 
 const userSlice = createSlice({
@@ -78,15 +79,23 @@ const userSlice = createSlice({
         },
         [operations.updateUserAvatar.fulfilled]: (state, { payload }) => {
             state.loading = false;
-            state.user.avatarURL = payload.avatarURL;
+            state.avatar = payload.avatarURL;
             
         },
         [operations.updateUserAvatar.rejected]: (state, {payload}) => {
             state.loading = false;
             state.error = payload;
         },
-      
+    },
+    reducers: {
+        setUserAvatarAction (store, action) {
+            store.avatar = action.payload;
+        },
     }
 })
+
+export const {
+    setUserAvatarAction,
+} = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

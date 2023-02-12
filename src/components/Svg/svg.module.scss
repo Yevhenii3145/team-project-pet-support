@@ -42,6 +42,19 @@
   fill: $accentColor;
 }
 
+.logout {
+  display: block;
+  fill: $lightColor;
+  opacity: 0.6;
+  stroke: $darkColor;
+
+  &:hover,
+  &:focus {
+    stroke: $accentColor;
+    fill: $accentColor;
+  }
+}
+
 .search_news {
   position: absolute;
   right: 8px;
@@ -54,6 +67,7 @@
     right: 332px;
   }
 }
+
 
 .search_reset {
   position: absolute;
@@ -75,13 +89,26 @@
   }
 }
 
+
 .iconAddPet {
+  
+  background-color: $accentColor;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+}
+
+.iconAddPet {
+
   @media (min-width: 768px) {
-    background-color: $accentColor;
-    padding: 7px;
-    border-radius: 50px;
+    width: 24px;
+    height: 24px;
+    box-sizing: content-box;
+    padding: 10px;
     margin-left: 12px;
     cursor: pointer;
+    
   }
 }
 
