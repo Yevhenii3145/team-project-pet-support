@@ -6,7 +6,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useSelector, useDispatch } from 'react-redux';
 import operations from 'redux/operations';
 import axios from 'axios';
-
+// import useAuth from 'shared/hooks/useAuth';
 import { setUserAvatarAction } from 'redux/userSlice';
 
 const { REACT_APP_BASE_URL } = process.env;
@@ -16,14 +16,13 @@ export default function UserDataItem() {
   const userInStore = useSelector(state => state.auth.user);
   const avatar = useSelector(state => state.user.avatar);
 
-
   const dispatch = useDispatch();
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
   const [avatarURL, setAvatar] = useState();
   const [imagePreviewUrl, setImagePreviewUrl] =
-  useState(userInStore.avatarURL ? userInStore.avatarURL :defaultImg);
-  
+useState(userInStore.avatarURL ? userInStore.avatarURL :defaultImg);
+
   const userAvatarUrl = avatar || defaultImg;
 
   useEffect(() => {
@@ -52,7 +51,6 @@ export default function UserDataItem() {
     reader.onloadend = () => {
       setAvatar(file);
       setImagePreviewUrl(reader.result);
-      // window.localStorage.setItem(file);
 
     };
     console.log(file);
@@ -64,7 +62,7 @@ export default function UserDataItem() {
     } else {
       localStorage.removeItem('avatar')
       reader.readAsDataURL(file)
-      // window.localStorage.setItem('avatar', imagePreviewUrl);
+      window.localStorage.setItem('avatar', imagePreviewUrl);
       dispatch(operations.updateUserAvatar(file));
     }
     return;

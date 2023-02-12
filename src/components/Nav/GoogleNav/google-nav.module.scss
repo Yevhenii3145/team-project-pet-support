@@ -1,7 +1,18 @@
 @import "../../../helpers/variables.module.scss";
 
 .googleBox {
-    margin-top: 20px;
+    margin: 20px 0 0;
+    
+   @media screen and (min-width: 768px) {
+    width: 210px;
+    margin: 20px 42% 0 auto;
+   }
+   @media screen and (min-width: 1280px) {
+    margin: 20px 43% 0 auto;
+   }
+   @media screen and (min-width: 1500px) {
+    margin: 20px 44% 0 auto;
+   }
 }
 .googleDecs {
     font-weight: 500;
@@ -19,17 +30,12 @@
         display: inline-block;
 
         &:not(:last-child) {
-            width: 60px;
             margin-bottom: 0;
             margin-right: 12px;
         }
     }
     @media screen and (min-width: 1280px) {
        font-size: 18px;
-       
-       &:not(:last-child) {
-        width: 130px;
-    }
        }
 }
 

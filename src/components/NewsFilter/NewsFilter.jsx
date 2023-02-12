@@ -30,7 +30,7 @@ export default function NewsFilter({
           <SvgInsert id="icon-reset-search" />
         </div>
       )}
-      {!inputValue && <SvgInsert id="icon-search" />}
+      {!inputValue && <SvgInsert id="icon-search-news" />}
     </div>
   );
 }

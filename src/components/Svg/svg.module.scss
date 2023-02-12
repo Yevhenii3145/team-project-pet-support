@@ -38,8 +38,8 @@
   }
 }
 
-.heart_favorite{
-  fill: $accentColor;;
+.heart_favorite {
+  fill: $accentColor;
 }
 
 .logout {
@@ -54,11 +54,20 @@
     fill: $accentColor;
   }
 }
-//   }
-//   @media (min-width: 1280px) {
-//     right: 332px;
-//   }
-// }
+
+.search_news {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  @media (min-width: 768px) {
+    right: 58px;
+    bottom: 10px;
+  }
+  @media (min-width: 1280px) {
+    right: 332px;
+  }
+}
+
 
 .search_reset {
   position: absolute;
@@ -80,23 +89,17 @@
   }
 }
 
-// .iconAddPet {
-//   border: 1px solid $accentColor;
-//   width: 40px;
-//   height: 40px;
-//   padding: 10px;
-//   border-radius: 50%;
-//   background-color: $accentColor;
 
-// }
-
-.iconAddPet{
+.iconAddPet {
   
   background-color: $accentColor;
   border-radius: 50%;
   width: 40px;
   height: 40px;
   padding: 10px;
+}
+
+.iconAddPet {
 
   @media (min-width: 768px) {
     width: 24px;
@@ -109,7 +112,7 @@
   }
 }
 
-.iconAddNotice{
+.iconAddNotice {
   @media (min-width: 768px) {
     background-color: $accentColor;
     padding: 10px;
@@ -119,7 +122,7 @@
   }
 }
 
-.male{
+.male {
   display: block;
   margin-top: 16px;
   margin-bottom: 12px;
@@ -134,23 +137,34 @@
 
 .iconEditAvatar {
   cursor: pointer;
-    &:hover,
-    &:focus {
-      fill: $accentColor;
-    }
+  &:hover,
+  &:focus {
+    fill: $accentColor;
+  }
 }
 
-.iconClose{
+.iconClose {
   display: block;
-width: 16px;
-height: 16px;
-margin-left: auto;
-border: #111;
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  border: #111;
+}
+
+.iconCloseAddNotice{
+  display: block;
+  height: 16px;
+  margin-left: auto;
+  border: #111;
+
+  @media screen and (min-width: 768px) {
+    height: 20px;
+  }
 }
 
 .iconDeleteNotice {
   margin-left: 13px;
-  fill: #FF6101;
+  fill: #ff6101;
 }
 
 .google {
@@ -163,15 +177,14 @@ border: #111;
   border: 1px solid $accentColor;
   border-radius: 40px;
 
-  &:hover, &:focus {
-    background-color:rgba($color: #FF6101, $alpha: 0.15);
+  &:hover,
+  &:focus {
+    background-color: rgba($color: #ff6101, $alpha: 0.15);
     border: 1px solid #c14d05;
   }
-  
 
   @media screen and (min-width: 768px) {
     display: inline-block;
-    margin: 0 auto 0;
   }
 }
 
@@ -183,6 +196,5 @@ border: #111;
   &:hover,
   &:focus {
     fill: $accentColor;
+  }
 }
-}
-

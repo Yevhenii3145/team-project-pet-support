@@ -27,6 +27,16 @@ function validatePassword(value) {
   return error;
 }
 
+function validateEmail(value) {
+  let error;
+  if (!value) {
+    error = 'Required';
+  } else if (!/^((([0-9A-Za-z]{1}[-0-9A-z]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я]{1,}[0-9А-Яа-я]{1}))@([-0-9A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/ui.test(value)) {
+    error = 'Invalid email address!';
+  }
+  return error;
+}
+
 const schemasForStepSecond = Yup.object().shape({
   name: Yup.string(),
   region: Yup.string().matches(
@@ -41,7 +51,7 @@ const schemasForStepSecond = Yup.object().shape({
 });
 
 const schemasForLogin = Yup.object().shape({
-  email: Yup.string().email().required(),
+  email: Yup.string().email().required().min(10).max(63),
   password: Yup.string().required().min(7).max(32)
 });
 
@@ -128,10 +138,11 @@ const AuthForm = () => {
                   type="email"
                   name="email"
                   placeholder="Email"
+                  validate={validateEmail}
                 />
                 <ErrorMessage
                   name="email"
-                  render={msg => Notify.warning(`${msg}`)}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
                 />
                 <Field
                   className={scss.form__input}
@@ -142,7 +153,7 @@ const AuthForm = () => {
                 />
                 <ErrorMessage
                   name="password"
-                  render={msg => Notify.warning(`${msg}`)}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
                 />
                 <Field
                   className={scss.form__input}
@@ -153,7 +164,7 @@ const AuthForm = () => {
                 />
                 <ErrorMessage
                   name="passwordConfirm"
-                  render={msg => Notify.warning(`${msg}`)}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
                 />
                 <button
                   className={`${scss.button__primary_main} ${scss.form__button}`}
@@ -181,7 +192,7 @@ const AuthForm = () => {
                 />
                 <ErrorMessage
                   name="name"
-                  render={msg => Notify.warning(`${msg}`)}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
                 />
                 <Field
                   className={scss.form__input}
@@ -192,7 +203,7 @@ const AuthForm = () => {
                 />
                 <ErrorMessage
                   name="region"
-                  render={msg => Notify.warning(`${msg}`)}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
                 />
                 <Field
                   className={scss.form__input}
@@ -202,7 +213,7 @@ const AuthForm = () => {
                 />
                 <ErrorMessage
                   name="number"
-                  render={msg => Notify.warning(`${msg}`)}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
                 />
                 <span
                   className={`${scss.button__primary_not_main} ${scss.form__back_button}`}

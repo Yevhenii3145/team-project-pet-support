@@ -10,13 +10,15 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const AddNoticeButton = () => {
   const [modalShow, setModalShow] = useState(false);
 const isLogin = useAuth();
-console.log(isLogin)
 
   const closeModal = () => {
+    document.body.style.overflow = 'visible';
     setModalShow(false);
   };
 
   const showModal = () => {
+    document.body.style.overflow = 'hidden';
+
     if(isLogin){
       setModalShow(true);
     } else{

@@ -133,7 +133,7 @@
     font-size: 12px;
     line-height: 1.33;
     letter-spacing: 0.04em;
-    color: rgba(17, 17, 17, 0.6);
+    color: #111111;
     padding: 0;
     cursor: pointer;
 
@@ -218,15 +218,20 @@
     font-size: 12px;
     line-height: 1.33;
     width: 60px;
+    min-width: 56px;
+    margin-right: 26px;
+
 
 @media screen and (min-width: 768px) {
     font-size: 18px;
     line-height: 1.33;
-    width: 83px;
+    min-width: 83px;
+    margin-right: 36px;
+
 }
     
 @media screen and (min-width: 1280px) {
-
+    margin-right: 24px;
         }
 
 }

@@ -3,13 +3,13 @@
 import scss from "./notices-category-list.module.scss";
 import NoticeCategoryItem from "components/NoticeCategoryItem/NoticeCategoryItem";
 
-const NoticesCategoryList = ({ pets }) => {
+const NoticesCategoryList = ({ pets, categoryNotices }) => {
 
     // console.log(pets)
 
     return(
         <ul className={scss.card_list}>
-            {pets.map((pet) => <NoticeCategoryItem pet={pet} key={pet._id} />) }
+            {pets.map((pet) => <NoticeCategoryItem pet={pet} key={pet._id} categoryNotices={categoryNotices} />) }
         </ul>   
     )
 }

@@ -7,6 +7,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import scss from './notice-category-item.module.scss';
 import SvgInsert from 'components/Svg/Svg';
 import {
+  fetchCategoryNotices,
   addNoticeToFavorite,
   deleteNotice,
   searchNotice,
@@ -16,7 +17,7 @@ import useAuth from 'shared/hooks/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
 import ModalNotice from '../ModalNotice/ModalNotice';
 
-const NoticeCategoryItem = ({ pet }) => {
+const NoticeCategoryItem = ({ pet, categoryNotices }) => {
   const {
     _id,
     image,
@@ -44,6 +45,7 @@ const NoticeCategoryItem = ({ pet }) => {
     if (isLogin) {
       dispatch(addNoticeToFavorite(noticeId));
       dispatch(getAllFavorites());
+      dispatch(fetchCategoryNotices(categoryNotices));
       return setIsFavorite(!isFavorite);
     }
     Notify.failure('You need authorization');
@@ -51,9 +53,11 @@ const NoticeCategoryItem = ({ pet }) => {
 
   function closeModal() {
     setModalShow(false);
+    document.body.style.overflow = 'visible';
   }
 
   const showModal = () => {
+    document.body.style.overflow = 'hidden'; 
     setModalShow(true);
     dispatch(searchNotice(pet._id));
   };
