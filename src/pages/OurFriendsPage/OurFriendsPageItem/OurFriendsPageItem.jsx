@@ -34,23 +34,24 @@ const OurFriendsPageItem = ({
   const normalFoto = foto !== null;
 
   function handleTime() {
-    if (normalTime) {
-      const startTime = start.split(':');
-      // minutes are worth 60 seconds. Hours are worth 60 minutes.
-      const secondsStart = startTime[0] * 60 * 60 + startTime[1] * 60;
-
-      const endTime = end.split(':');
-      const secondsEnd = endTime[0] * 60 * 60 + endTime[1] * 60;
-      const timeNow = new Date();
-      const nowH = String(timeNow).slice(16, 18);
-      const nowM = String(timeNow).slice(19, 21);
-      const nowS = String(timeNow).slice(22, 24);
-      const secondsNow = nowH * 60 * 60 + nowM * 60 + nowS;
-      if (secondsNow >= secondsStart && secondsNow <= secondsEnd) {
-        return 'open';
-      }
-      return 'close';
+    if (!normalTime) {
+      return;
     }
+
+    const startTime = start.split(':');
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    const secondsStart = startTime[0] * 60 * 60 + startTime[1] * 60;
+
+    const endTime = end.split(':');
+    const secondsEnd = endTime[0] * 60 * 60 + endTime[1] * 60;
+    const timeNow = new Date();
+    const nowH = String(timeNow).slice(16, 18);
+    const nowM = String(timeNow).slice(19, 21);
+    const nowS = String(timeNow).slice(22, 24);
+    const secondsNow = nowH * 60 * 60 + nowM * 60 + nowS;
+    return secondsNow >= secondsStart && secondsNow <= secondsEnd
+      ? 'open'
+      : 'close';
   }
 
   return (
