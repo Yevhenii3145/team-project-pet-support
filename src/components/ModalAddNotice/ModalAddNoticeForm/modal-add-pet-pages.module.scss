@@ -288,9 +288,9 @@
   background-color: $lightColor;
   border: 2px solid $accentColor;
   border-radius: 40px;
-
   &:hover,
-  &:focus {
+  &:focus,
+  &:checked {
     background-color: $accentColor;
   }
 }
