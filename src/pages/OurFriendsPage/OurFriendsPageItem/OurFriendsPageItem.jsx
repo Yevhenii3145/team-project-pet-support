@@ -48,7 +48,7 @@ const OurFriendsPageItem = ({
     const nowH = String(timeNow).slice(16, 18);
     const nowM = String(timeNow).slice(19, 21);
     const nowS = String(timeNow).slice(22, 24);
-    const secondsNow = nowH * 60 * 60 + nowM * 60 + nowS;
+    const secondsNow = nowH * 60 * 60 + nowM * 60 + Number(nowS);
     return secondsNow >= secondsStart && secondsNow <= secondsEnd
       ? 'open'
       : 'close';
