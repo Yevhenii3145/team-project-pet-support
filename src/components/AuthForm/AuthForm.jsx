@@ -62,7 +62,6 @@ const AuthForm = () => {
 
   let user = useSelector(state => state.auth.user);
   const loading = useSelector(state => state.auth.loading);
-  // const loading = true;
   const dispatch = useDispatch();
 
   const onLogin = (data) => {
@@ -79,7 +78,6 @@ const AuthForm = () => {
   };
 
   const handleSubmitForRegister = (values, actions) => {
-    console.log(values);
     if (stepOne) {
       if (values.password !== values.passwordConfirm) {
         return Notify.failure('Your passwords must have the same value');
@@ -94,24 +92,19 @@ const AuthForm = () => {
         city: values.region,
         phone: values.number,
       };
-      console.log(user);
       actions.resetForm();
       setStepOne(true);
-      // return;
       return dispatch(operations.registerNewUser(user));
     }
   };
 
   const handleSubmitForLogin = (values, actions) => {
-    console.log("values", values);
     user = {
       email: values.email,
       password: values.password,
     };
-    console.log(user);
     actions.resetForm();
     return onLogin(user)
-    // return dispatch(operations.login(user));
   };
 
   const backButtonClick = () => {
@@ -125,7 +118,7 @@ const AuthForm = () => {
       email: values.email,
       password: values.password,
     };
-    console.log("user", user);
+    actions.resetForm();
     return dispatch(operations.authVerify(user));
   };
 
@@ -285,24 +278,13 @@ const AuthForm = () => {
               </button>
               <p className={scss.form__description}>
                 Resend verification email? Click {' '}
-                
                 <NavLink to="/verify" className={scss.description__nav}>
-              here
-            </NavLink>
-            {/* <button type="button" className={scss.get_searct_btn} onClick={() => btnAuthVerify()}>
-              Тут
-                </button> */}
+                  here
+                </NavLink>
               </p>
-              {/* `${REACT_APP_BASE_URL}/api/auth/verify` */}
-
-              {/* <a href="#"  onClick={() => btnAuthVerify(user)}>
-                <p className={scss.googleDecs}>тут</p>
-              </a> */}
-
               <GoogleAuth/>
             </Form>
           </Formik>
-          
           <p className={scss.form__description}>
             Don't have an account?{' '}
             <NavLink to="/register" className={scss.description__nav}>
@@ -347,18 +329,6 @@ const AuthForm = () => {
               >
                 Verify
               </button>
-              {/* <p className={scss.form__description}>
-                Повторно отправить письмо верификации? Нажмите {' '} */}
-                
-            {/* <button type="button" className={scss.get_searct_btn} onClick={() => btnAuthVerify()}>
-              Тут
-                </button> */}
-              {/* </p> */}
-              {/* `${REACT_APP_BASE_URL}/api/auth/verify` */}
-              {/* <a href="#"  onClick={() => btnAuthVerify(user)}>
-        <p className={scss.googleDecs}>тут</p>
-        </a> */}
-              {/* <GoogleAuth/> */}
             </Form>
           </Formik>
           

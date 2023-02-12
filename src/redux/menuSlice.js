@@ -75,7 +75,6 @@ export const authSlice = createSlice({
     [operations.authVerify.fulfilled]: (store, { payload }) => {
       console.log('payload', payload);
       store.loading = false;
-      // store.user = payload;
       Report.info(
         'SUCCESS!',
         `You have successfully registered, the verification has been sent to your mail.`,
