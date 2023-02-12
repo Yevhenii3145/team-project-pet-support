@@ -8,6 +8,19 @@ const ModalNotice = ({ id, onClose, onAddDelete, favorite }) => {
   const loading = useSelector(state => state.notices.loading);
   const notice = useSelector(state => state.notices.notice);
 
+  const formatDate = date => {
+    const dateFormat = new Date(date);
+    return `${
+      dateFormat.getMonth() + 1 < 10
+        ? `0${dateFormat.getMonth() + 1}`
+        : dateFormat.getMonth() + 1
+    }.${
+      dateFormat.getDate() < 10
+        ? `0${dateFormat.getDate()}`
+        : dateFormat.getDate()
+    }.${dateFormat.getFullYear()}`;
+  };
+
   return (
     <>
       {loading ? (
@@ -44,7 +57,7 @@ const ModalNotice = ({ id, onClose, onAddDelete, favorite }) => {
                         Birthday:
                       </h4>
                       <p className={scss.modal_notice__item_description}>
-                        {notice.birthday}
+                        {formatDate(notice.birthday)}
                       </p>
                     </li>
                     <li className={scss.modal_notice__item}>
