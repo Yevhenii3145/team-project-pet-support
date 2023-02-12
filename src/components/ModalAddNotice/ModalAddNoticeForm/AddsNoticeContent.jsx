@@ -91,8 +91,6 @@ const AddsPetContent = ({ close }) => {
         'Okay'
       );
     }
-    // setPetLocation(location.value);
-    // setPetPrice(price.value);
     return changeStep();
   };
 
@@ -142,6 +140,9 @@ const AddsPetContent = ({ close }) => {
     <>
       {loading && <Loader />}
       <div className={scss.modalAdds_page}>
+        <div className={scss.modal_notice__close} onClick={close}>
+          <SvgInsert id="icon-close-add-notice" />
+        </div>
         <h3 className={scss.modalAdds_page__tittle}>Add pet</h3>
         {stepOne && (
           <>
@@ -157,6 +158,7 @@ const AddsPetContent = ({ close }) => {
                   name="petCategory"
                   value="lost-found"
                   type="radio"
+                  checked={petCategory === 'lost-found'}
                   className={scss.radioButtonInput}
                   onChange={handleRadioChangeCategory}
                 />
@@ -164,10 +166,11 @@ const AddsPetContent = ({ close }) => {
               <label className={scss.button}>
                 in good hands
                 <input
-                required
+                  required
                   name="petCategory"
                   value="for-free"
                   type="radio"
+                  checked={petCategory === 'for-free'}
                   className={scss.radioButtonInput}
                   onChange={handleRadioChangeCategory}
                 />
@@ -175,10 +178,11 @@ const AddsPetContent = ({ close }) => {
               <label className={scss.button}>
                 sell
                 <input
-                required
+                  required
                   name="petCategory"
                   value="sell"
                   type="radio"
+                  checked={petCategory === 'sell'}
                   className={scss.radioButtonInput}
                   onChange={handleRadioChangeCategory}
                 />
@@ -286,8 +290,6 @@ const AddsPetContent = ({ close }) => {
                     required
                     className={scss.radioButtonInput}
                     type="radio"
-                    // checked={currentRadioValue}
-                    defaultChecked=""
                     name="sex"
                     value="male"
                     onChange={handleRadioChange}
@@ -297,10 +299,9 @@ const AddsPetContent = ({ close }) => {
                   <SvgInsert id="icon-female" />
                   Female
                   <input
-                  required
+                    required
                     className={scss.radioButtonInput}
                     type="radio"
-                    // checked={currentRadioValue}
                     name="sex"
                     value="female"
                     onChange={handleRadioChange}
