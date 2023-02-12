@@ -63,10 +63,7 @@ export const authSlice = createSlice({
       console.log('payload', payload);
       store.loading = false;
       store.error = payload;
-      Report.warning(
-        'Warning',
-        `${store.error.message}`,
-        'Okay')
+      Report.warning('Warning', `${store.error.message}`, 'Okay');
     },
     [operations.authVerify.pending]: store => {
       store.loading = true;
@@ -85,10 +82,7 @@ export const authSlice = createSlice({
       console.log('payload', payload);
       store.loading = false;
       store.error = payload;
-      Report.warning(
-        'Warning',
-        `${store.error.message}`,
-        'Okay')
+      Report.warning('Warning', `${store.error.message}`, 'Okay');
     },
     [operations.logout.pending]: store => {
       store.loading = true;
@@ -111,6 +105,8 @@ export const authSlice = createSlice({
       store.user = {};
     },
     [operations.current.fulfilled]: (store, { payload }) => {
+      const usertoken = JSON.parse(window.localStorage.getItem('token'));
+      if (usertoken) store.token = usertoken;
       store.isLoadingUser = false;
       store.user = payload;
       store.isLogin = true;
