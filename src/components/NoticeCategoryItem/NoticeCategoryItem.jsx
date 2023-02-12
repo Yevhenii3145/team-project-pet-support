@@ -148,7 +148,7 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
               </button>
             )}
           </div>
-          <p className={scss.card_text}>{category}</p>
+          <p className={scss.card_text}>{category === "for-free" ? "in good hands" : category}</p>
         </div>
       </li>
     </>
