@@ -16,11 +16,9 @@
 .modal__section {
   border-radius: 20px;
   background-color: #ffffff;
+
+  @media screen and (max-width: 768px) {
+    height: 95%;
+    overflow-y: scroll;
+  }
 }
-
-@media screen and (max-width: 768px) {
-  .modal__section {height: 95%;
-    overflow-y: scroll;}
-}
-
-
