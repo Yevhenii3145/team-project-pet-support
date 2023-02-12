@@ -136,6 +136,16 @@ const AddsPetContent = ({ close }) => {
     setCurrentRadioValue(e.target.value);
   };
 
+  const validateFile = () => {
+    if(!imageURL){
+      Report.warning(
+        'Notice Warning',
+        'Please add a photo.',
+        'Okay',
+        );
+    }
+  }
+
   return (
     <>
       {loading && <Loader />}
@@ -151,9 +161,8 @@ const AddsPetContent = ({ close }) => {
               amet, consectetur
             </p>
             <div className={scss.buttonCont}>
-              <label className={scss.button}>
-                lost/found
-                <input
+            <input
+                id='lost-found'
                   required
                   name="petCategory"
                   value="lost-found"
@@ -162,10 +171,11 @@ const AddsPetContent = ({ close }) => {
                   className={scss.radioButtonInput}
                   onChange={handleRadioChangeCategory}
                 />
+              <label for='lost-found' className={scss.buttonCategory}>
+                lost/found
               </label>
-              <label className={scss.button}>
-                in good hands
-                <input
+              <input
+                id='for-free'
                   required
                   name="petCategory"
                   value="for-free"
@@ -174,10 +184,11 @@ const AddsPetContent = ({ close }) => {
                   className={scss.radioButtonInput}
                   onChange={handleRadioChangeCategory}
                 />
+              <label for='for-free' className={scss.buttonCategory}>
+                in good hands
               </label>
-              <label className={scss.button}>
-                sell
-                <input
+              <input
+                id='sell'
                   required
                   name="petCategory"
                   value="sell"
@@ -186,6 +197,8 @@ const AddsPetContent = ({ close }) => {
                   className={scss.radioButtonInput}
                   onChange={handleRadioChangeCategory}
                 />
+              <label for='sell' className={scss.buttonCategory}>
+                sell
               </label>
             </div>
             <form onSubmit={handleSubmitForStepOne}>
@@ -283,29 +296,31 @@ const AddsPetContent = ({ close }) => {
                 The sex<span className={scss.star}>*</span>:
               </h2>
               <div className={scss.radioButtonSection}>
-                <label className={scss.radioButton}>
-                  <SvgInsert id="icon-male" />
-                  Male
-                  <input
+              <input
+                  id='male'
                     required
-                    className={scss.radioButtonInput}
+                    className={scss.radioButtonInputSex}
                     type="radio"
                     name="sex"
                     value="male"
                     onChange={handleRadioChange}
                   />
+                <label for='male' className={scss.radioButton}>
+                  <SvgInsert id="icon-male" />
+                  Male
                 </label>
-                <label className={scss.radioButton}>
-                  <SvgInsert id="icon-female" />
-                  Female
-                  <input
+                <input
+                  id='female'
                     required
-                    className={scss.radioButtonInput}
+                    className={scss.radioButtonInputSex}
                     type="radio"
                     name="sex"
                     value="female"
                     onChange={handleRadioChange}
                   />
+                <label for='female' className={scss.radioButton}>
+                  <SvgInsert id="icon-female" />
+                  Female
                 </label>
               </div>
             </section>
@@ -381,6 +396,7 @@ const AddsPetContent = ({ close }) => {
                 <button
                   className={`${scss.button__primary_main} ${scss.modalAdds_page__button}`}
                   type="submit"
+                  onClick={validateFile}
                 >
                   Done
                 </button>
