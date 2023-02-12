@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import * as api from "../shared/api/userApi";
+import { create } from 'yup/lib/Reference';
+import * as api from '../shared/api/userApi';
+import { useParams } from 'react-router-dom';
 
 const { REACT_APP_BASE_URL } = process.env;
 console.log(REACT_APP_BASE_URL);
@@ -87,13 +89,16 @@ const logout = createAsyncThunk(
 
 const current = createAsyncThunk('users/current', async (_, thunkAPI) => {
   const state = thunkAPI.getState();
+  const { usertoken } = useParams();
   const persistedToken = state.auth.token;
-
   if (persistedToken === null) {
     return thunkAPI.rejectWithValue('Unable to fetch user');
   }
 
   try {
+    if (usertoken) {
+      setAuthHeader(usertoken);
+    }
     setAuthHeader(persistedToken);
     const response = await axios.get('/users/current');
     return response.data;
@@ -154,12 +159,10 @@ const getUserPet = createAsyncThunk('users/pets', async (_, thunkAPI) => {
   }
 });
 
-
-export const deletePet  = createAsyncThunk(
+export const deletePet = createAsyncThunk(
   'users/{petId}',
   async (petId, thunkAPI) => {
     try {
-
       await api.deleteUserPet(petId);
       return petId;
     } catch (error) {
@@ -167,7 +170,6 @@ export const deletePet  = createAsyncThunk(
     }
   }
 );
-
 
 const updateUser = createAsyncThunk('user/update', async (data, thunkAPI) => {
   try {
