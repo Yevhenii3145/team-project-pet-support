@@ -11,7 +11,7 @@ const initialState = {
     userId: "",
     pets: [],
     token: null,
-    avatarURL: null,
+    // avatar: 'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!',
 }
 
 const userSlice = createSlice({
@@ -79,7 +79,7 @@ const userSlice = createSlice({
         },
         [operations.updateUserAvatar.fulfilled]: (state, { payload }) => {
             state.loading = false;
-            state.user.avatarURL = payload.avatarURL;
+            state.user.avatarURL = payload;
             
         },
         [operations.updateUserAvatar.rejected]: (state, {payload}) => {

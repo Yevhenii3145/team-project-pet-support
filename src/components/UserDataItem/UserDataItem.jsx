@@ -1,24 +1,58 @@
 import scss from './user-data-item.module.scss';
 import { UserFormik } from './UserFormik';
 import SvgInsert from '../Svg/Svg';
-import { useState } from 'react';
-// import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useSelector, useDispatch } from 'react-redux';
 import operations from 'redux/operations';
+import axios from 'axios';
+
+const { REACT_APP_BASE_URL } = process.env;
+axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
+
+
 
 export default function UserDataItem() {
   
-  const user = useSelector(state => state.auth.user);
+   const userInStore = useSelector(state => state.auth.user);
+  const [userAvatar, setUserAvatar] = useState();
+ 
+
   const dispatch = useDispatch();
-  console.log(user)
-  
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
-  const [avatarURL, setAvatar] = useState({});
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(user.avatarURL ? user.avatarURL : defaultImg);
-console.log(user.avatarURL)
+  const [avatarURL, setAvatar] = useState();
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(userInStore.avatarURL ? userInStore.avatarURL :defaultImg);
+  const [user, setUser] = useState({});
+ 
 
+  useEffect(() => {
+    const avatar = userInStore.avatarURL;
+    if (userInStore.token !== undefined) {
+      fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${userInStore.token}`,
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          setUser(data);
+          setUserAvatar(avatar);
+       
+        })
+        .catch(error => console.log(error));
+      return;
+    } else {
+      setUser(userInStore);
+      setUserAvatar(userInStore.avatarURL);
+      console.log(avatarURL)
+      
+    }
+  }, []);
+
+console.log(user.avatarURL)
+  
 
   const handleImageChange = e => {
     const reader = new FileReader();
@@ -28,27 +62,43 @@ console.log(user.avatarURL)
         timeout: 5000,
       });
       setImagePreviewUrl(defaultImg);
+      
       return;
     }
     reader.onloadend = () => {
       setAvatar(file);
       setImagePreviewUrl(reader.result);
-
+  
+      
     };
     reader.readAsDataURL(file);
     dispatch(operations.updateUserAvatar(file));
+  
+
+    
     return;
   };
 
+  console.log('imagePreviewUrl', imagePreviewUrl)
 
   return (
     <div className={scss.userItem_container}>
       <div className={scss.userItem_box_yourPhoto}>
-        <img
+        {userInStore.token !== undefined
+          && <img
           className={scss.userItem__yourPhoto}
-          src={imagePreviewUrl}
+            src={avatarURL}
           alt=""
-        />
+          />
+        }
+        {userInStore.token === undefined
+          && <img
+          className={scss.userItem__yourPhoto}
+            src={imagePreviewUrl}
+          alt=""
+          />
+          }
+      
         <div className={scss.userItem_box_btnPhoto}>
           
             <>

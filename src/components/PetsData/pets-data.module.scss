@@ -81,19 +81,7 @@
 
 }
 
-.iconAddPet {
-    box-sizing: content-box;
-    border-radius: 50%;
-    background-color: $accentColor;
 
-    @media (min-width: 768px) {
-        
-        padding: 7px;
-        margin-left: 12px;
-        cursor: pointer;
-
-    }
-}
 
 .petModal_button {
     background-color: $lightColor;
@@ -106,6 +94,7 @@
     width: 100%;
     text-align: center;
     height: 40px;
+    padding: 7px;
 
     &:hover,
     &:focus {
