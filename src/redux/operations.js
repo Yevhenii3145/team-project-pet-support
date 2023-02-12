@@ -59,6 +59,22 @@ const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   }
 });
 
+const authVerify = createAsyncThunk('auth/verify', async (user, thunkAPI) => {
+  try {
+    const response = await axios.post('/auth/verify', user);
+    const state = thunkAPI.getState();
+    console.log('state', state);
+    console.log('response.data', response.data);
+    return response.data;
+  } catch ({ response }) {
+    const error = {
+      status: response.status,
+      message: response.data.message,
+    };
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
@@ -173,6 +189,7 @@ const updateUser = createAsyncThunk('user/update', async (data, thunkAPI) => {
 const operations = {
   registerNewUser,
   login,
+  authVerify,
   logout,
   current,
   addPet,

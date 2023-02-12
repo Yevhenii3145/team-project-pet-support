@@ -66,8 +66,30 @@ export const authSlice = createSlice({
       Report.warning(
         'Warning',
         `${store.error.message}`,
+        'Okay')
+    },
+    [operations.authVerify.pending]: store => {
+      store.loading = true;
+      store.error = null;
+    },
+    [operations.authVerify.fulfilled]: (store, { payload }) => {
+      console.log('payload', payload);
+      store.loading = false;
+      // store.user = payload;
+      Report.info(
+        'SUCCESS!',
+        `You have successfully registered, the verification has been sent to your mail.`,
         'Okay'
       );
+    },
+    [operations.authVerify.rejected]: (store, { payload }) => {
+      console.log('payload', payload);
+      store.loading = false;
+      store.error = payload;
+      Report.warning(
+        'Warning',
+        `${store.error.message}`,
+        'Okay')
     },
     [operations.logout.pending]: store => {
       store.loading = true;
