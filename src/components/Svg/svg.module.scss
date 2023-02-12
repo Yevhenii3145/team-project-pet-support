@@ -124,6 +124,17 @@
   border: #111;
 }
 
+.iconCloseAddNotice{
+  display: block;
+  height: 16px;
+  margin-left: auto;
+  border: #111;
+
+  @media screen and (min-width: 768px) {
+    height: 20px;
+  }
+}
+
 .iconDeleteNotice {
   margin-left: 13px;
   fill: #ff6101;
