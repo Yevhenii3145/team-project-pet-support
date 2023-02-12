@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCategoryNotices, addNoticeToFavorite, deleteNotice, searchNotice, getAllFavorites, getSearch } from "./notices-operation";
+import { fetchCategoryNotices, deleteNotice, searchNotice, getAllFavorites, getSearch } from "./notices-operation";
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import operations from 'redux/operations';
 
@@ -7,7 +7,6 @@ const initialState = {
     items: [],
     loading: false,
     error: null,
-    isNotisFavorite: false,
     noticeId: "",
     notice: null,
     favoriteNotices: null
@@ -22,6 +21,7 @@ const noticesSlice = createSlice({
         },
         [fetchCategoryNotices.fulfilled]: (store, action) => {
             store.loading = false;
+            store.error = null;
             store.items = action.payload.data;
         },
         [fetchCategoryNotices.rejected]: (store, action) => {
@@ -29,18 +29,6 @@ const noticesSlice = createSlice({
             store.error = action.payload;
         },
 
-        [addNoticeToFavorite.pending]: store => {
-            store.loading = true;
-        },
-        [addNoticeToFavorite.fulfilled]: (store, action) => {
-            store.loading = false;
-            store.isNotisFavorite = store.items.some(item => item._id === action.payload)
-            
-        },
-        [addNoticeToFavorite.rejected]: (store, action) => {
-            store.loading = false;
-            store.error = action.payload;
-        },
         [getAllFavorites.pending]: (state, action) => {
             state.loading = true;
             state.favoriteNotices = null;
@@ -57,17 +45,20 @@ const noticesSlice = createSlice({
               'Okay'
             );
           },
+
         [deleteNotice.pending]: store => {
             store.loading = true;
         },
         [deleteNotice.fulfilled]: (store, action) => {
             store.loading = false;
+            store.error = null;
             store.items = store.items.filter(item => item._id !== action.payload);
         },
         [deleteNotice.rejected]: (store, action) => {
             store.loading = false;
             store.error = action.payload;
         },
+
         [searchNotice.pending]: (state, action) => {
             state.loading = true;
           },
@@ -83,6 +74,7 @@ const noticesSlice = createSlice({
               'Okay'
             );
         },
+
         [getSearch.pending]: (store, action) => {
             store.loading = true;
         },
@@ -99,17 +91,27 @@ const noticesSlice = createSlice({
               'Okay'
             );
         },
-          
+
         [operations.addNotice.pending]: store => {
             store.loading = true;
         },
         [operations.addNotice.fulfilled]: (store, action) => {
-            store.loading = false;
-            store.items.unshift(action.payload);
+          store.loading = false;
+          store.items.unshift(action.payload);
+          Report.success(
+            'Success',
+            `${action.payload.name} added successfully.`,
+            'Okay',
+          );
         },
         [operations.addNotice.rejected]: (store, action) => {
-            store.loading = false;
-            store.error = action.payload;
+          store.loading = false;
+          store.error = action.payload;
+          Report.warning(
+            'Warning',
+            `Something went wrong.`,
+            'Okay'
+          );
         },
     }
 })

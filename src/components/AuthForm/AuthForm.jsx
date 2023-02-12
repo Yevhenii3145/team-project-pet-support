@@ -62,7 +62,6 @@ const AuthForm = () => {
 
   let user = useSelector(state => state.auth.user);
   const loading = useSelector(state => state.auth.loading);
-  // const loading = true;
   const dispatch = useDispatch();
 
   const onLogin = (data) => {
@@ -79,7 +78,6 @@ const AuthForm = () => {
   };
 
   const handleSubmitForRegister = (values, actions) => {
-    console.log(values);
     if (stepOne) {
       if (values.password !== values.passwordConfirm) {
         return Notify.failure('Your passwords must have the same value');
@@ -94,31 +92,34 @@ const AuthForm = () => {
         city: values.region,
         phone: values.number,
       };
-      console.log(user);
       actions.resetForm();
       setStepOne(true);
-      // return;
       return dispatch(operations.registerNewUser(user));
     }
   };
 
   const handleSubmitForLogin = (values, actions) => {
-    console.log("values", values);
     user = {
       email: values.email,
       password: values.password,
-
     };
-    console.log(user);
     actions.resetForm();
     return onLogin(user)
-    // return dispatch(operations.login(user));
   };
 
   const backButtonClick = () => {
     if (!stepOne) {
       return setStepOne(true);
     }
+  };
+
+  const btnAuthVerify = (values, actions) => {
+    user = {
+      email: values.email,
+      password: values.password,
+    };
+    actions.resetForm();
+    return dispatch(operations.authVerify(user));
   };
 
   return (
@@ -275,6 +276,12 @@ const AuthForm = () => {
               >
                 Login
               </button>
+              <p className={scss.form__description}>
+                Resend verification email? Click {' '}
+                <NavLink to="/verify" className={scss.description__nav}>
+                  here
+                </NavLink>
+              </p>
               <GoogleAuth/>
             </Form>
           </Formik>
@@ -282,6 +289,53 @@ const AuthForm = () => {
             Don't have an account?{' '}
             <NavLink to="/register" className={scss.description__nav}>
               Register
+            </NavLink>
+          </p>
+        </>
+      )}
+      {page === '/verify' && (
+        <>
+          <Formik
+            validationSchema={schemasForLogin}
+            initialValues={initialValue}
+            onSubmit={btnAuthVerify}
+          >
+            <Form className={scss.form__container} autoComplete="off">
+              <Field
+                className={scss.form__input}
+                type="email"
+                name="email"
+                placeholder="Email"
+              />
+              <ErrorMessage
+                name="email"
+                render={msg => Notify.warning(`${msg}`)}
+              />
+              <Field
+                className={`${scss.form__input} ${scss.form__login__input}`}
+                type="password"
+                name="password"
+                placeholder="Password"
+                validate={validatePassword}
+              />
+              <ErrorMessage
+                name="password"
+                render={msg => Notify.warning(`${msg}`)}
+              />
+
+              <button
+                className={`${scss.button__primary_main} ${scss.form__button}`}
+                type="submit"
+              >
+                Verify
+              </button>
+            </Form>
+          </Formik>
+          
+          <p className={scss.form__description}>
+            Go to back?{' '}
+            <NavLink to="/login" className={scss.description__nav}>
+              Login
             </NavLink>
           </p>
         </>

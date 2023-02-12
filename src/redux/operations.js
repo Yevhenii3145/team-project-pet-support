@@ -8,7 +8,7 @@ axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
 axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGNmZWRiMWE2Y2I0ZjlkNTJlOTYwZSIsImlhdCI6MTY3NTUzMjE0NCwiZXhwIjoxNjc1NjE0OTQ0fQ.TCE19oHh_jueRFQFEjnQp7ydbK-1FbsYf46jW8PcW74`;
 
-const setAuthHeader = token => {
+export const setAuthHeader = token => {
   if (token) {
     return (axios.defaults.headers.common.authorization = `Bearer ${token} `);
   }
@@ -46,9 +46,19 @@ export const fetchUserData = createAsyncThunk(
 const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     const response = await axios.post('/auth/login', user);
-    const state = thunkAPI.getState();
-    console.log('state', state);
-    console.log('response.data', response.data);
+    return response.data;
+  } catch ({ response }) {
+    const error = {
+      status: response.status,
+      message: response.data.message,
+    };
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
+const authVerify = createAsyncThunk('auth/verify', async (user, thunkAPI) => {
+  try {
+    const response = await axios.post('/auth/verify', user);
     return response.data;
   } catch ({ response }) {
     const error = {
@@ -173,6 +183,7 @@ const updateUser = createAsyncThunk('user/update', async (data, thunkAPI) => {
 const operations = {
   registerNewUser,
   login,
+  authVerify,
   logout,
   current,
   addPet,
