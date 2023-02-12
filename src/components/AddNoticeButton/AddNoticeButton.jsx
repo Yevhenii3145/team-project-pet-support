@@ -17,10 +17,10 @@ const isLogin = useAuth();
   };
 
   const showModal = () => {
-    document.body.style.overflow = 'hidden';
 
     if(isLogin){
       setModalShow(true);
+      document.body.style.overflow = 'hidden';
     } else{
       Notify.failure("You need authorization");
     }
