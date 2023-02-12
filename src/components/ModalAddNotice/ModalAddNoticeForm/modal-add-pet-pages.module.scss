@@ -127,6 +127,12 @@
   margin-bottom: 8px;
 }
 
+.modal_notice__close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
 .modalAdds_page_box {
   display: block;
   text-align: left;
@@ -232,6 +238,66 @@
   color: #f59256;
 }
 
+.divNoticesCategoriesNav {
+  @media screen and (max-width: 767px) {
+    display: flex;
+    width: 400px;
+  }
+}
+
+.radioButtonSection {
+  display: flex;
+}
+
+input[type="radio"] {
+	display: none;
+}
+// .radioButtonInput {
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
+//   appearance: none;
+// }
+
+.buttonCont {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  gap: 12px;
+
+  @media screen and (min-width: 768px) {
+    width: 290px;
+  }
+}
+
+.buttonCategory {
+  display: block;
+  padding: 7px 24px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.36;
+  letter-spacing: 0.04em;
+  color: inherit;
+  background-color: $lightColor;
+  border: 2px solid $accentColor;
+  border-radius: 40px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus{
+    background-color: $accentColor;
+  }
+}
+
+.radioButtonInput{
+	&:checked {
+		& + label {
+			background-color: $accentColor;
+		}
+	}
+}
+
+
 .radioButton {
   display: flex;
   flex-direction: column;
@@ -248,49 +314,10 @@
   }
 }
 
-.radioButtonInput {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.radioButtonSection {
-  display: flex;
-}
-
-.divNoticesCategoriesNav {
-  @media screen and (max-width: 767px) {
-    display: flex;
-    width: 400px;
-  }
-}
-
-.buttonCont {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  gap: 12px;
-
-  @media screen and (min-width: 768px) {
-    width: 290px;
-  }
-}
-
-.button {
-  display: block;
-  padding: 7px 24px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.36;
-  letter-spacing: 0.04em;
-  color: inherit;
-  background-color: $lightColor;
-  border: 2px solid $accentColor;
-  border-radius: 40px;
-
-  &:hover,
-  &:focus {
-    background-color: $accentColor;
-  }
+.radioButtonInputSex{
+	&:checked {
+		& + label {
+		color: $accentColor;
+		}
+	}
 }

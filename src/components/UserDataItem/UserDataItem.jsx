@@ -1,18 +1,40 @@
 import scss from './user-data-item.module.scss';
 import { UserFormik } from './UserFormik';
 import SvgInsert from '../Svg/Svg';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { useSelector, useDispatch } from 'react-redux';
+import operations from 'redux/operations';
+import axios from 'axios';
+// import useAuth from 'shared/hooks/useAuth';
+import { setUserAvatarAction } from 'redux/userSlice';
+
+const { REACT_APP_BASE_URL } = process.env;
+axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
 export default function UserDataItem() {
-  
-  const user = useSelector(state => state.auth.user);
+  const userInStore = useSelector(state => state.auth.user);
+  const avatar = useSelector(state => state.user.avatar);
+
+  const dispatch = useDispatch();
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
-  const [avatarURL, setAvatar] = useState({});
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(user.avatarURL ? user.avatarURL : defaultImg);
+  const [avatarURL, setAvatar] = useState();
+  const [imagePreviewUrl, setImagePreviewUrl] =
+useState(userInStore.avatarURL ? userInStore.avatarURL :defaultImg);
 
+  const userAvatarUrl = avatar || defaultImg;
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const response = await axios.get('/users/current');
+
+      if(response?.data) {
+        dispatch(setUserAvatarAction(response?.data?.avatarURL))
+      }
+    }
+    fetchUserData();
+  }, []);
 
 
   const handleImageChange = e => {
@@ -23,6 +45,7 @@ export default function UserDataItem() {
         timeout: 5000,
       });
       setImagePreviewUrl(defaultImg);
+
       return;
     }
     reader.onloadend = () => {
@@ -30,7 +53,18 @@ export default function UserDataItem() {
       setImagePreviewUrl(reader.result);
 
     };
-    reader.readAsDataURL(file);
+    console.log(file);
+    if (userInStore.token !== undefined) {
+
+       reader.readAsDataURL(file)
+       window.localStorage.setItem('avatar', imagePreviewUrl);
+
+    } else {
+      localStorage.removeItem('avatar')
+      reader.readAsDataURL(file)
+      window.localStorage.setItem('avatar', imagePreviewUrl);
+      dispatch(operations.updateUserAvatar(file));
+    }
     return;
   };
 
@@ -40,11 +74,12 @@ export default function UserDataItem() {
       <div className={scss.userItem_box_yourPhoto}>
         <img
           className={scss.userItem__yourPhoto}
-          src={imagePreviewUrl}
+          src={userAvatarUrl}
           alt=""
         />
+
         <div className={scss.userItem_box_btnPhoto}>
-          
+
             <>
               <input
                 className={scss.userItem_input_edit_photo}
@@ -52,7 +87,7 @@ export default function UserDataItem() {
                 name="file"
                 accept="image/png, image/jpeg, image/jpg, image/webp"
                 id="file"
-                onChange={e => handleImageChange(e)}
+                onChange={handleImageChange}
               />
               <label htmlFor="file" className={scss.userItem_edit_photo}>
                 <SvgInsert id="icon-edit-avatar" />
@@ -67,5 +102,4 @@ export default function UserDataItem() {
     </div>
   );
 }
-
 

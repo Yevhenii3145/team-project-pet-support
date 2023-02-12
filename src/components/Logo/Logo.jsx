@@ -12,12 +12,12 @@ const dispatch = useDispatch();
 
     return (
         <div className={scss.logoWrapper}>
-        <NavLink to="/" className={scss.logo}>
+        <NavLink to="/" className={scss.logo} title="logoLink">
             <SvgInsert id="icon-logo" />
         </NavLink>
             {isActive === false
-            ? <button type="button"  onClick={()=>dispatch(setMenuActive(!isActive))} className={scss.button}><SvgInsert id="icon-menu-open"/> </button>
-            : <button type="button"  onClick={()=>dispatch(setMenuActive(!isActive))} className={scss.button}><SvgInsert id="icon-menu-close"/></button>}
+            ? <button type="button" title="openMenu" onClick={()=>dispatch(setMenuActive(!isActive))} className={scss.button}><SvgInsert id="icon-menu-open"/> </button>
+            : <button type="button" title="closemenu" onClick={()=>dispatch(setMenuActive(!isActive))} className={scss.button}><SvgInsert id="icon-menu-close"/></button>}
         </div>
     )
 }
