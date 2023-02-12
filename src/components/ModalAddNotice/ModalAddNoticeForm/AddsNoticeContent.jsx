@@ -171,7 +171,7 @@ const AddsPetContent = ({ close }) => {
                   className={scss.radioButtonInput}
                   onChange={handleRadioChangeCategory}
                 />
-              <label for='lost-found' className={scss.buttonCategory}>
+              <label htmlFor='lost-found' className={scss.buttonCategory}>
                 lost/found
               </label>
               <input
@@ -184,7 +184,7 @@ const AddsPetContent = ({ close }) => {
                   className={scss.radioButtonInput}
                   onChange={handleRadioChangeCategory}
                 />
-              <label for='for-free' className={scss.buttonCategory}>
+              <label htmlFor='for-free' className={scss.buttonCategory}>
                 in good hands
               </label>
               <input
@@ -197,7 +197,7 @@ const AddsPetContent = ({ close }) => {
                   className={scss.radioButtonInput}
                   onChange={handleRadioChangeCategory}
                 />
-              <label for='sell' className={scss.buttonCategory}>
+              <label htmlFor='sell' className={scss.buttonCategory}>
                 sell
               </label>
             </div>
@@ -305,7 +305,7 @@ const AddsPetContent = ({ close }) => {
                     value="male"
                     onChange={handleRadioChange}
                   />
-                <label for='male' className={scss.radioButton}>
+                <label htmlFor='male' className={scss.radioButton}>
                   <SvgInsert id="icon-male" />
                   Male
                 </label>
@@ -318,7 +318,7 @@ const AddsPetContent = ({ close }) => {
                     value="female"
                     onChange={handleRadioChange}
                   />
-                <label for='female' className={scss.radioButton}>
+                <label htmlFor='female' className={scss.radioButton}>
                   <SvgInsert id="icon-female" />
                   Female
                 </label>

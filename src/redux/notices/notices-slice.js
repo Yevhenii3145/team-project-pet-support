@@ -45,7 +45,7 @@ const noticesSlice = createSlice({
               'Okay'
             );
           },
-          
+
         [deleteNotice.pending]: store => {
             store.loading = true;
         },
@@ -91,18 +91,27 @@ const noticesSlice = createSlice({
               'Okay'
             );
         },
-          
+
         [operations.addNotice.pending]: store => {
             store.loading = true;
         },
         [operations.addNotice.fulfilled]: (store, action) => {
-            store.loading = false;
-            store.error = null;
-            store.items.unshift(action.payload);
+          store.loading = false;
+          store.items.unshift(action.payload);
+          Report.success(
+            'Success',
+            `${action.payload.name} added successfully.`,
+            'Okay',
+          );
         },
         [operations.addNotice.rejected]: (store, action) => {
-            store.loading = false;
-            store.error = action.payload;
+          store.loading = false;
+          store.error = action.payload;
+          Report.warning(
+            'Warning',
+            `Something went wrong.`,
+            'Okay'
+          );
         },
     }
 })
