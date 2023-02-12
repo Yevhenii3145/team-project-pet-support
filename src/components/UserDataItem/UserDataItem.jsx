@@ -6,54 +6,37 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useSelector, useDispatch } from 'react-redux';
 import operations from 'redux/operations';
 import axios from 'axios';
-// import useAuth from 'shared/hooks/useAuth';
+
+import { setUserAvatarAction } from 'redux/userSlice';
 
 const { REACT_APP_BASE_URL } = process.env;
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
-
-
 export default function UserDataItem() {
-  
-   const userInStore = useSelector(state => state.auth.user);
-  const [userAvatar, setUserAvatar] = useState();
-  // const isLogin = useAuth();
+  const userInStore = useSelector(state => state.auth.user);
+  const avatar = useSelector(state => state.user.avatar);
+
 
   const dispatch = useDispatch();
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
   const [avatarURL, setAvatar] = useState();
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(userInStore.avatarURL ? userInStore.avatarURL :defaultImg);
-  const [user, setUser] = useState({});
- 
+  const [imagePreviewUrl, setImagePreviewUrl] =
+  useState(userInStore.avatarURL ? userInStore.avatarURL :defaultImg);
+  
+  const userAvatarUrl = avatar || defaultImg;
 
   useEffect(() => {
-    const avatar = userInStore.avatarURL;
-    if (userInStore.token !== undefined) {
-      fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${userInStore.token}`,
-        },
-      })
-        .then(response => response.json())
-        .then(data => {
-          setUser(data);
-          setUserAvatar(avatar);
-       
-        })
-        .catch(error => console.log(error));
-      return;
-    } else {
-      setUser(userInStore);
-      setUserAvatar(userInStore.avatarURL);
-      console.log(avatarURL)
-      
+    const fetchUserData = async () => {
+      const response = await axios.get('/users/current');
+
+      if(response?.data) {
+        dispatch(setUserAvatarAction(response?.data?.avatarURL))
+      }
     }
+    fetchUserData();
   }, []);
 
-console.log(user.avatarURL)
-  
 
   const handleImageChange = e => {
     const reader = new FileReader();
@@ -63,61 +46,42 @@ console.log(user.avatarURL)
         timeout: 5000,
       });
       setImagePreviewUrl(defaultImg);
-      
+
       return;
     }
     reader.onloadend = () => {
       setAvatar(file);
       setImagePreviewUrl(reader.result);
       // window.localStorage.setItem(file);
-      
-      
+
     };
+    console.log(file);
     if (userInStore.token !== undefined) {
-     
+
        reader.readAsDataURL(file)
        window.localStorage.setItem('avatar', imagePreviewUrl);
-      
-      
-      
+
     } else {
       localStorage.removeItem('avatar')
       reader.readAsDataURL(file)
-      window.localStorage.setItem('avatar', imagePreviewUrl);
+      // window.localStorage.setItem('avatar', imagePreviewUrl);
       dispatch(operations.updateUserAvatar(file));
-      
-    } 
+    }
     return;
   };
 
-  let av= window.localStorage.getItem('avatar');
-  
-  console.log('av', av)
- 
-// var returnObj = JSON.parse(localStorage.getItem("myKey"))
-
-  console.log('imagePreviewUrl', imagePreviewUrl)
 
   return (
     <div className={scss.userItem_container}>
       <div className={scss.userItem_box_yourPhoto}>
-        {userInStore.token === undefined
-          && (<img
+        <img
           className={scss.userItem__yourPhoto}
-            src={imagePreviewUrl}
+          src={userAvatarUrl}
           alt=""
-          />)
-        }
-        {userInStore.token !== undefined
-          && (<img
-          className={scss.userItem__yourPhoto}
-            src={av}
-          alt=""
-          />)
-          }
-      
+        />
+
         <div className={scss.userItem_box_btnPhoto}>
-          
+
             <>
               <input
                 className={scss.userItem_input_edit_photo}
@@ -125,7 +89,7 @@ console.log(user.avatarURL)
                 name="file"
                 accept="image/png, image/jpeg, image/jpg, image/webp"
                 id="file"
-                onChange={e => handleImageChange(e)}
+                onChange={handleImageChange}
               />
               <label htmlFor="file" className={scss.userItem_edit_photo}>
                 <SvgInsert id="icon-edit-avatar" />
@@ -140,5 +104,4 @@ console.log(user.avatarURL)
     </div>
   );
 }
-
 
