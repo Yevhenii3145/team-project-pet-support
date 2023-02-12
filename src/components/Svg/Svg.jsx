@@ -40,8 +40,8 @@ const SvgInsert = ({ id }) => {
         <svg
           id="icon-edit"
           viewBox="0 0 32 32"
-          width="12.5"
-          height="12.5"
+          width="20"
+          height="20"
           className={scss.iconEdit}
         >
           <path
@@ -55,8 +55,8 @@ const SvgInsert = ({ id }) => {
         <svg
           id="icon-edit"
           viewBox="0 0 32 32"
-          width="12.5"
-          height="12.5"
+          width="20"
+          height="20"
           className={scss.iconEdit_active}
         >
           <path
@@ -71,8 +71,8 @@ const SvgInsert = ({ id }) => {
         <svg
           id="icon-done"
           viewBox="0 0 32 32"
-          width="12.5"
-          height="12.5"
+          width="20"
+          height="20"
           className={scss.iconDone}
         >
           <path
