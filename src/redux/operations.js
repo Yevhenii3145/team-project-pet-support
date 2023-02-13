@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import { create } from 'yup/lib/Reference';
 import * as api from '../shared/api/userApi';
 
 const { REACT_APP_BASE_URL } = process.env;

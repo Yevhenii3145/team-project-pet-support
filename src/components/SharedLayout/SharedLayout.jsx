@@ -17,7 +17,6 @@ const SharedLayout = () => {
     }
     if (usertoken) {
       window.localStorage.setItem('token', usertoken);
-      document.location.reload();
       navigate('user');
     }
   }, [token, navigate, usertoken]);

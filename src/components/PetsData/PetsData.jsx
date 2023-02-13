@@ -1,13 +1,12 @@
 import { PetsList } from '../PetsList/PetsList';
 import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
 import AddsPetContent from '../ModalAddsPet/ModalAddPetPages/AddsPetContent';
-// import { getPets, getUserId } from '../../redux/selectors';
-import operations from "../../redux/operations";
+import operations from '../../redux/operations';
 import { useEffect } from 'react';
 import Loader from 'components/Loader/Loader';
 import { useState } from 'react';
-import SvgInsert from "../Svg/Svg";
-import { useSelector, useDispatch } from "react-redux"
+import SvgInsert from '../Svg/Svg';
+import { useSelector, useDispatch } from 'react-redux';
 import scss from './pets-data.module.scss';
 
 function PetsData() {
@@ -19,7 +18,7 @@ function PetsData() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(operations.getUserPet())
+    dispatch(operations.getUserPet());
   }, [dispatch]);
 
   const closeModal = () => {
@@ -43,7 +42,7 @@ function PetsData() {
             type="button"
             onClick={showModal}
           >
-            Add pet <SvgInsert className={scss.iconAddPet} id='icon-add-pet' />
+            Add pet <SvgInsert className={scss.iconAddPet} id="icon-add-pet" />
           </button>
         </div>
       </div>
@@ -58,7 +57,6 @@ function PetsData() {
 
         <div className={scss.overflow}>
           <PetsList pets={pets} />
-
         </div>
       </div>
     </>
