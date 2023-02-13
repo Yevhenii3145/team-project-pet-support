@@ -25,7 +25,7 @@ export function PetsList({ pets }) {
           <p className={scss.petsList_field}>Name: {name}</p>
           <p className={scss.petsList_field} >Date of birth: {editDate(birthday)}</p>
           <p className={scss.petsList_field}>Breed: {breed} </p>
-          <p className={scss.petsList_field}>Comments:{comments} </p>
+          <p className={scss.petsList_field}>Comments: {comments} </p>
           <button className={scss.petsList_button} onClick={()=> onDeletePet(_id)} type="button">
             <SvgInsert id="icon-delete" />
           </button>
