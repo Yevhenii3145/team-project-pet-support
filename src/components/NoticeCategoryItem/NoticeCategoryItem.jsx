@@ -73,6 +73,16 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
 
   const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));
 
+  const getCategoryNotice = category => {
+    if (category === "for-free") {
+      category = "in good hands";
+    }
+    if (category === "lost-found") {
+      category = "lost/found";
+    }
+    return category;
+  }
+
   return (
     <>
       {modalShow && (
@@ -82,6 +92,7 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
               id={pet._id}
               onClose={closeModal}
               onAddDelete={btnAddToFavorite}
+              categoryNotice = {getCategoryNotice}
               favorite={isFavorite}
             />
           </Modal>
@@ -148,7 +159,7 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
               </button>
             )}
           </div>
-          <p className={scss.card_text}>{category === "for-free" ? "in good hands" : category}</p>
+          <p className={scss.card_text}>{getCategoryNotice(category)}</p>
         </div>
       </li>
     </>
