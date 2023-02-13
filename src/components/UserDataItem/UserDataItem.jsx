@@ -17,12 +17,6 @@ export default function UserDataItem() {
   const userInStore = useSelector(state => state.auth.user);
   const avatar = useSelector(state => state.user.avatar);
 
-  const searchParams = new URLSearchParams(document.location.search);
-  const usertoken = searchParams.get('usertoken');
-  if (usertoken) {
-    window.localStorage.setItem('token', JSON.stringify(usertoken));
-  }
-
   const dispatch = useDispatch();
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
