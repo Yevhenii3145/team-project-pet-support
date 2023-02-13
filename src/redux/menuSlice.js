@@ -20,7 +20,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: {},
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
     isLogin: false,
     loading: false,
     userId: localStorage.getItem('userId'),
