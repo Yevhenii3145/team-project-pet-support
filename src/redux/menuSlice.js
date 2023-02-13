@@ -105,15 +105,11 @@ export const authSlice = createSlice({
       store.isLoadingUser = true;
       store.error = null;
       store.user = {};
-      const usertoken = localStorage.getItem('token');
-      if (usertoken) store.token = usertoken;
     },
     [operations.current.fulfilled]: (store, { payload }) => {
       store.isLoadingUser = false;
       store.user = payload;
       store.isLogin = true;
-      const usertoken = localStorage.getItem('token');
-      if (usertoken) store.token = usertoken;
     },
 
     [operations.current.rejected]: (store, { payload }) => {
