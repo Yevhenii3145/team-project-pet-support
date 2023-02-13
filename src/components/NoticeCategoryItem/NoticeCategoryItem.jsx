@@ -44,9 +44,8 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
   const btnAddToFavorite = noticeId => {
     if (isLogin) {
       dispatch(addNoticeToFavorite(noticeId));
-      dispatch(getAllFavorites());
-      dispatch(fetchCategoryNotices(categoryNotices));
-      return setIsFavorite(!isFavorite);
+      setIsFavorite(!isFavorite);
+      return;
     }
     Notify.failure('You need authorization');
   };

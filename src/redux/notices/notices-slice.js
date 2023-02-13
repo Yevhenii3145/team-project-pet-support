@@ -18,6 +18,7 @@ const noticesSlice = createSlice({
     extraReducers: {
         [fetchCategoryNotices.pending]: store => {
             store.loading = true;
+            store.items = [];
         },
         [fetchCategoryNotices.fulfilled]: (store, action) => {
             store.loading = false;
