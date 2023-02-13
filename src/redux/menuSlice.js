@@ -20,7 +20,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: {},
-    token: null,
+    token: localStorage.getItem('token'),
     isLogin: false,
     loading: false,
     userId: localStorage.getItem('userId'),
@@ -93,6 +93,7 @@ export const authSlice = createSlice({
       store.user = {};
       store.token = '';
       store.isLogin = false;
+      localStorage.removeItem('token');
       localStorage.removeItem('userId');
     },
     [operations.logout.rejected]: (store, { payload }) => {
@@ -105,8 +106,6 @@ export const authSlice = createSlice({
       store.user = {};
     },
     [operations.current.fulfilled]: (store, { payload }) => {
-      const usertoken = JSON.parse(window.localStorage.getItem('token'));
-      if (usertoken) store.token = usertoken;
       store.isLoadingUser = false;
       store.user = payload;
       store.isLogin = true;
