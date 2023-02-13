@@ -105,6 +105,8 @@ export const authSlice = createSlice({
       store.isLoadingUser = true;
       store.error = null;
       store.user = {};
+      const usertoken = localStorage.getItem('token');
+      if (usertoken) store.token = usertoken;
     },
     [operations.current.fulfilled]: (store, { payload }) => {
       store.isLoadingUser = false;
@@ -118,6 +120,7 @@ export const authSlice = createSlice({
       store.isLoadingUser = false;
       store.error = payload;
       localStorage.removeItem('token');
+      store.token = null;
     },
     [operations.updateUser.pending]: (store, action) => {
       store.loading = true;
