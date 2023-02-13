@@ -188,8 +188,8 @@ export function UserFormik() {
     if (!city.value) {
       return Notify.failure('Required!', { timeout: 5000 });
     }
-    if (!/^[aA-zZ]+,/.test(city.value)) {
-      return Notify.failure('Is not correct format, must "City, Region"', {
+    if (!/^[aA-zZ]/.test(city.value)) {
+      return Notify.failure('Is not correct format, must only letters!', {
         timeout: 5000,
       });
     } else {
