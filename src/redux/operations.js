@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import { create } from 'yup/lib/Reference';
 import * as api from '../shared/api/userApi';
 
 const { REACT_APP_BASE_URL } = process.env;
@@ -15,7 +14,6 @@ export const setAuthHeader = token => {
   }
   axios.defaults.headers.common.authorization = '';
 };
-
 const registerNewUser = createAsyncThunk(
   'auth/register',
   async (user, thunkAPI) => {
@@ -89,8 +87,8 @@ const logout = createAsyncThunk(
 const current = createAsyncThunk('users/current', async (_, thunkAPI) => {
   const state = thunkAPI.getState();
   const persistedToken = state.auth.token;
-  console.log(persistedToken);
   if (persistedToken === null) {
+    console.log(persistedToken);
     return thunkAPI.rejectWithValue('Unable to fetch user');
   }
 

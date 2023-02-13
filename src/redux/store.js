@@ -14,7 +14,6 @@ import storage from 'redux-persist/lib/storage';
 import { menuSlice, authReducer } from './menuSlice';
 import { userReducer } from './userSlice';
 
-// import authReducer from './auth/auth-slice'
 import noticesReducer from './notices/notices-slice';
 import { filtersReducer } from './filter/filter-slice';
 
@@ -24,7 +23,7 @@ const persistConfig = {
   whitelist: ['token'],
 };
 
-const persistedReducer = persistReducer(persistConfig, authReducer)
+const persistedReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
@@ -35,14 +34,11 @@ export const store = configureStore({
     filter: filtersReducer,
     notices: noticesReducer,
     // auth: persistedReducer,
-    
-
-
   },
 
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      serializableCheck: false
+      serializableCheck: false,
       // {
       //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       // },

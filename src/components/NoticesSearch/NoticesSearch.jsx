@@ -1,9 +1,6 @@
 import scss from './notices-search.module.scss';
 import SvgInsert from 'components/Svg/Svg';
 import { useState } from 'react';
-//  import axios from "axios";
-// import { format } from 'date-fns';
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getSearch } from '../../redux/notices/notices-operation';
 import { useDispatch } from 'react-redux';
 import { filterNotice } from 'redux/filter/filter-slice';
@@ -11,52 +8,20 @@ import { filterNotice } from 'redux/filter/filter-slice';
 const { REACT_APP_BASE_URL } = process.env;
 console.log(REACT_APP_BASE_URL);
 
-const NoticesSearch = ({userSearching}) => {
-  // const [data, setData] = useState([]);
+const NoticesSearch = ({ userSearching }) => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
-  // const [inputValue, setInputValue] = useState(false);
-
-  // const getSearch = async () => {
-  //   const response = await axios.get(
-  //     `${REACT_APP_BASE_URL}/api/notices/search?keyword=${search}`
-  //   );
-  //   // setSearch('');
-  //   console.log("response.data", response.data)
-  //   return response.data;
-  // };
 
   const handleChange = e => {
     setSearch(e.currentTarget.value);
     console.log(search);
-    userSearching(e.currentTarget.value)
-    dispatch(filterNotice(e.currentTarget.value))
+    userSearching(e.currentTarget.value);
+    dispatch(filterNotice(e.currentTarget.value));
   };
 
   const btnGetSearch = search => {
     dispatch(getSearch(search));
   };
-  // useEffect(() => {
-  //   search.length > 0 ? setInputValue(true) : setInputValue(false);
-  // }, [search.length]);
-
-  // const reset = (e) => {
-  //   setSearch('');
-  // };
-
-  // function noticesSearch() {
-  //   if (!search) {
-  //     return data;
-  //   }
-  //   const normalizedFilter = search.toLocaleLowerCase();
-  //   const searchList = search.filter(news => {
-  //     return news.title.toLocaleLowerCase().includes(normalizedFilter);
-  //   });
-  //   if (searchList.length === 0) {
-  //     Notify.warning('Write a correct request');
-  //   }
-  //   return searchList;
-  // }
 
   return (
     <div className={scss.search}>
@@ -75,13 +40,6 @@ const NoticesSearch = ({userSearching}) => {
       >
         <SvgInsert id="icon-search" />
       </button>
-
-      {/* {inputValue && (
-        <div onClick={() => reset()}>
-          <SvgInsert id="icon-reset-search" />
-        </div>)} */}
-
-      {/* {!inputValue && <SvgInsert id="icon-search" />} */}
     </div>
   );
 };

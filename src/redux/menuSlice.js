@@ -91,9 +91,10 @@ export const authSlice = createSlice({
     [operations.logout.fulfilled]: (store, { payload }) => {
       store.loading = false;
       store.user = {};
-      store.token = '';
+      store.token = null;
       store.isLogin = false;
-      localStorage.removeItem('token');
+      const usertoken = localStorage.getItem('token');
+      if (usertoken) localStorage.removeItem('token');
       localStorage.removeItem('userId');
     },
     [operations.logout.rejected]: (store, { payload }) => {
@@ -104,24 +105,19 @@ export const authSlice = createSlice({
       store.isLoadingUser = true;
       store.error = null;
       store.user = {};
-      const usertoken = localStorage.getItem('token');
-      if (usertoken) {
-        store.token = usertoken;
-      }
     },
     [operations.current.fulfilled]: (store, { payload }) => {
-      const usertoken = localStorage.getItem('token');
-      if (usertoken) {
-        store.token = usertoken;
-      }
       store.isLoadingUser = false;
       store.user = payload;
       store.isLogin = true;
+      const usertoken = localStorage.getItem('token');
+      if (usertoken) store.token = usertoken;
     },
 
     [operations.current.rejected]: (store, { payload }) => {
       store.isLoadingUser = false;
       store.error = payload;
+      localStorage.removeItem('token');
     },
     [operations.updateUser.pending]: (store, action) => {
       store.loading = true;
