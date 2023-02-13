@@ -31,22 +31,21 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
   } = pet;
   const [modalShow, setModalShow] = useState(false);
   const dispatch = useDispatch();
-
+  const isLogin = useAuth();
   const localStorageUserId = localStorage.getItem('userId');
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
-  const [isFavorite, setIsFavorite] = useState(
+  const [isFavorite, setIsFavorite] = useState(isLogin ?
     favoriteNotices !== null &&
-      favoriteNotices.some(notice => notice._id === _id)
+      favoriteNotices.some(notice => notice._id === _id) : null
   );
 
-  const isLogin = useAuth();
+
 
   const btnAddToFavorite = noticeId => {
     if (isLogin) {
       dispatch(addNoticeToFavorite(noticeId));
-      dispatch(getAllFavorites());
-      dispatch(fetchCategoryNotices(categoryNotices));
-      return setIsFavorite(!isFavorite);
+      setIsFavorite(!isFavorite);
+      return;
     }
     Notify.failure('You need authorization');
   };
