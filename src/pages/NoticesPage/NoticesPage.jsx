@@ -6,17 +6,29 @@ import NoticesCategoriesNav from "components/NoticesCategoriesNav/NoticesCategor
 
 import NoticesSearch from "components/NoticesSearch/NoticesSearch";
 import AddNoticeButton from "components/AddNoticeButton/AddNoticeButton";
+import { useState } from "react";
 
 
 const NoticesPage = () => {
+    const [searching, setSearching] = useState(false)
+
+    const handleDownSearch = (value) => {
+        if(value.length > 0){
+            return setSearching(true);
+        }
+        if(value.length === 0){
+            return setSearching(false)
+        }
+    }
+
     return (
         <main className={scss.main}>
             <div className={container.container}>
                 <h2 className ={scss.main_title}>Find your favorite pet</h2>
-                <NoticesSearch/>
+                <NoticesSearch userSearching={handleDownSearch}/>
                 <AddNoticeButton/>
-                <NoticesCategoriesNav />
-                <Outlet />
+                {!searching && <NoticesCategoriesNav />}
+                <Outlet/>
             </div>
         </main>
     )

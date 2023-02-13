@@ -16,6 +16,7 @@ import { userReducer } from './userSlice';
 
 // import authReducer from './auth/auth-slice'
 import noticesReducer from './notices/notices-slice';
+import { filtersReducer } from './filter/filter-slice';
 
 const persistConfig = {
   key: 'token',
@@ -31,7 +32,7 @@ export const store = configureStore({
     auth: persistedReducer,
     // auth: authReducer,
     user: userReducer,
-
+    filter: filtersReducer,
     notices: noticesReducer,
     // auth: persistedReducer,
     
