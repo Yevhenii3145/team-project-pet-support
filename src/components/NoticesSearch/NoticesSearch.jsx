@@ -6,11 +6,12 @@ import { useState } from 'react';
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getSearch } from '../../redux/notices/notices-operation';
 import { useDispatch } from 'react-redux';
+import { filterNotice } from 'redux/filter/filter-slice';
 
 const { REACT_APP_BASE_URL } = process.env;
 console.log(REACT_APP_BASE_URL);
 
-const NoticesSearch = () => {
+const NoticesSearch = ({userSearching}) => {
   // const [data, setData] = useState([]);
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
@@ -26,8 +27,10 @@ const NoticesSearch = () => {
   // };
 
   const handleChange = e => {
-    console.log(e.currentTarget.value);
     setSearch(e.currentTarget.value);
+    console.log(search);
+    userSearching(e.currentTarget.value)
+    dispatch(filterNotice(e.currentTarget.value))
   };
 
   const btnGetSearch = search => {
@@ -62,7 +65,7 @@ const NoticesSearch = () => {
         type="text"
         placeholder="Search"
         name="search"
-        onInput={handleChange}
+        onChange={handleChange}
         value={search}
       />
       <button

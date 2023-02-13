@@ -7,6 +7,7 @@ import {
   getAllFavorites,
 } from 'redux/notices/notices-operation';
 import { getStore, getNotices } from 'redux/notices/notices-selectors';
+import { getFilter } from 'redux/filter/filter-selector';
 import Loader from 'components/Loader/Loader';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import useAuth from 'shared/hooks/useAuth';
@@ -14,7 +15,31 @@ import useAuth from 'shared/hooks/useAuth';
 const NoticesCategoriesList = () => {
   const dispatch = useDispatch();
   const { categoryName } = useParams();
+  //const isSearch = useSelector(getSearch);
+  //console.log(isSearch)
+  // console.log('in list', search)
   const pets = useSelector(getNotices);
+  const filter = useSelector(getFilter)
+  console.log(filter)
+
+  const filterNotices = () => {
+    if (!filter) {
+      return pets;
+    }
+
+    const normalizedFilter = filter.toLocaleLowerCase();
+
+    const filteredNotice = pets.filter(({title}) => {
+      console.log(title)
+      const normalizedTittle = title.toLocaleLowerCase();
+      const filterResult = normalizedTittle.includes(normalizedFilter);
+      return filterResult;
+    });
+    
+    return filteredNotice;
+  };
+  console.log(filterNotices())
+
   const { loading, error } = useSelector(getStore);
 
   const isLogin = useAuth();
@@ -28,7 +53,7 @@ const NoticesCategoriesList = () => {
   return (
     <>
       {loading && <Loader />}
-      {pets.length > 0 && <NoticesCategoryList pets={pets} categoryNotices={categoryName} />}
+      {pets.length > 0 && <NoticesCategoryList pets={filterNotices()} categoryNotices={categoryName} />}
       {error && Notify.failure('Oops, something went wrong')}
     </>
   );
