@@ -10,18 +10,6 @@ const SharedLayout = () => {
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(document.location.search);
   const usertoken = searchParams.get('usertoken');
-  console.log(usertoken);
-  // if (usertoken) {
-  //   window.localStorage.setItem('token', usertoken);
-  //   navigate('user');
-  // }
-
-  // useEffect(() => {
-  //   if (usertoken) {
-  //     window.localStorage.setItem('token', usertoken);
-  //     navigate('user');
-  //   }
-  // }, [usertoken, navigate]);
 
   useEffect(() => {
     if (!token) {
