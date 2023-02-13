@@ -12,7 +12,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { NavLink, useLocation } from 'react-router-dom';
 
 const schemasForStepFirst = Yup.object().shape({
-  email: Yup.string().email().required(),
+  email: Yup.string().email().required().min(10, 'the minimum number of characters in the field is 10').max(63, 'the maximum number of characters in the field is 63 inclusive'),
   password: Yup.string().required().min(7).max(32),
   passwordConfirm: Yup.string().required(),
 });
@@ -30,22 +30,22 @@ function validatePassword(value) {
 function validateEmail(value) {
   let error;
   if (!value) {
-    error = 'Required';
-  } else if (!/^((([0-9A-Za-z]{1}[-0-9A-z]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я]{1,}[0-9А-Яа-я]{1}))@([-0-9A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/ui.test(value)) {
-    error = 'Invalid email address!';
+    error = 'E-mail address required';
+  } else if (!/^((([0-9A-Za-z]{1}[-0-9A-z]{1,}[0-9A-Za-z]{1}))@([-0-9A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/i.test(value)) {
+    error = 'The e-mail address is not correct, there must be at least 2 characters before the "@" symbol, the hyphen cannot be at the beginning, and the e-mail cannot contain Latin letters, email can include Latin letters, numbers and symbols!';
   }
   return error;
 }
 
 const schemasForStepSecond = Yup.object().shape({
-  name: Yup.string(),
+  name: Yup.string().required('Name is required!'),
   region: Yup.string().matches(
     /^[aA-zZ]+,/,
     'Is not correct format, must "City, Region"'
-  ),
+  ).required('Region is required'),
   number: Yup.string()
     .matches(/[0-9]/, 'Field must contain only numbers!')
-    .required()
+    .required('Phone number is required!')
     .min(12, 'Is not correct format, must 380xxxxxxxxx!')
     .max(12, 'Is not correct format, must 380xxxxxxxxx!'),
 });
@@ -143,7 +143,7 @@ const AuthForm = () => {
                 />
                 <ErrorMessage
                   name="email"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
                 />
                 <Field
                   className={scss.form__input}
@@ -154,7 +154,7 @@ const AuthForm = () => {
                 />
                 <ErrorMessage
                   name="password"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
                 />
                 <Field
                   className={scss.form__input}
@@ -165,7 +165,7 @@ const AuthForm = () => {
                 />
                 <ErrorMessage
                   name="passwordConfirm"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
                 />
                 <button
                   className={`${scss.button__primary_main} ${scss.form__button}`}
@@ -193,7 +193,7 @@ const AuthForm = () => {
                 />
                 <ErrorMessage
                   name="name"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
                 />
                 <Field
                   className={scss.form__input}
@@ -204,7 +204,7 @@ const AuthForm = () => {
                 />
                 <ErrorMessage
                   name="region"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
                 />
                 <Field
                   className={scss.form__input}
@@ -214,7 +214,7 @@ const AuthForm = () => {
                 />
                 <ErrorMessage
                   name="number"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 5000})}
+                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
                 />
                 <span
                   className={`${scss.button__primary_not_main} ${scss.form__back_button}`}

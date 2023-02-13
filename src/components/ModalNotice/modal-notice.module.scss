@@ -92,7 +92,7 @@ p {
   font-size: 14px;
   line-height: 19px;
   min-width: 63px;
-  margin-right: 55px;
+  margin-right: 40px;
 
   &:last-child {
     width: auto;
@@ -107,6 +107,7 @@ p {
   font-weight: 500;
   font-size: 14px;
   line-height: 19px;
+  word-break: break-word;
 
   color: #000000;
 }
