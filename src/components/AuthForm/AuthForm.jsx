@@ -44,10 +44,10 @@ const schemasForStepSecond = Yup.object().shape({
     'Is not correct format, must "City, Region"'
   ).required('Region is required'),
   number: Yup.string()
-    .matches(/[0-9]/, 'Field must contain only numbers!')
+    .matches(/^3?[\s]?8?[\s]?\(?0\d{2}?\)?[\s]?\d{3}[\s|-]?\d{2}[\s|-]?\d{2}$/, 'Field must contain only numbers and format 380xxxxxxxxx!')
     .required('Phone number is required!')
-    .min(12, 'Is not correct format, must 380xxxxxxxxx!')
-    .max(12, 'Is not correct format, must 380xxxxxxxxx!'),
+    .min(12, 'Cannot be less than twelve characters!')
+    .max(12, 'Cannot be more than twelve characters!'),
 });
 
 const schemasForLogin = Yup.object().shape({

@@ -31,7 +31,6 @@ const noticesSlice = createSlice({
 
         [getAllFavorites.pending]: (state, action) => {
             state.loading = true;
-            state.favoriteNotices = null;
           },
         [getAllFavorites.fulfilled]: (state, action) => {
             state.loading = false;
@@ -61,6 +60,7 @@ const noticesSlice = createSlice({
 
         [searchNotice.pending]: (state, action) => {
             state.loading = true;
+            state.notice = null;
           },
         [searchNotice.fulfilled]: (state, action) => {
             state.loading = false;
