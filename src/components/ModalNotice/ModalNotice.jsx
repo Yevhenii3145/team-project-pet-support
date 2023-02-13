@@ -4,7 +4,7 @@ import SvgInsert from '../Svg/Svg';
 import { useSelector } from 'react-redux';
 import Loader from 'components/Loader/Loader';
 
-const ModalNotice = ({ id, onClose, onAddDelete, favorite }) => {
+const ModalNotice = ({ id, onClose, onAddDelete, categoryNotice, favorite }) => {
   const loading = useSelector(state => state.notices.loading);
   const notice = useSelector(state => state.notices.notice);
 
@@ -40,7 +40,7 @@ const ModalNotice = ({ id, onClose, onAddDelete, favorite }) => {
                     alt={notice.name}
                   />
                   <span className={scss.modal_notice__category}>
-                    {notice.category}
+                    {categoryNotice(notice.category)}
                   </span>
                 </div>
                 <div>
