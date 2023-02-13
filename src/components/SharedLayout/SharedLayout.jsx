@@ -7,14 +7,23 @@ import { useNavigate } from 'react-router-dom';
 
 const SharedLayout = () => {
   const token = useSelector(state => state.auth.token);
-  console.log(token);
   const navigate = useNavigate();
 
+  const searchParams = new URLSearchParams(document.location.search);
+  const usertoken = searchParams.get('usertoken');
+  console.log(usertoken);
+
   useEffect(() => {
-    if (!token) {
-      navigate('notices/sell');
+    // if (!token) {
+    //   navigate('notices/sell');
+    // }
+    if (usertoken) {
+      console.log('yes, sir');
+      window.localStorage.setItem('token', usertoken);
+      window.location.reload();
+      navigate('user');
     }
-  }, [token, navigate]);
+  }, [token, navigate, usertoken]);
 
   return (
     <>

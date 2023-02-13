@@ -14,8 +14,6 @@ export const setAuthHeader = token => {
   }
   axios.defaults.headers.common.authorization = '';
 };
-const searchParams = new URLSearchParams(document.location.search);
-const usertoken = searchParams.get('usertoken');
 
 const registerNewUser = createAsyncThunk(
   'auth/register',
@@ -88,14 +86,8 @@ const logout = createAsyncThunk(
 );
 
 const current = createAsyncThunk('users/current', async (_, thunkAPI) => {
-  let persistedToken;
-
-  if (usertoken) {
-    persistedToken = usertoken;
-  } else {
-    const state = thunkAPI.getState();
-    persistedToken = state.auth.token;
-  }
+  const state = thunkAPI.getState();
+  const persistedToken = state.auth.token;
 
   try {
     setAuthHeader(persistedToken);
