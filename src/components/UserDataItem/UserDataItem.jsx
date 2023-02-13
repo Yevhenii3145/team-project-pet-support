@@ -4,10 +4,8 @@ import SvgInsert from '../Svg/Svg';
 import { useState, useEffect } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useSelector, useDispatch } from 'react-redux';
-// import { URLSearchParams } from 'react-router-dom';
 import operations from 'redux/operations';
 import axios from 'axios';
-// import useAuth from 'shared/hooks/useAuth';
 import { setUserAvatarAction } from 'redux/userSlice';
 
 const { REACT_APP_BASE_URL } = process.env;
@@ -37,7 +35,7 @@ export default function UserDataItem() {
       }
     };
     fetchUserData();
-  }, []);
+  }, [dispatch]);
 
   const handleImageChange = e => {
     const reader = new FileReader();
