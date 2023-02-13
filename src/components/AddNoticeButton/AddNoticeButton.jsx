@@ -1,4 +1,3 @@
-// import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import scss from './add-notice-button.module.scss';
 import SvgInsert from 'components/Svg/Svg';
@@ -9,7 +8,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const AddNoticeButton = () => {
   const [modalShow, setModalShow] = useState(false);
-const isLogin = useAuth();
+  const isLogin = useAuth();
 
   const closeModal = () => {
     document.body.style.overflow = 'visible';
@@ -17,14 +16,13 @@ const isLogin = useAuth();
   };
 
   const showModal = () => {
-
-    if(isLogin){
+    if (isLogin) {
       setModalShow(true);
       document.body.style.overflow = 'hidden';
-    } else{
-      Notify.failure("You need authorization");
+    } else {
+      Notify.failure('You need authorization');
     }
-  }
+  };
 
   return (
     <div className={scss.cont}>
@@ -39,9 +37,8 @@ const isLogin = useAuth();
           </ModalAddNotice>
         </>
       )}
-
     </div>
-  )
-}
+  );
+};
 
 export default AddNoticeButton;

@@ -4,7 +4,6 @@ import EllipsisText from 'react-ellipsis-text';
 import { format } from 'date-fns';
 import { useState, useEffect } from 'react';
 
-// compareAsc;
 const NewsItem = ({ title, url, description, date }) => {
   const [matches, setMatches] = useState(
     window.matchMedia('(min-width: 1280px)').matches
@@ -18,7 +17,6 @@ const NewsItem = ({ title, url, description, date }) => {
   const formatDate = format(new Date(date), 'dd/MM/yyyy');
   const zeroDate = formatDate === '01/01/1970' ? '' : formatDate;
 
-  // console.log(formatDate);
   return (
     <li className={s.news_item}>
       <span className={s.news_line}></span>

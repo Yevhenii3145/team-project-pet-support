@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import s from './newsFilter.module.scss';
-// import { SlClose } from 'react-icons/sl';
 import SvgInsert from 'components/Svg/Svg';
-// import { useState, useEffect } from 'react';
 
 export default function NewsFilter({
   input,
@@ -10,11 +8,6 @@ export default function NewsFilter({
   resetInput,
   inputValue,
 }) {
-  //   const [inputTrue, setinputTrue] = useState(false);
-
-  //   useEffect(() => {
-  //     !input.lenght === '' ? setinputTrue(true) : setinputTrue(false);
-  //   }, [input.lenght]);
   return (
     <div className={s.search}>
       <input

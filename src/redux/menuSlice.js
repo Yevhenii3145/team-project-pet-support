@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import operations from './operations';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-// import { useFetcher } from 'react-router-dom';
 
 let initialState = {
   menuActive: false,

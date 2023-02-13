@@ -15,12 +15,9 @@ import useAuth from 'shared/hooks/useAuth';
 const NoticesCategoriesList = () => {
   const dispatch = useDispatch();
   const { categoryName } = useParams();
-  //const isSearch = useSelector(getSearch);
-  //console.log(isSearch)
-  // console.log('in list', search)
   const pets = useSelector(getNotices);
-  const filter = useSelector(getFilter)
-  console.log(filter)
+  const filter = useSelector(getFilter);
+  console.log(filter);
 
   const filterNotices = () => {
     if (!filter) {
@@ -29,16 +26,16 @@ const NoticesCategoriesList = () => {
 
     const normalizedFilter = filter.toLocaleLowerCase();
 
-    const filteredNotice = pets.filter(({title}) => {
-      console.log(title)
+    const filteredNotice = pets.filter(({ title }) => {
+      console.log(title);
       const normalizedTittle = title.toLocaleLowerCase();
       const filterResult = normalizedTittle.includes(normalizedFilter);
       return filterResult;
     });
-    
+
     return filteredNotice;
   };
-  console.log(filterNotices())
+  console.log(filterNotices());
 
   const { loading, error } = useSelector(getStore);
 
@@ -53,7 +50,12 @@ const NoticesCategoriesList = () => {
   return (
     <>
       {loading && <Loader />}
-      {pets.length > 0 && <NoticesCategoryList pets={filterNotices()} categoryNotices={categoryName} />}
+      {pets.length > 0 && (
+        <NoticesCategoryList
+          pets={filterNotices()}
+          categoryNotices={categoryName}
+        />
+      )}
       {error && Notify.failure('Oops, something went wrong')}
     </>
   );

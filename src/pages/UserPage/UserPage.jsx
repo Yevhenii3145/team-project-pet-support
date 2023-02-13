@@ -1,5 +1,3 @@
-// import scss from "./user-page.module.scss";
-
 import React from 'react';
 import { UserData } from '../../components/UserData/UserData';
 import Logout from '../../components/Logout/Logout';
