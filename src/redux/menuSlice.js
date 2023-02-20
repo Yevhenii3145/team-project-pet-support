@@ -5,6 +5,8 @@ import { Report } from 'notiflix/build/notiflix-report-aio';
 let initialState = {
   menuActive: false,
 };
+const searchParams = new URLSearchParams(document.location.search);
+const usertoken = searchParams.get('usertoken');
 
 export const menuSlice = createSlice({
   name: 'menu',
@@ -20,8 +22,8 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: {},
-    token: null,
-    isLogin: false,
+    token: usertoken ? usertoken : null,
+    isLogin: usertoken ? true : false,
     loading: false,
     userId: localStorage.getItem('userId'),
   },

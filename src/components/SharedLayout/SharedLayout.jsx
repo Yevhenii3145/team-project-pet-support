@@ -1,23 +1,21 @@
 import scss from './shared-layout.module.scss';
 import base from '../../helpers/container.module.scss';
 import love from '../../images/heart-desktop.svg';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const SharedLayout = () => {
   const token = useSelector(state => state.auth.token);
-  const navigate = useNavigate();
+  console.log(token);
+  // const navigate = useNavigate();
 
-  const searchParams = new URLSearchParams(document.location.search);
-  const usertoken = searchParams.get('usertoken');
-
-  useEffect(() => {
-    if (usertoken) {
-      window.localStorage.setItem('token', usertoken);
-      navigate('user');
-    }
-  }, [token, navigate, usertoken]);
+  // useEffect(() => {
+  //   if (usertoken) {
+  //     window.localStorage.setItem('token', usertoken);
+  //     navigate('user');
+  //   }
+  // }, [token, navigate, usertoken]);
 
   return (
     <>
