@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchUserData } from "../redux/operations";
 import operations from './operations';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
 const initialState = {
     items: {},
@@ -52,6 +52,7 @@ const userSlice = createSlice({
         [operations.getUserPet.fulfilled]: (state, {payload}) => {
             state.loading = false;
             state.pets = payload;
+    
         
         },
         [operations.getUserPet.rejected]: (state, {payload}) => {
@@ -65,9 +66,19 @@ const userSlice = createSlice({
         [operations.deletePet.fulfilled]: (state, action) => {
             state.loading = false;
             state.pets = state.pets.filter(pet => pet._id !== action.payload);
-                Report.warning(
-                'Are you sure you want to delete your pet?!'
-            );
+            
+            Confirm.show(
+                'Notiflix Confirm',
+                'Are you sure you want to delete your petcard?!',
+                'Yes',
+                'No',
+                function() {
+                alert('You is bad.');
+                },
+                function() {
+                    // Confirm.close();
+                },
+            )
         },
         [operations.deletePet.rejected]: (state, {payload}) => {
             state.loading = false;

@@ -3,10 +3,13 @@ import { NavLink } from "react-router-dom";
 import SvgInsert from "components/Svg/Svg";
 import { useSelector, useDispatch } from "react-redux";
 import { setMenuActive } from "redux/menuSlice";
+import useAuth from 'shared/hooks/useAuth';
 
 const UserNav = () => {
 
-    const isActive = useSelector(state=>state.menu.menuActive)
+    const isActive = useSelector(state => state.menu.menuActive)
+    const user = useSelector(state => state.auth.user);
+    console.log('user', user.avatarURL)
     const dispatch = useDispatch();
 
     return (
@@ -15,8 +18,8 @@ const UserNav = () => {
             <SvgInsert id="icon-account"/>
                 Account</NavLink>
             : <NavLink to={'user'} className={scss.account}>
-            <SvgInsert id="icon-account"/>
-                Account</NavLink>
+            <img  src={user.avatarURL} className={scss.avatarURL} alt="" />
+                {user.name}</NavLink>
         
     )
 }
