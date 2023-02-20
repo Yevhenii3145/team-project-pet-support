@@ -5,10 +5,11 @@ import operations from '../../redux/operations';
 
 export function PetsList({ pets }) {
   const dispatch = useDispatch();
+  console.log(pets)
+  
 
   const onDeletePet = (_id) => {
-    
-    dispatch(operations.deletePet(_id));
+        dispatch(operations.deletePet(_id));
   }
 
   const elements = pets.map(({ name, birthday, breed, image, comments, _id }) => {

@@ -21,6 +21,8 @@ function PetsData() {
     dispatch(operations.getUserPet());
   }, [dispatch]);
 
+  console.log(pets)
+  
   const closeModal = () => {
     setModalShow(false);
     document.body.style.overflow = 'visible';

@@ -18,8 +18,7 @@ export default function UserDataItem() {
   const dispatch = useDispatch();
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
-  const [avatarURL, setAvatar] = useState();
-  console.log(avatarURL);
+  const [avatarURL, setAvatar] = useState();;
   const [imagePreviewUrl, setImagePreviewUrl] = useState(
     userInStore.avatarURL ? userInStore.avatarURL : defaultImg
   );
@@ -32,6 +31,7 @@ export default function UserDataItem() {
 
       if (response?.data) {
         dispatch(setUserAvatarAction(response?.data?.avatarURL));
+        console.log(response?.data)
       }
     };
     fetchUserData();
