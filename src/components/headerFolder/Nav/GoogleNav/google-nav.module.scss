@@ -2,17 +2,9 @@
 
 .googleBox {
     margin: 20px 0 0;
-    
-   @media screen and (min-width: 768px) {
-    width: 210px;
-    margin: 20px 42% 0 auto;
-   }
-   @media screen and (min-width: 1280px) {
-    margin: 20px 43% 0 auto;
-   }
-   @media screen and (min-width: 1500px) {
-    margin: 20px 44% 0 auto;
-   }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .googleDecs {
     font-weight: 500;
@@ -21,6 +13,10 @@
     letter-spacing: 0.04em;
     color: $darkColor;
     text-align: center;
+    text-shadow: $accentColor 1px 0 10px;
+        &:first-child{
+            text-shadow: none;
+        }
     
     &:not(:last-child) {
         margin-bottom: 10px;
@@ -40,6 +36,10 @@
 }
 
 .googleLink {
+    margin-left: 15px;
+        &:first-child{
+            margin-left: 0;
+        }
     @media screen and (min-width: 768px) {
         display: inline-flex;
         flex-direction: column;
