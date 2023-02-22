@@ -2,7 +2,7 @@ import scss from './auth-form.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import operations from '../../redux/operations';
-import GoogleAuth from "../Nav/GoogleNav/GoogleNav"
+import GoogleAuth from '../Nav/GoogleNav/GoogleNav';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Loader from 'components/Loader/Loader';
@@ -10,9 +10,14 @@ import * as Yup from 'yup';
 import { useState } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { NavLink, useLocation } from 'react-router-dom';
+import SvgInsert from 'components/Svg/Svg';
+import cities from './ua.json';
 
 const schemasForStepFirst = Yup.object().shape({
-  email: Yup.string().email().required().min(10, 'the minimum number of characters in the field is 10').max(63, 'the maximum number of characters in the field is 63 inclusive'),
+  email: Yup.string()
+    .email()
+    .min(10, 'The minimum number of characters in the field is 10.')
+    .max(63, 'The maximum number of characters in the field is 63.'),
   password: Yup.string().required().min(7).max(32),
   passwordConfirm: Yup.string().required(),
 });
@@ -31,32 +36,39 @@ function validateEmail(value) {
   let error;
   if (!value) {
     error = 'E-mail address required';
-  } else if (!/^((([0-9A-Za-z]{1}[-0-9A-z]{1,}[0-9A-Za-z]{1}))@([-0-9A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/i.test(value)) {
-    error = 'The e-mail address is not correct, there must be at least 2 characters before the "@" symbol, the hyphen cannot be at the beginning, and the e-mail cannot contain Latin letters, email can include Latin letters, numbers and symbols!';
+  } else if (
+    !/^((([0-9A-Za-z]{1}[-0-9A-z]{1,}[0-9A-Za-z]{1}))@([-0-9A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/i.test(
+      value
+    )
+  ) {
+    error =
+      'The e-mail address is not correct, there must be at least 2 characters before the "@" symbol, the hyphen cannot be at the beginning, and the e-mail cannot contain Latin letters';
   }
   return error;
 }
 
 const schemasForStepSecond = Yup.object().shape({
   name: Yup.string().required('Name is required!'),
-  region: Yup.string().matches(
-    /^[aA-zZ]+,/,
-    'Is not correct format, must "City, Region"'
-  ).required('Region is required'),
+  region: Yup.string().required('Region is required!'),
   number: Yup.string()
-    .matches(/^3?[\s]?8?[\s]?\(?0\d{2}?\)?[\s]?\d{3}[\s|-]?\d{2}[\s|-]?\d{2}$/, 'Field must contain only numbers and format 380xxxxxxxxx!')
+    .matches(
+      /[0-9]/,
+      'Field must contain only numbers, format +380xxxxxxxxx!'
+    )
     .required('Phone number is required!')
-    .min(12, 'Cannot be less than twelve characters!')
-    .max(12, 'Cannot be more than twelve characters!'),
+    .min(9, 'Cannot be less than nine characters!')
+    .max(9, 'Cannot be more than nine characters!'),
 });
 
 const schemasForLogin = Yup.object().shape({
   email: Yup.string().email().required().min(10).max(63),
-  password: Yup.string().required().min(7).max(32)
+  password: Yup.string().required().min(7).max(32),
 });
 
 const AuthForm = () => {
   const [stepOne, setStepOne] = useState(true);
+  const [onShowPassword, setOnShowPassword] = useState(false);
+  const [onShowConfirmPassword, setOnShowConfirmPassword] = useState(false);
   const location = useLocation();
   const page = location.pathname;
 
@@ -64,9 +76,9 @@ const AuthForm = () => {
   const loading = useSelector(state => state.auth.loading);
   const dispatch = useDispatch();
 
-  const onLogin = (data) => {
+  const onLogin = data => {
     dispatch(operations.login(data));
-  }
+  };
 
   const initialValue = {
     email: '',
@@ -80,7 +92,9 @@ const AuthForm = () => {
   const handleSubmitForRegister = (values, actions) => {
     if (stepOne) {
       if (values.password !== values.passwordConfirm) {
-        return Notify.failure('Your passwords must have the same value');
+        return Notify.failure('Your passwords must have the same value!', {
+          timeout: 6000,
+        });
       }
       return setStepOne(false);
     }
@@ -90,7 +104,7 @@ const AuthForm = () => {
         password: values.password,
         name: values.name,
         city: values.region,
-        phone: values.number,
+        phone: `380${values.number}`,
       };
       actions.resetForm();
       setStepOne(true);
@@ -104,13 +118,20 @@ const AuthForm = () => {
       password: values.password,
     };
     actions.resetForm();
-    return onLogin(user)
+    return onLogin(user);
   };
 
   const backButtonClick = () => {
     if (!stepOne) {
       return setStepOne(true);
     }
+  };
+
+  const showPassword = () => {
+    return setOnShowPassword(!onShowPassword);
+  };
+  const showConfirmPassword = () => {
+    return setOnShowConfirmPassword(!onShowConfirmPassword);
   };
 
   const btnAuthVerify = (values, actions) => {
@@ -134,46 +155,75 @@ const AuthForm = () => {
               onSubmit={handleSubmitForRegister}
             >
               <Form className={scss.form__container} autoComplete="off">
-                <Field
-                  className={scss.form__input}
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  validate={validateEmail}
-                />
-                <ErrorMessage
-                  name="email"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
-                />
-                <Field
-                  className={scss.form__input}
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  validate={validatePassword}
-                />
-                <ErrorMessage
-                  name="password"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
-                />
-                <Field
-                  className={scss.form__input}
-                  type="password"
-                  name="passwordConfirm"
-                  placeholder="Confirm Password"
-                  validate={validatePassword}
-                />
-                <ErrorMessage
-                  name="passwordConfirm"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
-                />
+                <div className={scss.form__input_container}>
+                  <Field
+                    className={scss.form__input}
+                    type="email"
+                    name="email"
+                    validate={validateEmail}
+                    placeholder=" "
+                  />
+                  <label className={scss.form__label}>Email</label>
+                  <ErrorMessage
+                    name="email"
+                    render={msg => <p className={scss.error__mesage}>{msg}</p>}
+                  />
+                </div>
+                <div className={scss.form__input_container}>
+                  <Field
+                    className={scss.form__input}
+                    type={!onShowPassword ? 'password' : 'text'}
+                    name="password"
+                    validate={validatePassword}
+                    placeholder=" "
+                  />
+                  <label className={scss.form__label}>Password</label>
+                  <span
+                    className={scss.form__input__password_show}
+                    onClick={showPassword}
+                  >
+                    {!onShowPassword ? (
+                      <SvgInsert id="eye" />
+                    ) : (
+                      <SvgInsert id="eye-blocked" />
+                    )}
+                  </span>
+                  <ErrorMessage
+                    name="password"
+                    render={msg => <p className={scss.error__mesage}>{msg}</p>}
+                  />
+                </div>
+                <div className={scss.form__input_container}>
+                  <Field
+                    className={scss.form__input}
+                    type={!onShowConfirmPassword ? 'password' : 'text'}
+                    name="passwordConfirm"
+                    placeholder=" "
+                    validate={validatePassword}
+                  />
+                  <label className={scss.form__label}>Confirm Password</label>
+                  <span
+                    className={scss.form__input__password_show}
+                    onClick={showConfirmPassword}
+                  >
+                    {!onShowConfirmPassword ? (
+                      <SvgInsert id="eye" />
+                    ) : (
+                      <SvgInsert id="eye-blocked" />
+                    )}
+                  </span>
+                  <ErrorMessage
+                    name="passwordConfirm"
+                    render={msg => <p className={scss.error__mesage}>{msg}</p>}
+                  />
+                </div>
                 <button
                   className={`${scss.button__primary_main} ${scss.form__button}`}
                   type="submit"
                 >
                   Next
                 </button>
-                <GoogleAuth/>
+                <GoogleAuth />
               </Form>
             </Formik>
           ) : (
@@ -184,38 +234,64 @@ const AuthForm = () => {
               autoComplete="off"
             >
               <Form className={scss.form__container}>
-                <Field
-                  className={scss.form__input}
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  required
-                />
-                <ErrorMessage
-                  name="name"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
-                />
-                <Field
-                  className={scss.form__input}
-                  type="text"
-                  name="region"
-                  placeholder="City, region"
-                  required
-                />
-                <ErrorMessage
-                  name="region"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
-                />
-                <Field
-                  className={scss.form__input}
-                  type="tel"
-                  name="number"
-                  placeholder="Mobile phone"
-                />
-                <ErrorMessage
-                  name="number"
-                  render={msg => Notify.warning(`${msg}`, {timeout: 6000})}
-                />
+                <div className={scss.form__input_container}>
+                  <Field
+                    className={scss.form__input}
+                    type="text"
+                    name="name"
+                    placeholder=" "
+                    required
+                  />
+                  <label className={scss.form__label}>Name</label>
+                  <ErrorMessage
+                    name="name"
+                    render={msg => <p className={scss.error__mesage}>{msg}</p>}
+                  />
+                </div>
+                <div className={scss.form__input_container}>
+                  <Field
+                    className={scss.form__input}
+                    name="region"
+                    list="region"
+                    placeholder=" "
+                  />
+                  <datalist id="region">
+                    {cities.map(city => (
+                      <option key={`${city.city}.${city.lat}`}>
+                        {city.city}, {city.admin_name}
+                      </option>
+                    ))}
+                  </datalist>
+                  <label className={scss.form__label}>City, region</label>
+                  <ErrorMessage
+                    name="region"
+                    render={msg => <p className={scss.error__mesage}>{msg}</p>}
+                  />
+                </div>
+                <div className={scss.form__input_container}>
+                  <Field
+                    className={`${scss.form__input} ${scss.form__input_phone}`}
+                    type="tel"
+                    name="number"
+                    placeholder=" "
+                  />
+                  <span className={scss.form__input_number}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="25"
+                      height="20"
+                    >
+                      <rect width="25" height="10" fill="#005BBB" />
+                      <rect width="25" height="10" y="10" fill="#FFD500" />
+                    </svg> 
+                    <p>+380</p>
+                  </span>
+                  <label className={scss.form__label}>Mobile phone</label>
+                  <ErrorMessage
+                    name="number"
+                    render={msg => <p className={scss.error__mesage}>{msg}</p>}
+                  />
+                </div>
                 <span
                   className={`${scss.button__primary_not_main} ${scss.form__back_button}`}
                   onClick={backButtonClick}
@@ -227,8 +303,8 @@ const AuthForm = () => {
                   type="submit"
                 >
                   Register
-                  </button>
-                <GoogleAuth/>
+                </button>
+                <GoogleAuth />
               </Form>
             </Formik>
           )}
@@ -277,12 +353,12 @@ const AuthForm = () => {
                 Login
               </button>
               <p className={scss.form__description}>
-                Resend verification email? Click {' '}
+                Resend verification email? Click{' '}
                 <NavLink to="/verify" className={scss.description__nav}>
                   here
                 </NavLink>
               </p>
-              <GoogleAuth/>
+              <GoogleAuth />
             </Form>
           </Formik>
           <p className={scss.form__description}>
@@ -331,7 +407,7 @@ const AuthForm = () => {
               </button>
             </Form>
           </Formik>
-          
+
           <p className={scss.form__description}>
             Go to back?{' '}
             <NavLink to="/login" className={scss.description__nav}>
