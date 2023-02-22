@@ -199,3 +199,33 @@
     fill: $accentColor;
   }
 }
+
+.iconFacebook {
+  display: flex;
+  margin: 0 auto 6px;
+  box-sizing: content-box;
+  background-color: $lightColor;
+  fill: currentColor;
+  stroke: currentColor;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid $accentColor;
+  border-radius: 40px;
+
+  &:hover,
+  &:focus {
+    background-color: rgba($color: #ff6101, $alpha: 0.15);
+    border: 1px solid #c14d05;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: inline-block;
+  }
+}
+
+.iconEye{
+  display: inline-block;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
