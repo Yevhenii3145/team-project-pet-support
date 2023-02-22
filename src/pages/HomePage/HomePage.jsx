@@ -1,4 +1,4 @@
-import SharedLayout from 'components/SharedLayout/SharedLayout';
+import SharedLayout from 'components/headerFolder/SharedLayout/SharedLayout';
 import scss from './home-page.module.scss';
 
 const HomePage = () => {

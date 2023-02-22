@@ -1,0 +1,201 @@
+@import '../../../helpers/variables.module.scss';
+
+.logo {
+  @media screen and (min-width: 768px) {
+    width: 94px;
+    height: 48px;
+  }
+}
+
+.openMenu {
+  padding-top: 4px;
+  transition: fill 500ms ease-in-out;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    fill: $accentColor;
+  }
+
+  @media screen and (min-width: 1280px) {
+    display: none;
+  }
+}
+
+.closeMenu {
+  padding-top: 4px;
+  stroke: #111;
+  transition: stroke 500ms ease-in-out;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    stroke: $accentColor;
+  }
+
+  @media screen and (min-width: 1280px) {
+    display: none;
+  }
+}
+
+.heart_favorite {
+  fill: $accentColor;
+}
+
+.logout {
+  display: block;
+  fill: $lightColor;
+  opacity: 0.6;
+  stroke: $darkColor;
+
+  &:hover,
+  &:focus {
+    stroke: $accentColor;
+    fill: $accentColor;
+  }
+}
+
+.search_news {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  @media (min-width: 768px) {
+    right: 58px;
+    bottom: 10px;
+  }
+  @media (min-width: 1280px) {
+    right: 332px;
+  }
+}
+
+
+.search_reset {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  cursor: pointer;
+  stroke: #111;
+  &:hover,
+  &:focus {
+    stroke: $accentColor;
+  }
+
+  @media (min-width: 768px) {
+    right: 58px;
+    bottom: 10px;
+  }
+  @media (min-width: 1280px) {
+    right: 332px;
+  }
+}
+
+
+.iconAddPet {
+  
+  background-color: $accentColor;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+}
+
+.iconAddPet {
+
+  @media (min-width: 768px) {
+    width: 24px;
+    height: 24px;
+    box-sizing: content-box;
+    padding: 10px;
+    margin-left: 12px;
+    cursor: pointer;
+    
+  }
+}
+
+.iconAddNotice {
+  @media (min-width: 768px) {
+    background-color: $accentColor;
+    padding: 10px;
+    border-radius: 50px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+}
+
+.male {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  width: 40px;
+  height: 40px;
+
+  @media (min-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.iconEditAvatar {
+
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    fill: $accentColor;
+  }
+}
+
+.iconClose {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  border: #111;
+}
+
+.iconCloseAddNotice{
+  display: block;
+  height: 16px;
+  margin-left: auto;
+  border: #111;
+
+  @media screen and (min-width: 768px) {
+    height: 20px;
+  }
+}
+
+.iconDeleteNotice {
+  margin-left: 13px;
+  fill: #ff6101;
+}
+
+.google {
+  display: flex;
+  margin: 0 auto 6px;
+  box-sizing: content-box;
+  background-color: $lightColor;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid $accentColor;
+  border-radius: 40px;
+
+  &:hover,
+  &:focus {
+    background-color: rgba($color: #ff6101, $alpha: 0.15);
+    border: 1px solid #c14d05;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: inline-block;
+  }
+}
+
+.iconAccount {
+  fill: $lightColor;
+}
+
+.iconDelete {
+  &:hover,
+  &:focus {
+    fill: $accentColor;
+  }
+}

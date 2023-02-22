@@ -2,10 +2,10 @@ import { Outlet } from "react-router-dom";
 
 import scss from "./notices-page.module.scss";
 import container from "helpers/container.module.scss";
-import NoticesCategoriesNav from "components/NoticesCategoriesNav/NoticesCategoriesNav";
+import NoticesCategoriesNav from "components/noticesFolder/NoticesCategoriesNav/NoticesCategoriesNav";
 
-import NoticesSearch from "components/NoticesSearch/NoticesSearch";
-import AddNoticeButton from "components/AddNoticeButton/AddNoticeButton";
+import NoticesSearch from "components/noticesFolder/NoticesSearch/NoticesSearch";
+import AddNoticeButton from "components/noticesFolder/AddNoticeButton/AddNoticeButton";
 import { useState } from "react";
 
 

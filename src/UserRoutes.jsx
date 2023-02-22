@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { Progress } from '@chakra-ui/react';
-import Header from 'components/Header/Header';
+import Header from 'components/headerFolder/Header/Header';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
@@ -16,10 +16,10 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const UserPage = lazy(() => import('./pages/UserPage/UserPage'));
 
 const NoticesCategoriesList = lazy(() =>
-  import('./components/NoticesCategoriesList/NoticesCategoriesList')
+  import('./components/noticesFolder/NoticesCategoriesList/NoticesCategoriesList')
 );
-const Public = lazy(() => import('./components/Public/Public'));
-const Private = lazy(() => import('./components/Private/Private'));
+const Public = lazy(() => import('./components/utilsFolder/Public/Public'));
+const Private = lazy(() => import('./components/utilsFolder/Private/Private'));
 
 const UserRoutes = () => {
   return (

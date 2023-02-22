@@ -1,7 +1,7 @@
 import React from 'react';
-import { UserData } from '../../components/UserData/UserData';
-import Logout from '../../components/Logout/Logout';
-import PetsData from '../../components/PetsData/PetsData';
+import { UserData } from '../../components/userFolder/UserData/UserData';
+import Logout from '../../components/userFolder/Logout/Logout';
+import PetsData from '../../components/petsUserFolder/PetsData/PetsData';
 import scss from '../../helpers/container.module.scss';
 import style from './user-page.module.scss';
 

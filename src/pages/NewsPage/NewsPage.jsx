@@ -1,7 +1,7 @@
-import NewsList from '../../components/NewsList/NewsList';
+import NewsList from '../../components/newsFolder/NewsList/NewsList';
 import s from './news-page.module.scss';
 import sass from '../../helpers/container.module.scss';
-import NewsFilter from '../../components/NewsFilter/NewsFilter';
+import NewsFilter from '../../components/newsFolder/NewsFilter/NewsFilter';
 import { useState, useEffect } from 'react';
 import news from './news.json';
 import { format } from 'date-fns';
@@ -58,7 +58,6 @@ const NewsPage = () => {
     const filterlist = data.filter(news => {
       return news.title.toLocaleLowerCase().includes(normalizedFilter);
     });
-    console.log(filterlist);
     if (filterlist.length === 0) {
       Notify.warning('Write a correct request');
     }

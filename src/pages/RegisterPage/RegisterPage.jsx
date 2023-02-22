@@ -1,6 +1,6 @@
 import scss from './register-page.module.scss';
 import base from '../../helpers/container.module.scss';
-import AuthForm from 'components/AuthForm/AuthForm';
+import AuthForm from 'components/userFolder/AuthForm/AuthForm';
 
 const RegisterPage = () => {
   return (
