@@ -15,7 +15,6 @@ import useAuth from 'redux/utils/useAuth';
 const NoticesCategoriesList = () => {
   const dispatch = useDispatch();
   const { categoryName } = useParams();
-  console.log(categoryName);
   const pets = useSelector(getNotices);
   const filter = useSelector(getFilter);
 
