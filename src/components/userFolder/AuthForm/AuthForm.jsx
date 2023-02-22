@@ -10,7 +10,7 @@ import * as Yup from 'yup'
 import { useState } from 'react'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import { NavLink, useLocation } from 'react-router-dom'
-import SvgInsert from 'components/Svg/Svg'
+import SvgInsert from 'components/utilsFolder/Svg/Svg'
 import cities from './ua.json'
 
 const schemasForStepFirst = Yup.object().shape({
