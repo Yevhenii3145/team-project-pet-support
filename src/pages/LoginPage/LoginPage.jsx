@@ -1,8 +1,8 @@
 import scss from './login-page.module.scss';
-import AuthForm from 'components/AuthForm/AuthForm';
+import AuthForm from 'components/userFolder/AuthForm/AuthForm';
 import { useSelector } from "react-redux";
 import base from '../../helpers/container.module.scss';
-import { getLoading } from "redux/selectors";
+import { getLoading } from "redux/selectors/selectors";
 import { Spinner } from '@chakra-ui/react'
 
 const LoginPage = () => {

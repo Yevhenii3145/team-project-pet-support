@@ -1,0 +1,238 @@
+@import '../../../helpers/variables.module.scss';
+@import '../../../helpers/buttons.module.scss';
+
+h4,
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.modal_notice__button_favorite {
+  fill: $accentColor;
+  color: $accentColor;
+}
+
+.modal_notice__content {
+  max-width: 280px;
+  padding: 20px 20px 40px;
+  z-index: 2000;
+}
+
+.modal_notice__close {
+  text-align: center;
+  background: $background;
+  backdrop-filter: blur(2px);
+  margin-left: auto;
+  max-width: 34px;
+  max-height: 34px;
+  padding: 6px;
+  border-radius: 40px;
+  cursor: pointer;
+    &:hover, &:focus{
+        background: #e6dfda;
+    }
+}
+
+.modal_notice__image_content {
+  position: relative;
+  margin-top: 6px;
+}
+
+.modal_notice__image {
+  border-radius: 0px 0px 40px 40px;
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+}
+
+.modal_notice__category {
+  position: absolute;
+  top: 20px;
+  display: block;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(50px);
+  border-radius: 0px 40px 40px 0px;
+  padding: 6px 67px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+}
+
+.modal_notice__title {
+  margin-top: 16px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: -0.01em;
+  color: #000000;
+}
+
+.modal_notice__list {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_notice__item {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  &:first-child {
+    margin-top: 0px;
+  }
+}
+
+.modal_notice__item_title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  min-width: 63px;
+  margin-right: 40px;
+
+  &:last-child {
+    width: auto;
+    margin-right: 0px;
+  }
+
+  color: #000000;
+}
+
+.modal_notice__item_description {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  word-break: break-word;
+
+  color: #000000;
+}
+
+.modal_notice__item_description_link:hover, .modal_notice__item_description_link:focus{
+  color: $accentColor;
+}
+
+.modal_notice__item_comment {
+  margin-top: 28px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+
+  color: #000000;
+}
+
+.modal_notice__button_container {
+  margin-top: 40px;
+}
+.modal_notice__button > svg {
+  margin-left: 8px;
+}
+
+.modal_notice__button {
+  width: 100%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.04em;
+  display: block;
+  &:last-child {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &:hover > svg,
+  &:focus > svg {
+    fill: $lightColor;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .modal_notice__content {
+    min-width: 704px;
+    padding: 32px 20px;
+  }
+
+  .modal_notice__content_info {
+    display: flex;
+    position: relative;
+  }
+
+  .modal_notice__close {
+    position: absolute;
+    right: 0px;
+    top: -8px;
+  }
+
+  .modal_notice__image_content {
+    margin-top: 0px;
+    margin-right: 20px;
+  }
+
+  .modal_notice__image {
+    border-radius: 0px 0px 40px 40px;
+    width: 288px;
+    height: 328px;
+  }
+
+  .modal_notice__title {
+    margin-top: 0px;
+    font-size: 28px;
+    line-height: 38px;
+
+    &:last-child {
+      width: auto;
+      margin-right: 0px;
+    }
+  }
+
+  .modal_notice__list {
+    margin-top: 20px;
+  }
+
+  .modal_notice__item_title {
+    font-size: 16px;
+    line-height: 22px;
+    min-width: 73px;
+    margin-right: 48px;
+
+    &:last-child {
+      width: auto;
+      margin-right: 0px;
+    }
+  }
+
+  .modal_notice__item_description {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .modal_notice__item_comment {
+    margin-top: 28px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .modal_notice__button_container {
+    margin-top: 32px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+  }
+
+  .modal_notice__button {
+    max-width: 160px;
+    &:last-child {
+      margin-top: 0px;
+      margin-right: 12px;
+    }
+  }
+}
