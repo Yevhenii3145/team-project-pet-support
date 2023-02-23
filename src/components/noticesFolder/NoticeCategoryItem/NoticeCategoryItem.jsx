@@ -7,11 +7,11 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import scss from './notice-category-item.module.scss';
 import SvgInsert from 'components/utilsFolder/Svg/Svg';
 import {
-  // fetchCategoryNotices,
+  fetchCategoryNotices,
   addNoticeToFavorite,
   deleteNotice,
   searchNotice,
-  // getAllFavorites,
+  getAllFavorites,
 } from 'redux/operations/noticesOperation';
 import useAuth from 'redux/utils/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
@@ -47,6 +47,8 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
   const btnAddToFavorite = noticeId => {
     if (isLogin) {
       dispatch(addNoticeToFavorite(noticeId));
+      dispatch(getAllFavorites);
+      dispatch(fetchCategoryNotices(categoryNotices));
       setIsFavorite(!isFavorite);
       return;
     }
