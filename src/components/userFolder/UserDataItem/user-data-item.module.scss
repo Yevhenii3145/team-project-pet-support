@@ -318,3 +318,9 @@ form:not(:last-child) {
     }
 
 }
+.loader__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

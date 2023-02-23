@@ -103,6 +103,17 @@ const AuthForm = () => {
             return setStepOne(false)
         }
         if (!stepOne) {
+
+            if(!cities.find(city => `${city.city}, ${city.admin_name}` === values.region)){
+                console.log('not')
+                return Notify.failure(
+                    'Please select a region from the list!',
+                    {
+                        timeout: 6000,
+                    }
+                )
+            }
+
             const user = {
                 email: values.email,
                 password: values.password,
@@ -297,6 +308,7 @@ const AuthForm = () => {
                                         className={scss.form__input}
                                         name="region"
                                         list="region"
+                                        type="text"
                                         placeholder=" "
                                     />
                                     <datalist id="region">
@@ -394,28 +406,53 @@ const AuthForm = () => {
                             className={scss.form__container}
                             autoComplete="off"
                         >
+                            <div className={scss.form__input_container}>
                             <Field
                                 className={scss.form__input}
                                 type="email"
                                 name="email"
-                                placeholder="Email"
+                                placeholder=" "
                             />
+                            <label className={scss.form__label}>Email</label>
                             <ErrorMessage
                                 name="email"
-                                render={msg => Notify.warning(`${msg}`)}
+                                render={msg => <p className={scss.error__mesage}>
+                                {msg}
+                            </p>}
                             />
+                            </div>
+                            <div className={scss.form__input_container}>
                             <Field
                                 className={`${scss.form__input} ${scss.form__login__input}`}
-                                type="password"
+                                type={
+                                    !onShowPassword
+                                        ? 'password'
+                                        : 'text'
+                                }
                                 name="password"
-                                placeholder="Password"
+                                placeholder=" "
                                 validate={validatePassword}
                             />
+                            <label className={scss.form__label}>Password</label>
+                            <span
+                                        className={
+                                            scss.form__input__password_show
+                                        }
+                                        onClick={showPassword}
+                                    >
+                                        {!onShowPassword ? (
+                                            <SvgInsert id="eye" />
+                                        ) : (
+                                            <SvgInsert id="eye-blocked" />
+                                        )}
+                                    </span>
                             <ErrorMessage
                                 name="password"
-                                render={msg => Notify.warning(`${msg}`)}
+                                render={msg => <p className={scss.error__mesage}>
+                                {msg}
+                            </p>}
                             />
-
+                            </div>
                             <button
                                 className={`${scss.button__primary_main} ${scss.form__button}`}
                                 type="submit"

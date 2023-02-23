@@ -123,10 +123,10 @@ export const authSlice = createSlice({
       },
 
       [operations.updateUser.pending] (state, action) {
-        state.loading = true;
+        //state.loading = true;
       },
       [operations.updateUser.fulfilled] (state, action) {
-        state.loading = false;
+        //state.loading = false;
         for (const key in action.payload) {
           switch (key) {
             case 'name':
@@ -153,7 +153,7 @@ export const authSlice = createSlice({
         }
       },
       [operations.updateUser.rejected] (state) {
-        state.loading = false;
+        //state.loading = false;
         Report.warning(
           'Warning',
           `Something went wrong or user with this name already exists!`,
