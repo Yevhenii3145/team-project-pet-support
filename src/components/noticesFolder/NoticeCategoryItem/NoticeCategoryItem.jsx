@@ -120,7 +120,7 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
             {category === 'sell' && (
               <li className={scss.card_info_item}>
                 <p className={scss.card_info_item_text}>Price:</p>
-                <p>{price}$</p>
+                <p>{price}</p>
               </li>
             )}
           </ul>

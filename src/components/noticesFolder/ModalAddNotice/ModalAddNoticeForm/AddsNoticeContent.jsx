@@ -6,6 +6,7 @@ import { addNotice } from 'redux/operations/noticesOperation';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import Loader from 'components/utilsFolder/Loader/Loader';
 import SvgInsert from 'components/utilsFolder/Svg/Svg';
+import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
 
 const AddsPetContent = ({ close }) => {
@@ -20,6 +21,7 @@ const AddsPetContent = ({ close }) => {
   const [currentRadioValue, setCurrentRadioValue] = useState('');
   const [petLocation, setPetLocation] = useState('');
   const [petPrice, setPetPrice] = useState(Number);
+  const [currencyValue, setCurrencyValue] = useState('UAH')
   const [imageURL, setImageURL] = useState(null);
   const loading = useSelector(state => state.user.loading);
   
@@ -88,6 +90,20 @@ const AddsPetContent = ({ close }) => {
 
   const handleSubmitForStepOne = e => {
     e.preventDefault();
+    if(petCategory === ''){
+      return Report.warning(
+        'Warning!',
+        'Please, selected type of category!',
+        'Okay',
+        );
+    }
+    if(petDate === ''){
+      return Report.warning(
+        'Warning!',
+        'Please, selected date of birth!',
+        'Okay',
+        );
+    }
     const form = e.currentTarget;
     const { title, name, date, breed } = form.elements;
     setPetTitle(title.value);
@@ -96,9 +112,16 @@ const AddsPetContent = ({ close }) => {
     setPetBreed(breed.value);
     return changeStep();
   };
-
+  
   const handleSubmit = e => {
     e.preventDefault();
+    if(currentRadioValue === ''){
+      return Report.warning(
+        'Warning!',
+        'Please, selected type of sex!',
+        'Okay',
+        );
+    }
     const form = e.currentTarget;
     const { image, comments } = form.elements;
     const data = new FormData();
@@ -111,7 +134,7 @@ const AddsPetContent = ({ close }) => {
     data.append('breed', petBreed);
     data.append('location', petLocation);
     data.append('sex', currentRadioValue);
-    data.append('price', petPrice);
+    data.append('price', `${petPrice} ${currencyValue}`);
     data.append('comments', comments.value);
     data.append('image', image.files[0]);
 
@@ -122,6 +145,8 @@ const AddsPetContent = ({ close }) => {
     setPetName('');
     setPetLocation('');
     setPetPrice('');
+    setCurrentRadioValue('')
+    setCurrencyValue('UAH')
     setImageURL(null);
     dispatch(addNotice(data));
     form.reset();
@@ -159,9 +184,8 @@ const AddsPetContent = ({ close }) => {
         <h3 className={scss.modalAdds_page__tittle}>Add pet</h3>
         {stepOne && (
           <>
-            <p className={scss.modalAdds_descriptions}>
-              Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
-              amet, consectetur
+            <p className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>
+            Type of category <span className={scss.star}>*</span>
             </p>
             <div className={scss.buttonCont}>
             <input
@@ -213,7 +237,7 @@ const AddsPetContent = ({ close }) => {
               <input
                 className={scss.modalAdds_page__input}
                 name="title"
-                placeholder="Type name pet"
+                placeholder="Type name"
                 type="text"
                 minLength="2"
                 maxLength="48"
@@ -224,7 +248,7 @@ const AddsPetContent = ({ close }) => {
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
               >
-                Name pet
+                Name pet <span className={scss.star}>*</span>
               </label>
               <input
                 className={scss.modalAdds_page__input}
@@ -240,7 +264,7 @@ const AddsPetContent = ({ close }) => {
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
               >
-                Data of birth
+                Data of birth <span className={scss.star}>*</span>
               </label>
               <Flatpickr
                 className={scss.modalAdds_page__input}
@@ -259,7 +283,7 @@ const AddsPetContent = ({ close }) => {
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
               >
-                Breed
+                Breed <span className={scss.star}>*</span>
               </label>
               <input
                 className={scss.modalAdds_page__input}
@@ -303,6 +327,14 @@ const AddsPetContent = ({ close }) => {
               </h2>
               <div className={scss.radioButtonSection}>
               <input
+                  required
+                  className={scss.radioButtonInputSex}
+                  type="radio"
+                  name="sex"
+                  value={currentRadioValue}
+                  defaultChecked
+                  />
+              <input
                   id='male'
                     required
                     className={scss.radioButtonInputSex}
@@ -344,13 +376,22 @@ const AddsPetContent = ({ close }) => {
               value={petLocation}
               onChange={changeStepOne}
             />
+            
             {sell && (
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
               >
                 Price<span className={scss.star}>*</span>:
+                <div className={scss.modalAdds_page__input_price}>
+                <select name="currency" className={scss.modalAdds_page__input_select} onChange={(e)=>{
+                  setCurrencyValue(e.target.value)
+                }}>
+                  <option value="UAH">UAH</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                </select>
                 <input
-                  className={scss.modalAdds_page__input}
+                  className={scss.modalAdds_page__input_select}
                   type="number"
                   name="price"
                   min="1"
@@ -359,13 +400,14 @@ const AddsPetContent = ({ close }) => {
                   value={petPrice}
                   onChange={changeStepOne}
                 />
+                </div>
               </label>
             )}
             <div className={scss.add__pet__container}>
               <p
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
               >
-                Load the pet’s image
+                Load the pet’s image <span className={scss.star}>*</span>
               </p>
               <input
                 className={scss.addspet__imgInput}
@@ -387,13 +429,13 @@ const AddsPetContent = ({ close }) => {
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_commit_box}`}
               >
-                Comments
+                Comments <span className={scss.star}>*</span>
               </label>
               <textarea
                 className={scss.modalAdds_commit}
                 type="text"
                 name="comments"
-                placeholder="Type breed"
+                placeholder="Type comment"
                 required
                 minLength="8"
                 maxLength="120"
