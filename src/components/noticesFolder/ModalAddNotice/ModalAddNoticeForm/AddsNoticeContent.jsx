@@ -6,6 +6,7 @@ import { addNotice } from 'redux/operations/noticesOperation';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import Loader from 'components/utilsFolder/Loader/Loader';
 import SvgInsert from 'components/utilsFolder/Svg/Svg';
+import Flatpickr from 'react-flatpickr'
 
 const AddsPetContent = ({ close }) => {
   const [sell, setSell] = useState(false);
@@ -24,6 +25,21 @@ const AddsPetContent = ({ close }) => {
   
   const dispatch = useDispatch();
 
+  const dateNow = new Date()
+
+  const formatDate = date => {
+      const dateFormat = new Date(date)
+      return `${
+          dateFormat.getMonth() + 1 < 10
+              ? `0${dateFormat.getMonth() + 1}`
+              : dateFormat.getMonth() + 1
+      }.${
+          dateFormat.getDate() < 10
+              ? `0${dateFormat.getDate()}`
+              : dateFormat.getDate()
+      }.${dateFormat.getFullYear()}`
+  }
+
   const changeStepOne = e => {
     switch (e.currentTarget.name) {
       case 'title':
@@ -32,9 +48,9 @@ const AddsPetContent = ({ close }) => {
       case 'name':
         setPetName(e.currentTarget.value);
         break;
-      case 'date':
-        setPetDate(e.currentTarget.value);
-        break;
+      // case 'date':
+      //   setPetDate(e.currentTarget.value);
+      //   break;
       case 'breed':
         setPetBreed(e.currentTarget.value);
         break;
@@ -70,13 +86,6 @@ const AddsPetContent = ({ close }) => {
     return;
   };
 
-  const dateNow = new Date();
-  const formatDate = `${dateNow.getDate() < 10 ? `0${dateNow.getDate()}` : dateNow.getDate()
-    }.${dateNow.getMonth() < 10
-      ? `0${dateNow.getMonth() + 1}`
-      : dateNow.getMonth() + 1
-    }.${dateNow.getFullYear()}`;
-
   const handleSubmitForStepOne = e => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -85,13 +94,6 @@ const AddsPetContent = ({ close }) => {
     setPetName(name.value);
     setPetDate(date.value);
     setPetBreed(breed.value);
-    if (new Date(petDate) >= new Date(formatDate)) {
-      return Report.info(
-        'Pet Info',
-        'Please choose a date no later than today.',
-        'Okay'
-      );
-    }
     return changeStep();
   };
 
@@ -240,16 +242,19 @@ const AddsPetContent = ({ close }) => {
               >
                 Data of birth
               </label>
-              <input
+              <Flatpickr
                 className={scss.modalAdds_page__input}
+                options={{
+                  dateFormat: 'm.d.Y',
+                  maxDate: `${formatDate(dateNow)}`,
+                }}
+                onChange={([date]) => {
+                    setPetDate(formatDate(date))
+                }}
                 name="date"
                 type="text"
-                pattern="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"
-                title="Date must be in the format: DD.MM.YYYY or DD/MM/YYYY or DD-MM-YYYY"
                 placeholder="Type date of birth"
-                required
                 value={petDate}
-                onChange={changeStepOne}
               />
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
