@@ -35,13 +35,12 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
   const isLogin = useAuth();
   const idUser = useSelector(state => state.auth.user.userId)
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
-
+  const loading = useSelector(state => state.notices.loading);
 
   const [isFavorite, setIsFavorite] = useState(isLogin ?
     favoriteNotices !== null &&
       favoriteNotices.some(notice => notice._id === _id) : null
   );
-
 
 
   const btnAddToFavorite = noticeId => {
@@ -86,7 +85,8 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
   }
 
   return (
-    <>
+    loading ? <p>loading...</p> :
+      <>
       {modalShow && (
         <>
           <Modal onClose={closeModal}>
@@ -165,6 +165,7 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
         </div>
       </li>
     </>
+    
   );
 };
 
