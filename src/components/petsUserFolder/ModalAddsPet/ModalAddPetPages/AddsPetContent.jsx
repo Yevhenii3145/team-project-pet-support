@@ -65,14 +65,14 @@ const AddsPetContent = ({ close }) => {
   const formatDate = date => {
     const dateFormat = new Date(date)
     return `${
-        dateFormat.getDate() < 10
-            ? `0${dateFormat.getDate()}`
-            : dateFormat.getDate()
-    }.${
       dateFormat.getMonth() + 1 < 10
           ? `0${dateFormat.getMonth() + 1}`
           : dateFormat.getMonth() + 1
-  }.${dateFormat.getFullYear()}`
+  }.${
+    dateFormat.getDate() < 10
+        ? `0${dateFormat.getDate()}`
+        : dateFormat.getDate()
+}.${dateFormat.getFullYear()}`
 }
 
   const handleSubmitForStepOne = e => {
@@ -151,7 +151,7 @@ const AddsPetContent = ({ close }) => {
               required
               value={petDate}
               options={{
-                dateFormat: 'd.m.Y',
+                dateFormat: 'm.d.Y',
                 maxDate: `${formatDate(dateNow)}`,
             }}
             onChange={([date]) => {
