@@ -11,25 +11,45 @@ const GoogleAuth = () => {
 
     return (
         <div className={scss.googleBox}>
+            <div className={scss.googleBox__title}>
             <p className={scss.googleDecs}>Or sign in with</p>
+            </div>
+            <div className={scss.linkBox}>
             {isActive === true ? (
-                <a
-                    href={`${REACT_APP_BASE_URL}/api/auth/google`}
-                    className={scss.googleLink}
-                    onClick={() => dispatch(setMenuActive(!isActive))}
-                >
-                    <SvgInsert id="icon-google" />
-                    <p className={scss.googleDecs}>Google</p>
-                </a>
+                <>
+                    <a
+                        href={`${REACT_APP_BASE_URL}/api/auth/google`}
+                        className={scss.googleLink}
+                        onClick={() => dispatch(setMenuActive(!isActive))}
+                    >
+                        <SvgInsert id="icon-google" />
+                    </a>
+                    <a
+                        href={`${REACT_APP_BASE_URL}/api/auth/facebook`}
+                        className={scss.googleLink}
+                        onClick={() => dispatch(setMenuActive(!isActive))}
+                    >
+                        <SvgInsert id="facebook" />
+                    </a>
+                </>
             ) : (
-                <a
-                    href={`${REACT_APP_BASE_URL}/api/auth/google`}
-                    className={scss.googleLink}
-                >
-                    <SvgInsert id="icon-google" />
-                    <p className={scss.googleDecs}>Google</p>
-                </a>
+                <>
+                    <a
+                        href={`${REACT_APP_BASE_URL}/api/auth/google`}
+                        className={scss.googleLink}
+                    >
+                        <SvgInsert id="icon-google" />
+                    </a>
+                    <a
+                        href={`${REACT_APP_BASE_URL}/api/auth/facebook`}
+                        className={scss.googleLink}
+                        onClick={() => dispatch(setMenuActive(!isActive))}
+                    >
+                        <SvgInsert id="facebook" />
+                    </a>
+                </>
             )}
+            </div>
         </div>
     )
 }

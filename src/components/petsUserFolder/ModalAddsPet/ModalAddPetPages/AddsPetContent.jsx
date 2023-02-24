@@ -6,7 +6,7 @@ import { Report } from 'notiflix/build/notiflix-report-aio';
 import Loader from 'components/utilsFolder/Loader/Loader';
 import SvgInsert from '../../../utilsFolder/Svg/Svg';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import 'flatpickr/dist/themes/material_orange.css'
+// import 'flatpickr/dist/themes/material_orange.css'
 import Flatpickr from 'react-flatpickr'
 
 const AddsPetContent = ({ close }) => {

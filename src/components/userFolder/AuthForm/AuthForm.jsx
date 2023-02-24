@@ -69,8 +69,22 @@ const AuthForm = () => {
     const [stepOne, setStepOne] = useState(true)
     const [onShowPassword, setOnShowPassword] = useState(false)
     const [onShowConfirmPassword, setOnShowConfirmPassword] = useState(false)
+    const [valuePassword, setValuePassword] = useState('')
+    const [valueConfirmPassword, setValueConfirmPassword] = useState('')
     const location = useLocation()
     const page = location.pathname
+    const handleChangePassword = (e) => {
+        switch(e.target.name){
+            case 'password':
+                setValuePassword(e.target.value);
+                break;
+            case 'passwordConfirm':
+                setValueConfirmPassword(e.target.value);
+                break;
+            default:
+                return;
+        }
+    }
 
     // let user = useSelector(state => state.auth.user);
     // console.log(user);
@@ -169,10 +183,12 @@ const AuthForm = () => {
                             validationSchema={schemasForStepFirst}
                             initialValues={initialValue}
                             onSubmit={handleSubmitForRegister}
+                            
                         >
                             <Form
                                 className={scss.form__container}
                                 autoComplete="off"
+                                onChange={handleChangePassword}
                             >
                                 <div className={scss.form__input_container}>
                                     <Field
@@ -205,22 +221,25 @@ const AuthForm = () => {
                                         name="password"
                                         validate={validatePassword}
                                         placeholder=" "
+                                        //onChange={handleChangePassword}
                                     />
                                     <label className={scss.form__label}>
                                         Password
                                     </label>
-                                    <span
-                                        className={
-                                            scss.form__input__password_show
+                                        {valuePassword.length >= 1 &&
+                                            <span
+                                            className={
+                                                scss.form__input__password_show
+                                            }
+                                            onClick={showPassword}
+                                        >
+                                            {!onShowPassword ? (
+                                                <SvgInsert id="eye" />
+                                            ) : (
+                                                <SvgInsert id="eye-blocked" />
+                                            )}
+                                        </span>
                                         }
-                                        onClick={showPassword}
-                                    >
-                                        {!onShowPassword ? (
-                                            <SvgInsert id="eye" />
-                                        ) : (
-                                            <SvgInsert id="eye-blocked" />
-                                        )}
-                                    </span>
                                     <ErrorMessage
                                         name="password"
                                         render={msg => (
@@ -245,7 +264,9 @@ const AuthForm = () => {
                                     <label className={scss.form__label}>
                                         Confirm Password
                                     </label>
-                                    <span
+                                        {
+                                        valueConfirmPassword.length >= 1 &&
+                                        <span
                                         className={
                                             scss.form__input__password_show
                                         }
@@ -257,6 +278,7 @@ const AuthForm = () => {
                                             <SvgInsert id="eye-blocked" />
                                         )}
                                     </span>
+                                        }
                                     <ErrorMessage
                                         name="passwordConfirm"
                                         render={msg => (
@@ -405,6 +427,7 @@ const AuthForm = () => {
                         <Form
                             className={scss.form__container}
                             autoComplete="off"
+                            onChange={handleChangePassword}
                         >
                             <div className={scss.form__input_container}>
                             <Field
@@ -434,18 +457,20 @@ const AuthForm = () => {
                                 validate={validatePassword}
                             />
                             <label className={scss.form__label}>Password</label>
-                            <span
-                                        className={
-                                            scss.form__input__password_show
+                            {valuePassword.length >= 1 &&
+                                            <span
+                                            className={
+                                                scss.form__input__password_show
+                                            }
+                                            onClick={showPassword}
+                                        >
+                                            {!onShowPassword ? (
+                                                <SvgInsert id="eye" />
+                                            ) : (
+                                                <SvgInsert id="eye-blocked" />
+                                            )}
+                                        </span>
                                         }
-                                        onClick={showPassword}
-                                    >
-                                        {!onShowPassword ? (
-                                            <SvgInsert id="eye" />
-                                        ) : (
-                                            <SvgInsert id="eye-blocked" />
-                                        )}
-                                    </span>
                             <ErrorMessage
                                 name="password"
                                 render={msg => <p className={scss.error__mesage}>
@@ -492,28 +517,53 @@ const AuthForm = () => {
                         <Form
                             className={scss.form__container}
                             autoComplete="off"
+                            onChange={handleChangePassword}
                         >
+                            <div className={scss.form__input_container}>
                             <Field
                                 className={scss.form__input}
                                 type="email"
                                 name="email"
-                                placeholder="Email"
+                                placeholder=" "
                             />
+                            <label className={scss.form__label}>Email</label>
                             <ErrorMessage
                                 name="email"
-                                render={msg => Notify.warning(`${msg}`)}
+                                render={msg => <p className={scss.error__mesage}>
+                                {msg}
+                            </p>}
                             />
+                            </div>
+                            <div className={scss.form__input_container}>
                             <Field
                                 className={`${scss.form__input} ${scss.form__login__input}`}
                                 type="password"
                                 name="password"
-                                placeholder="Password"
+                                placeholder=" "
                                 validate={validatePassword}
                             />
+                            <label className={scss.form__label}>Password</label>
+                            {valuePassword.length >= 1 &&
+                                            <span
+                                            className={
+                                                scss.form__input__password_show
+                                            }
+                                            onClick={showPassword}
+                                        >
+                                            {!onShowPassword ? (
+                                                <SvgInsert id="eye" />
+                                            ) : (
+                                                <SvgInsert id="eye-blocked" />
+                                            )}
+                                        </span>
+                                        }
                             <ErrorMessage
                                 name="password"
-                                render={msg => Notify.warning(`${msg}`)}
+                                render={msg => <p className={scss.error__mesage}>
+                                {msg}
+                            </p>}
                             />
+                            </div>
 
                             <button
                                 className={`${scss.button__primary_main} ${scss.form__button}`}
