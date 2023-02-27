@@ -5,6 +5,7 @@ import operations from './redux/operations/userOperations';
 import { getLoading } from 'redux/selectors/selectors';
 
 import UserRoutes from './UserRoutes';
+import ScrollToTop from 'components/utilsFolder/ScrollToTop/ScrollToTop';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -17,5 +18,10 @@ export const App = () => {
     }
   }, [token, dispatch]);
 
-  return <>{isLoadindUser ? <p>Loading...</p> : <UserRoutes />}</>;
+  return (
+    <>
+      {isLoadindUser ? <p>Loading...</p> : <UserRoutes />}
+      <ScrollToTop />
+    </>
+  )
 };

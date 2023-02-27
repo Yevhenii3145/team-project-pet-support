@@ -1,0 +1,20 @@
+@import "helpers/variables.module.scss";
+
+.btn {
+    position: fixed;
+    z-index: 30;
+    bottom: 50px;
+    right: 50px;
+    height: 50px;
+    width: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $accentColor;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 5px $accentColor;
+    cursor: pointer;
+}
