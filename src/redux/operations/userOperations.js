@@ -5,8 +5,6 @@ const { REACT_APP_BASE_URL } = process.env;
 
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
-axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGNmZWRiMWE2Y2I0ZjlkNTJlOTYwZSIsImlhdCI6MTY3NTUzMjE0NCwiZXhwIjoxNjc1NjE0OTQ0fQ.TCE19oHh_jueRFQFEjnQp7ydbK-1FbsYf46jW8PcW74`;
-
 export const setAuthHeader = token => {
   if (token) {
     return (axios.defaults.headers.common.authorization = `Bearer ${token} `);

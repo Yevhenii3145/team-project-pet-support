@@ -23,6 +23,7 @@
   position: absolute;
   top: 11px;
   left: 15px;
+  transition: top 200ms cubic-bezier(0.4, 0, 0.2, 1), left 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .form__input {
@@ -139,6 +140,10 @@ right: 15px;
     padding: 14px 32px 13px;
     font-size: 18px;
     line-height: 25px;
+
+    &:focus-within ~ .form__label, &:not(:placeholder-shown) ~ .form__label{
+      background-image: linear-gradient(to bottom, $lightColor 50%, $background 50%);;
+    }
   }
   .error__mesage{
     font-size: 16px;

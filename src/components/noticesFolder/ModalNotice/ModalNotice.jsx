@@ -100,7 +100,7 @@ const ModalNotice = ({ id, onClose, onAddDelete, categoryNotice, favorite }) => 
                           Price:
                         </h4>
                         <p className={scss.modal_notice__item_description}>
-                          {`${notice.price}$`}
+                          {notice.price}
                         </p>
                       </li>
                     )}

@@ -78,6 +78,33 @@
   }
 }
 
+.modalAdds_page__input_price{
+  display: flex;
+  margin-top: 8px;
+}
+
+.modalAdds_page__input_select{
+  display: block;
+  padding: 14px 8px;
+  background: $background;
+  border: 1px solid rgba(245, 146, 86, 0.5);
+  border-radius: 40px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: rgba(27, 27, 27, 0.6);
+  outline: none;
+  text-align: center;
+    &:last-child{
+      margin-left: 10px;
+      width: 85%;
+      text-align: start;
+      padding: 14px 11px 12px;
+    }
+}
+
 .add__pet__container {
   position: relative;
 }
@@ -216,10 +243,6 @@
     display: flex;
     justify-content: center;
     flex-direction: row-reverse;
-  }
-
-  .add__pet__container {
-    padding: 0px 27px;
   }
 
   .modalAdds_commit_box {
