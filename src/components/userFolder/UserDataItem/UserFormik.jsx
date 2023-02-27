@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import operations from 'redux/operations/userOperations'
 import axios from 'axios'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
-import 'flatpickr/dist/themes/material_orange.css'
+import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
 import { Oval } from 'react-loader-spinner'
 

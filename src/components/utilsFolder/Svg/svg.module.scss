@@ -109,13 +109,11 @@
 }
 
 .iconAddNotice {
-  @media (min-width: 768px) {
     background-color: $accentColor;
     padding: 10px;
     border-radius: 50px;
     margin-left: 8px;
     cursor: pointer;
-  }
 }
 
 .male {

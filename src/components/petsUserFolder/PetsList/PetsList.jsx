@@ -10,23 +10,27 @@ import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 export function PetsList() {
   const dispatch = useDispatch();
   const pets = useSelector(state => state.user.pets);
-  console.log('pets', pets)
+ 
 
   const onDeletePet = (_id) => {
-                Confirm.show(
-                'Notiflix Confirm',
-                'Are you sure you want to delete your petcard?!',
-                'Yes',
-                'No',
-                  function () {
-                  dispatch(operationsPets.deletePet(_id));
-
-                },
-                function() {
-                alert('If you say so...');
-                },
-            )
-        dispatch(operationsPets.deletePet(_id));
+        // dispatch(operationsPets.deletePet(_id));
+    Confirm.show(
+      '',
+      'Are you sure you want to delete your petcard?',
+      'Yes',
+      'No',
+      () => { dispatch(operationsPets.deletePet(_id)) },
+      () => {},
+      {
+        messageFontSize: '20px',
+        borderRadius: '8px',
+        cssAnimationStyle: 'zoom',
+        okButtonColor: '#ffffff',
+        okButtonBackground: '#eebb9c',
+        cancelButtonColor: '#ffffff',
+        cancelButtonBackground: '#F59256',
+      },
+    );
   }
   const [modalShow, setModalShow] = useState(false);
 
