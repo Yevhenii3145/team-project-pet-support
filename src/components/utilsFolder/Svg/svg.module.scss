@@ -185,7 +185,11 @@
 }
 
 .iconDelete {
-  fill: $accentColor;
+    
+    
+      &:hover {
+        fill: $accentColor;
+      }
 }
 
 .iconFacebook {
