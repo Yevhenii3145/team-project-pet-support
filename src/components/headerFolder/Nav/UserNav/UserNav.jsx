@@ -8,7 +8,10 @@ const UserNav = () => {
 
     const isActive = useSelector(state => state.menu.menuActive)
     const user = useSelector(state => state.auth.user);
+    // console.log('user', user);
+    // console.log('isActive', isActive);
     const dispatch = useDispatch();
+   
 
     return (
         isActive === true 

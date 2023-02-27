@@ -2,11 +2,15 @@ import scss from './pets-list.module.scss';
 import SvgInsert from '../../utilsFolder/Svg/Svg';
 import { useDispatch, useSelector } from "react-redux";
 import operationsPets from 'redux/operations/userPetsApi';
+import { useState } from 'react';
+import EditPetContent from '../ModalAddsPet/ModalAddPetPages/EditPetContent';
+import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
 export function PetsList() {
   const dispatch = useDispatch();
   const pets = useSelector(state => state.user.pets);
+ 
 
   const onDeletePet = (_id) => {
         // dispatch(operationsPets.deletePet(_id));
@@ -28,6 +32,17 @@ export function PetsList() {
       },
     );
   }
+  const [modalShow, setModalShow] = useState(false);
+
+   const closeModal = () => {
+    setModalShow(false);
+    document.body.style.overflow = 'visible';
+  };
+
+  const showModal = () => {
+    setModalShow(true);
+    document.body.style.overflow = 'hidden';
+  };
 
   const elements = pets.map(({ name, birthday, breed, image, comments, _id }) => {
 
@@ -47,6 +62,21 @@ export function PetsList() {
           <button className={scss.petsList_button} onClick={()=> onDeletePet(_id)} type="button">
             <SvgInsert id="icon-delete" />
           </button>
+          <button
+            className={scss.iconEdit_btn}
+              onClick={showModal }
+            >
+            <SvgInsert id="icon-edit" />
+          </button>
+          <div >
+        {modalShow && (
+          <>
+            <ModalAddsPet onClose={closeModal}>
+                  <EditPetContent _id={_id} pets={pets}/>
+            </ModalAddsPet>
+          </>
+        )}
+      </div>
         </div>
       </li>
     );
@@ -54,7 +84,7 @@ export function PetsList() {
 
   return (
     <>
-      <ol style={{ width: '100%', padding: '0' }}>{elements}</ol>
+      <ol className={scss.petList_container} >{elements}</ol>
     </>
   );
 }
