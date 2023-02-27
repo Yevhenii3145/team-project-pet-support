@@ -256,6 +256,10 @@
     cursor: pointer;
     position: relative;
     width: 85px;
+    &:hover,
+    &:focus {
+        color: $accentColor;
+    }
     
 }
 
@@ -300,8 +304,7 @@
     width: 20px;
     height: 20px;
     box-sizing: content-box;
-    
-    // padding: 5px;
+
 
 @media screen and (min-width: 768px) {
    
@@ -323,4 +326,14 @@ form:not(:last-child) {
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.loading__watch {
+
+    top: 45%;
+    left: 10%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
 }

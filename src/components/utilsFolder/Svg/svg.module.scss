@@ -47,12 +47,8 @@
   fill: $lightColor;
   opacity: 0.6;
   stroke: $darkColor;
-
-  &:hover,
-  &:focus {
-    stroke: $accentColor;
-    fill: $accentColor;
-  }
+  stroke: $accentColor;
+  fill: $accentColor;
 }
 
 .search_news {
@@ -138,10 +134,7 @@
 .iconEditAvatar {
 
   cursor: pointer;
-  &:hover,
-  &:focus {
-    fill: $accentColor;
-  }
+  fill: $accentColor;
 }
 
 .iconClose {
@@ -194,10 +187,7 @@
 }
 
 .iconDelete {
-  &:hover,
-  &:focus {
-    fill: $accentColor;
-  }
+  fill: $accentColor;
 }
 
 .iconFacebook {
