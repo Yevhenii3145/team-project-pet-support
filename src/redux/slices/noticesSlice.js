@@ -17,7 +17,7 @@ const noticesSlice = createSlice({
     extraReducers: {
         [fetchCategoryNotices.pending] (state) {
             state.loading = true;
-            state.items = [];
+            // state.items = [];
         },
         [fetchCategoryNotices.fulfilled] (state, action) {
             state.loading = false;
@@ -28,6 +28,20 @@ const noticesSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+        
+        // [addNoticeToFavorite.pending] (state) {
+        //     state.loading = true;
+        //     state.items = [];
+        // },
+        // [addNoticeToFavorite.fulfilled] (state, action) {
+        //     state.loading = false;
+        //     state.error = null;
+        //     state.favoriteNotices.push(action.payload);
+        // },
+        // [addNoticeToFavorite.rejected] (state, action) {
+        //     state.loading = false;
+        //     state.error = action.payload;
+        // },
 
         [getAllFavorites.pending] (state) {
             state.loading = true;

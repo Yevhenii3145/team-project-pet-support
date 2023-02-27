@@ -6,50 +6,37 @@
 }
 
 .button {
-  position: fixed;
-  bottom: 15px;
-  z-index: 1;
+  position: absolute;
+  top: 240px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
-  width: 80px;
-  height: 80px;
+  width: 129px;
+  height: 44px;
+
   border-radius: 50px;
   border: none;
   font-size: 12px;
   line-height: 20px;
-  color: #ffffff;
-  background-color: coral;
-  box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
+  color: #111111;
+  background-color: transparent;
 
   transition: fill 500ms ease-in-out;
   cursor: pointer;
 
   &:hover,
   &:focus {
-    fill: $accentColor;
+    color: $accentColor;
   }
 
   @media (min-width: 768px) {
-    position: absolute;
-    flex-direction: row-reverse;
     font-size: 20px;
     line-height: 27px;
-    background-color: transparent;
-    color: #111111;
-    width: 129px;
-    height: 44px;
     top: 373px;
-    box-shadow:none;
-
-    &:hover,
-    &:focus {
-      color: $accentColor;
-    }
   }
 
   @media (min-width: 1280px) {
-        top: 335px;
-      }
-    }
+    top: 335px;
+  }
+}

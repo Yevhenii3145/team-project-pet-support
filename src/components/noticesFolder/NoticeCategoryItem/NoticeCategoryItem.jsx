@@ -3,15 +3,16 @@ import { useState } from 'react';
 
 import { formatDistanceStrict } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
 import scss from './notice-category-item.module.scss';
 import SvgInsert from 'components/utilsFolder/Svg/Svg';
 import {
-  // fetchCategoryNotices,
+  fetchCategoryNotices,
   addNoticeToFavorite,
   deleteNotice,
   searchNotice,
-  // getAllFavorites,
+  getAllFavorites,
 } from 'redux/operations/noticesOperation';
 import useAuth from 'redux/utils/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
@@ -47,6 +48,8 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
   const btnAddToFavorite = noticeId => {
     if (isLogin) {
       dispatch(addNoticeToFavorite(noticeId));
+      dispatch(getAllFavorites);
+      dispatch(fetchCategoryNotices(categoryNotices));
       setIsFavorite(!isFavorite);
       return;
     }
@@ -70,7 +73,23 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
   };
 
   const btnDeleteNotice = noticeId => {
-    dispatch(deleteNotice(noticeId));
+    Confirm.show(
+      '',
+      'Are you sure you want to delete notis?',
+      'Yes',
+      'No',
+      () => { dispatch(deleteNotice(noticeId)) },
+      () => {},
+      {
+        messageFontSize: '20px',
+        borderRadius: '8px',
+        cssAnimationStyle: 'zoom',
+        okButtonColor: '#ffffff',
+        okButtonBackground: '#eebb9c',
+        cancelButtonColor: '#ffffff',
+        cancelButtonBackground: '#F59256',
+      },
+    );
   };
 
   const getAgePet = formatDistanceStrict(new Date(), new Date(birthday));

@@ -2,13 +2,31 @@ import scss from './pets-list.module.scss';
 import SvgInsert from '../../utilsFolder/Svg/Svg';
 import { useDispatch, useSelector } from "react-redux";
 import operationsPets from 'redux/operations/userPetsApi';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
 export function PetsList() {
   const dispatch = useDispatch();
   const pets = useSelector(state => state.user.pets);
 
   const onDeletePet = (_id) => {
-        dispatch(operationsPets.deletePet(_id));
+        // dispatch(operationsPets.deletePet(_id));
+    Confirm.show(
+      '',
+      'Are you sure you want to delete your petcard?',
+      'Yes',
+      'No',
+      () => { dispatch(operationsPets.deletePet(_id)) },
+      () => {},
+      {
+        messageFontSize: '20px',
+        borderRadius: '8px',
+        cssAnimationStyle: 'zoom',
+        okButtonColor: '#ffffff',
+        okButtonBackground: '#eebb9c',
+        cancelButtonColor: '#ffffff',
+        cancelButtonBackground: '#F59256',
+      },
+    );
   }
 
   const elements = pets.map(({ name, birthday, breed, image, comments, _id }) => {
