@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCategoryNotices, deleteNotice, searchNotice, getAllFavorites, getSearch } from "../operations/noticesOperation";
+import { fetchCategoryNotices, deleteNotice, searchNotice, getAllFavorites, getSearch, addNoticeToFavorite } from "../operations/noticesOperation";
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { addNotice } from "../operations/noticesOperation";
 
@@ -58,6 +58,15 @@ const noticesSlice = createSlice({
               `Something went wrong.`,
               'Okay'
             );
+          },
+
+          [addNoticeToFavorite.fulfilled] (state, action) {
+            if(state.favoriteNotices.some(notice => notice._id === action.payload)){
+              const index = state.favoriteNotices.findIndex(notice => notice._id === action.payload)
+              state.favoriteNotices.splice(index, 1)
+              return;
+            }
+            state.favoriteNotices.push({_id: action.payload});
           },
 
         [deleteNotice.pending] (state) {

@@ -6,7 +6,7 @@ import { Report } from 'notiflix/build/notiflix-report-aio';
 import Loader from 'components/utilsFolder/Loader/Loader';
 import SvgInsert from '../../../utilsFolder/Svg/Svg';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import 'flatpickr/dist/themes/material_orange.css'
+// import 'flatpickr/dist/themes/material_orange.css'
 import Flatpickr from 'react-flatpickr'
 
 const AddsPetContent = ({ close }) => {
@@ -65,14 +65,14 @@ const AddsPetContent = ({ close }) => {
   const formatDate = date => {
     const dateFormat = new Date(date)
     return `${
-        dateFormat.getDate() < 10
-            ? `0${dateFormat.getDate()}`
-            : dateFormat.getDate()
-    }.${
       dateFormat.getMonth() + 1 < 10
           ? `0${dateFormat.getMonth() + 1}`
           : dateFormat.getMonth() + 1
-  }.${dateFormat.getFullYear()}`
+  }.${
+    dateFormat.getDate() < 10
+        ? `0${dateFormat.getDate()}`
+        : dateFormat.getDate()
+}.${dateFormat.getFullYear()}`
 }
 
   const handleSubmitForStepOne = e => {
@@ -151,7 +151,7 @@ const AddsPetContent = ({ close }) => {
               required
               value={petDate}
               options={{
-                dateFormat: 'd.m.Y',
+                dateFormat: 'm.d.Y',
                 maxDate: `${formatDate(dateNow)}`,
             }}
             onChange={([date]) => {
