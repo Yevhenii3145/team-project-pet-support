@@ -17,10 +17,6 @@ function PetsData() {
     const loading = useSelector(state => state.user.loading)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(operationsPets.getUserPet())
-    }, [dispatch])
-
     const closeModal = () => {
         setModalShow(false)
         document.body.style.overflow = 'visible'
