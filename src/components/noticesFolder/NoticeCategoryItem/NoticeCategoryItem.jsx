@@ -40,6 +40,7 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
   const idUser = useSelector(state => state.auth.user.userId)
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   const loading = useSelector(state => state.notices.loading);
+  const filter = useSelector(state => state.filter);
 
   const [isFavorite, setIsFavorite] = useState(isLogin ?
     favoriteNotices !== null &&
@@ -49,9 +50,14 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
 
   const btnAddToFavorite = noticeId => {
     if (isLogin) {
+      if(filter === null){
+        dispatch(addNoticeToFavorite(noticeId));
+        dispatch(getAllFavorites);
+        dispatch(fetchCategoryNotices(categoryNotices));
+        setIsFavorite(!isFavorite);
+        return;
+      }
       dispatch(addNoticeToFavorite(noticeId));
-      dispatch(getAllFavorites);
-      dispatch(fetchCategoryNotices(categoryNotices));
       setIsFavorite(!isFavorite);
       return;
     }

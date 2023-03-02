@@ -11,7 +11,7 @@ import { useState } from 'react'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import { NavLink, useLocation } from 'react-router-dom'
 import SvgInsert from 'components/utilsFolder/Svg/Svg'
-import cities from './ua.json'
+import cities from '../../../helpers/ua.json'
 
 const schemasForStepFirst = Yup.object().shape({
     email: Yup.string()
@@ -69,6 +69,7 @@ const AuthForm = () => {
     const [stepOne, setStepOne] = useState(true)
     const [onShowPassword, setOnShowPassword] = useState(false)
     const [onShowConfirmPassword, setOnShowConfirmPassword] = useState(false)
+    const [coordination, setCoordination] = useState(false)
     const [valuePassword, setValuePassword] = useState('')
     const [valueConfirmPassword, setValueConfirmPassword] = useState('')
     const location = useLocation()
@@ -80,6 +81,9 @@ const AuthForm = () => {
                 break;
             case 'passwordConfirm':
                 setValueConfirmPassword(e.target.value);
+                break;
+            case 'coordination':
+                setCoordination(e.target.checked);
                 break;
             default:
                 return;
@@ -288,12 +292,17 @@ const AuthForm = () => {
                                         )}
                                     />
                                 </div>
+                                <div className={scss.coordination__box}>
+                                <Field className={scss.coordination__box_input} type='checkbox' name="coordination"/>
+                                <label className={scss.coordination__box_title}>Погоджуюсь з <a href='https://www.google.com.ua/' className={scss.coordination__box_link} target="_blank" rel="noopener noreferrer">правилами користування сайту</a></label>
+                                </div>
                                 <button
-                                    className={`${scss.button__primary_main} ${scss.form__button}`}
-                                    type="submit"
-                                >
-                                    Next
-                                </button>
+                                className={`${scss.button__primary_main} ${scss.form__button}`}
+                                type="submit"
+                                disabled={!coordination}
+                            >
+                                Next
+                            </button>
                                 <GoogleAuth />
                             </Form>
                         </Formik>
