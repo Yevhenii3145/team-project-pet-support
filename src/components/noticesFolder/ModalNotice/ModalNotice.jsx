@@ -1,12 +1,16 @@
 import scss from './modal-notice.module.scss';
 import SvgInsert from '../../utilsFolder/Svg/Svg';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Loader from 'components/utilsFolder/Loader/Loader';
+import { Link } from 'react-router-dom';
+import { fetchInfoPetUser, fetchInfoUser } from 'redux/operations/userGuestOperations';
 
 const ModalNotice = ({ id, onClose, onAddDelete, categoryNotice, favorite }) => {
   const loading = useSelector(state => state.notices.loading);
   const notice = useSelector(state => state.notices.notice);
+  const idUser = useSelector(state => state.auth.user.userId)
+  const dispatch = useDispatch()
 
   const formatDate = date => {
     const dateFormat = new Date(date);
@@ -104,6 +108,17 @@ const ModalNotice = ({ id, onClose, onAddDelete, categoryNotice, favorite }) => 
                         </p>
                       </li>
                     )}
+                      <li className={scss.modal_notice__item}>
+                          <h4 className={scss.modal_notice__item_title}>Owner:</h4>
+                          <Link to={notice.owner._id === idUser ? '/user' : `/user/${notice.owner._id}`} 
+                          onClick={() => {
+                              if(notice.owner._id === idUser) {
+                                return
+                              } else {
+                                dispatch(fetchInfoUser(notice.owner._id), fetchInfoPetUser(notice.owner._id))
+                              } }} 
+                          className={`${scss.modal_notice__item_description} ${scss.modal_notice__item_description_link}`}>{notice.owner.name} &#8601;</Link>
+                      </li>
                   </ul>
                 </div>
               </div>
