@@ -13,7 +13,6 @@ axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
 export default function UserDataItem() {
   const userInStore = useSelector(state => state.auth.user);
-  console.log("userInStore", userInStore)
   const token = useSelector(state => state.auth.token);
   const [loading, setLoading] = useState('');
   const dispatch = useDispatch();

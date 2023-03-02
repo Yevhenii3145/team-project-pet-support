@@ -58,7 +58,7 @@ function PetsData() {
                 )}
 
                 <div className={scss.overflow}>
-                    {pets.length === 0 ? <EmptyPetsList /> : <PetsList />}
+                    {pets.length === 0 ? <EmptyPetsList text='You haven`t added any animals to your list yet'/> : <PetsList />}
                 </div>
             </div>
         </>

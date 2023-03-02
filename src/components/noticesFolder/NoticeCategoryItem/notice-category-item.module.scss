@@ -55,6 +55,20 @@
     min-width: 90px;
 }
 
+.card_info_item_link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    word-break: break-word;
+  
+    color: #000000;
+
+    &:hover, &:focus {
+        color: $accentColor;
+    }
+}
+
 .add_to_favorite_btn {
     position: absolute;
     top: 12px;
