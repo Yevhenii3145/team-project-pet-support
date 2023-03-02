@@ -161,7 +161,7 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
                   dispatch(fetchInfoUser(owner._id), fetchInfoPetUser(owner._id))
                 }
                 }} 
-              className={scss.card_info_item_link}>{owner.name} &#8601;</Link>
+              className={scss.card_info_item_link} data-action='owner'>{owner.name} &#8601;</Link>
              </li>
           </ul>
           <div className={scss.box_btn}>

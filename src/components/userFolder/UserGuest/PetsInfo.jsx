@@ -31,17 +31,25 @@ const editDate = e => {
         <div className={style.overflow}>
          <ul className={scss.petList_container}>
         {loading && <Loader/>}
-        {pets.length === 0 
+        {!loading && pets.length === 0 
         ? <EmptyPetsList text={`${userName} hasn't added any own animals to yourself list yet`}/>
         : pets.map(({name, birthday, breed, image, comments, _id}) => {
     return (
             <li className={scss.petsList_box} key={_id}>
                  <img className={scss.petsList_photo} src={image} alt="pet" />
             <div className={scss.petsList_text_box}>
-                <p className={scss.petsList_field}>Name: {name}</p>
-                <p className={scss.petsList_field} >Date of birth: {editDate(birthday)}</p>
-                <p className={scss.petsList_field}>Breed: {breed} </p>
-                <p className={scss.petsList_field}>Comments: {comments} </p>
+                <p className={scss.petsList_field}>
+                   <span className={scss.labelPets}>Name:</span> 
+                    {name}</p>
+                <p className={scss.petsList_field}>
+                   <span className={scss.labelPets}>Date of birth:</span>  
+                    {editDate(birthday)}</p>
+                <p className={scss.petsList_field}>
+                   <span className={scss.labelPets}>Breed:</span>  
+                    {breed} </p>
+                <p className={scss.petsList_field}>
+                   <span className={scss.labelPets}>Comments:</span>  
+                    {comments} </p>
             </div>
             </li>
        )
