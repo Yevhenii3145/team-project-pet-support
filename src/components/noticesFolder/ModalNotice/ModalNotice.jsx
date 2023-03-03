@@ -113,8 +113,10 @@ const ModalNotice = ({ id, onClose, onAddDelete, categoryNotice, favorite }) => 
                           <Link to={notice.owner._id === idUser ? '/user' : `/user/${notice.owner._id}`} 
                           onClick={() => {
                               if(notice.owner._id === idUser) {
+                                document.body.style.overflow = 'visible';
                                 return
                               } else {
+                                document.body.style.overflow = 'visible';
                                 dispatch(fetchInfoUser(notice.owner._id), fetchInfoPetUser(notice.owner._id))
                               } }} 
                           className={`${scss.modal_notice__item_description} ${scss.modal_notice__item_description_link}`}>{notice.owner.name} &#8601;</Link>
