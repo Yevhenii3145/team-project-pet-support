@@ -1,113 +1,59 @@
-# React homework template
+## Commands
 
-Этот проект был создан при помощи
-[Create React App](https://github.com/facebook/create-react-app). Для знакомства
-и настройки дополнительных возможностей
-[обратись к документации](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Make sure you have an LTS version of Node.js installed on your computer.
+   [Download and install](https://nodejs.org/en/) if needed.
+2. Install the project's base dependencies with the `npm install` command.
+3. Start development mode by running the `npm start` command.
+4. Go to [http://localhost:3000](http://localhost:3000) in your browser. This
+   page will automatically reload after saving changes to the project files.
 
-## Создание репозитория по шаблону
+## Petly
 
-Используй этот репозиторий организации GoIT как шаблон для создания репозитория
-своего проекта. Для этого нажми на кнопку `«Use this template»` и выбери опцию
-`«Create a new repository»`, как показано на изображении.
+[![Homepage](./assets/images/Home_min.jpg 'Petly')](https://team-project-pet-support.vercel.app/)
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+[Live site](https://team-project-pet-support.vercel.app/)
 
-На следующем шаге откроется страница создания нового репозитория. Заполни поле
-его имени, убедись что репозиторий публичный, после чего нажми кнопку
-`«Create repository from template»`.
+Welcome to our online platform that offers a variety of animals for sale or
+adoption, completely free of charge. We are dedicated to providing a safe and
+loving home for every animal in need and our mission is to match these animals
+with their perfect forever homes.
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+We believe that every animal deserves a chance at a happy life and that's why we
+partner with various animal welfare organizations and shelters to promote
+adoption and to help reduce the number of animals in shelters. We also keep
+up-to-date with the latest news in animal welfare, and work to promote awareness
+about animal rights and the importance of responsible pet ownership.
 
-После того как репозиторий будет создан, необходимо перейти в настройки
-созданного репозитория на вкладку `Settings` > `Actions` > `General` как
-показано на изображении.
+Join us in our mission to give every animal a loving and caring home.
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+## Frontend
 
-Проскролив страницу до самого конца, в секции `«Workflow permissions»` выбери
-опцию `«Read and write permissions»` и поставь галочку в чекбоксе. Это
-необходимо для автоматизации процесса деплоя проекта.
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) ![Redux toolkit](./assets/images/frontend/logo_redux_toolkit.png) ![Redux persist](./assets/images/frontend/logo_persist.png) ![Axios](./assets/images/frontend/logo_axios.png) ![Chakra](./assets/images/frontend/logo_chakra.png) ![date-fns](./assets/images/frontend/logo_date-fns.png) ![dotenv](./assets/images/frontend/logo_dotenv.png) ![formik](./assets/images/frontend/logo_formik.png) ![luxon](./assets/images/frontend/logo_luxon.png) ![nanoid](./assets/images/frontend/logo_nanoid.png) ![notiflix](./assets/images/frontend/logo_notiflix.png) ![flatpickr](./assets/images/frontend/logo_flatpickr.png) ![loader_spinner](./assets/images/frontend/logo_loader-spinner.png) ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
 
-Теперь у тебя есть личный репозиторий проекта, со структурой файлов и папок
-репозитория-шаблона. Далее работай с ним как с любым другим личным репозиторием,
-клонируй его себе на компьютер, пиши код, делай коммиты и отправляй их на
-GitHub.
+## Backend
 
-## Подготовка к работе
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white) ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white) ![sendgrid](./assets/images/backend/logo_sendgrid.png) ![bcrypt](./assets/images/backend/logo_bcrypt.png) ![cloudinary](./assets/images/backend/logo_cloudinary.png) ![dotenv](./assets/images/backend/logo_dotenv.png) ![express](./assets/images/backend/logo_express.png) ![jimp](./assets/images/backend/logo_jimp.png) ![joi](./assets/images/backend/logo_joi.png) ![jsonwebtoken](./assets/images/backend/logo_jsonwebtoken.png) ![mongoose](./assets/images/backend/logo_mongoose.png) ![nanoid](./assets/images/backend/logo_nanoid.png) ![gravatar](./assets/images/backend/logo_gravatar.png) ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
-1. Убедись что на компьютере установлена LTS-версия Node.js.
-   [Скачай и установи](https://nodejs.org/en/) её если необходимо.
-2. Установи базовые зависимости проекта командой `npm install`.
-3. Запусти режим разработки, выполнив команду `npm start`.
-4. Перейди в браузере по адресу [http://localhost:3000](http://localhost:3000).
-   Эта страница будет автоматически перезагружаться после сохранения изменений в
-   файлах проекта.
+[GitHub](https://github.com/Yevhenii3145/backend-team-project-pet-support)
 
-## Деплой
+[Swagger](https://backend-team-project-pet-support.onrender.com/api-docs/)
 
-Продакшн версия проекта будет автоматически проходить линтинг, собираться и
-деплоиться на GitHub Pages, в ветку `gh-pages`, каждый раз когда обновляется
-ветка `main`. Например, после прямого пуша или принятого пул-реквеста. Для этого
-необходимо в файле `package.json` отредактировать поле `homepage`, заменив
-`your_username` и `your_repo_name` на свои, и отправить изменения на GitHub.
+## Members:
 
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
-```
+##### Frontend
 
-Далее необходимо зайти в настройки GitHub-репозитория (`Settings` > `Pages`) и
-выставить раздачу продакшн версии файлов из папки `/root` ветки `gh-pages`, если
-это небыло сделано автоматически.
+-   Halyna Vorokh (Scrum Master)
+-   Dmytro Zayets
+-   Taras Perchyk
+-   Evgen Grabar
+-   Kateryna Bykova
+-   Mykyta Kovpak
+-   Olena Holovina
+-   Anna Kasianenko
 
-![GitHub Pages settings](./assets/repo-settings.png)
+##### Backend
 
-### Статус деплоя
-
-Статус деплоя крайнего коммита отображается иконкой возле его идентификатора.
-
-- **Желтый цвет** - выполняется сборка и деплой проекта.
-- **Зеленый цвет** - деплой завершился успешно.
-- **Красный цвет** - во время линтинга, сборки или деплоя произошла ошибка.
-
-Более детальную информацию о статусе можно посмотреть кликнув по иконке, и в
-выпадающем окне перейти по ссылке `Details`.
-
-![Deployment status](./assets/deploy-status.png)
-
-### Живая страница
-
-Через какое-то время, обычно пару минут, живую страницу можно будет посмотреть
-по адресу указанному в отредактированном свойстве `homepage`. Например, вот
-ссылка на живую версию для этого репозитория
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
-
-Если открывается пустая страница, убедись что во вкладке `Console` нет ошибок
-связанных с неправильными путями к CSS и JS файлам проекта (**404**). Скорее
-всего у тебя неправильное значение свойства `homepage` в файле `package.json`.
-
-### Маршрутизация
-
-Если приложение использует библиотеку `react-router-dom` для маршрутизации,
-необходимо дополнительно настроить компонент `<BrowserRouter>`, передав в пропе
-`basename` точное название твоего репозитория. Слеш в начале строки обязателен.
-
-```jsx
-<BrowserRouter basename="/your_repo_name">
-  <App />
-</BrowserRouter>
-```
-
-## Как это работает
-
-![How it works](./assets/how-it-works.png)
-
-1. После каждого пуша в ветку `main` GitHub-репозитория, запускается специальный
-   скрипт (GitHub Action) из файла `.github/workflows/deploy.yml`.
-2. Все файлы репозитория копируются на сервер, где проект инициализируется и
-   проходит линтинг и сборку перед деплоем.
-3. Если все шаги прошли успешно, собранная продакшн версия файлов проекта
-   отправляется в ветку `gh-pages`. В противном случае, в логе выполнения
-   скрипта будет указано в чем проблема.
+-   Krystyna Varchuk (Team Leader)
+-   Maksym Dziubanchuk
+-   Sergiy Kudryavtsev
