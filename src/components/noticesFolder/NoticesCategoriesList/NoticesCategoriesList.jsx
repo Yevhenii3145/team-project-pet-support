@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import NoticesCategoryList from 'components/noticesFolder/NoticesCategoryList/NoticesCategoryList'
 import {
@@ -13,12 +13,18 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import useAuth from 'redux/utils/useAuth'
 import { EmptyFavoriteList } from '../EmptyFavoriteList/EmptyFavoriteList'
 import { EmptyOwnList } from '../EmptyOwnList/EmptyOwnList'
+import LoadMore from 'components/utilsFolder/LoadMore/LoadMore'
 
 const NoticesCategoriesList = () => {
     const dispatch = useDispatch()
     const { categoryName } = useParams()
     const pets = useSelector(getNotices)
     const filter = useSelector(getFilter)
+    // const totalNotices = useSelector(getTotalNotices)
+    const [searchParams] = useSearchParams()
+    const page = searchParams.get('page')
+    const limit = searchParams.get('limit')
+    console.log(pets);
 
     const filterNotices = () => {
         if (!filter) {
@@ -40,11 +46,18 @@ const NoticesCategoriesList = () => {
 
     const isLogin = useAuth()
     useEffect(() => {
+
+        const data = {
+            categoryName,
+            page,
+            limit, 
+        }
+
         if (isLogin) {
             dispatch(getAllFavorites())
         }
-        dispatch(fetchCategoryNotices(categoryName))
-    }, [dispatch, categoryName, isLogin])
+        dispatch(fetchCategoryNotices(data))
+    }, [dispatch, isLogin, categoryName, limit, page])
 
     return (
         <>
@@ -56,9 +69,9 @@ const NoticesCategoriesList = () => {
             {pets.length > 0 && (
                 <NoticesCategoryList
                     pets={filterNotices()}
-                    categoryNotices={categoryName}
                 />
             )}
+            {pets.length < 8 ? null : <LoadMore/>}
             {error && Notify.failure('Oops, something went wrong')}
         </>
     )

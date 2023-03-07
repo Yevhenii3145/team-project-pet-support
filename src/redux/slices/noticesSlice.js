@@ -8,7 +8,8 @@ const initialState = {
     loading: false,
     error: null,
     notice: null,
-    favoriteNotices: null
+    favoriteNotices: null,
+    // totalNotices: 0,
 }
 
 const noticesSlice = createSlice({
@@ -23,6 +24,7 @@ const noticesSlice = createSlice({
             state.loading = false;
             state.error = null;
             state.items = action.payload.data;
+            // state.totalNotices = action.payload.total;
         },
         [fetchCategoryNotices.rejected] (state, action) {
             state.loading = false;
