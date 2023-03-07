@@ -14,7 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import { authReducer } from './slices/authSlice';
 import { menuSlice} from './slices/menuSlice';
 import { userReducer } from './slices/userSlice';
-
+import { userGuestReducer } from './slices/userGuestSlice';
 import noticesReducer from './slices/noticesSlice';
 import { filtersReducer } from './slices/filterSlice';
 
@@ -33,6 +33,7 @@ export const store = configureStore({
     user: userReducer,
     filter: filtersReducer,
     notices: noticesReducer,
+    guest: userGuestReducer,
   },
 
   middleware: getDefaultMiddleware =>

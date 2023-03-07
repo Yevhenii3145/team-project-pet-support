@@ -17,6 +17,8 @@ import {
 import useAuth from 'redux/utils/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
 import ModalNotice from '../ModalNotice/ModalNotice';
+import { Link } from 'react-router-dom';
+import { fetchInfoPetUser, fetchInfoUser } from 'redux/operations/userGuestOperations';
 
 const NoticeCategoryItem = ({ pet, categoryNotices }) => {
   const {
@@ -30,6 +32,7 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
     category,
     owner,
   } = pet;
+
   
   const [modalShow, setModalShow] = useState(false);
   const dispatch = useDispatch();
@@ -37,6 +40,7 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
   const idUser = useSelector(state => state.auth.user.userId)
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   const loading = useSelector(state => state.notices.loading);
+  const filter = useSelector(state => state.filter);
 
   const [isFavorite, setIsFavorite] = useState(isLogin ?
     favoriteNotices !== null &&
@@ -46,9 +50,14 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
 
   const btnAddToFavorite = noticeId => {
     if (isLogin) {
+      if(filter === null){
+        dispatch(addNoticeToFavorite(noticeId));
+        dispatch(getAllFavorites);
+        dispatch(fetchCategoryNotices(categoryNotices));
+        setIsFavorite(!isFavorite);
+        return;
+      }
       dispatch(addNoticeToFavorite(noticeId));
-      dispatch(getAllFavorites);
-      dispatch(fetchCategoryNotices(categoryNotices));
       setIsFavorite(!isFavorite);
       return;
     }
@@ -142,6 +151,18 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
                 <p>{price}</p>
               </li>
             )}
+             <li className={scss.card_info_item}>
+              <p className={scss.card_info_item_text}>Owner:</p>
+              <Link to={owner._id === idUser ? '/user' :`/user/${owner._id}`} 
+              onClick={() => {
+                if(owner._id === idUser) {
+                 return
+                } else {
+                  dispatch(fetchInfoUser(owner._id), fetchInfoPetUser(owner._id))
+                }
+                }} 
+              className={scss.card_info_item_link} data-action='owner'>{owner.name} &#8601;</Link>
+             </li>
           </ul>
           <div className={scss.box_btn}>
             <button
@@ -151,7 +172,7 @@ const NoticeCategoryItem = ({ pet, categoryNotices }) => {
             >
               Learn more
             </button>
-            {isLogin && idUser === owner && (
+            {isLogin && idUser === owner._id && (
               <button
                 type="button"
                 className={scss.delete_btn}

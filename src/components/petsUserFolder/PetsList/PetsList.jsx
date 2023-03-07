@@ -2,11 +2,15 @@ import scss from './pets-list.module.scss';
 import SvgInsert from '../../utilsFolder/Svg/Svg';
 import { useDispatch, useSelector } from "react-redux";
 import operationsPets from 'redux/operations/userPetsApi';
+import { useState } from 'react';
+import EditPetContent from '../ModalAddsPet/ModalAddPetPages/EditPetContent';
+import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
 export function PetsList() {
   const dispatch = useDispatch();
   const pets = useSelector(state => state.user.pets);
+ 
 
   const onDeletePet = (_id) => {
         // dispatch(operationsPets.deletePet(_id));
@@ -28,6 +32,17 @@ export function PetsList() {
       },
     );
   }
+  const [modalShow, setModalShow] = useState(false);
+
+   const closeModal = () => {
+    setModalShow(false);
+    document.body.style.overflow = 'visible';
+  };
+
+  const showModal = () => {
+    setModalShow(true);
+    document.body.style.overflow = 'hidden';
+  };
 
   const elements = pets.map(({ name, birthday, breed, image, comments, _id }) => {
 
@@ -40,13 +55,36 @@ export function PetsList() {
       <li className={scss.petsList_box} key={_id}>
         <img className={scss.petsList_photo} src={image} alt="" />
         <div className={scss.petsList_text_box}>
-          <p className={scss.petsList_field}>Name: {name}</p>
-          <p className={scss.petsList_field} >Date of birth: {editDate(birthday)}</p>
-          <p className={scss.petsList_field}>Breed: {breed} </p>
-          <p className={scss.petsList_field}>Comments: {comments} </p>
+          <p className={scss.petsList_field}>
+           <span className={scss.labelPets}>Name:</span> 
+           {name}</p>
+          <p className={scss.petsList_field}>
+           <span className={scss.labelPets}>Date of birth:</span>  
+            {editDate(birthday)}</p>
+          <p className={scss.petsList_field}>
+           <span className={scss.labelPets}>Breed:</span>  
+            {breed} </p>
+          <p className={scss.petsList_field}>
+           <span className={scss.labelPets}>Comments:</span>  
+            {comments} </p>
           <button className={scss.petsList_button} onClick={()=> onDeletePet(_id)} type="button">
             <SvgInsert id="icon-delete" />
           </button>
+          <button
+            className={scss.iconEdit_btn}
+              onClick={showModal }
+            >
+            <SvgInsert id="icon-edit" />
+          </button>
+          <div >
+        {modalShow && (
+          <>
+            <ModalAddsPet onClose={closeModal}>
+                  <EditPetContent _id={_id} pets={pets}/>
+            </ModalAddsPet>
+          </>
+        )}
+      </div>
         </div>
       </li>
     );
@@ -54,7 +92,7 @@ export function PetsList() {
 
   return (
     <>
-      <ol style={{ width: '100%', padding: '0' }}>{elements}</ol>
+      <ol className={scss.petList_container} >{elements}</ol>
     </>
   );
 }

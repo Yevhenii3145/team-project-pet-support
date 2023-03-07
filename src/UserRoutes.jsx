@@ -18,6 +18,8 @@ const UserPage = lazy(() => import('./pages/UserPage/UserPage'));
 const NoticesCategoriesList = lazy(() =>
   import('./components/noticesFolder/NoticesCategoriesList/NoticesCategoriesList')
 );
+
+const UserGuestPage = lazy(() => import('./pages/UserGuestPage/UserGuestPage'));
 const Public = lazy(() => import('./components/utilsFolder/Public/Public'));
 const Private = lazy(() => import('./components/utilsFolder/Private/Private'));
 
@@ -35,6 +37,7 @@ const UserRoutes = () => {
             <Route path=":categoryName" element={<NoticesCategoriesList />} />
           </Route>
           <Route path="/friends" element={<OurFriendsPage />} />
+          <Route path="/user/:id" element={<UserGuestPage/>}/>
 
           <Route element={<Public />}>
             <Route path="/register" element={<RegisterPage />} />

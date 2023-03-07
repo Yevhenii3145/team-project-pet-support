@@ -8,6 +8,7 @@ import Loader from 'components/utilsFolder/Loader/Loader';
 import SvgInsert from 'components/utilsFolder/Svg/Svg';
 import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
+import cities from '../../../../helpers/ua.json'
 
 const AddsPetContent = ({ close }) => {
   const [sell, setSell] = useState(false);
@@ -122,6 +123,14 @@ const AddsPetContent = ({ close }) => {
         'Okay',
         );
     }
+    if(!cities.find(city => `${city.city}, ${city.admin_name}` === petLocation)){
+      console.log('not')
+      return Report.warning(
+        'Warning!',
+        'Please, selected location from the list!',
+        'Okay',
+        );
+  }
     const form = e.currentTarget;
     const { image, comments } = form.elements;
     const data = new FormData();
@@ -362,21 +371,22 @@ const AddsPetContent = ({ close }) => {
                 </label>
               </div>
             </section>
-            <label
-              className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
-            >
-              Location<span className={scss.star}>*</span>:
-            </label>
-            <input
-              className={scss.modalAdds_page__input}
-              type="text"
-              name="location"
-              placeholder="City, region"
-              required
-              value={petLocation}
-              onChange={changeStepOne}
-            />
-            
+            <label className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}>
+            Location<span className={scss.star}>*</span>:
+            </label>   
+            <input 
+            className={scss.modalAdds_page__input}
+            list="region" 
+            name="location"
+            placeholder="City, region"
+            onChange={changeStepOne}
+             />  
+            <datalist id="region">
+              {cities.map(city => <option
+                      key={`${city.city}.${city.lat}`}
+                      value={`${city.city}, ${city.admin_name}`}
+                      />)}  
+            </datalist>
             {sell && (
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
