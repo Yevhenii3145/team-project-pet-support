@@ -43,8 +43,9 @@ const NoticesCategoriesList = () => {
         if (isLogin) {
             dispatch(getAllFavorites())
         }
+        console.log('lists');
         dispatch(fetchCategoryNotices(categoryName))
-    }, [dispatch, categoryName, isLogin])
+    }, [dispatch, isLogin, categoryName])
 
     return (
         <>
@@ -56,7 +57,6 @@ const NoticesCategoriesList = () => {
             {pets.length > 0 && (
                 <NoticesCategoryList
                     pets={filterNotices()}
-                    categoryNotices={categoryName}
                 />
             )}
             {error && Notify.failure('Oops, something went wrong')}

@@ -143,16 +143,20 @@ p {
   text-align: center;
   letter-spacing: 0.04em;
   display: block;
-  &:last-child {
-    margin-top: 12px;
-    display: flex;
-    justify-content: center;
+  &:not(:last-child) {
+    margin-bottom: 10px;
   }
 
   &:hover > svg,
   &:focus > svg {
     fill: $lightColor;
   }
+}
+
+.button__primary_not_main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -224,14 +228,13 @@ p {
   .modal_notice__button_container {
     margin-top: 32px;
     display: flex;
-    justify-content: flex-start;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
   }
 
   .modal_notice__button {
     max-width: 160px;
-    &:last-child {
-      margin-top: 0px;
+    &:not(:last-child) {
+      margin-bottom: 0;
       margin-right: 12px;
     }
   }
