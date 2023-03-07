@@ -15,6 +15,7 @@ import scss from './pets-data.module.scss'
 function PetsData() {
     const [modalShow, setModalShow] = useState(false)
     const pets = useSelector(state => state.user.pets)
+    console.log('pets', pets)
 
     const loading = useSelector(state => state.user.loading)
     // const dispatch = useDispatch()

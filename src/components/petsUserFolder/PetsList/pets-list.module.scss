@@ -114,8 +114,8 @@
     }
 
     @media screen and (min-width: 768px) {
-        width: 44px;
-        height: 44px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
         background-color: $background;
         margin: 0;
@@ -173,4 +173,8 @@
         width: 95%;
     }
 
+}
+
+.icon_edit {
+    fill: #111111;
 }

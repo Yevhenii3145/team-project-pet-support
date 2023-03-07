@@ -9,8 +9,9 @@ import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
 export function PetsList() {
   const dispatch = useDispatch();
-  const pets = useSelector(state => state.user.pets);
- 
+const pets = useSelector(state => state.user.pets)
+    console.log('pets', pets)
+//  console.log("petsList", pets)
 
   const onDeletePet = (_id) => {
         // dispatch(operationsPets.deletePet(_id));
@@ -68,13 +69,13 @@ export function PetsList() {
            <span className={scss.labelPets}>Comments:</span>  
             {comments} </p>
           <button className={scss.petsList_button} onClick={()=> onDeletePet(_id)} type="button">
-            <SvgInsert id="icon-delete" />
+            <SvgInsert className={scss.icon_delete} id="icon-deletepet" />
           </button>
           <button
             className={scss.iconEdit_btn}
               onClick={showModal }
             >
-            <SvgInsert id="icon-edit" />
+            <SvgInsert id="icon-edit-active" />
           </button>
           <div >
         {modalShow && (

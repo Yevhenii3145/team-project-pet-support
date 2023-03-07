@@ -8,6 +8,7 @@ import SvgInsert from '../../../utilsFolder/Svg/Svg';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // import 'flatpickr/dist/themes/material_orange.css'
 import Flatpickr from 'react-flatpickr'
+// import { add } from 'date-fns';
 
 const AddsPetContent = ({ close }) => {
   const [stepOne, setStepOne] = useState(true);
@@ -57,6 +58,7 @@ const AddsPetContent = ({ close }) => {
       setImageURL(reader.result);
     };
     reader.readAsDataURL(image);
+    console.log('image add hand', image)
     return;
   };
 
@@ -95,6 +97,7 @@ const AddsPetContent = ({ close }) => {
     data.append('breed', petBreed);
     data.append('comments', comments.value);
     data.append('image', image.files[0]);
+    console.log('image add ssabmit', image.files[0])
     setPetBreed('');
     setPetDate('');
     setPetName('');
@@ -103,6 +106,8 @@ const AddsPetContent = ({ close }) => {
     form.reset();
     return close();
   };
+
+
 
   const validateFile = () => {
     if(!imageURL){
@@ -113,6 +118,8 @@ const AddsPetContent = ({ close }) => {
         );
     }
   }
+
+  // console.log('imageURL', imageURL)
 
   return (
     <>

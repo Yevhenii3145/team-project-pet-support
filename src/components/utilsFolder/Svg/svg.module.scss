@@ -185,11 +185,8 @@
 }
 
 .iconDelete {
-    
-    
-      &:hover {
-        fill: $accentColor;
-      }
+  fill: $accentColor;
+
 }
 
 .iconFacebook {
@@ -220,4 +217,13 @@
   stroke-width: 0;
   stroke: currentColor;
   fill: currentColor;
+}
+
+.iconDelete_pet {
+
+  cursor: pointer;
+  &:hover {
+    fill: $accentColor;
+  }
+
 }

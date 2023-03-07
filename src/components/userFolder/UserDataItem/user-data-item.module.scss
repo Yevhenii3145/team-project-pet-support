@@ -124,10 +124,7 @@
     padding: 0 0 0 18px;
     cursor: pointer;
 
-    &:hover,
-    &:focus {
-        border: 1px solid $accentColor;
-    }
+
 
 
     @media screen and (min-width: 768px) {
@@ -157,7 +154,7 @@
     box-sizing: border-box;
     background: $background;
     border: 1px solid;
-    border-color: $accentColor;
+    // border-color: $accentColor;
     border-radius: 40px;
     font-style: normal;
     font-weight: 400;
