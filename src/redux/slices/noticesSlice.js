@@ -24,13 +24,20 @@ const noticesSlice = createSlice({
             state.loading = false;
             state.error = null;
             state.totalNotices = action.payload.data.countNotices;
+            if(action.payload.data.notices.length === 0) {
+              state.items.length = 0;
+              return
+            }
+            if(state.items.length === 0) {
+              state.items = action.payload.data.notices;
+              return
+            }
             if(state.items.length > 0 && state.items[0].category === action.payload.data.notices[0].category) {
               const arrId = state.items.map(item => item._id)
               const result = action.payload.data.notices.filter(item => !arrId.includes(item._id))
               state.items.push(...result)
               return
             }
-            state.items = action.payload.data.notices;
         },
         [fetchCategoryNotices.rejected] (state, action) {
             state.loading = false;
