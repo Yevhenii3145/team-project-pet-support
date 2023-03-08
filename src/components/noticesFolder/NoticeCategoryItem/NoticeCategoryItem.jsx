@@ -1,10 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { formatDistanceStrict } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
-
 import scss from './notice-category-item.module.scss';
 import SvgInsert from 'components/utilsFolder/Svg/Svg';
 import {
@@ -19,7 +18,7 @@ import Modal from '../ModalNotice/Modal/Modal';
 import ModalNotice from '../ModalNotice/ModalNotice';
 import { fetchInfoPetUser, fetchInfoUser } from 'redux/operations/userGuestOperations';
 
-const NoticeCategoryItem = ({ pet}) => {
+const NoticeCategoryItem = ({ pet, value}) => {
   const {
     _id,
     image,
@@ -39,20 +38,9 @@ const NoticeCategoryItem = ({ pet}) => {
   const idUser = useSelector(state => state.auth.user.userId)
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   const loading = useSelector(state => state.notices.loading);
-
-  // const {categoryName} = useParams()
-  // const [searchParams] = useSearchParams()
-  // const page = searchParams.get('page')
-  // const limit = searchParams.get('limit')
-//   const data = {
-//     categoryName,
-//     page,
-//     limit
-// }
   // const filter = useSelector(state => state.filter);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { categoryName } = useParams()
-
+  
   useEffect(() => {
     
     if(favoriteNotices.length > 0) {
@@ -60,6 +48,7 @@ const NoticeCategoryItem = ({ pet}) => {
     }
 
   }, [favoriteNotices, dispatch, _id])
+
 
   const btnAddToFavorite = async (noticeId) => {
     if (!isLogin) {
@@ -74,7 +63,7 @@ const NoticeCategoryItem = ({ pet}) => {
           setIsFavorite(false) 
         }    
     
-    dispatch(fetchCategoryNotices(categoryName))
+    dispatch(fetchCategoryNotices(value))
   }
 
   function closeModal() {

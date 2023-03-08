@@ -1,12 +1,9 @@
 import { useEffect } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import NoticesCategoryList from 'components/noticesFolder/NoticesCategoryList/NoticesCategoryList'
-import {
-    fetchCategoryNotices,
-    getAllFavorites,
-} from 'redux/operations/noticesOperation'
-import { getStore, getNotices } from 'redux/selectors/noticesSelectors'
+import { fetchCategoryNotices, getAllFavorites } from 'redux/operations/noticesOperation'
+import { getStore, getNotices, getTotalNotices } from 'redux/selectors/noticesSelectors'
 import { getFilter } from 'redux/selectors/filterSelector'
 import Loader from 'components/utilsFolder/Loader/Loader'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
@@ -14,17 +11,33 @@ import useAuth from 'redux/utils/useAuth'
 import { EmptyFavoriteList } from '../EmptyFavoriteList/EmptyFavoriteList'
 import { EmptyOwnList } from '../EmptyOwnList/EmptyOwnList'
 import LoadMore from 'components/utilsFolder/LoadMore/LoadMore'
+import { Events, scroller } from 'react-scroll'
+import { useState } from 'react'
+import { useMemo } from 'react'
 
 const NoticesCategoriesList = () => {
     const dispatch = useDispatch()
     const { categoryName } = useParams()
     const pets = useSelector(getNotices)
     const filter = useSelector(getFilter)
-    // const totalNotices = useSelector(getTotalNotices)
-    const [searchParams] = useSearchParams()
-    const page = searchParams.get('page')
-    const limit = searchParams.get('limit')
-    console.log(pets);
+    const totalNotices = useSelector(getTotalNotices)
+    const { loading, error } = useSelector(getStore)
+    const isLogin = useAuth()
+    const [page, setPage] = useState(1)
+    const [name, setName] = useState('sell')
+    const limit = 8
+
+
+    const memoizedValue = useMemo(
+        () => {
+            const data = {
+                categoryName: name === categoryName ? name : (setName(categoryName), setPage(1), name),
+                page,
+                limit
+            }
+            return data
+        }, [categoryName, page, limit, name]
+    )
 
     const filterNotices = () => {
         if (!filter) {
@@ -42,26 +55,43 @@ const NoticesCategoriesList = () => {
         return filteredNotice
     }
 
-    const { loading, error } = useSelector(getStore)
+    
+useEffect(() => {
+    Events.scrollEvent.register('begin', function () {
+        console.log('begin', arguments);
+    });
+    
+    Events.scrollEvent.register('end', function () {
+        console.log('end', arguments);
+    });
+}, []);
+    
+useEffect(() => {
+    return () => {
+        Events.scrollEvent.remove('begin');
+        Events.scrollEvent.remove('end');
+    };
+});
 
-    const isLogin = useAuth()
-    useEffect(() => {
+useEffect(() => {
 
-        const data = {
-            categoryName,
-            page,
-            limit, 
-        }
+if (isLogin) {
+    dispatch(getAllFavorites())
+}
 
-        if (isLogin) {
-            dispatch(getAllFavorites())
-        }
+    dispatch(fetchCategoryNotices(memoizedValue))
 
-    //     dispatch(fetchCategoryNotices(data))
-    // }, [dispatch, isLogin, categoryName, limit, page])
-        console.log('lists');
-        dispatch(fetchCategoryNotices(categoryName))
-    }, [dispatch, isLogin, categoryName])
+}, [dispatch, isLogin, memoizedValue])
+
+const scrollTo = () => {
+        scroller.scrollTo('scroll-to-element', {
+        duration: 2000,
+        delay: 100,
+        smooth: 'easeInOutQuint',
+        offset: -150,
+    });
+}
+
 
     return (
         <>
@@ -73,9 +103,12 @@ const NoticesCategoriesList = () => {
             {pets.length > 0 && (
                 <NoticesCategoryList
                     pets={filterNotices()}
+                    data={memoizedValue}
                 />
             )}
-            {pets.length < 8 ? null : <LoadMore/>}
+            {totalNotices / 8 > page 
+            ? <LoadMore scroll={scrollTo} changePage={setPage}/> 
+            : null}
             {error && Notify.failure('Oops, something went wrong')}
         </>
     )

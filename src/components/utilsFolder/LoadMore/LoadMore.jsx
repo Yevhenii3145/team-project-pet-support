@@ -1,17 +1,15 @@
-import { useSearchParams } from "react-router-dom";
 import scss from './load-more.module.scss';
+import { Element} from 'react-scroll';
 
-const LoadMore = () => {
-
-const [searchParams, setSearchParams] = useSearchParams();
-
-const page = searchParams.get('page')
-const limit = searchParams.get('limit')
+const LoadMore = ({scroll, changePage}) => {
 
     return (
-
-        <button type="button" className={scss.buttonLoad} onClick={()=>setSearchParams({page: Number(page) + 1, limit})}>Load more...</button>
-
+        <div onClick={()=>scroll()}>
+        <button type="button" className={scss.buttonLoad} 
+                onClick={()=> changePage(prev => prev += 1)}>
+                Load more...</button>
+        <Element className="element" name="scroll-to-element" />
+        </div>
     )
 }
 
