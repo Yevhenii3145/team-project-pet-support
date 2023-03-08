@@ -9,7 +9,7 @@ import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
 export function PetsList() {
   const dispatch = useDispatch();
-const pets = useSelector(state => state.user.pets)
+  const pets = useSelector(state => state.user.pets)
     console.log('pets', pets)
 //  console.log("petsList", pets)
 

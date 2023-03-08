@@ -124,6 +124,24 @@ const updateUser = createAsyncThunk('user/update', async (data, thunkAPI) => {
   }
 });
 
+const deleteAccount = createAsyncThunk('users/delete', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const persistedToken = state.auth.token;
+
+  try {
+    setAuthHeader(persistedToken);
+    const response = await axios.delete('/users/current');
+    return response.data;
+  } catch ({ response }) {
+    setAuthHeader();
+    const error = {
+      status: response.status,
+      message: response.data.message,
+    };
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const operations = {
   registerNewUser,
   login,
@@ -132,6 +150,7 @@ const operations = {
   current,
   updateUser,
   updateUserAvatar,
+  deleteAccount
 };
 
 export default operations;

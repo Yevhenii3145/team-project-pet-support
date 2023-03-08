@@ -163,15 +163,32 @@ export const authSlice = createSlice({
 
       [operations.updateUserAvatar.pending] (state) {
         state.loading = true;
-    },
-    [operations.updateUserAvatar.fulfilled] (state, { payload }) {
-        state.loading = false;
-        state.user.avatar = payload.avatarURL;
-    },
-    [operations.updateUserAvatar.rejected]: (state, {payload}) => {
-        state.loading = false;
-        state.error = payload;
-    },
+      },
+      [operations.updateUserAvatar.fulfilled] (state, { payload }) {
+          state.loading = false;
+          state.user.avatar = payload.avatarURL;
+      },
+      [operations.updateUserAvatar.rejected]: (state, {payload}) => {
+          state.loading = false;
+          state.error = payload;
+      },
+
+      [operations.deleteAccount.pending] (state) {
+        state.loading = true;
+      },
+      [operations.deleteAccount.fulfilled] (state, { payload }) {
+          state.loading = false;
+        state.user = payload;
+                Report.info(
+          'SUCCESS!',
+          `Your account deleted .`,
+          'Okay'
+        );
+      },
+      [operations.deleteAccount.rejected]: (state, {payload}) => {
+          state.loading = false;
+          state.error = payload;
+      },
     },
 })
 

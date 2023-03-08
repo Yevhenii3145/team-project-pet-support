@@ -185,7 +185,14 @@
 }
 
 .iconDelete {
+  padding: 2px;
   fill: $accentColor;
+ 
+
+    @media screen and (min-width: 768px) {
+
+      
+      }
 
 }
 
@@ -220,10 +227,12 @@
 }
 
 .iconDelete_pet {
+  padding: 2px;
 
   cursor: pointer;
   &:hover {
     fill: $accentColor;
+  
   }
 
 }
