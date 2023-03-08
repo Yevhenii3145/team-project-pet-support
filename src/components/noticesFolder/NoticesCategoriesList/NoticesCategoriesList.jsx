@@ -56,8 +56,12 @@ const NoticesCategoriesList = () => {
         if (isLogin) {
             dispatch(getAllFavorites())
         }
-        dispatch(fetchCategoryNotices(data))
-    }, [dispatch, isLogin, categoryName, limit, page])
+
+    //     dispatch(fetchCategoryNotices(data))
+    // }, [dispatch, isLogin, categoryName, limit, page])
+        console.log('lists');
+        dispatch(fetchCategoryNotices(categoryName))
+    }, [dispatch, isLogin, categoryName])
 
     return (
         <>

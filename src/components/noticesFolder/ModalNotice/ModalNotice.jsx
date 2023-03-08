@@ -1,15 +1,16 @@
 import scss from './modal-notice.module.scss';
 import SvgInsert from '../../utilsFolder/Svg/Svg';
-
+import useAuth from 'redux/utils/useAuth';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from 'components/utilsFolder/Loader/Loader';
 import { Link } from 'react-router-dom';
 import { fetchInfoPetUser, fetchInfoUser } from 'redux/operations/userGuestOperations';
 
-const ModalNotice = ({ id, onClose, onAddDelete, categoryNotice, favorite }) => {
+const ModalNotice = ({ id, onClose, onAddDelete, categoryNotice, favorite, deleteNotice }) => {
   const loading = useSelector(state => state.notices.loading);
   const notice = useSelector(state => state.notices.notice);
-  const idUser = useSelector(state => state.auth.user.userId)
+  const idUser = useSelector(state => state.auth.user.userId);
+  const isLogin = useAuth();
   const dispatch = useDispatch()
 
   const formatDate = date => {
@@ -129,43 +130,23 @@ const ModalNotice = ({ id, onClose, onAddDelete, categoryNotice, favorite }) => 
                 {notice.comments}
               </article>
               <div className={scss.modal_notice__button_container}>
-                <a
-                  href={`tel:+${notice.phone}`}
-                  className={`${scss.button__primary_main} ${scss.modal_notice__button} ${scss.modal_notice__button_contact}`}
-                  type="button"
-                >
+              
+                <a href={`tel:+${notice.phone}`}
+                  className={`${scss.button__primary_main} ${scss.modal_notice__button} ${scss.modal_notice__button_contact}`} type="button">
                   Contact
                 </a>
-                {favorite && (
-                  <button
-                    onClick={() => {
-                      onAddDelete(id);
-                    }}
-                    className={`${scss.button__primary_not_main} ${scss.modal_notice__button}`}
-                    type="button"
-                  >
-                    Remove
-                    <SvgInsert
-                      className={scss.modal_notice__button_favorite}
-                      id="icon-heart-favorite"
-                    />
+
+                  <button onClick={() => {onAddDelete(id);}}
+                    className={`${scss.button__primary_not_main} ${scss.modal_notice__button}`} type="button">
+                    {favorite ? 'Remove' : 'Add to'}
+                    <SvgInsert className={scss.modal_notice__button_favorite} id="icon-heart-favorite"/>
                   </button>
-                )}
-                {!favorite && (
-                  <button
-                    onClick={() => {
-                      onAddDelete(id);
-                    }}
-                    className={`${scss.button__primary_not_main} ${scss.modal_notice__button}`}
-                    type="button"
-                  >
-                    Add to
-                    <SvgInsert
-                      className={scss.modal_notice__button_favorite}
-                      id="icon-heart-favorite"
-                    />
-                  </button>
-                )}
+
+                  {isLogin && idUser === notice.owner._id && (
+              <button type="button" className={`${scss.button__primary_not_main} ${scss.modal_notice__button}`} onClick={() => deleteNotice(notice.owner_id)}>
+                Delete
+                <SvgInsert id="icon-delete-notice" />
+              </button>)}
               </div>
             </div>
           )}

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCategoryNotices, deleteNotice, searchNotice, getAllFavorites, getSearch, addNoticeToFavorite } from "../operations/noticesOperation";
+import { fetchCategoryNotices, deleteNotice, searchNotice, getAllFavorites, getSearch, addNoticeToFavorite, deleteFavoriteNotice } from "../operations/noticesOperation";
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { addNotice } from "../operations/noticesOperation";
 
@@ -8,7 +8,7 @@ const initialState = {
     loading: false,
     error: null,
     notice: null,
-    favoriteNotices: null,
+    favoriteNotices: [],
     // totalNotices: 0,
 }
 
@@ -23,34 +23,19 @@ const noticesSlice = createSlice({
         [fetchCategoryNotices.fulfilled] (state, action) {
             state.loading = false;
             state.error = null;
-            state.items = action.payload.data;
+            state.items = action.payload.data.notices;
             // state.totalNotices = action.payload.total;
         },
         [fetchCategoryNotices.rejected] (state, action) {
             state.loading = false;
             state.error = action.payload;
         },
-        
-        // [addNoticeToFavorite.pending] (state) {
-        //     state.loading = true;
-        //     state.items = [];
-        // },
-        // [addNoticeToFavorite.fulfilled] (state, action) {
-        //     state.loading = false;
-        //     state.error = null;
-        //     state.favoriteNotices.push(action.payload);
-        // },
-        // [addNoticeToFavorite.rejected] (state, action) {
-        //     state.loading = false;
-        //     state.error = action.payload;
-        // },
-
         [getAllFavorites.pending] (state) {
             state.loading = true;
           },
         [getAllFavorites.fulfilled] (state, action) {
             state.loading = false;
-            state.favoriteNotices = action.payload;
+            state.favoriteNotices = action.payload.notices;
           },
         [getAllFavorites.rejected] (state, action) {
             state.loading = false;
@@ -61,16 +46,15 @@ const noticesSlice = createSlice({
               'Okay'
             );
           },
-
           [addNoticeToFavorite.fulfilled] (state, action) {
-            if(state.favoriteNotices.some(notice => notice._id === action.payload)){
-              const index = state.favoriteNotices.findIndex(notice => notice._id === action.payload)
-              state.favoriteNotices.splice(index, 1)
-              return;
-            }
-            state.favoriteNotices.push({_id: action.payload});
+            state.favoriteNotices = action.payload;
           },
-
+          [addNoticeToFavorite.rejected] (state, action) {
+            state.error = action.payload;
+          },
+        [deleteFavoriteNotice.rejected] (state, action) {
+            state.error = action.payload;
+        },
         [deleteNotice.pending] (state) {
             state.loading = true;
         },

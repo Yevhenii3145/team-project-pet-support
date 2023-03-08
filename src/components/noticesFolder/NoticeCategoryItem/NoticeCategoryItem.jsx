@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { useParams, useSearchParams, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { formatDistanceStrict } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
@@ -12,7 +12,7 @@ import {
   addNoticeToFavorite,
   deleteNotice,
   searchNotice,
-  getAllFavorites,
+  deleteFavoriteNotice
 } from 'redux/operations/noticesOperation';
 import useAuth from 'redux/utils/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
@@ -39,39 +39,43 @@ const NoticeCategoryItem = ({ pet}) => {
   const idUser = useSelector(state => state.auth.user.userId)
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   const loading = useSelector(state => state.notices.loading);
-  const filter = useSelector(state => state.filter);
-  const {categoryName} = useParams()
-  const [searchParams] = useSearchParams()
-  const page = searchParams.get('page')
-  const limit = searchParams.get('limit')
 
-  const [isFavorite, setIsFavorite] = useState(isLogin ?
-    favoriteNotices !== null &&
-      favoriteNotices.some(notice => notice._id === _id) : null
-  );
+  // const {categoryName} = useParams()
+  // const [searchParams] = useSearchParams()
+  // const page = searchParams.get('page')
+  // const limit = searchParams.get('limit')
+//   const data = {
+//     categoryName,
+//     page,
+//     limit
+// }
+  // const filter = useSelector(state => state.filter);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { categoryName } = useParams()
 
-
-  const btnAddToFavorite = noticeId => {
-    const data = {
-      categoryName,
-      page,
-      limit
-  }
-
-    if (isLogin) {
-      if(filter === null){
-        dispatch(addNoticeToFavorite(noticeId));
-        dispatch(getAllFavorites);
-        dispatch(fetchCategoryNotices(data));
-        setIsFavorite(!isFavorite);
-        return;
-      }
-      dispatch(addNoticeToFavorite(noticeId));
-      setIsFavorite(!isFavorite);
-      return;
+  useEffect(() => {
+    
+    if(favoriteNotices.length > 0) {
+      favoriteNotices.map(item => item._id === _id && setIsFavorite(true))
     }
-    Notify.failure('You need authorization');
-  };
+
+  }, [favoriteNotices, dispatch, _id])
+
+  const btnAddToFavorite = async (noticeId) => {
+    if (!isLogin) {
+      Notify.failure('You need authorization');
+      return
+    }else if(!isFavorite) {
+          dispatch(addNoticeToFavorite(noticeId));
+          setIsFavorite(true)
+          return
+    } else if (isFavorite){
+         await dispatch(deleteFavoriteNotice(noticeId))
+          setIsFavorite(false) 
+        }    
+    
+    dispatch(fetchCategoryNotices(categoryName))
+  }
 
   function closeModal() {
     setModalShow(false);
@@ -133,6 +137,7 @@ const NoticeCategoryItem = ({ pet}) => {
               onAddDelete={btnAddToFavorite}
               categoryNotice = {getCategoryNotice}
               favorite={isFavorite}
+              deleteNotice={btnDeleteNotice}
             />
           </Modal>
         </>
@@ -191,24 +196,11 @@ const NoticeCategoryItem = ({ pet}) => {
                 <SvgInsert id="icon-delete-notice" />
               </button>
             )}
-            {!isFavorite && (
-              <button
-                type="button"
-                className={scss.add_to_favorite_btn}
-                onClick={() => btnAddToFavorite(_id)}
-              >
-                <SvgInsert id="icon-heart" />
-              </button>
-            )}
-            {isFavorite && (
-              <button
-                type="button"
-                className={`${scss.add_to_favorite_btn} ${scss.add_to_favorite_btn_active}`}
-                onClick={() => btnAddToFavorite(_id)}
-              >
-                <SvgInsert id="icon-heart" />
-              </button>
-            )}
+            <button onClick={()=>btnAddToFavorite(_id)}
+            type="button"
+            className={isFavorite ? `${scss.add_to_favorite_btn} ${scss.add_to_favorite_btn_active}` : scss.add_to_favorite_btn}>
+                <SvgInsert id="icon-heart"/>
+            </button>
           </div>
           <p className={scss.card_text}>{getCategoryNotice(category)}</p>
         </div>
