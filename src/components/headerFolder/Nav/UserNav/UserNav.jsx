@@ -21,7 +21,7 @@ const UserNav = () => {
             : <NavLink to={'user'} className={scss.account}>
                 {user.avatar
                     ? (<img src={user.avatar} className={scss.avatarURL} alt="" />)
-                    : (<SvgInsert id="icon-account"/>)}
+                    : (<SvgInsert className={scss.icone_account} id="icon-account"/>)}
                 {reversName}
                   
                 </NavLink>
@@ -30,4 +30,3 @@ const UserNav = () => {
 }
 
 export default UserNav;
-//   {user.name.lenght<= 9 ? user.name : user.name.slice(0, 9)}

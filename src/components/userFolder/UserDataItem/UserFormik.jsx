@@ -7,7 +7,7 @@ import axios from 'axios'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
-import { Oval } from 'react-loader-spinner'
+// import { Oval } from 'react-loader-spinner'
 
 const { REACT_APP_BASE_URL } = process.env
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
@@ -16,7 +16,7 @@ export function UserFormik() {
     const dispatch = useDispatch()
     const userInStore = useSelector(state => state.auth.user)
     const token = useSelector(state => state.auth.token)
-    const [loading, setLoading] = useState('')
+    // const [loading, setLoading] = useState('')
     const [userName, setUserName] = useState('')
     const [userEmail, setUserEmail] = useState('')
     const [userBirthday, setUserBirthday] = useState('')
@@ -38,7 +38,7 @@ export function UserFormik() {
     }
 
     useEffect(() => {
-        setLoading(true)
+        // setLoading(true)
         if (token !== undefined) {
             fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
                 method: 'GET',
@@ -57,11 +57,11 @@ export function UserFormik() {
                     )
                     setUserPhone(data.phone)
                     setUserCity(data.city)
-                    setLoading(false)
+                    // setLoading(false)
                 })
                 .catch(error => {
                     console.log(error)
-                    setLoading(false)
+                    // setLoading(false)
                 })
             return
         } else {
@@ -74,7 +74,7 @@ export function UserFormik() {
             )
             setUserPhone(userInStore.phone)
             setUserCity(userInStore.city)
-            setLoading(false)
+            // setLoading(false)
         }
     }, [userInStore, token])
 
@@ -216,7 +216,7 @@ export function UserFormik() {
     return (
         <>
             <div className={scss.userDataForm_box}>
-                {loading ? (
+                {/* {loading ? (
                     <>
                         <div className={scss.loader__content}>
                             <Oval
@@ -233,7 +233,7 @@ export function UserFormik() {
                             />
                         </div>
                     </>
-                ) : (
+                ) : ( */}
                     <>
                         <form onSubmit={handleSubmitName}>
                             <div className={scss.field_box}>
@@ -439,7 +439,7 @@ export function UserFormik() {
                             </div>
                         </form>
                     </>
-                )}
+                {/* )} */}
             </div>
         </>
     )

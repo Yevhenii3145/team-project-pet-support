@@ -58,7 +58,6 @@ const AddsPetContent = ({ close }) => {
       setImageURL(reader.result);
     };
     reader.readAsDataURL(image);
-    console.log('image add hand', image)
     return;
   };
 
