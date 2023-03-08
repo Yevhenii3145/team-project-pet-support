@@ -11,7 +11,7 @@ import {
   addNoticeToFavorite,
   deleteNotice,
   searchNotice,
-  deleteFavoriteNotice
+  deleteFavoriteNotice,
 } from 'redux/operations/noticesOperation';
 import useAuth from 'redux/utils/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
@@ -59,11 +59,10 @@ const NoticeCategoryItem = ({ pet, value}) => {
           setIsFavorite(true)
           return
     } else if (isFavorite){
-         await dispatch(deleteFavoriteNotice(noticeId))
+        await dispatch(deleteFavoriteNotice(noticeId))
           setIsFavorite(false) 
+          dispatch(fetchCategoryNotices(value))
         }    
-    
-    dispatch(fetchCategoryNotices(value))
   }
 
   function closeModal() {

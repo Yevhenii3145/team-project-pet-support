@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import NoticesCategoryList from 'components/noticesFolder/NoticesCategoryList/NoticesCategoryList'
@@ -12,8 +11,8 @@ import { EmptyFavoriteList } from '../EmptyFavoriteList/EmptyFavoriteList'
 import { EmptyOwnList } from '../EmptyOwnList/EmptyOwnList'
 import LoadMore from 'components/utilsFolder/LoadMore/LoadMore'
 import { Events, scroller } from 'react-scroll'
-import { useState } from 'react'
-import { useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
+import { setNameCategory } from 'redux/slices/noticesSlice'
 
 const NoticesCategoriesList = () => {
     const dispatch = useDispatch()
@@ -28,34 +27,36 @@ const NoticesCategoriesList = () => {
     const limit = 8
 
 
-    const memoizedValue = useMemo(
-        () => {
-            const data = {
-                categoryName: name === categoryName ? name : (setName(categoryName), setPage(1), name),
-                page,
-                limit
-            }
-            return data
-        }, [categoryName, page, limit, name]
-    )
-
-    const filterNotices = () => {
-        if (!filter) {
-            return pets
+const memoizedValue = useMemo(
+    () => {
+        const data = {
+            categoryName: name === categoryName ? name : (setName(categoryName), setPage(1), name),
+            page,
+            limit
         }
+    return data
+}, [categoryName, page, limit, name])
 
-        const normalizedFilter = filter.toLocaleLowerCase()
+const filterNotices = () => {
+    if (!filter) {
+return pets
+}
 
-        const filteredNotice = pets.filter(({ title }) => {
-            const normalizedTittle = title.toLocaleLowerCase()
-            const filterResult = normalizedTittle.includes(normalizedFilter)
-            return filterResult
-        })
+const normalizedFilter = filter.toLocaleLowerCase()
 
-        return filteredNotice
-    }
+const filteredNotice = pets.filter(({ title }) => {
+const normalizedTittle = title.toLocaleLowerCase()
+const filterResult = normalizedTittle.includes(normalizedFilter)
+    return filterResult
+})
 
-    
+return filteredNotice
+}
+
+useEffect(() => {
+    dispatch(setNameCategory(categoryName))
+}, [categoryName, dispatch])
+
 useEffect(() => {
     Events.scrollEvent.register('begin', function () {
         console.log('begin', arguments);
@@ -79,7 +80,7 @@ if (isLogin) {
     dispatch(getAllFavorites())
 }
 
-    dispatch(fetchCategoryNotices(memoizedValue))
+dispatch(fetchCategoryNotices(memoizedValue))
 
 }, [dispatch, isLogin, memoizedValue])
 
@@ -97,18 +98,9 @@ const scrollTo = () => {
         <>
             {loading && <Loader />}
             {categoryName === 'own' && pets.length === 0 && <EmptyOwnList />}
-            {categoryName === 'favorite' && pets.length === 0 && (
-                <EmptyFavoriteList />
-            )}
-            {pets.length > 0 && (
-                <NoticesCategoryList
-                    pets={filterNotices()}
-                    data={memoizedValue}
-                />
-            )}
-            {totalNotices / 8 > page 
-            ? <LoadMore scroll={scrollTo} changePage={setPage}/> 
-            : null}
+            {categoryName === 'favorite' && pets.length === 0 && <EmptyFavoriteList />}
+            {pets.length > 0 && <NoticesCategoryList pets={filterNotices()} data={memoizedValue}/>}
+            {totalNotices / 8 > page ? <LoadMore scroll={scrollTo} changePage={setPage}/> : null}
             {error && Notify.failure('Oops, something went wrong')}
         </>
     )
