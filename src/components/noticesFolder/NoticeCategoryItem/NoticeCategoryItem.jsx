@@ -10,7 +10,6 @@ import {
   fetchCategoryNotices,
   addNoticeToFavorite,
   deleteNotice,
-  searchNotice,
   deleteFavoriteNotice,
 } from 'redux/operations/noticesOperation';
 import useAuth from 'redux/utils/useAuth';
@@ -74,7 +73,6 @@ const NoticeCategoryItem = ({ pet, value}) => {
   const showModal = () => {
     document.body.style.overflow = 'hidden'; 
     setModalShow(true);
-    dispatch(searchNotice(pet._id));
   };
 
   const getPlacePet = () => {
@@ -120,12 +118,12 @@ const NoticeCategoryItem = ({ pet, value}) => {
         <>
           <Modal onClose={closeModal}>
             <ModalNotice
-              id={pet._id}
               onClose={closeModal}
               onAddDelete={btnAddToFavorite}
               categoryNotice = {getCategoryNotice}
               favorite={isFavorite}
               deleteNotice={btnDeleteNotice}
+              info={pet}
             />
           </Modal>
         </>

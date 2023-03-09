@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCategoryNotices, deleteNotice, searchNotice, getAllFavorites, getSearch, addNoticeToFavorite, deleteFavoriteNotice } from "../operations/noticesOperation";
+import { fetchCategoryNotices, deleteNotice, getAllFavorites, getSearch, addNoticeToFavorite, deleteFavoriteNotice } from "../operations/noticesOperation";
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { addNotice } from "../operations/noticesOperation";
 
@@ -31,19 +31,19 @@ const noticesSlice = createSlice({
             state.error = null;
             state.totalNotices = action.payload.data.countNotices;
             if(state.nameCategory[0] === 'own') {
-              state.nameCategory[1] === 1 ? state.items = action.payload.data.notices : state.items.push(...action.payload.data.notices)
+              state.nameCategory[1] === 1 
+              ? state.items = action.payload.data.notices 
+              : state.items.push(...action.payload.data.notices)
               return
             } else if(state.nameCategory[0] === 'favorite') {
-              console.log();
-              state.nameCategory[1] === 1 ? state.items = action.payload.data.notices : state.items.push(...action.payload.data.notices)
+              state.nameCategory[1] === 1 
+              ? state.items = action.payload.data.notices 
+              : state.items.push(...action.payload.data.notices)
               return
-            } else if (state.items.length > 0 && state.items[0].category === action.payload.data.notices[0].category) {
-              const arrId = state.items.map(item => item._id)
-              const result = action.payload.data.notices.filter(item => !arrId.includes(item._id))
-              state.items.push(...result)
-              return
-            }
-            state.items = action.payload.data.notices;
+            } 
+            state.nameCategory[1] === 1
+              ? state.items = action.payload.data.notices
+              : state.items.push(...action.payload.data.notices)
         },
         [fetchCategoryNotices.rejected] (state, action) {
             state.loading = false;
@@ -86,25 +86,6 @@ const noticesSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
-
-        [searchNotice.pending] (state) {
-            state.loading = true;
-            state.notice = null;
-          },
-        [searchNotice.fulfilled] (state, action) {
-            state.loading = false;
-            state.notice = action.payload;
-          },
-        [searchNotice.rejected] (state, action) {
-            state.loading = false;
-            state.error = action.payload;
-            Report.warning(
-              'Warning',
-              `Something went wrong.`,
-              'Okay'
-            );
-        },
-
         [getSearch.pending] (state, action) {
             state.loading = true;
         },
