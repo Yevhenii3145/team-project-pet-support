@@ -9,8 +9,8 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Flatpickr from 'react-flatpickr';
 import axios from 'axios';
 
-// const { REACT_APP_BASE_URL } = process.env
-// axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
+const { REACT_APP_BASE_URL } = process.env
+axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
 
 
 const EditPetContent = ({ close, pets, _id, }) => {
@@ -21,7 +21,7 @@ const EditPetContent = ({ close, pets, _id, }) => {
 
   const isPet = pets.find(e => e._id === _id);
 
-  const dateString = "2022-03-17T00:00:00.00Z";
+  const dateString = isPet.birthday;
   const date = new Date(dateString);
   const month = date.getMonth() + 1;
   const day = date.getDate();
@@ -34,7 +34,6 @@ const EditPetContent = ({ close, pets, _id, }) => {
   const [imageURL, setImageURL] = useState(isPet.image);
   const [petComments, setPetComments] = useState(isPet.comments);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // const [pet, setPet] = useState({isPet})
 
   const changeStepOne = e => {
     switch (e.currentTarget.name) {
@@ -70,11 +69,11 @@ const EditPetContent = ({ close, pets, _id, }) => {
       setImageURL(null);
       return;
     }
-    reader.onloadend = () => {
+      reader.onloadend = () => {
       setImageURL(reader.result);
     };
-    reader.readAsDataURL(image);
-    return;
+      reader.readAsDataURL(image);
+      return;
   };
 
   const dateNow = new Date();
@@ -96,7 +95,6 @@ const EditPetContent = ({ close, pets, _id, }) => {
     const form = e.currentTarget;
     const { name, date, breed } = form.elements;
     setPetName(name.value);
-    // console.log('name.value', name.value)
     setPetDate(date.value);
     setPetBreed(breed.value);
     if (new Date(petDate) >= new Date(formatDate)) {
@@ -109,58 +107,57 @@ const EditPetContent = ({ close, pets, _id, }) => {
     return changeStep();
   };
 
-  const handleSubmit = async (e) => {
+ 
+  
+const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     const { image, comments } = form.elements;
-    setPetComments(comments.value);
+  setPetComments(comments.value);
+
+  if ( image.files.length > 0) {
+  
     const data = new FormData();
     data.append('name', petName);
     data.append('birthday', petDate);
     data.append('breed', petBreed);
     data.append('comments', petComments);
-    setImageURL(image.files[0])
     data.append('image', image.files[0]);
+    // console.log('image', image.files[0])
+    // console.log('imageURL', imageURL)
 
-   
-  //    axios
-  //     .put(`${REACT_APP_BASE_URL}/api/users/${_id}`, data)
-  //     .then((response) => {
-  //       onUpdatePet(response.data);
-  //     })
-  //     .catch((error) => console.error(error));
-  // // };
     try {
-      const response = await axios.put(`/users/${_id}`, data)
-      // onUpdatePet(response.data);
-      console.log('response.data', response.data)
+      await axios.put(`/users/${_id}`, data);
       setIsSubmitting(false);
-   }
-    catch (error) {
+    } catch (error) {
       setIsSubmitting(false);
-
+    }
+  } else {
+   
+    try {
+      await axios.put(`/users/${_id}`, {
+        name: petName,
+        birthday: petDate,
+        breed: petBreed,
+        comments: petComments,
+        image: imageURL,
+      });
+          console.log('imageURL', imageURL)
+      setIsSubmitting(false);
+    } catch (error) {
+      setIsSubmitting(false);
+    }
   }
-    // dispatch(operationsPets.updatePet(_id, data));
-    // console.log('image.files[0]', imageURL)
-    setPetComments('');
-    setPetBreed('');
-    setPetDate('');
-    setPetName('');
-    setImageURL(null);
-    form.reset();
-    return close();
+
+  setPetComments('');
+  setPetBreed('');
+  setPetDate('');
+  setPetName('');
+  setImageURL(null);
+  form.reset();
+  return close();
   };
 
-
-  // const validateFile = () => 
-  //   if(!imageURL){
-  //     Report.warning(
-  //       'Pet Warning',
-  //       'Please add a photo.',
-  //       'Okay',
-  //       );
-  //   }
-  // }
 
   return (
     <>
@@ -259,11 +256,11 @@ const EditPetContent = ({ close, pets, _id, }) => {
                 onChange={handleImageChange}
               />
               <label className={scss.addspet__imgLabel} htmlFor="img"></label>
-              {imageURL && (
+              {/* {imageURL && ( */}
                 <div className={scss.addspetPhoto__container}>
                   <img src={imageURL} alt="pet" />
                 </div>
-              )}
+              {/* )} */}
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_commit_box}`}
               >

@@ -117,8 +117,6 @@ const AddsPetContent = ({ close }) => {
     }
   }
 
-  // console.log('imageURL', imageURL)
-
   return (
     <>
       {loading && <Loader />}
