@@ -9,9 +9,9 @@ axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
 export const fetchCategoryNotices = createAsyncThunk(
   'notices/fetchNotices',
-  async (categoryName, thunkAPI) => {
+  async (value, thunkAPI) => {
     try {
-      const data = await api.getCategoryNotices(categoryName);
+      const data = await api.getCategoryNotices(value);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -23,8 +23,20 @@ export const addNoticeToFavorite = createAsyncThunk(
   'notices/favoriteNotice',
   async (noticeId, thunkAPI) => {
     try {
-      await api.addNoticeToFavorite(noticeId);
-      return noticeId;
+      const data = await api.addNoticeToFavorite(noticeId);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteFavoriteNotice = createAsyncThunk(
+  'notices/deleteFavorites',
+  async (noticeId, thunkAPI) => {
+    try {
+      const data = await api.deleteNoticeFromFavorite(noticeId);
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

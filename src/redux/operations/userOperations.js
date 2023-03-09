@@ -62,6 +62,20 @@ const authVerify = createAsyncThunk('auth/verify', async (user, thunkAPI) => {
   }
 });
 
+const resetUserPassword = createAsyncThunk('auth/reset-password', async (user, thunkAPI) => {
+  try {
+    const response = await axios.post('/auth/reset-password', user);
+    console.log(response.data)
+    return response.data;
+  } catch ({ response }) {
+    const error = {
+      status: response.status,
+      message: response.data.message,
+    };
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
@@ -150,7 +164,9 @@ const operations = {
   current,
   updateUser,
   updateUserAvatar,
-  deleteAccount
+  deleteAccount,
+  resetUserPassword,
+
 };
 
 export default operations;

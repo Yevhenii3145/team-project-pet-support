@@ -25,6 +25,7 @@
   top: 11px;
   left: 15px;
   transition: top 200ms cubic-bezier(0.4, 0, 0.2, 1), left 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 
 .form__input {
@@ -129,6 +130,7 @@ right: 15px;
 .form__button {
   width: 100%;
 
+
     &:disabled,
     &[disabled]{
       border: 1px solid #999999;
@@ -154,6 +156,19 @@ right: 15px;
 
   margin-top: 40px;
 }
+.form__description_reset{
+  margin-top: 10px;
+}
+.form__description_recover{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  color: rgba(17, 17, 17, 0.6);
+  margin-bottom: 5px;
+}
+
 .description__nav {
   color: #3091eb;
 }
