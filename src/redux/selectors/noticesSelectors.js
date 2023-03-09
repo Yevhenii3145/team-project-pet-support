@@ -3,3 +3,5 @@ export const getStore = ({notices}) => ({loading: notices.loading, error: notice
 export const getNotices = ({ notices }) => notices.items;
 
 export const getFavoriteNotice =   ({ notices }) => notices.isNotisFavorite;
+
+export const getTotalNotices = ({notices}) => notices.totalNotices;

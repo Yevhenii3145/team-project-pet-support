@@ -1,10 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { formatDistanceStrict } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
-
 import scss from './notice-category-item.module.scss';
 import SvgInsert from 'components/utilsFolder/Svg/Svg';
 import {
@@ -12,15 +11,14 @@ import {
   addNoticeToFavorite,
   deleteNotice,
   searchNotice,
-  deleteFavoriteNotice
+  deleteFavoriteNotice,
 } from 'redux/operations/noticesOperation';
 import useAuth from 'redux/utils/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
 import ModalNotice from '../ModalNotice/ModalNotice';
-import { Link } from 'react-router-dom';
 import { fetchInfoPetUser, fetchInfoUser } from 'redux/operations/userGuestOperations';
 
-const NoticeCategoryItem = ({ pet}) => {
+const NoticeCategoryItem = ({ pet, value}) => {
   const {
     _id,
     image,
@@ -40,10 +38,9 @@ const NoticeCategoryItem = ({ pet}) => {
   const idUser = useSelector(state => state.auth.user.userId)
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   const loading = useSelector(state => state.notices.loading);
-  // const filter = useSelector(state => state.filter);
+  const filter = useSelector(state => state.filter);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { categoryName } = useParams()
-
+  
   useEffect(() => {
     
     if(favoriteNotices.length > 0) {
@@ -52,20 +49,22 @@ const NoticeCategoryItem = ({ pet}) => {
 
   }, [favoriteNotices, dispatch, _id])
 
+
   const btnAddToFavorite = async (noticeId) => {
     if (!isLogin) {
       Notify.failure('You need authorization');
       return
     }else if(!isFavorite) {
-          dispatch(addNoticeToFavorite(noticeId));
-          setIsFavorite(true)
-          return
+      if(filter === null) {
+        dispatch(addNoticeToFavorite(noticeId));
+        setIsFavorite(true)
+        return
+      }
     } else if (isFavorite){
-         await dispatch(deleteFavoriteNotice(noticeId))
+        await dispatch(deleteFavoriteNotice(noticeId))
           setIsFavorite(false) 
+          dispatch(fetchCategoryNotices(value))
         }    
-    
-    dispatch(fetchCategoryNotices(categoryName))
   }
 
   function closeModal() {

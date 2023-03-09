@@ -4,8 +4,9 @@ const { REACT_APP_BASE_URL } = process.env;
 
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
-export const getCategoryNotices = async (categoryName) => {
-    const data = await axios.get(`/notices/${categoryName}`);
+export const getCategoryNotices = async (value) => {
+  const {categoryName, page, limit} = value
+    const data = await axios.get(`/notices/${categoryName}?page=${page}&limit=${limit}`);
     return data;
 }
 
