@@ -12,8 +12,6 @@ axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 export default function UserDataItem() {
   const userInStore = useSelector(state => state.auth.user);
   const token = useSelector(state => state.auth.token);
-    // const loading = useSelector(state => state.user.loading);
-  // const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
@@ -30,22 +28,17 @@ export default function UserDataItem() {
     }
       
     reader.onloadend = () => {
-        //  console.log('onloadend', loading)
       dispatch(operations.updateUserAvatar(file));
       
     };
  
     if (token !== undefined) {
-      //  setLoading(true);
       reader.readAsDataURL(file);
 
     } else {
-      // setLoading(true);
       reader.readAsDataURL(file);
- 
     }
-      // setLoading(false);
-      // console.log('load 24', loading)
+
     return;
   };
 

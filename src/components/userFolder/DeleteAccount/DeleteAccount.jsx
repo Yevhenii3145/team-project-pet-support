@@ -12,7 +12,6 @@ axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
 export default function DeleteAccount() {
     const dispatch = useDispatch();
     const token = useSelector(state => state.auth.token)
-    console.log('token', token);
     
     const handlDeleteAccount = () => {
             Confirm.show(
@@ -35,23 +34,7 @@ export default function DeleteAccount() {
         cancelButtonBackground: '#F59256',
       },
     )
-    
-        // fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
-        //         method: 'DELETE',
-        //         headers: {
-        //             Authorization: `Bearer ${token}`,
-        //         },
-        //     })
-        //     .then(() => {
-        //         localStorage.clear();
-        //             window.location.replace('http://localhost:3000/register');
-        //     })
-        //     .catch(() => {
-        //         console.error('Failed to delete account.');
-        //     })
     };
-
-
 
     return (
        <div className={scss.delete_account_box}>

@@ -2,25 +2,33 @@ import scss from './pets-list.module.scss';
 import SvgInsert from '../../utilsFolder/Svg/Svg';
 import { useDispatch, useSelector } from "react-redux";
 import operationsPets from 'redux/operations/userPetsApi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import EditPetContent from '../ModalAddsPet/ModalAddPetPages/EditPetContent';
 import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
 export function PetsList() {
+  
+  const [modalShow, setModalShow] = useState(false);
   const dispatch = useDispatch();
-  const pets = useSelector(state => state.user.pets)
-    console.log('pets', pets)
-//  console.log("petsList", pets)
+
+  useEffect(() => {
+    dispatch(operationsPets.getUserPet());
+  }, [dispatch]);
+  
+  const pets = useSelector(state => state.user.pets);
 
   const onDeletePet = (_id) => {
-        // dispatch(operationsPets.deletePet(_id));
     Confirm.show(
       '',
       'Are you sure you want to delete your petcard?',
       'Yes',
       'No',
-      () => { dispatch(operationsPets.deletePet(_id)) },
+      () => {
+        dispatch(operationsPets.deletePet(_id)).then(() => {
+          dispatch(operationsPets.getUserPet());
+        })
+      },
       () => {},
       {
         messageFontSize: '20px',
@@ -33,7 +41,6 @@ export function PetsList() {
       },
     );
   }
-  const [modalShow, setModalShow] = useState(false);
 
    const closeModal = () => {
     setModalShow(false);
@@ -45,12 +52,13 @@ export function PetsList() {
     document.body.style.overflow = 'hidden';
   };
 
-  const elements = pets.map(({ name, birthday, breed, image, comments, _id }) => {
+  const elements = Array.isArray(pets) && pets.map(({ name, birthday, breed, image, comments, _id }) => {
 
     const editDate = e => {
       const reversDate = e.slice(0, 10).split('-').reverse();
       return reversDate.join('.');
  }
+
 
     return (
       <li className={scss.petsList_box} key={_id}>

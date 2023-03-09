@@ -38,7 +38,6 @@ const userSlice = createSlice({
         [operationsPets.getUserPet.fulfilled] (state, {payload}) {
             state.loading = false;
           state.pets = payload;
-          console.log('payload', payload);
         },
         [operationsPets.getUserPet.rejected] (state, {payload}) {
             state.loading = false;
@@ -59,7 +58,7 @@ const userSlice = createSlice({
         
         [operationsPets.updatePet.pending] (state) {
           state.loading = true;
-          console.log('pending')
+    
           },
         [operationsPets.updatePet.fulfilled] (state, action) {
           state.loading = false;

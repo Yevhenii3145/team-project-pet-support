@@ -96,7 +96,6 @@ const AddsPetContent = ({ close }) => {
     data.append('breed', petBreed);
     data.append('comments', comments.value);
     data.append('image', image.files[0]);
-    console.log('image add ssabmit', image.files[0])
     setPetBreed('');
     setPetDate('');
     setPetName('');
