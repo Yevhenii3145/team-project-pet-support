@@ -166,6 +166,8 @@ const AddsPetContent = ({ close }) => {
     setPetCategory(e.target.value);
     if (e.target.value === 'sell') {
       setSell(true);
+    } else {
+      setSell(false);
     }
   };
 
