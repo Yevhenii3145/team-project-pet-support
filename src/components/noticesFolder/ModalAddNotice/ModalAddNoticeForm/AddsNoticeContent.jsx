@@ -426,16 +426,15 @@ const AddsPetContent = ({ close }) => {
                 accept="image/png, image/jpeg, image/jpg, image/webp"
                 id="img"
                 required
-                multiple
                 onChange={handleImageChange}
               />
-              <label className={scss.addspet__imgLabel} htmlFor="img"></label>
-              {imageURL && (
-                <div className={scss.addspetPhoto__container}>
-                  <p>You image:</p>
-                  <img src={imageURL} alt="pet" />
-                </div>
-              )}
+              <label className={scss.addspet__imgLabel} htmlFor="img">
+                {imageURL && (
+                  <div className={scss.addspetPhoto__container}>
+                    <img src={imageURL} alt="pet" className={scss.addspet__photo} />
+                  </div>
+                )}
+              </label>
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_commit_box}`}
               >
