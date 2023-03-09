@@ -37,7 +37,6 @@ const NoticeCategoryItem = ({ pet, value}) => {
   const isLogin = useAuth();
   const idUser = useSelector(state => state.auth.user.userId)
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
-  const loading = useSelector(state => state.notices.loading);
   const filter = useSelector(state => state.filter);
   const [isFavorite, setIsFavorite] = useState(false);
   
@@ -116,7 +115,6 @@ const NoticeCategoryItem = ({ pet, value}) => {
   }
 
   return (
-    loading ? <p>loading...</p> :
       <>
       {modalShow && (
         <>
