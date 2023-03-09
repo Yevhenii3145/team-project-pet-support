@@ -6,6 +6,8 @@ import Header from 'components/headerFolder/Header/Header';
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
 const VerifyPage = lazy(() => import('./pages/VerifyPage/VerifyPage'));
+const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage/ResetPasswordPage'));
+const RecoverPasswordPage = lazy(() => import('./pages/RecoverPasswordPage/RecoverPasswordPage'));
 const NewsPage = lazy(() => import('./pages/NewsPage/NewsPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 const NoticesPage = lazy(() => import('./pages/NoticesPage/NoticesPage'));
@@ -43,6 +45,8 @@ const UserRoutes = () => {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/verify" element={<VerifyPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
+            <Route path="/refresh" element={<RecoverPasswordPage />} />
           </Route>
 
           <Route element={<Private />}>
