@@ -8,10 +8,10 @@ const UserNav = () => {
 
     const isActive = useSelector(state => state.menu.menuActive)
     const user = useSelector(state => state.auth.user);
-    // console.log('user', user);
-    // console.log('isActive', isActive);
     const dispatch = useDispatch();
-   
+  
+    const newName = user.name;
+    const reversName = user.name === undefined ? 'Account' : newName.substr(0, 9);
 
     return (
         isActive === true 
@@ -19,8 +19,12 @@ const UserNav = () => {
             <SvgInsert id="icon-account"/>
                 Account</NavLink>
             : <NavLink to={'user'} className={scss.account}>
-            <img  src={user.avatar} className={scss.avatarURL} alt="" />
-                {user.name}</NavLink>
+                {user.avatar
+                    ? (<img src={user.avatar} className={scss.avatarURL} alt="" />)
+                    : (<SvgInsert className={scss.icone_account} id="icon-account"/>)}
+                {reversName}
+                  
+                </NavLink>
         
     )
 }

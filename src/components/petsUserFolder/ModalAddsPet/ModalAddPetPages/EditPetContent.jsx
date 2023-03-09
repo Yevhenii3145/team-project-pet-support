@@ -1,35 +1,39 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import {useSelector} from 'react-redux';
 import scss from './modal-add-pet-pages.module.scss';
-import operationsPets from 'redux/operations/userPetsApi';
+// import operationsPets from 'redux/operations/userPetsApi';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-// import Loader from 'components/Loader/Loader';
+import Loader from 'components/utilsFolder/Loader/Loader';
 import SvgInsert from '../../../utilsFolder/Svg/Svg';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import Flatpickr from 'react-flatpickr';
+import axios from 'axios';
+
+const { REACT_APP_BASE_URL } = process.env
+axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
 
 
-
-const EditPetContent = ({ close, pets, _id }) => {
-  console.log('_id', _id);
-  console.log('pets', pets);
+const EditPetContent = ({ close, pets, _id, }) => {
+  // const dispatch = useDispatch();
+    
   const [stepOne, setStepOne] = useState(true);
-  // const loading = useSelector(state => state.user.loading);
-  const dispatch = useDispatch();
+  const loading = useSelector(state => state.user.loading);
 
   const isPet = pets.find(e => e._id === _id);
-  
-  console.log('isPet', isPet);
-  const date = isPet.birthday;
-  const editDate = e => {
-  const reversDate = e.slice(0, 10).split('-').reverse();
-  return reversDate.join('.');
- }
+
+  const dateString = isPet.birthday;
+  const date = new Date(dateString);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const formattedDate = `${month}.${day}.${year}`;
 
   const [petName, setPetName] = useState(isPet.name);
-  const [petDate, setPetDate] = useState(editDate(date));
+  const [petDate, setPetDate] = useState(formattedDate)
   const [petBreed, setPetBreed] = useState(isPet.breed);
   const [imageURL, setImageURL] = useState(isPet.image);
   const [petComments, setPetComments] = useState(isPet.comments);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const changeStepOne = e => {
     switch (e.currentTarget.name) {
@@ -65,21 +69,26 @@ const EditPetContent = ({ close, pets, _id }) => {
       setImageURL(null);
       return;
     }
-    reader.onloadend = () => {
+      reader.onloadend = () => {
       setImageURL(reader.result);
     };
-    reader.readAsDataURL(image);
-    return;
+      reader.readAsDataURL(image);
+      return;
   };
 
   const dateNow = new Date();
-  const formatDate = `${
-    dateNow.getDate() < 10 ? `0${dateNow.getDate()}` : dateNow.getDate()
+  const formatDate = date => {
+    const dateFormat = new Date(date)
+    return `${
+      dateFormat.getMonth() + 1 < 10
+          ? `0${dateFormat.getMonth() + 1}`
+          : dateFormat.getMonth() + 1
   }.${
-    dateNow.getMonth() < 10
-      ? `0${dateNow.getMonth() + 1}`
-      : dateNow.getMonth() + 1
-  }.${dateNow.getFullYear()}`;
+    dateFormat.getDate() < 10
+        ? `0${dateFormat.getDate()}`
+        : dateFormat.getDate()
+}.${dateFormat.getFullYear()}`
+}
 
   const handleSubmitForStepOne = e => {
     e.preventDefault();
@@ -98,46 +107,66 @@ const EditPetContent = ({ close, pets, _id }) => {
     return changeStep();
   };
 
-  const handleSubmit = e => {
+ 
+  
+const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     const { image, comments } = form.elements;
-    setPetComments(comments.value);
+  setPetComments(comments.value);
+
+  if ( image.files.length > 0) {
+  
     const data = new FormData();
     data.append('name', petName);
     data.append('birthday', petDate);
     data.append('breed', petBreed);
     data.append('comments', petComments);
     data.append('image', image.files[0]);
-    console.log(image.files[0])
-    console.log("yyyy")
-    setPetBreed('');
-    setPetDate('');
-    setPetName('');
-    setImageURL(null);
-    dispatch(operationsPets.addPet(data));
-    form.reset();
-    return close();
-  };
+    // console.log('image', image.files[0])
+    // console.log('imageURL', imageURL)
 
-  const validateFile = () => {
-    if(!imageURL){
-      Report.warning(
-        'Pet Warning',
-        'Please add a photo.',
-        'Okay',
-        );
+    try {
+      await axios.put(`/users/${_id}`, data);
+      setIsSubmitting(false);
+    } catch (error) {
+      setIsSubmitting(false);
+    }
+  } else {
+   
+    try {
+      await axios.put(`/users/${_id}`, {
+        name: petName,
+        birthday: petDate,
+        breed: petBreed,
+        comments: petComments,
+        image: imageURL,
+      });
+          console.log('imageURL', imageURL)
+      setIsSubmitting(false);
+    } catch (error) {
+      setIsSubmitting(false);
     }
   }
 
+  setPetComments('');
+  setPetBreed('');
+  setPetDate('');
+  setPetName('');
+  setImageURL(null);
+  form.reset();
+  return close();
+  };
+
+
   return (
     <>
-      {/* {loading && <Loader />} */}
+      {loading && <Loader />}
       <div className={scss.modalAdds_page}>
         <div className={scss.modalAdds_page__close} onClick={close}>
           <SvgInsert id="icon-close" />
         </div>
-        <h3 className={scss.modalAdds_page__tittle}>Add pet</h3>
+        <h3 className={scss.modalAdds_page__tittle}>Edite pet</h3>
         {stepOne && (
           <form onSubmit={handleSubmitForStepOne}>
             <label
@@ -150,7 +179,7 @@ const EditPetContent = ({ close, pets, _id }) => {
               name="name"
               placeholder="Type name pet"
               type="text"
-              required
+              // required
               value={petName}
               onChange={changeStepOne}
             />
@@ -159,16 +188,20 @@ const EditPetContent = ({ close, pets, _id }) => {
             >
               Date of birth
             </label>
-            <input
+            <Flatpickr
               className={scss.modalAdds_page__input}
               name="date"
               type="text"
-              pattern="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"
-              title="Date must be in the format: DD.MM.YYYY or DD/MM/YYYY or DD-MM-YYYY"
               placeholder="Type date of birth"
-              required
+              // required
               value={petDate}
-              onChange={changeStepOne}
+              options={{
+                dateFormat: 'm.d.Y',
+                maxDate: `${formatDate(dateNow)}`,
+            }}
+            onChange={([date]) => {
+                setPetDate(formatDate(date))
+            }}
             />
             <label
               className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
@@ -180,7 +213,7 @@ const EditPetContent = ({ close, pets, _id }) => {
               type="text"
               name="breed"
               placeholder="Type breed"
-              required
+              // required
               value={petBreed}
               onChange={changeStepOne}
             />
@@ -211,25 +244,23 @@ const EditPetContent = ({ close, pets, _id }) => {
               <p className={scss.modalAdds_page__field}>
                 Add photo and some comments
               </p>
-
               <input
                 className={scss.addspet__imgInput}
                 type="file"
                 name="image"
                 accept="image/png, image/jpeg, image/jpg, image/webp"
                 id="img"
-                required
+                // required
                 title='is required'
                 multiple
                 onChange={handleImageChange}
               />
               <label className={scss.addspet__imgLabel} htmlFor="img"></label>
-              {imageURL && (
+              {/* {imageURL && ( */}
                 <div className={scss.addspetPhoto__container}>
-                  <p>You image:</p>
                   <img src={imageURL} alt="pet" />
                 </div>
-              )}
+              {/* )} */}
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_commit_box}`}
               >
@@ -240,16 +271,17 @@ const EditPetContent = ({ close, pets, _id }) => {
                 type="text"
                 name="comments"
                 placeholder="Type comments"
-                value={petComments}
+                defaultValue={petComments}
                 minLength={8}
-                required
+                // required
               />
 
               <div className={scss.addPet__button}>
                 <button
                   className={`${scss.button__primary_main} ${scss.modalAdds_page__button}`}
                   type="submit"
-                  onClick={validateFile}
+                  disabled={isSubmitting}
+                  // onClick={validateFile}
                 >
                   Done
                 </button>

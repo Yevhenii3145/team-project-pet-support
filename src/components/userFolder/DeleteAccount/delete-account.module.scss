@@ -46,22 +46,23 @@
     font-size: 12px;
 
     @media screen and (min-width: 768px) {
-        position: absolute;
+        // position: absolute;
         margin: 0;
-        right: 47%;
-        top: 548px;
+     
+        // right: 47%;
+        // top: 548px;
 
     }
 
     @media screen and (min-width: 1280px) {
-        top: 710px;
-        left: 19%;
-        margin-left: 16px;
+        margin: 0;
+        padding-right: 20px;
     }
 }
 
 
 .delete_icon {
+    padding: 3px;
     fill: $accentColor;
 
 }

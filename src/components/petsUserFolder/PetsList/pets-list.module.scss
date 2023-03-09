@@ -108,14 +108,28 @@
     position: absolute;
     left: 230px;
     bottom: 5%;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
 
     &:hover {
         cursor: pointer;
+        border: 1px solid $accentColor;
+    
+    }
+
+    &>svg {
+        position: absolute;
+        content: '';
+        left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     @media screen and (min-width: 768px) {
-        width: 44px;
-        height: 44px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
         background-color: $background;
         margin: 0;
@@ -124,10 +138,19 @@
         bottom: 5%;
 
 
+    &>svg {
+        position: absolute;
+        content: '';
+        left:5px;
+        top: 50%;
+            transform: translateY(-50%);
+}
+
     }
 
     @media screen and (min-width: 1280px) {}
 }
+
 
 .iconEdit_btn {
     position: relative;
@@ -173,4 +196,8 @@
         width: 95%;
     }
 
+}
+
+.icon_edit {
+    fill: #111111;
 }

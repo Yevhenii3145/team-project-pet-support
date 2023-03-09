@@ -16,13 +16,14 @@ const addPet = createAsyncThunk('user/addPet', async (dataPet, thunkAPI) => {
     }
   });
 
-
-  const getUserPet = createAsyncThunk('users/pets', async (_, thunkAPI) => {
+const getUserPet = createAsyncThunk(
+  'users/current/pets',
+  async (_, thunkAPI) => {
     try {
-      const response = await axios.get('/users/pets');
-      return response.data;
+      const response = await axios.get('users/current/pets')
+      return response.data
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message)
     }
   });
 
@@ -36,6 +37,19 @@ const addPet = createAsyncThunk('user/addPet', async (dataPet, thunkAPI) => {
         return thunkAPI.rejectWithValue(error);
       }
     }
+);
+  const updatePet = createAsyncThunk(
+    'users/{petId}',
+    async ({ formData, petId}, thunkAPI) => {
+   
+      try {
+        const response = await axios.put(`/users/${petId}`, formData);
+        console.log('response.data', response.data)
+        return response.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
   );
 
 
@@ -43,6 +57,7 @@ const operationsPets = {
   addPet,
   getUserPet,
   deletePet,
+  updatePet,
 }
 
 export default operationsPets;
