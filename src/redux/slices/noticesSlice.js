@@ -10,7 +10,7 @@ const initialState = {
     notice: null,
     favoriteNotices: [],
     totalNotices: 0,
-    nameCategory: ''
+    nameCategory: []
 }
 
 const noticesSlice = createSlice({
@@ -30,11 +30,11 @@ const noticesSlice = createSlice({
             state.loading = false;
             state.error = null;
             state.totalNotices = action.payload.data.countNotices;
-            if(state.nameCategory === 'own') {
-              state.items = action.payload.data.notices;
+            if(state.nameCategory[0] === 'own') {
+              state.nameCategory[1] === 1 ? state.items = action.payload.data.notices : state.items.push(action.payload.data.notices)
               return
-            } else if(state.nameCategory === 'favorite') {
-              state.items = action.payload.data.notices;
+            } else if(state.nameCategory[0] === 'favorite') {
+              state.nameCategory[1] === 1 ? state.items = action.payload.data.notices : state.items.push(action.payload.data.notices)
               return
             } else if (state.items.length > 0 && state.items[0].category === action.payload.data.notices[0].category) {
               const arrId = state.items.map(item => item._id)

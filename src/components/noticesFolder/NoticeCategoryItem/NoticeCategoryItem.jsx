@@ -38,7 +38,7 @@ const NoticeCategoryItem = ({ pet, value}) => {
   const idUser = useSelector(state => state.auth.user.userId)
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   const loading = useSelector(state => state.notices.loading);
-  // const filter = useSelector(state => state.filter);
+  const filter = useSelector(state => state.filter);
   const [isFavorite, setIsFavorite] = useState(false);
   
   useEffect(() => {
@@ -55,9 +55,11 @@ const NoticeCategoryItem = ({ pet, value}) => {
       Notify.failure('You need authorization');
       return
     }else if(!isFavorite) {
-          dispatch(addNoticeToFavorite(noticeId));
-          setIsFavorite(true)
-          return
+      if(filter === null) {
+        dispatch(addNoticeToFavorite(noticeId));
+        setIsFavorite(true)
+        return
+      }
     } else if (isFavorite){
         await dispatch(deleteFavoriteNotice(noticeId))
           setIsFavorite(false) 

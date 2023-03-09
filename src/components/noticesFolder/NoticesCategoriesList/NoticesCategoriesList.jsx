@@ -54,8 +54,8 @@ return filteredNotice
 }
 
 useEffect(() => {
-    dispatch(setNameCategory(categoryName))
-}, [categoryName, dispatch])
+    dispatch(setNameCategory([categoryName, page]))
+}, [categoryName,page, dispatch])
 
 useEffect(() => {
     Events.scrollEvent.register('begin', function () {
