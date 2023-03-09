@@ -83,6 +83,22 @@ export const authSlice = createSlice({
         Report.warning('Warning', `${state.error.message}`, 'Okay');
       },
 
+      [operations.resetUserPassword.pending] (state, { payload }) {
+        state.loading = true;
+      },
+      [operations.resetUserPassword.fulfilled] (state, {payload}) {
+        state.loading = false;
+        Report.info(
+          'SUCCESS!',
+          `Please check your mail.`,
+          'Okay'
+        );
+      },
+      [operations.resetUserPassword.rejected] (state, { payload }) {
+        state.loading = false;
+        Report.warning('Warning', `${payload.message} this email.`, 'Okay');
+      },
+
       [operations.logout.pending] (state, {payload}) {
         state.loading = true;
         state.error = payload;
