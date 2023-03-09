@@ -11,7 +11,9 @@ import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 export function PetsList() {
 
 const dispatch = useDispatch();
-const [modalShow, setModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [isActiveEdite, setIsActiveEdite] = useState(false);
 const loading = useSelector(state => state.user.loading);
  
 
@@ -56,6 +58,9 @@ const loading = useSelector(state => state.user.loading);
     document.body.style.overflow = 'hidden';
   };
 
+  const active = isActive ? "icon-delete" : "icon-deletepet";
+  const activeEdite = isActiveEdite ? "icon-edit_active" : "icon-edit";
+
   const elements = Array.isArray(pets) && pets.map(({ name, birthday, breed, image, comments, _id }) => {
 
     const editDate = e => {
@@ -80,14 +85,22 @@ const loading = useSelector(state => state.user.loading);
             <p className={scss.petsList_field}>
               <span className={scss.labelPets}>Comments:</span>   
               {comments} </p>
-            <button className={scss.petsList_button} onClick={() => onDeletePet(_id)} type="button">
-              <SvgInsert className={scss.icon_delete} id="icon-deletepet" />
+          <button
+            className={scss.petsList_button}
+            onClick={() => onDeletePet(_id)}
+            type="button"
+            onMouseEnter={() => setIsActive(true)}
+            onMouseLeave={() => setIsActive(false)}
+          >
+            <SvgInsert className={scss.icon_delete} id={active} />
             </button>
             <button
               className={scss.iconEdit_btn}
-              onClick={showModal}
+            onClick={showModal}
+            onMouseEnter={() => setIsActiveEdite(true)}
+            onMouseLeave={() => setIsActiveEdite(false)}
             >
-              <SvgInsert id="icon-edit-active" />
+              <SvgInsert id={activeEdite} />
             </button>
             <div >
               {modalShow && (
@@ -109,6 +122,3 @@ const loading = useSelector(state => state.user.loading);
     </>
   );
 }
-
-
- // 
