@@ -81,7 +81,7 @@ const AuthForm = () => {
             console.log('refresh')
             console.log(params)
         }
-    },[page])
+    },[page, params])
 
     const handleChangePassword = e => {
         switch (e.target.name) {
