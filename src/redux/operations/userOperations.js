@@ -76,6 +76,21 @@ const resetUserPassword = createAsyncThunk('auth/reset-password', async (user, t
   }
 });
 
+const refreshPassword = createAsyncThunk('auth/update-password', async (userInfo, thunkAPI) => {
+  try {
+    axios.defaults.headers.common.authorization = userInfo.userToken;
+    const response = await axios.patch('/auth/update-password', userInfo.userNewPassword);
+    console.log(response.data)
+    return response.data;
+  } catch ({ response }) {
+    const error = {
+      status: response.status,
+      message: response.data.message,
+    };
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
@@ -166,7 +181,7 @@ const operations = {
   updateUserAvatar,
   deleteAccount,
   resetUserPassword,
-
+  refreshPassword,
 };
 
 export default operations;
