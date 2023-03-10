@@ -89,6 +89,10 @@ a[data-action="owner"] {
     border: none;
     border-radius: 50%;
     cursor: pointer;
+
+    &:hover {
+        border: 1px solid $accentColor;
+    }
 }
 
 .add_to_favorite_btn > svg {
@@ -104,6 +108,27 @@ a[data-action="owner"] {
 
 .add_to_favorite_btn_active> svg {
     fill: $accentColor;
+}
+
+.edit_notice_btn {
+    position: absolute;
+    top: 70px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(2px);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+        border: 1px solid $accentColor;
+    }
 }
 
 .box_btn {

@@ -16,9 +16,11 @@ import {
 import useAuth from 'redux/utils/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
 import ModalNotice from '../ModalNotice/ModalNotice';
+import ModalAddNotice from 'components/noticesFolder/ModalAddNotice/ModalAddNotice';
+import EditNoticeContent from 'components/noticesFolder/ModalAddNotice/ModalAddNoticeForm/EditNoticeContent';
 import { fetchInfoPetUser, fetchInfoUser } from 'redux/operations/userGuestOperations';
 
-const NoticeCategoryItem = ({ pet, value}) => {
+const NoticeCategoryItem = ({ notice, value}) => {
   const {
     _id,
     image,
@@ -29,10 +31,11 @@ const NoticeCategoryItem = ({ pet, value}) => {
     price,
     category,
     owner,
-  } = pet;
+  } = notice;
 
   
   const [modalShow, setModalShow] = useState(false);
+  const [modalShowEditNotice, setModalShowEditNotice] = useState(false);
   const dispatch = useDispatch();
   const isLogin = useAuth();
   const idUser = useSelector(state => state.auth.user.userId)
@@ -75,7 +78,7 @@ const NoticeCategoryItem = ({ pet, value}) => {
   const showModal = () => {
     document.body.style.overflow = 'hidden'; 
     setModalShow(true);
-    dispatch(searchNotice(pet._id));
+    dispatch(searchNotice(notice._id));
   };
 
   const getPlacePet = () => {
@@ -115,6 +118,16 @@ const NoticeCategoryItem = ({ pet, value}) => {
     return category;
   }
 
+  const showModalEditNotice = () => {
+    setModalShowEditNotice(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModalEditNotice = () => {
+    document.body.style.overflow = 'visible';
+    setModalShowEditNotice(false);
+  };
+
   return (
     loading ? <p>loading...</p> :
       <>
@@ -122,7 +135,7 @@ const NoticeCategoryItem = ({ pet, value}) => {
         <>
           <Modal onClose={closeModal}>
             <ModalNotice
-              id={pet._id}
+              id={notice._id}
               onClose={closeModal}
               onAddDelete={btnAddToFavorite}
               categoryNotice = {getCategoryNotice}
@@ -132,6 +145,15 @@ const NoticeCategoryItem = ({ pet, value}) => {
           </Modal>
         </>
       )}
+      
+      {modalShowEditNotice && (
+        <>
+          <ModalAddNotice onClose={closeModalEditNotice}>
+              <EditNoticeContent notice={notice} />
+          </ModalAddNotice>
+        </>
+      )}
+
       <li className={scss.card_item}>
         <img src={image} alt="pet" className={scss.card_img} />
         <div className={scss.card_info}>
@@ -190,6 +212,11 @@ const NoticeCategoryItem = ({ pet, value}) => {
             type="button"
             className={isFavorite ? `${scss.add_to_favorite_btn} ${scss.add_to_favorite_btn_active}` : scss.add_to_favorite_btn}>
                 <SvgInsert id="icon-heart"/>
+            </button>
+            <button onClick={showModalEditNotice}
+            type="button"
+            className={scss.edit_notice_btn}>
+                <SvgInsert id="icon-edit" />
             </button>
           </div>
           <p className={scss.card_text}>{getCategoryNotice(category)}</p>

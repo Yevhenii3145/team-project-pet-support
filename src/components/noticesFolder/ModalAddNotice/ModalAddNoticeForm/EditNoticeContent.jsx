@@ -10,20 +10,25 @@ import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
 import cities from '../../../../helpers/ua.json'
 
-const AddsNoticeContent = ({ close }) => {
+const EditNoticeContent = ({ close, notice }) => {
+
+  console.log(notice);
+
   const [sell, setSell] = useState(false);
   const [stepOne, setStepOne] = useState(true);
 
-  const [petCategory, setPetCategory] = useState('');
-  const [petName, setPetName] = useState('');
-  const [petTitle, setPetTitle] = useState('');
-  const [petDate, setPetDate] = useState('');
-  const [petBreed, setPetBreed] = useState('');
-  const [currentRadioValue, setCurrentRadioValue] = useState('');
-  const [petLocation, setPetLocation] = useState('');
-  const [petPrice, setPetPrice] = useState(Number);
+  const [petCategory, setPetCategory] = useState(`${notice.category}`);
+  const [petName, setPetName] = useState(`${notice.name}`);
+  const [petTitle, setPetTitle] = useState(`${notice.title}`);
+  const [petDate, setPetDate] = useState(`${notice.birthday}`);
+  const [petBreed, setPetBreed] = useState(`${notice.breed}`);
+  const [currentRadioValue, setCurrentRadioValue] = useState(`${notice.sex}`);
+  const [petLocation, setPetLocation] = useState(`${notice.location}`);
+  const [petPrice, setPetPrice] = useState(`${notice.price}`);
   const [currencyValue, setCurrencyValue] = useState('UAH')
-  const [imageURL, setImageURL] = useState(null);
+  const [imageURL, setImageURL] = useState(`${notice.image}`);
+  const [petComments, setPetComments] = useState(`${notice.comments}`);
+
   const loading = useSelector(state => state.user.loading);
   
   const dispatch = useDispatch();
@@ -62,6 +67,9 @@ const AddsNoticeContent = ({ close }) => {
         break;
       case 'price':
         setPetPrice(e.currentTarget.value);
+        break;
+      case 'comments':
+        setPetComments(e.currentTarget.defaultValue);
         break;
       default:
         return;
@@ -144,7 +152,8 @@ const AddsNoticeContent = ({ close }) => {
     data.append('location', petLocation);
     data.append('sex', currentRadioValue);
     data.append('price', `${petPrice} ${currencyValue}`);
-    data.append('comments', comments.value);
+    // data.append('comments', comments.value);
+    data.append('comments', petComments);
     data.append('image', image.files[0]);
 
     setPetTitle('');
@@ -446,6 +455,7 @@ const AddsNoticeContent = ({ close }) => {
                 className={scss.modalAdds_commit}
                 type="text"
                 name="comments"
+                defaultValue={petComments}
                 placeholder="Type comment"
                 required
                 minLength="8"
@@ -473,4 +483,4 @@ const AddsNoticeContent = ({ close }) => {
     </>
   );
 };
-export default AddsNoticeContent;
+export default EditNoticeContent;
