@@ -8,6 +8,7 @@ import SvgInsert from '../../../utilsFolder/Svg/Svg';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // import 'flatpickr/dist/themes/material_orange.css'
 import Flatpickr from 'react-flatpickr'
+// import { add } from 'date-fns';
 
 const AddsPetContent = ({ close }) => {
   const [stepOne, setStepOne] = useState(true);
@@ -103,6 +104,8 @@ const AddsPetContent = ({ close }) => {
     form.reset();
     return close();
   };
+
+
 
   const validateFile = () => {
     if(!imageURL){

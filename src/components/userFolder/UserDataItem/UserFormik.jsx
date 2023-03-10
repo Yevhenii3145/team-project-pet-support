@@ -219,9 +219,10 @@ export function UserFormik() {
                 {loading ? (
                     <>
                         <div className={scss.loader__content}>
-                            <Oval
-                                height={80}
-                                width={80}
+                            <div className={scss.loader_oval}>
+                                <Oval
+                                height={60}
+                                width={60}
                                 color="#F59256"
                                 wrapperStyle={{}}
                                 wrapperClass=""
@@ -231,6 +232,7 @@ export function UserFormik() {
                                 strokeWidth={2}
                                 strokeWidthSecondary={2}
                             />
+                            </div>
                         </div>
                     </>
                 ) : (
@@ -372,7 +374,7 @@ export function UserFormik() {
                                         onChange={handleChange}
                                         type="tel"
                                         name="phone"
-                                        value={userPhone}
+                                            value={userPhone}
                                         className={
                                             scss.userDataForm_field_active
                                         }
@@ -382,7 +384,7 @@ export function UserFormik() {
                                         onChange={handleChange}
                                         type="tel"
                                         name="phone"
-                                        value={userPhone}
+                                        value={`+${userPhone}`}
                                         disabled
                                         className={scss.userDataForm_field}
                                     />

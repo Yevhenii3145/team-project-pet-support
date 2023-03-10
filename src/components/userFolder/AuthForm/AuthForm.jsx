@@ -7,9 +7,9 @@ import GoogleAuth from '../../headerFolder/Nav/GoogleNav/GoogleNav'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Loader from 'components/utilsFolder/Loader/Loader'
 import * as Yup from 'yup'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useParams } from 'react-router-dom'
 import SvgInsert from 'components/utilsFolder/Svg/Svg'
 import cities from '../../../helpers/ua.json'
 
@@ -37,7 +37,7 @@ function validateEmail(value) {
     if (!value) {
         error = 'E-mail address required'
     } else if (
-        !/^((([0-9A-Za-z]{1}[-0-9A-z]{1,}[0-9A-Za-z]{1}))@([-0-9A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/i.test(
+        !/^((([0-9A-Za-z]{1}[-0-9A-z.]{1,}[0-9A-Za-z]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/i.test(
             value
         )
     ) {
@@ -74,19 +74,28 @@ const AuthForm = () => {
     const [valueConfirmPassword, setValueConfirmPassword] = useState('')
     const location = useLocation()
     const page = location.pathname
-    const handleChangePassword = (e) => {
-        switch(e.target.name){
+    const params = useParams()
+
+    useEffect(()=>{
+        if(page === '/refresh'){
+            console.log('refresh')
+            console.log(params)
+        }
+    },[page, params])
+
+    const handleChangePassword = e => {
+        switch (e.target.name) {
             case 'password':
-                setValuePassword(e.target.value);
-                break;
+                setValuePassword(e.target.value)
+                break
             case 'passwordConfirm':
-                setValueConfirmPassword(e.target.value);
-                break;
+                setValueConfirmPassword(e.target.value)
+                break
             case 'coordination':
-                setCoordination(e.target.checked);
-                break;
+                setCoordination(e.target.checked)
+                break
             default:
-                return;
+                return
         }
     }
 
@@ -121,15 +130,15 @@ const AuthForm = () => {
             return setStepOne(false)
         }
         if (!stepOne) {
-
-            if(!cities.find(city => `${city.city}, ${city.admin_name}` === values.region)){
-                console.log('not')
-                return Notify.failure(
-                    'Please select a region from the list!',
-                    {
-                        timeout: 6000,
-                    }
+            if (
+                !cities.find(
+                    city => `${city.city}, ${city.admin_name}` === values.region
                 )
+            ) {
+                console.log('not')
+                return Notify.failure('Please select a region from the list!', {
+                    timeout: 6000,
+                })
             }
 
             const user = {
@@ -177,6 +186,33 @@ const AuthForm = () => {
         return dispatch(operations.authVerify(user))
     }
 
+    const resetPassword = (values, actions) => {
+        const userEmail = {
+            email: values.email,
+        }
+        actions.resetForm()
+        return dispatch(operations.resetUserPassword(userEmail))
+    }
+
+    const handleSubmitForChangePassword = (values, actions) => {
+        if (values.password !== values.passwordConfirm) {
+            console.log(values.password)
+            console.log(values.passwordConfirm)
+            return Notify.failure('Your passwords must have the same value!', {
+                timeout: 6000,
+            })
+        }
+        const userNewPassword = {
+            password: values.password,
+        }
+        console.log(userNewPassword)
+        actions.resetForm()
+        setValuePassword('')
+        setValueConfirmPassword('')
+        return
+        //return dispatch(operations.resetUserPassword(userEmail))
+    }
+
     return (
         <>
             {loading && <Loader />}
@@ -187,7 +223,6 @@ const AuthForm = () => {
                             validationSchema={schemasForStepFirst}
                             initialValues={initialValue}
                             onSubmit={handleSubmitForRegister}
-                            
                         >
                             <Form
                                 className={scss.form__container}
@@ -230,8 +265,8 @@ const AuthForm = () => {
                                     <label className={scss.form__label}>
                                         Password
                                     </label>
-                                        {valuePassword.length >= 1 &&
-                                            <span
+                                    {valuePassword.length >= 1 && (
+                                        <span
                                             className={
                                                 scss.form__input__password_show
                                             }
@@ -243,7 +278,7 @@ const AuthForm = () => {
                                                 <SvgInsert id="eye-blocked" />
                                             )}
                                         </span>
-                                        }
+                                    )}
                                     <ErrorMessage
                                         name="password"
                                         render={msg => (
@@ -268,21 +303,20 @@ const AuthForm = () => {
                                     <label className={scss.form__label}>
                                         Confirm Password
                                     </label>
-                                        {
-                                        valueConfirmPassword.length >= 1 &&
+                                    {valueConfirmPassword.length >= 1 && (
                                         <span
-                                        className={
-                                            scss.form__input__password_show
-                                        }
-                                        onClick={showConfirmPassword}
-                                    >
-                                        {!onShowConfirmPassword ? (
-                                            <SvgInsert id="eye" />
-                                        ) : (
-                                            <SvgInsert id="eye-blocked" />
-                                        )}
-                                    </span>
-                                        }
+                                            className={
+                                                scss.form__input__password_show
+                                            }
+                                            onClick={showConfirmPassword}
+                                        >
+                                            {!onShowConfirmPassword ? (
+                                                <SvgInsert id="eye" />
+                                            ) : (
+                                                <SvgInsert id="eye-blocked" />
+                                            )}
+                                        </span>
+                                    )}
                                     <ErrorMessage
                                         name="passwordConfirm"
                                         render={msg => (
@@ -293,16 +327,34 @@ const AuthForm = () => {
                                     />
                                 </div>
                                 <div className={scss.coordination__box}>
-                                <Field className={scss.coordination__box_input} type='checkbox' name="coordination"/>
-                                <label className={scss.coordination__box_title}>Погоджуюсь з <a href='https://www.google.com.ua/' className={scss.coordination__box_link} target="_blank" rel="noopener noreferrer">правилами користування сайту</a></label>
+                                    <Field
+                                        className={scss.coordination__box_input}
+                                        type="checkbox"
+                                        name="coordination"
+                                    />
+                                    <label
+                                        className={scss.coordination__box_title}
+                                    >
+                                        Погоджуюсь з{' '}
+                                        <a
+                                            href="https://www.google.com.ua/"
+                                            className={
+                                                scss.coordination__box_link
+                                            }
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            правилами користування сайту
+                                        </a>
+                                    </label>
                                 </div>
                                 <button
-                                className={`${scss.button__primary_main} ${scss.form__button}`}
-                                type="submit"
-                                disabled={!coordination}
-                            >
-                                Next
-                            </button>
+                                    className={`${scss.button__primary_main} ${scss.form__button}`}
+                                    type="submit"
+                                    disabled={!coordination}
+                                >
+                                    Next
+                                </button>
                                 <GoogleAuth />
                             </Form>
                         </Formik>
@@ -439,53 +491,57 @@ const AuthForm = () => {
                             onChange={handleChangePassword}
                         >
                             <div className={scss.form__input_container}>
-                            <Field
-                                className={scss.form__input}
-                                type="email"
-                                name="email"
-                                placeholder=" "
-                            />
-                            <label className={scss.form__label}>Email</label>
-                            <ErrorMessage
-                                name="email"
-                                render={msg => <p className={scss.error__mesage}>
-                                {msg}
-                            </p>}
-                            />
+                                <Field
+                                    className={scss.form__input}
+                                    type="email"
+                                    name="email"
+                                    placeholder=" "
+                                />
+                                <label className={scss.form__label}>
+                                    Email
+                                </label>
+                                <ErrorMessage
+                                    name="email"
+                                    render={msg => (
+                                        <p className={scss.error__mesage}>
+                                            {msg}
+                                        </p>
+                                    )}
+                                />
                             </div>
                             <div className={scss.form__input_container}>
-                            <Field
-                                className={`${scss.form__input} ${scss.form__login__input}`}
-                                type={
-                                    !onShowPassword
-                                        ? 'password'
-                                        : 'text'
-                                }
-                                name="password"
-                                placeholder=" "
-                                validate={validatePassword}
-                            />
-                            <label className={scss.form__label}>Password</label>
-                            {valuePassword.length >= 1 &&
-                                            <span
-                                            className={
-                                                scss.form__input__password_show
-                                            }
-                                            onClick={showPassword}
-                                        >
-                                            {!onShowPassword ? (
-                                                <SvgInsert id="eye" />
-                                            ) : (
-                                                <SvgInsert id="eye-blocked" />
-                                            )}
-                                        </span>
+                                <Field
+                                    className={`${scss.form__input} ${scss.form__login__input}`}
+                                    type={!onShowPassword ? 'password' : 'text'}
+                                    name="password"
+                                    placeholder=" "
+                                    validate={validatePassword}
+                                />
+                                <label className={scss.form__label}>
+                                    Password
+                                </label>
+                                {valuePassword.length >= 1 && (
+                                    <span
+                                        className={
+                                            scss.form__input__password_show
                                         }
-                            <ErrorMessage
-                                name="password"
-                                render={msg => <p className={scss.error__mesage}>
-                                {msg}
-                            </p>}
-                            />
+                                        onClick={showPassword}
+                                    >
+                                        {!onShowPassword ? (
+                                            <SvgInsert id="eye" />
+                                        ) : (
+                                            <SvgInsert id="eye-blocked" />
+                                        )}
+                                    </span>
+                                )}
+                                <ErrorMessage
+                                    name="password"
+                                    render={msg => (
+                                        <p className={scss.error__mesage}>
+                                            {msg}
+                                        </p>
+                                    )}
+                                />
                             </div>
                             <button
                                 className={`${scss.button__primary_main} ${scss.form__button}`}
@@ -497,6 +553,17 @@ const AuthForm = () => {
                                 Resend verification email? Click{' '}
                                 <NavLink
                                     to="/verify"
+                                    className={scss.description__nav}
+                                >
+                                    here
+                                </NavLink>
+                            </p>
+                            <p
+                                className={`${scss.form__description} ${scss.form__description_reset}`}
+                            >
+                                Forgot your password? Click{' '}
+                                <NavLink
+                                    to="/reset-password"
                                     className={scss.description__nav}
                                 >
                                     here
@@ -529,49 +596,57 @@ const AuthForm = () => {
                             onChange={handleChangePassword}
                         >
                             <div className={scss.form__input_container}>
-                            <Field
-                                className={scss.form__input}
-                                type="email"
-                                name="email"
-                                placeholder=" "
-                            />
-                            <label className={scss.form__label}>Email</label>
-                            <ErrorMessage
-                                name="email"
-                                render={msg => <p className={scss.error__mesage}>
-                                {msg}
-                            </p>}
-                            />
+                                <Field
+                                    className={scss.form__input}
+                                    type="email"
+                                    name="email"
+                                    placeholder=" "
+                                />
+                                <label className={scss.form__label}>
+                                    Email
+                                </label>
+                                <ErrorMessage
+                                    name="email"
+                                    render={msg => (
+                                        <p className={scss.error__mesage}>
+                                            {msg}
+                                        </p>
+                                    )}
+                                />
                             </div>
                             <div className={scss.form__input_container}>
-                            <Field
-                                className={`${scss.form__input} ${scss.form__login__input}`}
-                                type="password"
-                                name="password"
-                                placeholder=" "
-                                validate={validatePassword}
-                            />
-                            <label className={scss.form__label}>Password</label>
-                            {valuePassword.length >= 1 &&
-                                            <span
-                                            className={
-                                                scss.form__input__password_show
-                                            }
-                                            onClick={showPassword}
-                                        >
-                                            {!onShowPassword ? (
-                                                <SvgInsert id="eye" />
-                                            ) : (
-                                                <SvgInsert id="eye-blocked" />
-                                            )}
-                                        </span>
+                                <Field
+                                    className={`${scss.form__input} ${scss.form__login__input}`}
+                                    type="password"
+                                    name="password"
+                                    placeholder=" "
+                                    validate={validatePassword}
+                                />
+                                <label className={scss.form__label}>
+                                    Password
+                                </label>
+                                {valuePassword.length >= 1 && (
+                                    <span
+                                        className={
+                                            scss.form__input__password_show
                                         }
-                            <ErrorMessage
-                                name="password"
-                                render={msg => <p className={scss.error__mesage}>
-                                {msg}
-                            </p>}
-                            />
+                                        onClick={showPassword}
+                                    >
+                                        {!onShowPassword ? (
+                                            <SvgInsert id="eye" />
+                                        ) : (
+                                            <SvgInsert id="eye-blocked" />
+                                        )}
+                                    </span>
+                                )}
+                                <ErrorMessage
+                                    name="password"
+                                    render={msg => (
+                                        <p className={scss.error__mesage}>
+                                            {msg}
+                                        </p>
+                                    )}
+                                />
                             </div>
 
                             <button
@@ -590,6 +665,134 @@ const AuthForm = () => {
                         </NavLink>
                     </p>
                 </>
+            )}
+            {page === '/reset-password' && (
+                <>
+                    <Formik
+                        initialValues={initialValue}
+                        onSubmit={resetPassword}
+                    >
+                        <Form className={scss.form__container}>
+                            <p className={scss.form__description_recover}>
+                                Please, enter your email to reset password:
+                            </p>
+                            <div className={scss.form__input_container}>
+                                <Field
+                                    className={scss.form__input}
+                                    type="email"
+                                    name="email"
+                                    placeholder=" "
+                                    validate={validateEmail}
+                                />
+                                <label className={scss.form__label}>
+                                    Email
+                                </label>
+                                <ErrorMessage
+                                    name="email"
+                                    render={msg => (
+                                        <p className={scss.error__mesage}>
+                                            {msg}
+                                        </p>
+                                    )}
+                                />
+                            </div>
+                            <button
+                                className={`${scss.button__primary_main} ${scss.form__button}`}
+                                type="submit"
+                            >
+                                Reset Password
+                            </button>
+                        </Form>
+                    </Formik>
+
+                    <p className={scss.form__description}>
+                        Go to back?{' '}
+                        <NavLink to="/login" className={scss.description__nav}>
+                            Login
+                        </NavLink>
+                    </p>
+                </>
+            )}
+            {page === '/refresh' && (
+                <Formik
+                    validationSchema={schemasForStepFirst}
+                    initialValues={initialValue}
+                    onSubmit={handleSubmitForChangePassword}
+                >
+                    <Form
+                        className={scss.form__container}
+                        autoComplete="off"
+                        onChange={handleChangePassword}
+                    >
+                        <div className={scss.form__input_container}>
+                            <Field
+                                className={scss.form__input}
+                                type={!onShowPassword ? 'password' : 'text'}
+                                name="password"
+                                validate={validatePassword}
+                                placeholder=" "
+                                //onChange={handleChangePassword}
+                            />
+                            <label className={scss.form__label}>Password</label>
+                            {valuePassword.length >= 1 && (
+                                <span
+                                    className={scss.form__input__password_show}
+                                    onClick={showPassword}
+                                >
+                                    {!onShowPassword ? (
+                                        <SvgInsert id="eye" />
+                                    ) : (
+                                        <SvgInsert id="eye-blocked" />
+                                    )}
+                                </span>
+                            )}
+                            <ErrorMessage
+                                name="password"
+                                render={msg => (
+                                    <p className={scss.error__mesage}>{msg}</p>
+                                )}
+                            />
+                        </div>
+                        <div className={scss.form__input_container}>
+                            <Field
+                                className={scss.form__input}
+                                type={
+                                    !onShowConfirmPassword ? 'password' : 'text'
+                                }
+                                name="passwordConfirm"
+                                placeholder=" "
+                                validate={validatePassword}
+                            />
+                            <label className={scss.form__label}>
+                                Confirm Password
+                            </label>
+                            {valueConfirmPassword.length >= 1 && (
+                                <span
+                                    className={scss.form__input__password_show}
+                                    onClick={showConfirmPassword}
+                                >
+                                    {!onShowConfirmPassword ? (
+                                        <SvgInsert id="eye" />
+                                    ) : (
+                                        <SvgInsert id="eye-blocked" />
+                                    )}
+                                </span>
+                            )}
+                            <ErrorMessage
+                                name="passwordConfirm"
+                                render={msg => (
+                                    <p className={scss.error__mesage}>{msg}</p>
+                                )}
+                            />
+                        </div>
+                        <button
+                            className={`${scss.button__primary_main} ${scss.form__button}`}
+                            type="submit"
+                        >
+                            Change password
+                        </button>
+                    </Form>
+                </Formik>
             )}
         </>
     )

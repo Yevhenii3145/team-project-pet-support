@@ -83,6 +83,22 @@ export const authSlice = createSlice({
         Report.warning('Warning', `${state.error.message}`, 'Okay');
       },
 
+      [operations.resetUserPassword.pending] (state, { payload }) {
+        state.loading = true;
+      },
+      [operations.resetUserPassword.fulfilled] (state, {payload}) {
+        state.loading = false;
+        Report.info(
+          'SUCCESS!',
+          `Please check your mail.`,
+          'Okay'
+        );
+      },
+      [operations.resetUserPassword.rejected] (state, { payload }) {
+        state.loading = false;
+        Report.warning('Warning', `${payload.message} this email.`, 'Okay');
+      },
+
       [operations.logout.pending] (state, {payload}) {
         state.loading = true;
         state.error = payload;
@@ -163,15 +179,32 @@ export const authSlice = createSlice({
 
       [operations.updateUserAvatar.pending] (state) {
         state.loading = true;
-    },
-    [operations.updateUserAvatar.fulfilled] (state, { payload }) {
-        state.loading = false;
-        state.user.avatar = payload.avatarURL;
-    },
-    [operations.updateUserAvatar.rejected]: (state, {payload}) => {
-        state.loading = false;
-        state.error = payload;
-    },
+      },
+      [operations.updateUserAvatar.fulfilled] (state, { payload }) {
+          state.loading = false;
+          state.user.avatar = payload.avatarURL;
+      },
+      [operations.updateUserAvatar.rejected]: (state, {payload}) => {
+          state.loading = false;
+          state.error = payload;
+      },
+
+      [operations.deleteAccount.pending] (state) {
+        state.loading = true;
+      },
+      [operations.deleteAccount.fulfilled] (state, { payload }) {
+          state.loading = false;
+        state.user = payload;
+                Report.info(
+          'SUCCESS!',
+          `Your account deleted .`,
+          'Okay'
+        );
+      },
+      [operations.deleteAccount.rejected]: (state, {payload}) => {
+          state.loading = false;
+          state.error = payload;
+      },
     },
 })
 

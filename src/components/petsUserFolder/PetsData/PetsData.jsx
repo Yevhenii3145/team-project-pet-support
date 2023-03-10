@@ -2,22 +2,26 @@ import { PetsList } from '../PetsList/PetsList'
 import { EmptyPetsList } from '../EmptyPetsList/EmptyPetsList'
 import ModalAddsPet from '../ModalAddsPet/ModalAddsPet'
 import AddsPetContent from '../ModalAddsPet/ModalAddPetPages/AddsPetContent'
-// import operationsPets from 'redux/operations/userPetsApi'
-// import { useEffect } from 'react'
+import operationsPets from 'redux/operations/userPetsApi'
+import { useEffect } from 'react'
 import Loader from 'components/utilsFolder/Loader/Loader'
 import { useState } from 'react'
 import SvgInsert from '../../utilsFolder/Svg/Svg'
-import { useSelector } from 'react-redux'
-// import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import scss from './pets-data.module.scss'
 
 function PetsData() {
     const [modalShow, setModalShow] = useState(false)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(operationsPets.getUserPet());
+      }, [dispatch]);
+    
     const pets = useSelector(state => state.user.pets)
 
     const loading = useSelector(state => state.user.loading)
-    // const dispatch = useDispatch()
 
     const closeModal = () => {
         setModalShow(false)

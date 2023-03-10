@@ -122,13 +122,6 @@
     letter-spacing: 0.04em;
     color: #111111;
     padding: 0 0 0 18px;
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-        border: 1px solid $accentColor;
-    }
-
 
     @media screen and (min-width: 768px) {
         font-size: 18px;
@@ -329,3 +322,36 @@ form:not(:last-child) {
     }
 
 }
+
+// .loading__watch {
+//     position: relative;
+ 
+//     left: 100%;
+// }
+
+.loader__content {
+    display: flex;
+    position: relative;
+
+}
+
+.loader_oval {
+    position: absolute;
+    content: '';
+    left: 88px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    @media screen and (min-width: 768px) {
+    left: 158.5px;
+    top: 16%;
+    transform: translateY(-16%);
+        }
+
+    @media screen and (min-width: 1280px) {
+
+    top: 68px;
+ 
+    }
+}
+

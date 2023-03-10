@@ -62,6 +62,20 @@ const authVerify = createAsyncThunk('auth/verify', async (user, thunkAPI) => {
   }
 });
 
+const resetUserPassword = createAsyncThunk('auth/reset-password', async (user, thunkAPI) => {
+  try {
+    const response = await axios.post('/auth/reset-password', user);
+    console.log(response.data)
+    return response.data;
+  } catch ({ response }) {
+    const error = {
+      status: response.status,
+      message: response.data.message,
+    };
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
@@ -124,6 +138,24 @@ const updateUser = createAsyncThunk('user/update', async (data, thunkAPI) => {
   }
 });
 
+const deleteAccount = createAsyncThunk('users/delete', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const persistedToken = state.auth.token;
+
+  try {
+    setAuthHeader(persistedToken);
+    const response = await axios.delete('/users/current');
+    return response.data;
+  } catch ({ response }) {
+    setAuthHeader();
+    const error = {
+      status: response.status,
+      message: response.data.message,
+    };
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const operations = {
   registerNewUser,
   login,
@@ -132,6 +164,9 @@ const operations = {
   current,
   updateUser,
   updateUserAvatar,
+  deleteAccount,
+  resetUserPassword,
+
 };
 
 export default operations;

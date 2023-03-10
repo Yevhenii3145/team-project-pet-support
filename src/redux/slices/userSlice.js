@@ -37,7 +37,7 @@ const userSlice = createSlice({
         },
         [operationsPets.getUserPet.fulfilled] (state, {payload}) {
             state.loading = false;
-            state.pets = payload;
+          state.pets = payload;
         },
         [operationsPets.getUserPet.rejected] (state, {payload}) {
             state.loading = false;
@@ -48,12 +48,29 @@ const userSlice = createSlice({
             state.loading = true;
         },
         [operationsPets.deletePet.fulfilled] (state, action) {
-            state.loading = false;
-            state.pets = state.pets.filter(pet => pet._id !== action.payload);
+          state.loading = false;
+          state.pets = state.pets.filter(pet => pet._id !== action.payload);
         },
         [operationsPets.deletePet.rejected] (state, {payload}) {
             state.loading = false;
             state.error = payload;
+      },
+        
+        [operationsPets.updatePet.pending] (state) {
+          state.loading = true;
+    
+          },
+        [operationsPets.updatePet.fulfilled] (state, action) {
+          state.loading = false;
+          console.log('fulfilled')
+          state.pets = action.payload;
+          // state.pets = state.pets.filter(pet => pet._id !== action.payload);
+          // const index = state.pets.findIndex((pet) => pet._id === action.payload._id);
+          // state.pets[index] = action.payload;
+           console.log('state.pets', state.pets)
+        },
+        [operationsPets.updatePet.rejected] (state) {
+            state.loading = false;
         },
     },
 })
