@@ -59,7 +59,7 @@ const loading = useSelector(state => state.user.loading);
   };
 
   const active = isActive ? "icon-delete" : "icon-deletepet";
-  const activeEdite = isActiveEdite ? "icon-edit_active" : "icon-edit";
+  const activeEdite = isActiveEdite ? "icon-edit-pet" : "icon-edit-pet-active";
 
   const elements = Array.isArray(pets) && pets.map(({ name, birthday, breed, image, comments, _id }) => {
 

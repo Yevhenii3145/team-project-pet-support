@@ -255,12 +255,11 @@ const handleSubmit = async (e) => {
                 multiple
                 onChange={handleImageChange}
               />
-              <label className={scss.addspet__imgLabel} htmlFor="img"></label>
-              {/* {imageURL && ( */}
+              <label className={scss.addspet__imgLabel} htmlFor="img">
                 <div className={scss.addspetPhoto__container}>
-                  <img src={imageURL} alt="pet" />
+                  <img src={imageURL} alt="pet" className={scss.addspet__photo}/>
                 </div>
-              {/* )} */}
+                </label>
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_commit_box}`}
               >
