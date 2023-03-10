@@ -72,16 +72,16 @@ const AuthForm = () => {
     const [coordination, setCoordination] = useState(false)
     const [valuePassword, setValuePassword] = useState('')
     const [valueConfirmPassword, setValueConfirmPassword] = useState('')
+    const [tokenForResetPassword, setTokenForResetPassword] = useState('')
     const location = useLocation()
     const page = location.pathname
-    const params = useParams()
+    const { token } = useParams()
 
     useEffect(()=>{
-        if(page === '/refresh'){
-            console.log('refresh')
-            console.log(params)
+        if(page !== '/register' && page !== '/login' && page !== '/verify' && page !== '/reset-password'){
+            setTokenForResetPassword(token)
         }
-    },[page, params])
+    },[page, token])
 
     const handleChangePassword = e => {
         switch (e.target.name) {
@@ -202,15 +202,18 @@ const AuthForm = () => {
                 timeout: 6000,
             })
         }
-        const userNewPassword = {
-            password: values.password,
+        const infoForUpdatePassword = {
+            userToken: tokenForResetPassword,
+            userNewPassword: {
+                password: values.password,
+            }
         }
-        console.log(userNewPassword)
+        console.log(infoForUpdatePassword)
         actions.resetForm()
         setValuePassword('')
         setValueConfirmPassword('')
-        return
-        //return dispatch(operations.resetUserPassword(userEmail))
+        setTokenForResetPassword('')
+        return dispatch(operations.refreshPassword(infoForUpdatePassword))
     }
 
     return (
@@ -713,7 +716,7 @@ const AuthForm = () => {
                     </p>
                 </>
             )}
-            {page === '/refresh' && (
+            {page !== '/register' && page !== '/login' && page !== '/verify' && page !== '/reset-password' && (
                 <Formik
                     validationSchema={schemasForStepFirst}
                     initialValues={initialValue}
