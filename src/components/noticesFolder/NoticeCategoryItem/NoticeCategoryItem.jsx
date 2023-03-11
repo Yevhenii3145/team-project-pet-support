@@ -51,7 +51,13 @@ const NoticeCategoryItem = ({ pet, value}) => {
 
   const btnAddToFavorite = async (noticeId) => {
     if (!isLogin) {
-      Notify.failure('You need authorization');
+      Notify.failure('You need authorization', 
+      { distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '20px',
+        borderRadius: '40px',
+        showOnlyTheLastOne: true});
       return
     }else if(!isFavorite) {
       if(filter === null) {
