@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchCategoryNotices, deleteNotice, getAllFavorites, getSearch, addNoticeToFavorite, deleteFavoriteNotice } from "../operations/noticesOperation";
-import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { addNotice } from "../operations/noticesOperation";
 
 const initialState = {
@@ -59,11 +59,13 @@ const noticesSlice = createSlice({
         [getAllFavorites.rejected] (state, action) {
             state.loading = false;
             state.error = action.payload;
-            Report.warning(
-              'Warning',
-              `Something went wrong.`,
-              'Okay'
-            );
+            Notify.failure('Something went wrong:(', 
+            { distance: '100px',
+              opacity: '0.8',
+              useIcon: false,
+              fontSize: '20px',
+              borderRadius: '40px',
+              showOnlyTheLastOne: true})
           },
           [addNoticeToFavorite.fulfilled] (state, action) {
             state.favoriteNotices = action.payload;
@@ -86,6 +88,7 @@ const noticesSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+
         [getSearch.pending] (state, action) {
             state.loading = true;
         },
@@ -96,11 +99,13 @@ const noticesSlice = createSlice({
         [getSearch.rejected] (state, action) {
             state.loading = false;
             state.error = action.payload;
-            Report.warning(
-              'Warning',
-              `Something went wrong.`,
-              'Okay'
-            );
+            Notify.failure('Something went wrong:(', 
+            { distance: '100px',
+              opacity: '0.8',
+              useIcon: false,
+              fontSize: '20px',
+              borderRadius: '40px',
+              showOnlyTheLastOne: true})
         },
 
         [addNotice.pending] (state) {
@@ -114,11 +119,13 @@ const noticesSlice = createSlice({
         [addNotice.rejected] (state, action) {
           state.loading = false;
           state.error = action.payload;
-          Report.warning(
-            'Warning',
-            `Something went wrong.`,
-            'Okay'
-          );
+          Notify.failure('Something went wrong:(', 
+          { distance: '100px',
+            opacity: '0.8',
+            useIcon: false,
+            fontSize: '20px',
+            borderRadius: '40px',
+            showOnlyTheLastOne: true})
         },
     }
 })

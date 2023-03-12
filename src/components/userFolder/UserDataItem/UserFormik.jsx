@@ -126,7 +126,14 @@ export function UserFormik() {
           return
         }
         if (!email.value) {
-            return Notify.failure('Required!', { timeout: 5000 })
+            return Notify.failure('Required!', 
+            {   timeout: 5000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '20px',
+                borderRadius: '40px',
+                showOnlyTheLastOne: true })
         }
         if (
             /^((([0-9A-Za-z]{1}[-0-9A-z]{1,}[0-9A-Za-z]{1}))@([-0-9A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/i.test(
@@ -136,7 +143,14 @@ export function UserFormik() {
         ) {
             return dispatch(operations.updateUser({ email: email.value }))
         } else {
-            return Notify.failure('Invalid email address!', { timeout: 5000 })
+            return Notify.failure('Invalid email address!', { 
+                timeout: 5000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '20px',
+                borderRadius: '40px',
+                showOnlyTheLastOne: true})
         }
     }
 
@@ -148,7 +162,14 @@ export function UserFormik() {
           return
         }
         if (!name.value) {
-            return Notify.failure('Required!', { timeout: 5000 })
+            return Notify.failure('Required!', { 
+                timeout: 5000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '20px',
+                borderRadius: '40px',
+                showOnlyTheLastOne: true })
         }
         return dispatch(operations.updateUser({ name: name.value }))
     }
@@ -161,7 +182,14 @@ export function UserFormik() {
           return
         }
         if (!birthday.value) {
-            return Notify.failure('Required!', { timeout: 5000 })
+            return Notify.failure('Required!', { 
+                timeout: 5000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '20px',
+                borderRadius: '40px',
+                showOnlyTheLastOne: true })
         }
         return dispatch(operations.updateUser({ birthday: birthday.value }))
     }
@@ -174,11 +202,24 @@ export function UserFormik() {
           return
         }
         if (!phone.value) {
-            return Notify.failure('Required!', { timeout: 5000 })
+            return Notify.failure('Required!', { 
+                timeout: 5000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '20px',
+                borderRadius: '40px',
+                showOnlyTheLastOne: true })
         }
         if (phone.value.length !== 12) {
             return Notify.failure('Is not correct format, must 380xxxxxxxxx!', {
                 timeout: 5000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '20px',
+                borderRadius: '40px',
+                showOnlyTheLastOne: true
             })
         }
         if (
@@ -188,6 +229,12 @@ export function UserFormik() {
         ) {
             return Notify.failure('Is not correct format, must 380xxxxxxxxx!', {
                 timeout: 5000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '20px',
+                borderRadius: '40px',
+                showOnlyTheLastOne: true
             })
         } else {
             return dispatch(operations.updateUser({ phone: phone.value }))
@@ -202,11 +249,24 @@ export function UserFormik() {
           return
         }
         if (!city.value) {
-            return Notify.failure('Required!', { timeout: 5000 })
+            return Notify.failure('Required!', { 
+                timeout: 5000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '20px',
+                borderRadius: '40px',
+                showOnlyTheLastOne: true })
         }
         if (!/^[aA-zZ]/.test(city.value)) {
             return Notify.failure('Is not correct format, must only letters!', {
                 timeout: 5000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '20px',
+                borderRadius: '40px',
+                showOnlyTheLastOne: true
             })
         } else {
             return dispatch(operations.updateUser({ city: city.value }))

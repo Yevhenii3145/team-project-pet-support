@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import scss from './modal-add-pet-pages.module.scss';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { addNotice } from 'redux/operations/noticesOperation';
-import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Loader from 'components/utilsFolder/Loader/Loader';
 import SvgInsert from 'components/utilsFolder/Svg/Svg';
 import 'flatpickr/dist/themes/airbnb.css'
@@ -78,6 +77,12 @@ const AddsPetContent = ({ close }) => {
     if (image?.size > 5242880) {
       Notify.warning('File is too big, please download max 5 mb!', {
         timeout: 6000,
+        distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '20px',
+        borderRadius: '40px',
+        showOnlyTheLastOne: true
       });
       setImageURL(null);
       return;
@@ -92,18 +97,22 @@ const AddsPetContent = ({ close }) => {
   const handleSubmitForStepOne = e => {
     e.preventDefault();
     if(petCategory === ''){
-      return Report.warning(
-        'Warning!',
-        'Please, selected type of category!',
-        'Okay',
-        );
+      return Notify.warning('Please, selected type of category!', 
+      { distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '20px',
+      borderRadius: '40px',
+      showOnlyTheLastOne: true})
     }
     if(petDate === ''){
-      return Report.warning(
-        'Warning!',
-        'Please, selected date of birth!',
-        'Okay',
-        );
+      return Notify.warning('Please, selected date of birth!', 
+      {distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '20px',
+      borderRadius: '40px',
+      showOnlyTheLastOne: true})
     }
     const form = e.currentTarget;
     const { title, name, date, breed } = form.elements;
@@ -117,19 +126,22 @@ const AddsPetContent = ({ close }) => {
   const handleSubmit = e => {
     e.preventDefault();
     if(currentRadioValue === ''){
-      return Report.warning(
-        'Warning!',
-        'Please, selected type of sex!',
-        'Okay',
-        );
+      return Notify.warning('Please, selected type of sex!', 
+      {distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '20px',
+      borderRadius: '40px',
+      showOnlyTheLastOne: true})
     }
     if(!cities.find(city => `${city.city}, ${city.admin_name}` === petLocation)){
-      console.log('not')
-      return Report.warning(
-        'Warning!',
-        'Please, selected location from the list!',
-        'Okay',
-        );
+      return Notify.warning('Please, selected location from the list!', 
+      {distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '20px',
+      borderRadius: '40px',
+      showOnlyTheLastOne: true})
   }
     const form = e.currentTarget;
     const { image, comments } = form.elements;
@@ -177,11 +189,13 @@ const AddsPetContent = ({ close }) => {
 
   const validateFile = () => {
     if(!imageURL){
-      Report.warning(
-        'Notice Warning',
-        'Please add a photo.',
-        'Okay',
-        );
+      return Notify.warning('Please add a photo!', 
+      {distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '20px',
+      borderRadius: '40px',
+    showOnlyTheLastOne: true})
     }
   }
 

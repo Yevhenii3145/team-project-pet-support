@@ -21,7 +21,13 @@ export default function UserDataItem() {
     const file = e.target.files[0];
     if (file?.size > 5242880) {
       Notify.warning('File is too big, please download max 5 mb!', {
-        timeout: 5000,
+      timeout: 5000,
+      distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '20px',
+      borderRadius: '40px',
+      showOnlyTheLastOne: true
       });
       
       return;

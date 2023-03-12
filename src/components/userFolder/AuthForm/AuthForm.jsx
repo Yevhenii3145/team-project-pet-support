@@ -124,6 +124,12 @@ const AuthForm = () => {
                     'Your passwords must have the same value!',
                     {
                         timeout: 6000,
+                        distance: '100px',
+                        opacity: '0.8',
+                        useIcon: false,
+                        fontSize: '20px',
+                        borderRadius: '40px',
+                        showOnlyTheLastOne: true
                     }
                 )
             }
@@ -138,6 +144,12 @@ const AuthForm = () => {
                 console.log('not')
                 return Notify.failure('Please select a region from the list!', {
                     timeout: 6000,
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '20px',
+                    borderRadius: '40px',
+                    showOnlyTheLastOne: true
                 })
             }
 
@@ -200,6 +212,12 @@ const AuthForm = () => {
             console.log(values.passwordConfirm)
             return Notify.failure('Your passwords must have the same value!', {
                 timeout: 6000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '20px',
+                borderRadius: '40px',
+                showOnlyTheLastOne: true
             })
         }
         const infoForUpdatePassword = {
