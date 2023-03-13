@@ -12,9 +12,11 @@ export function PetsList() {
 
 const dispatch = useDispatch();
   const [modalShow, setModalShow] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  const [isActiveEdite, setIsActiveEdite] = useState(false);
-const loading = useSelector(state => state.user.loading);
+  // const [isActiveEdite, setIsActiveEdite] = useState(false);
+  const [isActiveCardEdite, setIsActiveCardEdite] = useState(null);
+  const [isActiveCardDelete, setIsActiveCardDelete] = useState(null);
+  const [id, setId] = useState(null);
+  const loading = useSelector(state => state.user.loading);
  
 
   useEffect(() => {
@@ -57,12 +59,14 @@ const loading = useSelector(state => state.user.loading);
     setModalShow(true);
     document.body.style.overflow = 'hidden';
   };
-
-  const active = isActive ? "icon-delete" : "icon-deletepet";
-  const activeEdite = isActiveEdite ? "icon-edit-pet" : "icon-edit-pet-active";
-
+  
+  // const active = isActive ? "icon-delete" : "icon-deletepet";
+  // const activeEdite = isActiveEdite ? "icon-edit-pet" : "icon-edit-pet-active";
+  
   const elements = Array.isArray(pets) && pets.map(({ name, birthday, breed, image, comments, _id }) => {
 
+    
+    
     const editDate = e => {
       const reversDate = e.slice(0, 10).split('-').reverse();
       return reversDate.join('.');
@@ -89,24 +93,28 @@ const loading = useSelector(state => state.user.loading);
             className={scss.petsList_button}
             onClick={() => onDeletePet(_id)}
             type="button"
-            onMouseEnter={() => setIsActive(true)}
-            onMouseLeave={() => setIsActive(false)}
+            onMouseEnter={() => setIsActiveCardDelete(_id)}
+            onMouseLeave={() => setIsActiveCardDelete(null)}
           >
-            <SvgInsert className={scss.icon_delete} id={active} />
+            <SvgInsert className={scss.icon_delete} id={_id === isActiveCardDelete ? "icon-delete" : "icon-deletepet" } />
             </button>
             <button
               className={scss.iconEdit_btn}
-            onClick={showModal}
-            onMouseEnter={() => setIsActiveEdite(true)}
-            onMouseLeave={() => setIsActiveEdite(false)}
+            onClick={() => {
+              setId(_id);
+              showModal();
+            }
+            }
+            onMouseEnter={() => setIsActiveCardEdite(_id)}
+            onMouseLeave={() => setIsActiveCardEdite(null)}
             >
-              <SvgInsert id={activeEdite} />
+              <SvgInsert id={_id === isActiveCardEdite ? "icon-edit-pet" : "icon-edit-pet-active"} />
             </button>
             <div >
               {modalShow && (
                 <>
                   <ModalAddsPet onClose={closeModal}>
-                    <EditPetContent _id={_id} pets={pets} />
+                    <EditPetContent _id={id}  />
                   </ModalAddsPet>
                 </>
               )}
