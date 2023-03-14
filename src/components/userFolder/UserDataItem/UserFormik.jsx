@@ -131,8 +131,8 @@ export function UserFormik() {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
-                fontSize: '20px',
-                borderRadius: '40px',
+                fontSize: '18px',
+                borderRadius: '20px',
                 showOnlyTheLastOne: true })
         }
         if (
@@ -148,8 +148,8 @@ export function UserFormik() {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
-                fontSize: '20px',
-                borderRadius: '40px',
+                fontSize: '18px',
+                borderRadius: '20px',
                 showOnlyTheLastOne: true})
         }
     }
@@ -167,8 +167,8 @@ export function UserFormik() {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
-                fontSize: '20px',
-                borderRadius: '40px',
+                fontSize: '18px',
+                borderRadius: '20px',
                 showOnlyTheLastOne: true })
         }
         return dispatch(operations.updateUser({ name: name.value }))
@@ -187,8 +187,8 @@ export function UserFormik() {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
-                fontSize: '20px',
-                borderRadius: '40px',
+                fontSize: '18px',
+                borderRadius: '20px',
                 showOnlyTheLastOne: true })
         }
         return dispatch(operations.updateUser({ birthday: birthday.value }))
@@ -207,8 +207,8 @@ export function UserFormik() {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
-                fontSize: '20px',
-                borderRadius: '40px',
+                fontSize: '18px',
+                borderRadius: '20px',
                 showOnlyTheLastOne: true })
         }
         if (phone.value.length !== 12) {
@@ -217,8 +217,8 @@ export function UserFormik() {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
-                fontSize: '20px',
-                borderRadius: '40px',
+                fontSize: '18px',
+                borderRadius: '20px',
                 showOnlyTheLastOne: true
             })
         }
@@ -232,8 +232,8 @@ export function UserFormik() {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
-                fontSize: '20px',
-                borderRadius: '40px',
+                fontSize: '18px',
+                borderRadius: '20px',
                 showOnlyTheLastOne: true
             })
         } else {
@@ -254,8 +254,8 @@ export function UserFormik() {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
-                fontSize: '20px',
-                borderRadius: '40px',
+                fontSize: '18px',
+                borderRadius: '20px',
                 showOnlyTheLastOne: true })
         }
         if (!/^[aA-zZ]/.test(city.value)) {
@@ -264,8 +264,8 @@ export function UserFormik() {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
-                fontSize: '20px',
-                borderRadius: '40px',
+                fontSize: '18px',
+                borderRadius: '20px',
                 showOnlyTheLastOne: true
             })
         } else {

@@ -33,8 +33,8 @@ export const authSlice = createSlice({
        {distance: '100px',
        opacity: '0.8',
        useIcon: false,
-       fontSize: '20px',
-       borderRadius: '40px',
+       fontSize: '18px',
+       borderRadius: '20px',
        showOnlyTheLastOne: true})
        state.user.name = action.payload.name;
         state.user.email = action.payload.email;
@@ -47,8 +47,8 @@ export const authSlice = createSlice({
         { distance: '100px',
           opacity: '0.8',
           useIcon: false,
-          fontSize: '20px',
-          borderRadius: '40px',
+          fontSize: '18px',
+          borderRadius: '20px',
           showOnlyTheLastOne: true})
       },
 
@@ -70,8 +70,8 @@ export const authSlice = createSlice({
         { distance: '100px',
           opacity: '0.8',
           useIcon: false,
-          fontSize: '20px',
-          borderRadius: '40px',
+          fontSize: '18px',
+          borderRadius: '20px',
           showOnlyTheLastOne: true})
       },
 
@@ -85,8 +85,8 @@ export const authSlice = createSlice({
         {distance: '100px',
         opacity: '0.8',
         useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
+        fontSize: '18px',
+        borderRadius: '20px',
         showOnlyTheLastOne: true})
       },
       [operations.authVerify.rejected] (state, { payload }) {
@@ -96,8 +96,8 @@ export const authSlice = createSlice({
         {distance: '100px',
         opacity: '0.8',
         useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
+        fontSize: '18px',
+        borderRadius: '20px',
         showOnlyTheLastOne: true})
       },
 
@@ -110,8 +110,8 @@ export const authSlice = createSlice({
         {distance: '100px',
         opacity: '0.8',
         useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
+        fontSize: '18px',
+        borderRadius: '20px',
         showOnlyTheLastOne: true})
       },
       [operations.resetUserPassword.rejected] (state, { payload }) {
@@ -120,8 +120,8 @@ export const authSlice = createSlice({
         {distance: '100px',
         opacity: '0.8',
         useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
+        fontSize: '18px',
+        borderRadius: '20px',
         showOnlyTheLastOne: true})
       },
 
@@ -200,8 +200,8 @@ export const authSlice = createSlice({
         {distance: '100px',
         opacity: '0.8',
         useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
+        fontSize: '18px',
+        borderRadius: '20px',
         showOnlyTheLastOne: true})
       },
 
@@ -227,8 +227,8 @@ export const authSlice = createSlice({
         {distance: '100px',
         opacity: '0.8',
         useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
+        fontSize: '18px',
+        borderRadius: '20px',
         showOnlyTheLastOne: true})
       },
       [operations.deleteAccount.rejected]: (state, {payload}) => {
