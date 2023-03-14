@@ -26,11 +26,11 @@
 }
 
 .userItem_box_yourPhoto {
-    display: flex;
+    display: block;
     position: relative;
 
     @media screen and (min-width: 768px) {
-        // display: block;
+     
 
     }
 
