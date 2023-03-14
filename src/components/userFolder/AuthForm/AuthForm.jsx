@@ -72,16 +72,16 @@ const AuthForm = () => {
     const [coordination, setCoordination] = useState(false)
     const [valuePassword, setValuePassword] = useState('')
     const [valueConfirmPassword, setValueConfirmPassword] = useState('')
+    const [tokenForResetPassword, setTokenForResetPassword] = useState('')
     const location = useLocation()
     const page = location.pathname
-    const params = useParams()
+    const { token } = useParams()
 
     useEffect(()=>{
-        if(page === '/refresh'){
-            console.log('refresh')
-            console.log(params)
+        if(page !== '/register' && page !== '/login' && page !== '/verify' && page !== '/reset-password'){
+            setTokenForResetPassword(token)
         }
-    },[page, params])
+    },[page, token])
 
     const handleChangePassword = e => {
         switch (e.target.name) {
@@ -124,6 +124,12 @@ const AuthForm = () => {
                     'Your passwords must have the same value!',
                     {
                         timeout: 6000,
+                        distance: '100px',
+                        opacity: '0.8',
+                        useIcon: false,
+                        fontSize: '20px',
+                        borderRadius: '40px',
+                        showOnlyTheLastOne: true
                     }
                 )
             }
@@ -138,6 +144,12 @@ const AuthForm = () => {
                 console.log('not')
                 return Notify.failure('Please select a region from the list!', {
                     timeout: 6000,
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '20px',
+                    borderRadius: '40px',
+                    showOnlyTheLastOne: true
                 })
             }
 
@@ -200,17 +212,26 @@ const AuthForm = () => {
             console.log(values.passwordConfirm)
             return Notify.failure('Your passwords must have the same value!', {
                 timeout: 6000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '20px',
+                borderRadius: '40px',
+                showOnlyTheLastOne: true
             })
         }
-        const userNewPassword = {
-            password: values.password,
+        const infoForUpdatePassword = {
+            userToken: tokenForResetPassword,
+            userNewPassword: {
+                password: values.password,
+            }
         }
-        console.log(userNewPassword)
+        console.log(infoForUpdatePassword)
         actions.resetForm()
         setValuePassword('')
         setValueConfirmPassword('')
-        return
-        //return dispatch(operations.resetUserPassword(userEmail))
+        setTokenForResetPassword('')
+        return dispatch(operations.refreshPassword(infoForUpdatePassword))
     }
 
     return (
@@ -713,7 +734,7 @@ const AuthForm = () => {
                     </p>
                 </>
             )}
-            {page === '/refresh' && (
+            {page !== '/register' && page !== '/login' && page !== '/verify' && page !== '/reset-password' && (
                 <Formik
                     validationSchema={schemasForStepFirst}
                     initialValues={initialValue}

@@ -2,10 +2,9 @@ import { useState } from 'react';
 import {useSelector} from 'react-redux';
 import scss from './modal-add-pet-pages.module.scss';
 // import operationsPets from 'redux/operations/userPetsApi';
-import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Loader from 'components/utilsFolder/Loader/Loader';
 import SvgInsert from '../../../utilsFolder/Svg/Svg';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Flatpickr from 'react-flatpickr';
 import axios from 'axios';
 
@@ -65,7 +64,13 @@ const EditPetContent = ({ close,  _id }) => {
     const image = e.target.files[0];
     if (image?.size > 5242880) {
       Notify.warning('File is too big, please download max 5 mb!', {
-        timeout: 6000,
+      timeout: 6000,
+      distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '20px',
+      borderRadius: '40px',
+      showOnlyTheLastOne: true
       });
       setImageURL(null);
       return;
@@ -99,11 +104,13 @@ const EditPetContent = ({ close,  _id }) => {
     setPetDate(date.value);
     setPetBreed(breed.value);
     if (new Date(petDate) >= new Date(formatDate)) {
-      return Report.info(
-        'Pet Info',
-        'Please choose a date no later than today.',
-        'Okay'
-      );
+      return Notify.failure('Please choose a date no later than today!', 
+      {distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '20px',
+      borderRadius: '40px',
+      showOnlyTheLastOne: true})
     }
     return changeStep();
   };

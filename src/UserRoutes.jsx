@@ -46,7 +46,7 @@ const UserRoutes = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/verify" element={<VerifyPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
-            <Route path="/refresh" element={<RecoverPasswordPage />} />
+            <Route path="/refresh/:token" element={<RecoverPasswordPage />} />
           </Route>
 
           <Route element={<Private />}>
