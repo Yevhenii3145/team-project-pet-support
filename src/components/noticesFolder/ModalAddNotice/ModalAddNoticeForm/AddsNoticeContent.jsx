@@ -80,8 +80,8 @@ const AddsPetContent = ({ close }) => {
         distance: '100px',
         opacity: '0.8',
         useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
+        fontSize: '18px',
+        borderRadius: '20px',
         showOnlyTheLastOne: true
       });
       setImageURL(null);
@@ -101,8 +101,8 @@ const AddsPetContent = ({ close }) => {
       { distance: '100px',
       opacity: '0.8',
       useIcon: false,
-      fontSize: '20px',
-      borderRadius: '40px',
+      fontSize: '18px',
+      borderRadius: '20px',
       showOnlyTheLastOne: true})
     }
     if(petDate === ''){
@@ -110,8 +110,8 @@ const AddsPetContent = ({ close }) => {
       {distance: '100px',
       opacity: '0.8',
       useIcon: false,
-      fontSize: '20px',
-      borderRadius: '40px',
+      fontSize: '18px',
+      borderRadius: '20px',
       showOnlyTheLastOne: true})
     }
     const form = e.currentTarget;
@@ -130,8 +130,8 @@ const AddsPetContent = ({ close }) => {
       {distance: '100px',
       opacity: '0.8',
       useIcon: false,
-      fontSize: '20px',
-      borderRadius: '40px',
+      fontSize: '18px',
+      borderRadius: '20px',
       showOnlyTheLastOne: true})
     }
     if(!cities.find(city => `${city.city}, ${city.admin_name}` === petLocation)){
@@ -139,8 +139,8 @@ const AddsPetContent = ({ close }) => {
       {distance: '100px',
       opacity: '0.8',
       useIcon: false,
-      fontSize: '20px',
-      borderRadius: '40px',
+      fontSize: '18px',
+      borderRadius: '20px',
       showOnlyTheLastOne: true})
   }
     const form = e.currentTarget;
@@ -193,8 +193,8 @@ const AddsPetContent = ({ close }) => {
       {distance: '100px',
       opacity: '0.8',
       useIcon: false,
-      fontSize: '20px',
-      borderRadius: '40px',
+      fontSize: '18px',
+      borderRadius: '20px',
     showOnlyTheLastOne: true})
     }
   }

@@ -21,6 +21,12 @@ export default function UserAvatar() {
     if (file?.size > 5242880) {
       Notify.warning('File is too big, please download max 5 mb!', {
         timeout: 5000,
+        distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true
       });
       
       return;

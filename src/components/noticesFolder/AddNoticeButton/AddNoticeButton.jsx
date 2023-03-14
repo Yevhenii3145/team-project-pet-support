@@ -24,8 +24,8 @@ const AddNoticeButton = () => {
       { distance: '100px',
         opacity: '0.8',
         useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
+        fontSize: '18px',
+        borderRadius: '20px',
         showOnlyTheLastOne: true});
     }
   };
