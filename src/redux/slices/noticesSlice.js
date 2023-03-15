@@ -94,7 +94,8 @@ const noticesSlice = createSlice({
         },
         [getSearch.fulfilled] (state, action) {
           state.loading = false;
-          state.items = action.payload;
+          state.totalNotices = action.payload.countNotices;
+          state.nameCategory[1] === 1 ? state.items = action.payload.result : state.items.push(...action.payload.result);
           },
         [getSearch.rejected] (state, action) {
             state.loading = false;
