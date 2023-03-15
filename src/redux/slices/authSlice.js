@@ -124,6 +124,29 @@ export const authSlice = createSlice({
         borderRadius: '20px',
         showOnlyTheLastOne: true})
       },
+      [operations.refreshPassword.pending] (state, { payload }) {
+        state.loading = true;
+      },
+      [operations.refreshPassword.fulfilled] (state, {payload}) {
+        state.loading = false;
+        Notify.success('Your password has been successfully changed.', 
+        {distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true})
+      },
+      [operations.refreshPassword.rejected] (state, { payload }) {
+        state.loading = false;
+        Notify.failure(`Your ${payload.message}.`, 
+        {distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true})
+      },
 
       [operations.logout.pending] (state, {payload}) {
         state.loading = true;

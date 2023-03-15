@@ -65,7 +65,6 @@ const authVerify = createAsyncThunk('auth/verify', async (user, thunkAPI) => {
 const resetUserPassword = createAsyncThunk('auth/reset-password', async (user, thunkAPI) => {
   try {
     const response = await axios.post('/auth/reset-password', user);
-    console.log(response.data)
     return response.data;
   } catch ({ response }) {
     const error = {
@@ -78,9 +77,8 @@ const resetUserPassword = createAsyncThunk('auth/reset-password', async (user, t
 
 const refreshPassword = createAsyncThunk('auth/update-password', async (userInfo, thunkAPI) => {
   try {
-    axios.defaults.headers.common.authorization = userInfo.userToken;
+    axios.defaults.headers.common.authorization = `Bearer ${userInfo.userToken} `
     const response = await axios.patch('/auth/update-password', userInfo.userNewPassword);
-    console.log(response.data)
     return response.data;
   } catch ({ response }) {
     const error = {
