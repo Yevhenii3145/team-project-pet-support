@@ -147,7 +147,7 @@ const NoticeCategoryItem = ({ notice, value}) => {
       {modalShowEditNotice && (
         <>
           <ModalAddNotice onClose={closeModalEditNotice}>
-              <EditNoticeContent notice={notice} />
+            <EditNoticeContent notice={notice} />
           </ModalAddNotice>
         </>
       )}
@@ -197,25 +197,30 @@ const NoticeCategoryItem = ({ notice, value}) => {
               Learn more
             </button>
             {isLogin && idUser === owner._id && (
-              <button
+              <>
+                <button
                 type="button"
                 className={scss.delete_btn}
                 onClick={() => btnDeleteNotice(_id)}
-              >
+                >
                 Delete
                 <SvgInsert id="icon-delete-notice" />
-              </button>
+                </button>
+                <button
+                type="button"
+                className={scss.edit_notice_btn}
+                onClick={showModalEditNotice}
+                >
+                  <SvgInsert id="icon-edit" />
+                </button>
+              </>
             )}
             <button onClick={()=>btnAddToFavorite(_id)}
             type="button"
             className={isFavorite ? `${scss.add_to_favorite_btn} ${scss.add_to_favorite_btn_active}` : scss.add_to_favorite_btn}>
                 <SvgInsert id="icon-heart"/>
             </button>
-            <button onClick={showModalEditNotice}
-            type="button"
-            className={scss.edit_notice_btn}>
-                <SvgInsert id="icon-edit" />
-            </button>
+            
           </div>
           <p className={scss.card_text}>{getCategoryNotice(category)}</p>
         </div>

@@ -110,3 +110,15 @@ export const addNotice = createAsyncThunk(
     }
   }
 );
+
+export const editNotice = createAsyncThunk(
+  'notices/editNotice',
+  async (dataNotice, thunkAPI) => {
+    try {
+      const data = await api.edithNotice(dataNotice);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

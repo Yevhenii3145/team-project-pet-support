@@ -99,7 +99,7 @@ const ModalNotice = ({ id, onClose, onAddDelete, categoryNotice, favorite, delet
                         {`+${notice.owner.phone}`}
                       </a>
                     </li>
-                    {notice.category !== 'In good hands' && (
+                    {notice.category === 'sell' && (
                       <li className={scss.modal_notice__item}>
                         <h4 className={scss.modal_notice__item_title}>
                           Price:

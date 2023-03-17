@@ -1,52 +1,36 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import scss from './modal-add-pet-pages.module.scss';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { addNotice } from 'redux/operations/noticesOperation';
+import { editNotice, fetchCategoryNotices } from 'redux/operations/noticesOperation';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-import Loader from 'components/utilsFolder/Loader/Loader';
 import SvgInsert from 'components/utilsFolder/Svg/Svg';
 import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
 import cities from '../../../../helpers/ua.json'
 
 const EditNoticeContent = ({ close, notice }) => {
-
-  console.log(notice);
-
-  const [sell, setSell] = useState(false);
+// console.log(noticeCategory);
   const [stepOne, setStepOne] = useState(true);
 
-  const [petCategory, setPetCategory] = useState(`${notice.category}`);
-  const [petName, setPetName] = useState(`${notice.name}`);
-  const [petTitle, setPetTitle] = useState(`${notice.title}`);
-  const [petDate, setPetDate] = useState(`${notice.birthday}`);
-  const [petBreed, setPetBreed] = useState(`${notice.breed}`);
-  const [currentRadioValue, setCurrentRadioValue] = useState(`${notice.sex}`);
-  const [petLocation, setPetLocation] = useState(`${notice.location}`);
-  const [petPrice, setPetPrice] = useState(`${notice.price}`);
-  const [currencyValue, setCurrencyValue] = useState('UAH')
-  const [imageURL, setImageURL] = useState(`${notice.image}`);
-  const [petComments, setPetComments] = useState(`${notice.comments}`);
+  const [petCategory, setPetCategory] = useState(notice.category);
+  const [petName, setPetName] = useState(notice.name);
+  const [petTitle, setPetTitle] = useState(notice.title);
+  const [petDate, setPetDate] = useState(notice.birthday);
+  const [petBreed, setPetBreed] = useState(notice.breed);
+  const [currentRadioValue, setCurrentRadioValue] = useState(notice.sex);
+  const [petLocation, setPetLocation] = useState(notice.location);
+  const [petPrice, setPetPrice] = useState(Number.parseFloat(notice.price));
+  const [currencyValue, setCurrencyValue] = useState(getCurrencyPricePet)
+  const [imageURL, setImageURL] = useState(notice.image);
+  const [petComments, setPetComments] = useState(notice.comments);
 
-  const loading = useSelector(state => state.user.loading);
-  
   const dispatch = useDispatch();
 
-  const dateNow = new Date()
-
-  const formatDate = date => {
-      const dateFormat = new Date(date)
-      return `${
-          dateFormat.getMonth() + 1 < 10
-              ? `0${dateFormat.getMonth() + 1}`
-              : dateFormat.getMonth() + 1
-      }.${
-          dateFormat.getDate() < 10
-              ? `0${dateFormat.getDate()}`
-              : dateFormat.getDate()
-      }.${dateFormat.getFullYear()}`
-  }
+  function getCurrencyPricePet() {
+    const result = notice.price.split(' ');
+    return result[1];
+  };
 
   const changeStepOne = e => {
     switch (e.currentTarget.name) {
@@ -56,9 +40,6 @@ const EditNoticeContent = ({ close, notice }) => {
       case 'name':
         setPetName(e.currentTarget.value);
         break;
-      // case 'date':
-      //   setPetDate(e.currentTarget.value);
-      //   break;
       case 'breed':
         setPetBreed(e.currentTarget.value);
         break;
@@ -69,7 +50,7 @@ const EditNoticeContent = ({ close, notice }) => {
         setPetPrice(e.currentTarget.value);
         break;
       case 'comments':
-        setPetComments(e.currentTarget.defaultValue);
+        setPetComments(e.currentTarget.value);
         break;
       default:
         return;
@@ -113,6 +94,7 @@ const EditNoticeContent = ({ close, notice }) => {
         'Okay',
         );
     }
+
     const form = e.currentTarget;
     const { title, name, date, breed } = form.elements;
     setPetTitle(title.value);
@@ -138,23 +120,29 @@ const EditNoticeContent = ({ close, notice }) => {
         'Please, selected location from the list!',
         'Okay',
         );
-  }
+    }
     const form = e.currentTarget;
-    const { image, comments } = form.elements;
+    const { image } = form.elements;
+
     const data = new FormData();
 
     data.append('category', petCategory);
     data.append('title', petTitle);
-
     data.append('name', petName);
     data.append('birthday', petDate);
     data.append('breed', petBreed);
-    data.append('location', petLocation);
     data.append('sex', currentRadioValue);
+    data.append('location', petLocation);
     data.append('price', `${petPrice} ${currencyValue}`);
-    // data.append('comments', comments.value);
+    if (image.files.length > 0) {
+      data.append('image', image.files[0]) ;
+    }
     data.append('comments', petComments);
-    data.append('image', image.files[0]);
+
+    dispatch(editNotice({
+      id: notice._id,
+      data
+    }));
 
     setPetTitle('');
     setPetCategory('');
@@ -166,18 +154,12 @@ const EditNoticeContent = ({ close, notice }) => {
     setCurrentRadioValue('')
     setCurrencyValue('UAH')
     setImageURL(null);
-    dispatch(addNotice(data));
     form.reset();
     return close();
   };
 
   const handleRadioChangeCategory = e => {
     setPetCategory(e.target.value);
-    if (e.target.value === 'sell') {
-      setSell(true);
-    } else {
-      setSell(false);
-    }
   };
 
   const handleRadioChange = e => {
@@ -185,18 +167,17 @@ const EditNoticeContent = ({ close, notice }) => {
   };
 
   const validateFile = () => {
-    if(!imageURL){
+    if (!imageURL) {
       Report.warning(
         'Notice Warning',
-        'Please add a photo.',
+        'Please add a photo!!!',
         'Okay',
-        );
+      );
     }
-  }
+  };
 
   return (
     <>
-      {loading && <Loader />}
       <div className={scss.modalAdds_page}>
         <div className={scss.modal_notice__close} onClick={close}>
           <SvgInsert id="icon-close-add-notice" />
@@ -290,15 +271,13 @@ const EditNoticeContent = ({ close, notice }) => {
                 className={scss.modalAdds_page__input}
                 options={{
                   dateFormat: 'm.d.Y',
-                  maxDate: `${formatDate(dateNow)}`,
-                }}
-                onChange={([date]) => {
-                    setPetDate(formatDate(date))
+                  maxDate: new Date()
                 }}
                 name="date"
                 type="text"
                 placeholder="Type date of birth"
                 value={petDate}
+                required
               />
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
@@ -389,6 +368,7 @@ const EditNoticeContent = ({ close, notice }) => {
             className={scss.modalAdds_page__input}
             list="region" 
             name="location"
+            value={petLocation}
             placeholder="City, region"
             onChange={changeStepOne}
              />  
@@ -398,13 +378,13 @@ const EditNoticeContent = ({ close, notice }) => {
                       value={`${city.city}, ${city.admin_name}`}
                       />)}  
             </datalist>
-            {sell && (
+            {petCategory === "sell" && (
               <label
                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
               >
                 Price<span className={scss.star}>*</span>:
                 <div className={scss.modalAdds_page__input_price}>
-                <select name="currency" className={scss.modalAdds_page__input_select} onChange={(e)=>{
+                <select name="currency" value={currencyValue} className={scss.modalAdds_page__input_select} onChange={(e)=>{
                   setCurrencyValue(e.target.value)
                 }}>
                   <option value="UAH">UAH</option>
@@ -436,7 +416,6 @@ const EditNoticeContent = ({ close, notice }) => {
                 name="image"
                 accept="image/png, image/jpeg, image/jpg, image/webp"
                 id="img"
-                required
                 onChange={handleImageChange}
               />
               <label className={scss.addspet__imgLabel} htmlFor="img">
@@ -460,6 +439,7 @@ const EditNoticeContent = ({ close, notice }) => {
                 required
                 minLength="8"
                 maxLength="120"
+                onChange={changeStepOne}
               />
               <div className={scss.addPet__button}>
                 <button
