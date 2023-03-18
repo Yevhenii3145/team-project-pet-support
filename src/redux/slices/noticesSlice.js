@@ -40,7 +40,7 @@ const noticesSlice = createSlice({
               ? state.items = action.payload.data.notices 
               : state.items.push(...action.payload.data.notices)
               return
-            } 
+            }
             state.nameCategory[1] === 1
               ? state.items = action.payload.data.notices
               : state.items.push(...action.payload.data.notices)

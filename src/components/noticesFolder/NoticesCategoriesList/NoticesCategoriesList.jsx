@@ -27,7 +27,7 @@ const NoticesCategoriesList = () => {
     const [filterPag, setFilterPag] = useState(1)
     const [name, setName] = useState('sell')
     const limit = 8
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const value = searchParams.get('keyword');
 
 const memoizedValue = useMemo(
@@ -79,15 +79,20 @@ useEffect(() => {
     };
 });
 
+useEffect(()=> {
+    if (isLogin) {
+        dispatch(getAllFavorites())
+    }
+}, [isLogin, dispatch,])
+
 useEffect(() => {
 
-if (isLogin) {
-    dispatch(getAllFavorites())
+if(!value) {
+    setSearchParams({})
+    dispatch(fetchCategoryNotices(memoizedValue))
 }
 
-    dispatch(fetchCategoryNotices(memoizedValue))
-
-}, [dispatch, isLogin, memoizedValue])
+}, [dispatch, memoizedValue, setSearchParams, value])
 
 const scrollTo = () => {
         scroller.scrollTo('scroll-to-element', {
@@ -106,8 +111,9 @@ const scrollTo = () => {
             {categoryName === 'favorite' && pets.length === 0 && <EmptyFavoriteList />}
             {pets.length === 0 && <EmptyList />}
             {pets.length > 0 && <NoticesCategoryList data={memoizedValue}/>}
-            {value && totalNotices / 8 > filterPag ? <LoadMore scroll={scrollTo} changePage={setPage} filterPage={setFilterPag}/> : null}
-            {!value && totalNotices / 8 > page ? <LoadMore scroll={scrollTo} changePage={setPage} filterPage={setFilterPag}/> : null}
+            {totalNotices / 8 > (value ? filterPag : page) ? <LoadMore scroll={scrollTo} changePage={value ? setFilterPag : setPage}/> : null}
+            {/* {value && totalNotices / 8 > filterPag ? <LoadMore scroll={scrollTo} changePage={setPage} filterPage={setFilterPag}/> : null}
+            {!value && totalNotices / 8 > page ? <LoadMore scroll={scrollTo} changePage={setPage} filterPage={setFilterPag}/> : null} */}
             {error && Notify.failure('Oops, something went wrong', 
             {distance: '100px',
             opacity: '0.8',

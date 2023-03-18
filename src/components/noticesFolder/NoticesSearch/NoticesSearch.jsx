@@ -15,7 +15,7 @@ const NoticesSearch = () => {
   const value = searchParams.get('keyword');
 
   useEffect(()=> {
-if(pagination > 1) {
+if(pagination > 1 && value) {
   const data = {
     value,
     categoryName,
