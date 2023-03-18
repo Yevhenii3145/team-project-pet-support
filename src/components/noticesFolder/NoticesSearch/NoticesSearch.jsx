@@ -4,14 +4,16 @@ import { useState } from 'react';
 import { getSearch } from '../../../redux/operations/noticesOperation';
 import { useDispatch } from 'react-redux';
 import { filterNotice } from 'redux/slices/filterSlice';
+import { useParams } from 'react-router-dom';
 
-const { REACT_APP_BASE_URL } = process.env;
-console.log(REACT_APP_BASE_URL);
 
 const NoticesSearch = () => {
   const [search, setSearch] = useState('');
   const [searchBtn, setSearchBtn] = useState(true);
   const [activeInput, setActiveInput] = useState(false);
+  const {categoryName} = useParams();
+  const [page] = useState(1);
+  const limit = 8;
   const dispatch = useDispatch();
 
   const handleChange = e => {
@@ -20,8 +22,14 @@ const NoticesSearch = () => {
   };
 
   const btnGetSearch = search => {
+    const data = {
+      search,
+      categoryName,
+      page,
+      limit
+    }
     setActiveInput(true);
-    dispatch(getSearch(search));
+    dispatch(getSearch(data));
     dispatch(filterNotice(search))
   };
 

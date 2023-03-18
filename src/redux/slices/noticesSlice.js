@@ -114,7 +114,6 @@ const noticesSlice = createSlice({
         },
         [addNotice.fulfilled] (state, action) {
           state.loading = false;
-          console.log("action.payload.category", action.payload.category);
           state.nameCategory === action.payload.category && state.items.unshift(action.payload);
         },
         [addNotice.rejected] (state, action) {

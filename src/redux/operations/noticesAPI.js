@@ -25,7 +25,8 @@ export const deleteNotice = async (noticeId) => {
     return data;
 }
 
-export const getSearch = async (search) => {
-  const data = await axios.get(`/notices/search?keyword=${search}`);
+export const getSearch = async (value) => {
+  const {search, categoryName, page, limit} = value;
+  const data = await axios.get(`/notices/search?keyword=${search}&category=${categoryName}&page=${page}&limit=${limit}`);
   return data;
 };
