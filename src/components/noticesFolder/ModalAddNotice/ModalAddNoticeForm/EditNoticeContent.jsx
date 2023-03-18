@@ -9,8 +9,8 @@ import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
 import cities from '../../../../helpers/ua.json'
 
-const EditNoticeContent = ({ close, notice }) => {
-// console.log(noticeCategory);
+const EditNoticeContent = ({ close, notice, noticeCategory }) => {
+
   const [stepOne, setStepOne] = useState(true);
 
   const [petCategory, setPetCategory] = useState(notice.category);
@@ -142,7 +142,8 @@ const EditNoticeContent = ({ close, notice }) => {
     dispatch(editNotice({
       id: notice._id,
       data
-    }));
+    }))
+    .then(() => dispatch(fetchCategoryNotices(noticeCategory)))
 
     setPetTitle('');
     setPetCategory('');
@@ -164,16 +165,6 @@ const EditNoticeContent = ({ close, notice }) => {
 
   const handleRadioChange = e => {
     setCurrentRadioValue(e.target.value);
-  };
-
-  const validateFile = () => {
-    if (!imageURL) {
-      Report.warning(
-        'Notice Warning',
-        'Please add a photo!!!',
-        'Okay',
-      );
-    }
   };
 
   return (
@@ -445,7 +436,6 @@ const EditNoticeContent = ({ close, notice }) => {
                 <button
                   className={`${scss.button__primary_main} ${scss.modalAdds_page__button}`}
                   type="submit"
-                  onClick={validateFile}
                 >
                   Done
                 </button>

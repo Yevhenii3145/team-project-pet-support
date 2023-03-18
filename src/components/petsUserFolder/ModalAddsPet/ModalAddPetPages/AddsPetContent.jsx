@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import scss from './modal-add-pet-pages.module.scss';
 import operationsPets from 'redux/operations/userPetsApi';
-import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Loader from 'components/utilsFolder/Loader/Loader';
 import SvgInsert from '../../../utilsFolder/Svg/Svg';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // import 'flatpickr/dist/themes/material_orange.css'
 import Flatpickr from 'react-flatpickr'
 // import { add } from 'date-fns';
@@ -49,7 +48,13 @@ const AddsPetContent = ({ close }) => {
     const image = e.target.files[0];
     if (image?.size > 5242880) {
       Notify.warning('File is too big, please download max 5 mb!', {
-        timeout: 6000,
+      timeout: 6000,
+      distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '18px',
+      borderRadius: '20px',
+      showOnlyTheLastOne: true
       });
       setImageURL(null);
       return;
@@ -109,11 +114,13 @@ const AddsPetContent = ({ close }) => {
 
   const validateFile = () => {
     if(!imageURL){
-      Report.warning(
-        'Pet Warning',
-        'Please add a photo.',
-        'Okay',
-        );
+      Notify.failure('Please add a photo!', 
+      {distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '18px',
+      borderRadius: '20px',
+      showOnlyTheLastOne: true})
     }
   }
 

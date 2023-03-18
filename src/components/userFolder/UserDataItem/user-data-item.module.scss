@@ -26,9 +26,11 @@
 }
 
 .userItem_box_yourPhoto {
+    display: block;
+    position: relative;
 
     @media screen and (min-width: 768px) {
-        // display: block;
+     
 
     }
 
@@ -355,3 +357,11 @@ form:not(:last-child) {
     }
 }
 
+.loader_oval_avatar {
+    position: absolute;
+        content: '';
+            // left: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+}

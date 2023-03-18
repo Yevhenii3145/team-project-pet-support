@@ -59,7 +59,13 @@ const NewsPage = () => {
       return news.title.toLocaleLowerCase().includes(normalizedFilter);
     });
     if (filterlist.length === 0) {
-      Notify.warning('Write a correct request');
+      Notify.warning('Write a correct request',
+      {distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '18px',
+      borderRadius: '20px',
+      showOnlyTheLastOne: true});
     }
     return filterlist;
   }

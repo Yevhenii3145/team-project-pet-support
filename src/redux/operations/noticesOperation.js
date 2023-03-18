@@ -55,18 +55,6 @@ export const deleteNotice = createAsyncThunk(
   }
 );
 
-export const searchNotice = createAsyncThunk(
-  'notices/searchOne',
-  async (noticeId, thunkAPI) => {
-    try {
-      const response = await api.searchNotice(noticeId);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
 export const getAllFavorites = createAsyncThunk(
   'notices/getFavorite',
   async (_, thunkAPI) => {

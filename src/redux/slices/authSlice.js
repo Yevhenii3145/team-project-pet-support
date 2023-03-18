@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import operations from '../operations/userOperations';
-import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const searchParams = new URLSearchParams(document.location.search);
 const usertoken = searchParams.get('usertoken'); 
@@ -28,24 +28,28 @@ export const authSlice = createSlice({
         state.loading = true;
       },
       [operations.registerNewUser.fulfilled](state, action) {
-        state.user.name = action.payload.name;
+       state.loading = false; 
+       Notify.success(`${action.payload.name}, you have successfully registered, the verification has been sent to your mail.`, 
+       {distance: '100px',
+       opacity: '0.8',
+       useIcon: false,
+       fontSize: '18px',
+       borderRadius: '20px',
+       showOnlyTheLastOne: true})
+       state.user.name = action.payload.name;
         state.user.email = action.payload.email;
         state.user.phone = action.payload.phone;
-        state.user.city = action.payload.city;
-        state.loading = false;
-        Report.info(
-          'SUCCESS!',
-          `${action.payload.name}, you have successfully registered, the verification has been sent to your mail.`,
-          'Okay'
-        );
+        state.user.city = action.payload.city; 
       },
       [operations.registerNewUser.rejected](state) {
         state.loading = false;
-        Report.warning(
-          'Warning',
-          `Something went wrong or user with this name already exists!`,
-          'Okay'
-        );
+        Notify.failure('Something went wrong or user with this name already exists!', 
+        { distance: '100px',
+          opacity: '0.8',
+          useIcon: false,
+          fontSize: '18px',
+          borderRadius: '20px',
+          showOnlyTheLastOne: true})
       },
 
       [operations.login.pending](state, { payload }) {
@@ -62,7 +66,13 @@ export const authSlice = createSlice({
       [operations.login.rejected] (state, { payload }) {
         state.loading = false;
         state.error = payload;
-        Report.warning('Warning', `${state.error.message}`, 'Okay');
+        Notify.failure(`${state.error.message}`, 
+        { distance: '100px',
+          opacity: '0.8',
+          useIcon: false,
+          fontSize: '18px',
+          borderRadius: '20px',
+          showOnlyTheLastOne: true})
       },
 
       [operations.authVerify.pending] (state, { payload }) {
@@ -71,16 +81,24 @@ export const authSlice = createSlice({
       },
       [operations.authVerify.fulfilled] (state, {payload}) {
         state.loading = false;
-        Report.info(
-          'SUCCESS!',
-          `You have successfully registered, the verification has been sent to your mail.`,
-          'Okay'
-        );
+        Notify.success('You have successfully registered, the verification has been sent to your mail.', 
+        {distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true})
       },
       [operations.authVerify.rejected] (state, { payload }) {
         state.loading = false;
         state.error = payload;
-        Report.warning('Warning', `${state.error.message}`, 'Okay');
+        Notify.failure(`${state.error.message}`, 
+        {distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true})
       },
 
       [operations.resetUserPassword.pending] (state, { payload }) {
@@ -88,15 +106,46 @@ export const authSlice = createSlice({
       },
       [operations.resetUserPassword.fulfilled] (state, {payload}) {
         state.loading = false;
-        Report.info(
-          'SUCCESS!',
-          `Please check your mail.`,
-          'Okay'
-        );
+        Notify.success('Please check your mail.', 
+        {distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true})
       },
       [operations.resetUserPassword.rejected] (state, { payload }) {
         state.loading = false;
-        Report.warning('Warning', `${payload.message} this email.`, 'Okay');
+        Notify.failure(`${payload.message} this email.`, 
+        {distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true})
+      },
+      [operations.refreshPassword.pending] (state, { payload }) {
+        state.loading = true;
+      },
+      [operations.refreshPassword.fulfilled] (state, {payload}) {
+        state.loading = false;
+        Notify.success('Your password has been successfully changed.', 
+        {distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true})
+      },
+      [operations.refreshPassword.rejected] (state, { payload }) {
+        state.loading = false;
+        Notify.failure(`Your ${payload.message}.`, 
+        {distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true})
       },
 
       [operations.logout.pending] (state, {payload}) {
@@ -170,11 +219,13 @@ export const authSlice = createSlice({
       },
       [operations.updateUser.rejected] (state) {
         //state.loading = false;
-        Report.warning(
-          'Warning',
-          `Something went wrong or user with this name already exists!`,
-          'Okay'
-        );
+        Notify.failure('Something went wrong or user with this name already exists!', 
+        {distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true})
       },
 
       [operations.updateUserAvatar.pending] (state) {
@@ -195,11 +246,13 @@ export const authSlice = createSlice({
       [operations.deleteAccount.fulfilled] (state, { payload }) {
           state.loading = false;
         state.user = payload;
-                Report.info(
-          'SUCCESS!',
-          `Your account deleted .`,
-          'Okay'
-        );
+        Notify.success('Your account deleted:(', 
+        {distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true})
       },
       [operations.deleteAccount.rejected]: (state, {payload}) => {
           state.loading = false;

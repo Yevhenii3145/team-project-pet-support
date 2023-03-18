@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import operationsPets from "redux/operations/userPetsApi";
-import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const initialState = {
     error: null,
@@ -18,19 +18,23 @@ const userSlice = createSlice({
         [operationsPets.addPet.fulfilled] (state, action) {
             state.loading = false;
             state.pets.push(action.payload);
-            Report.success(
-                'Success',
-                `${action.payload.name} added successfully.`,
-                'Okay',
-                );
+            Notify.success(`${action.payload.name} added successfully.`, {
+              distance: '100px',
+              opacity: '0.8',
+              useIcon: false,
+              fontSize: '18px',
+              borderRadius: '20px',
+              showOnlyTheLastOne: true})
           },
         [operationsPets.addPet.rejected] (state) {
             state.loading = false;
-            Report.warning(
-              'Warning',
-              `Something went wrong.`,
-              'Okay'
-            );
+            Notify.failure('Something went wrong:(', {
+              distance: '100px',
+              opacity: '0.8',
+              useIcon: false,
+              fontSize: '18px',
+              borderRadius: '20px',
+              showOnlyTheLastOne: true})
         },
         [operationsPets.getUserPet.pending] (state) {
            state.loading = false;

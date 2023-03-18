@@ -20,7 +20,13 @@ const AddNoticeButton = () => {
       setModalShow(true);
       document.body.style.overflow = 'hidden';
     } else {
-      Notify.failure('You need authorization');
+      Notify.failure('You need authorization', 
+      { distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true});
     }
   };
 

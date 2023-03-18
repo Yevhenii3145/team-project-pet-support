@@ -10,7 +10,6 @@ import {
   fetchCategoryNotices,
   addNoticeToFavorite,
   deleteNotice,
-  searchNotice,
   deleteFavoriteNotice,
 } from 'redux/operations/noticesOperation';
 import useAuth from 'redux/utils/useAuth';
@@ -33,7 +32,6 @@ const NoticeCategoryItem = ({ notice, value}) => {
     owner,
   } = notice;
 
-  
   const [modalShow, setModalShow] = useState(false);
   const [modalShowEditNotice, setModalShowEditNotice] = useState(false);
   const dispatch = useDispatch();
@@ -54,7 +52,13 @@ const NoticeCategoryItem = ({ notice, value}) => {
 
   const btnAddToFavorite = async (noticeId) => {
     if (!isLogin) {
-      Notify.failure('You need authorization');
+      Notify.failure('You need authorization', 
+      { distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true});
       return
     }else if(!isFavorite) {
       if(filter === null) {
@@ -77,7 +81,6 @@ const NoticeCategoryItem = ({ notice, value}) => {
   const showModal = () => {
     document.body.style.overflow = 'hidden'; 
     setModalShow(true);
-    dispatch(searchNotice(notice._id));
   };
 
   const getPlacePet = () => {
@@ -133,12 +136,12 @@ const NoticeCategoryItem = ({ notice, value}) => {
         <>
           <Modal onClose={closeModal}>
             <ModalNotice
-              id={notice._id}
               onClose={closeModal}
               onAddDelete={btnAddToFavorite}
               categoryNotice = {getCategoryNotice}
               favorite={isFavorite}
               deleteNotice={btnDeleteNotice}
+              info={notice}
             />
           </Modal>
         </>
@@ -147,7 +150,7 @@ const NoticeCategoryItem = ({ notice, value}) => {
       {modalShowEditNotice && (
         <>
           <ModalAddNotice onClose={closeModalEditNotice}>
-            <EditNoticeContent notice={notice} />
+            <EditNoticeContent notice={notice} noticeCategory={value} />
           </ModalAddNotice>
         </>
       )}

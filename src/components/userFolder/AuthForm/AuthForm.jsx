@@ -9,7 +9,7 @@ import Loader from 'components/utilsFolder/Loader/Loader'
 import * as Yup from 'yup'
 import { useEffect, useState } from 'react'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
-import { NavLink, useLocation, useParams } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import SvgInsert from 'components/utilsFolder/Svg/Svg'
 import cities from '../../../helpers/ua.json'
 
@@ -72,16 +72,17 @@ const AuthForm = () => {
     const [coordination, setCoordination] = useState(false)
     const [valuePassword, setValuePassword] = useState('')
     const [valueConfirmPassword, setValueConfirmPassword] = useState('')
+    const [tokenForResetPassword, setTokenForResetPassword] = useState('')
     const location = useLocation()
     const page = location.pathname
-    const params = useParams()
+    const { token } = useParams()
+    const navigate = useNavigate()
 
     useEffect(()=>{
-        if(page === '/refresh'){
-            console.log('refresh')
-            console.log(params)
+        if(page !== '/register' && page !== '/login' && page !== '/verify' && page !== '/reset-password'){
+            setTokenForResetPassword(token)
         }
-    },[page, params])
+    },[page, token])
 
     const handleChangePassword = e => {
         switch (e.target.name) {
@@ -124,6 +125,12 @@ const AuthForm = () => {
                     'Your passwords must have the same value!',
                     {
                         timeout: 6000,
+                        distance: '100px',
+                        opacity: '0.8',
+                        useIcon: false,
+                        fontSize: '18px',
+                        borderRadius: '20px',
+                        showOnlyTheLastOne: true
                     }
                 )
             }
@@ -138,6 +145,12 @@ const AuthForm = () => {
                 console.log('not')
                 return Notify.failure('Please select a region from the list!', {
                     timeout: 6000,
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '18px',
+                    borderRadius: '20px',
+                    showOnlyTheLastOne: true
                 })
             }
 
@@ -196,21 +209,28 @@ const AuthForm = () => {
 
     const handleSubmitForChangePassword = (values, actions) => {
         if (values.password !== values.passwordConfirm) {
-            console.log(values.password)
-            console.log(values.passwordConfirm)
             return Notify.failure('Your passwords must have the same value!', {
                 timeout: 6000,
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '18px',
+                borderRadius: '20px',
+                showOnlyTheLastOne: true
             })
         }
-        const userNewPassword = {
-            password: values.password,
+        const infoForUpdatePassword = {
+            userToken: tokenForResetPassword,
+            userNewPassword: {
+                password: values.password,
+            }
         }
-        console.log(userNewPassword)
         actions.resetForm()
         setValuePassword('')
         setValueConfirmPassword('')
-        return
-        //return dispatch(operations.resetUserPassword(userEmail))
+        setTokenForResetPassword('')
+        dispatch(operations.refreshPassword(infoForUpdatePassword))
+        return navigate("/login")
     }
 
     return (
@@ -331,11 +351,13 @@ const AuthForm = () => {
                                         className={scss.coordination__box_input}
                                         type="checkbox"
                                         name="coordination"
+                                        id="coordination"
                                     />
                                     <label
                                         className={scss.coordination__box_title}
+                                        htmlFor="coordination"
                                     >
-                                        Погоджуюсь з{' '}
+                                        Agree with the{' '}
                                         <a
                                             href="https://www.google.com.ua/"
                                             className={
@@ -344,7 +366,7 @@ const AuthForm = () => {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            правилами користування сайту
+                                            terms of use of the site
                                         </a>
                                     </label>
                                 </div>
@@ -713,7 +735,7 @@ const AuthForm = () => {
                     </p>
                 </>
             )}
-            {page === '/refresh' && (
+            {page !== '/register' && page !== '/login' && page !== '/verify' && page !== '/reset-password' && (
                 <Formik
                     validationSchema={schemasForStepFirst}
                     initialValues={initialValue}

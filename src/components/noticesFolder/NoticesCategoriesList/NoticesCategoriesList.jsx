@@ -101,7 +101,13 @@ const scrollTo = () => {
             {categoryName === 'favorite' && pets.length === 0 && <EmptyFavoriteList />}
             {pets.length > 0 && <NoticesCategoryList pets={filterNotices()} data={memoizedValue}/>}
             {totalNotices / 8 > page ? <LoadMore scroll={scrollTo} changePage={setPage}/> : null}
-            {error && Notify.failure('Oops, something went wrong')}
+            {error && Notify.failure('Oops, something went wrong', 
+            {distance: '100px',
+            opacity: '0.8',
+            useIcon: false,
+            fontSize: '18px',
+            borderRadius: '20px',
+            showOnlyTheLastOne: true})}
         </>
     )
 }

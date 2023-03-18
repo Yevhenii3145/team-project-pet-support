@@ -2,10 +2,9 @@ import { useState } from 'react';
 import {useSelector} from 'react-redux';
 import scss from './modal-add-pet-pages.module.scss';
 // import operationsPets from 'redux/operations/userPetsApi';
-import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Loader from 'components/utilsFolder/Loader/Loader';
 import SvgInsert from '../../../utilsFolder/Svg/Svg';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Flatpickr from 'react-flatpickr';
 import axios from 'axios';
 
@@ -13,11 +12,12 @@ const { REACT_APP_BASE_URL } = process.env
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
 
 
-const EditPetContent = ({ close, pets, _id, }) => {
+const EditPetContent = ({ close,  _id }) => {
   // const dispatch = useDispatch();
     
   const [stepOne, setStepOne] = useState(true);
   const loading = useSelector(state => state.user.loading);
+  const pets = useSelector(state => state.user.pets)
 
   const isPet = pets.find(e => e._id === _id);
 
@@ -64,7 +64,13 @@ const EditPetContent = ({ close, pets, _id, }) => {
     const image = e.target.files[0];
     if (image?.size > 5242880) {
       Notify.warning('File is too big, please download max 5 mb!', {
-        timeout: 6000,
+      timeout: 6000,
+      distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '18px',
+      borderRadius: '20px',
+      showOnlyTheLastOne: true
       });
       setImageURL(null);
       return;
@@ -98,11 +104,13 @@ const EditPetContent = ({ close, pets, _id, }) => {
     setPetDate(date.value);
     setPetBreed(breed.value);
     if (new Date(petDate) >= new Date(formatDate)) {
-      return Report.info(
-        'Pet Info',
-        'Please choose a date no later than today.',
-        'Okay'
-      );
+      return Notify.failure('Please choose a date no later than today!', 
+      {distance: '100px',
+      opacity: '0.8',
+      useIcon: false,
+      fontSize: '18px',
+      borderRadius: '20px',
+      showOnlyTheLastOne: true})
     }
     return changeStep();
   };
@@ -140,7 +148,7 @@ const handleSubmit = async (e) => {
         birthday: petDate,
         breed: petBreed,
         comments: petComments,
-        image: imageURL,
+
       });
           console.log('imageURL', imageURL)
       setIsSubmitting(false);
