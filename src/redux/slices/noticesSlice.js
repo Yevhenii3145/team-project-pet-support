@@ -94,8 +94,18 @@ const noticesSlice = createSlice({
         },
         [getSearch.fulfilled] (state, action) {
           state.loading = false;
+          if(action.payload.countNotices === 0) {
+            Notify.failure('Ooops, your query is not found', 
+            { distance: '100px',
+              opacity: '0.8',
+              useIcon: false,
+              fontSize: '18px',
+              borderRadius: '20px',
+              showOnlyTheLastOne: true});
+              return
+                }
           state.totalNotices = action.payload.countNotices;
-          state.nameCategory[1] === 1 ? state.items = action.payload.result : state.items.push(...action.payload.result);
+          state.nameCategory[2] === 1 ? state.items = action.payload.result : state.items.push(...action.payload.result);
           },
         [getSearch.rejected] (state, action) {
             state.loading = false;
