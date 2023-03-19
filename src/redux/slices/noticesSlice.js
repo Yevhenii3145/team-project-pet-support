@@ -39,7 +39,7 @@ const noticesSlice = createSlice({
               ? state.items = action.payload.data.notices 
               : state.items.push(...action.payload.data.notices)
               return
-            } 
+            }
             state.nameCategory[1] === 1
               ? state.items = action.payload.data.notices
               : state.items.push(...action.payload.data.notices)
@@ -93,8 +93,18 @@ const noticesSlice = createSlice({
         },
         [getSearch.fulfilled] (state, action) {
           state.loading = false;
+          if(action.payload.countNotices === 0) {
+            Notify.failure('Ooops, your query is not found', 
+            { distance: '100px',
+              opacity: '0.8',
+              useIcon: false,
+              fontSize: '18px',
+              borderRadius: '20px',
+              showOnlyTheLastOne: true});
+              return
+                }
           state.totalNotices = action.payload.countNotices;
-          state.nameCategory[1] === 1 ? state.items = action.payload.result : state.items.push(...action.payload.result);
+          state.nameCategory[2] === 1 ? state.items = action.payload.result : state.items.push(...action.payload.result);
           },
         [getSearch.rejected] (state, action) {
             state.loading = false;
@@ -113,7 +123,6 @@ const noticesSlice = createSlice({
         },
         [addNotice.fulfilled] (state, action) {
           state.loading = false;
-          console.log("action.payload.category", action.payload.category);
           state.nameCategory === action.payload.category && state.items.unshift(action.payload);
         },
         [addNotice.rejected] (state, action) {

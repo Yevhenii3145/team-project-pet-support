@@ -1,7 +1,11 @@
 import scss from './notices-category-list.module.scss';
 import NoticeCategoryItem from 'components/noticesFolder/NoticeCategoryItem/NoticeCategoryItem';
+import { useSelector } from 'react-redux';
+import { getNotices } from 'redux/selectors/noticesSelectors';
 
-const NoticesCategoryList = ({ pets, data}) => {
+const NoticesCategoryList = ({ data}) => {
+
+  const pets = useSelector(getNotices);
  
   return (
     <ul className={scss.card_list}>
