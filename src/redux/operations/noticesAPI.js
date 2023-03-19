@@ -29,3 +29,8 @@ export const getSearch = async (search) => {
   const data = await axios.get(`/notices/search?keyword=${search}`);
   return data;
 };
+
+export const edithNotice = async (dataNotice) => {
+  const data = await axios.put(`/notices/notice/${dataNotice.id}`, dataNotice.data);
+  return data;
+};

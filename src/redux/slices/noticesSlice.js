@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCategoryNotices, deleteNotice, getAllFavorites, getSearch, addNoticeToFavorite, deleteFavoriteNotice } from "../operations/noticesOperation";
+import { fetchCategoryNotices, deleteNotice, getAllFavorites, getSearch, addNoticeToFavorite, deleteFavoriteNotice, addNotice } from "../operations/noticesOperation";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { addNotice } from "../operations/noticesOperation";
 
 const initialState = {
     items: [],
@@ -127,7 +126,7 @@ const noticesSlice = createSlice({
             fontSize: '18px',
             borderRadius: '20px',
             showOnlyTheLastOne: true})
-        },
+        }
     }
 })
 
