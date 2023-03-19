@@ -1,8 +1,15 @@
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import NoticesCategoryList from 'components/noticesFolder/NoticesCategoryList/NoticesCategoryList'
-import { fetchCategoryNotices, getAllFavorites } from 'redux/operations/noticesOperation'
-import { getStore, getNotices, getTotalNotices } from 'redux/selectors/noticesSelectors'
+import {
+    fetchCategoryNotices,
+    getAllFavorites,
+} from 'redux/operations/noticesOperation'
+import {
+    getStore,
+    getNotices,
+    getTotalNotices,
+} from 'redux/selectors/noticesSelectors'
 // import { getFilter } from 'redux/selectors/filterSelector'
 import Loader from 'components/utilsFolder/Loader/Loader'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
@@ -27,100 +34,104 @@ const NoticesCategoriesList = () => {
     const [filterPag, setFilterPag] = useState(1)
     const [name, setName] = useState('sell')
     const limit = 8
-    const [searchParams, setSearchParams] = useSearchParams();
-    const value = searchParams.get('keyword');
+    const [searchParams, setSearchParams] = useSearchParams()
+    const value = searchParams.get('keyword')
 
-const memoizedValue = useMemo(
-    () => {
+    const memoizedValue = useMemo(() => {
         const data = {
-            categoryName: name === categoryName ? name : (setName(categoryName), setPage(1), name),
+            categoryName:
+                name === categoryName
+                    ? name
+                    : (setName(categoryName), setPage(1), name),
             page,
-            limit
+            limit,
         }
-    return data
-}, [categoryName, page, limit, name])
+        return data
+    }, [categoryName, page, limit, name])
 
-// const filterNotices = () => {
-//     if (!filter) {
-// return pets
-// }
+    // const filterNotices = () => {
+    //     if (!filter) {
+    // return pets
+    // }
 
-// const normalizedFilter = filter.toLocaleLowerCase()
+    // const normalizedFilter = filter.toLocaleLowerCase()
 
-// const filteredNotice = pets.filter(({ title }) => {
-// const normalizedTittle = title.toLocaleLowerCase()
-// const filterResult = normalizedTittle.includes(normalizedFilter)
-//     return filterResult
-// })
+    // const filteredNotice = pets.filter(({ title }) => {
+    // const normalizedTittle = title.toLocaleLowerCase()
+    // const filterResult = normalizedTittle.includes(normalizedFilter)
+    //     return filterResult
+    // })
 
-// return filteredNotice
-// }
+    // return filteredNotice
+    // }
 
-useEffect(()=>{
+    useEffect(() => {
+        dispatch(setNameCategory([categoryName, page, filterPag]))
+    }, [categoryName, page, filterPag, dispatch])
 
-    dispatch(setNameCategory([categoryName, page, filterPag]))
+    useEffect(() => {
+        Events.scrollEvent.register('begin', function () {
+            console.log('begin', arguments)
+        })
 
-},[categoryName, page, filterPag, dispatch])
+        Events.scrollEvent.register('end', function () {
+            console.log('end', arguments)
+        })
+    }, [])
 
-useEffect(() => {
-    Events.scrollEvent.register('begin', function () {
-        console.log('begin', arguments);
-    });
-    
-    Events.scrollEvent.register('end', function () {
-        console.log('end', arguments);
-    });
-}, []);
-    
-useEffect(() => {
-    return () => {
-        Events.scrollEvent.remove('begin');
-        Events.scrollEvent.remove('end');
-    };
-});
+    useEffect(() => {
+        return () => {
+            Events.scrollEvent.remove('begin')
+            Events.scrollEvent.remove('end')
+        }
+    })
 
-useEffect(()=> {
-    if (isLogin) {
-        dispatch(getAllFavorites())
-    }
-}, [isLogin, dispatch,])
+    useEffect(() => {
+        if (isLogin) {
+            dispatch(getAllFavorites())
+        }
+    }, [isLogin, dispatch])
 
-useEffect(() => {
+    useEffect(() => {
+        if (!value) {
+            setSearchParams({})
+            dispatch(fetchCategoryNotices(memoizedValue))
+        }
+    }, [dispatch, memoizedValue, setSearchParams, value])
 
-if(!value) {
-    setSearchParams({})
-    dispatch(fetchCategoryNotices(memoizedValue))
-}
-
-}, [dispatch, memoizedValue, setSearchParams, value])
-
-const scrollTo = () => {
+    const scrollTo = () => {
         scroller.scrollTo('scroll-to-element', {
-        duration: 2000,
-        delay: 100,
-        smooth: 'easeInOutQuint',
-        offset: -150,
-    });
-}
-
+            duration: 2000,
+            delay: 100,
+            smooth: 'easeInOutQuint',
+            offset: -150,
+        })
+    }
 
     return (
         <>
             {loading && <Loader />}
-            {categoryName === 'own' && pets.length === 0 && <EmptyOwnList />}
-            {categoryName === 'favorite' && pets.length === 0 && <EmptyFavoriteList />}
+            {/* {categoryName === 'own' && pets.length === 0 && <EmptyOwnList />}
+            {categoryName === 'favorite' && pets.length === 0 && <EmptyFavoriteList />} */}
             {pets.length === 0 && <EmptyList />}
-            {pets.length > 0 && <NoticesCategoryList data={memoizedValue}/>}
-            {totalNotices / 8 > (value ? filterPag : page) ? <LoadMore scroll={scrollTo} changePage={value ? setFilterPag : setPage}/> : null}
+            {pets.length > 0 && <NoticesCategoryList data={memoizedValue} />}
+            {totalNotices / 8 > (value ? filterPag : page) ? (
+                <LoadMore
+                    scroll={scrollTo}
+                    changePage={value ? setFilterPag : setPage}
+                />
+            ) : null}
             {/* {value && totalNotices / 8 > filterPag ? <LoadMore scroll={scrollTo} changePage={setPage} filterPage={setFilterPag}/> : null}
             {!value && totalNotices / 8 > page ? <LoadMore scroll={scrollTo} changePage={setPage} filterPage={setFilterPag}/> : null} */}
-            {error && Notify.failure('Oops, something went wrong', 
-            {distance: '100px',
-            opacity: '0.8',
-            useIcon: false,
-            fontSize: '18px',
-            borderRadius: '20px',
-            showOnlyTheLastOne: true})}
+            {error &&
+                Notify.failure('Oops, something went wrong', {
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '18px',
+                    borderRadius: '20px',
+                    showOnlyTheLastOne: true,
+                })}
         </>
     )
 }
