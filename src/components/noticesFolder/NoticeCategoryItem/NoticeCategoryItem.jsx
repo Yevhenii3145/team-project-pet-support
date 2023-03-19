@@ -15,13 +15,15 @@ import {
 import useAuth from 'redux/utils/useAuth'
 import Modal from '../ModalNotice/Modal/Modal'
 import ModalNotice from '../ModalNotice/ModalNotice'
+import ModalAddNotice from 'components/noticesFolder/ModalAddNotice/ModalAddNotice'
+import EditNoticeContent from 'components/noticesFolder/ModalAddNotice/ModalAddNoticeForm/EditNoticeContent'
 import {
     fetchInfoPetUser,
     fetchInfoUser,
 } from 'redux/operations/userGuestOperations'
 import { useTranslation } from 'react-i18next'
 
-const NoticeCategoryItem = ({ pet, value }) => {
+const NoticeCategoryItem = ({ notice, value }) => {
     const {
         _id,
         image,
@@ -32,9 +34,10 @@ const NoticeCategoryItem = ({ pet, value }) => {
         price,
         category,
         owner,
-    } = pet
+    } = notice
 
     const [modalShow, setModalShow] = useState(false)
+    const [modalShowEditNotice, setModalShowEditNotice] = useState(false)
     const dispatch = useDispatch()
     const isLogin = useAuth()
     const idUser = useSelector(state => state.auth.user.userId)
@@ -123,6 +126,16 @@ const NoticeCategoryItem = ({ pet, value }) => {
         return category
     }
 
+    const showModalEditNotice = () => {
+        setModalShowEditNotice(true)
+        document.body.style.overflow = 'hidden'
+    }
+
+    const closeModalEditNotice = () => {
+        document.body.style.overflow = 'visible'
+        setModalShowEditNotice(false)
+    }
+
     return (
         <>
             {modalShow && (
@@ -134,11 +147,23 @@ const NoticeCategoryItem = ({ pet, value }) => {
                             categoryNotice={getCategoryNotice}
                             favorite={isFavorite}
                             deleteNotice={btnDeleteNotice}
-                            info={pet}
+                            info={notice}
                         />
                     </Modal>
                 </>
             )}
+
+            {modalShowEditNotice && (
+                <>
+                    <ModalAddNotice onClose={closeModalEditNotice}>
+                        <EditNoticeContent
+                            notice={notice}
+                            noticeCategory={value}
+                        />
+                    </ModalAddNotice>
+                </>
+            )}
+
             <li className={scss.card_item}>
                 <img src={image} alt="pet" className={scss.card_img} />
                 <div className={scss.card_info}>
@@ -206,14 +231,23 @@ const NoticeCategoryItem = ({ pet, value }) => {
                             {t('NoticesPage.card.learnMore')}
                         </button>
                         {isLogin && idUser === owner._id && (
-                            <button
-                                type="button"
-                                className={scss.delete_btn}
-                                onClick={() => btnDeleteNotice(_id)}
-                            >
-                                {t('NoticesPage.card.delete')}
-                                <SvgInsert id="icon-delete-notice" />
-                            </button>
+                            <>
+                                <button
+                                    type="button"
+                                    className={scss.delete_btn}
+                                    onClick={() => btnDeleteNotice(_id)}
+                                >
+                                    {t('NoticesPage.card.delete')}
+                                    <SvgInsert id="icon-delete-notice" />
+                                </button>
+                                <button
+                                    type="button"
+                                    className={scss.edit_notice_btn}
+                                    onClick={showModalEditNotice}
+                                >
+                                    <SvgInsert id="icon-edit" />
+                                </button>
+                            </>
                         )}
                         <button
                             onClick={() => btnAddToFavorite(_id)}

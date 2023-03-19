@@ -16,7 +16,7 @@ import { menuSlice} from './slices/menuSlice';
 import { userReducer } from './slices/userSlice';
 import { userGuestReducer } from './slices/userGuestSlice';
 import noticesReducer from './slices/noticesSlice';
-import { filtersReducer } from './slices/filterSlice';
+// import { filtersReducer } from './slices/filterSlice';
 
 const persistConfig = {
   key: 'token',
@@ -31,7 +31,7 @@ export const store = configureStore({
     menu: persistReducer(persistConfig, menuSlice.reducer),
     auth: persistedReducer,
     user: userReducer,
-    filter: filtersReducer,
+    // filter: filtersReducer,
     notices: noticesReducer,
     guest: userGuestReducer,
   },
