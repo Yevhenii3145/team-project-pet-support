@@ -145,6 +145,16 @@
             "all": "all",
             "favoriteAds": "favorite ads",
             "myAds": "my ads"
+        },
+        "search": "Search",
+        "card": {
+            "breed": "Breed",
+            "place": "Place",
+            "age": "Age",
+            "price": "Price",
+            "owner": "Owner",
+            "learnMore": "Learn more",
+            "delete": "Delete"
         }
     }
 }
