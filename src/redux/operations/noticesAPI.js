@@ -30,3 +30,8 @@ export const getSearch = async (items) => {
   const data = await axios.get(`/notices/search?keyword=${value}&category=${categoryName}&page=${page}&limit=${limit}`);
   return data;
 };
+
+export const edithNotice = async (dataNotice) => {
+  const data = await axios.put(`/notices/notice/${dataNotice.id}`, dataNotice.data);
+  return data;
+};

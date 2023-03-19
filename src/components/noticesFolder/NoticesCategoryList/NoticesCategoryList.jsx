@@ -11,7 +11,7 @@ const NoticesCategoryList = ({ data}) => {
     <ul className={scss.card_list}>
       {pets.map(pet => (
         <NoticeCategoryItem
-          pet={pet}
+          notice={pet}
           key={pet._id}
           value={data}
         />
