@@ -41,14 +41,14 @@ const Nav = () => {
                     )}
                     {isActive === true ? (
                         <NavLink
-                            to={'notices/sell'}
+                            to={'notices'}
                             className={scss.linkMain}
                             onClick={() => dispatch(setMenuActive(!isActive))}
                         >
                             {t('Nav.findPet')}
                         </NavLink>
                     ) : (
-                        <NavLink to={'notices/sell'} className={scss.linkMain}>
+                        <NavLink to={'notices'} className={scss.linkMain}>
                             {t('Nav.findPet')}
                         </NavLink>
                     )}

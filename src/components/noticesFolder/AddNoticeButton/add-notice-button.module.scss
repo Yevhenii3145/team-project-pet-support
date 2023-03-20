@@ -1,13 +1,8 @@
 @import '../../../helpers/variables.module.scss';
 
-.cont {
-  display: flex;
-  flex-direction: row-reverse;
-}
-
 .button {
   position: absolute;
-  top: 240px;
+  right: 0;
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
@@ -33,10 +28,5 @@
   @media (min-width: 768px) {
     font-size: 20px;
     line-height: 27px;
-    top: 373px;
-  }
-
-  @media (min-width: 1280px) {
-    top: 335px;
   }
 }
