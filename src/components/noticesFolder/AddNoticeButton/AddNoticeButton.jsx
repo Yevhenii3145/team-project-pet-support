@@ -31,7 +31,7 @@ const AddNoticeButton = () => {
   };
 
   return (
-    <div className={scss.cont}>
+    <>
       <button className={scss.button} type="button" onClick={showModal}>
         <SvgInsert id="icon-add-notice" />
         Add pet
@@ -43,7 +43,7 @@ const AddNoticeButton = () => {
           </ModalAddNotice>
         </>
       )}
-    </div>
+    </>
   );
 };
 
