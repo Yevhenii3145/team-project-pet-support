@@ -1,10 +1,20 @@
-import { NavLink} from 'react-router-dom';
+import { NavLink, useNavigate, useParams} from 'react-router-dom';
 import scss from './notices-categories-nav.module.scss';
 import useAuth from 'redux/utils/useAuth';
+import { useEffect } from 'react';
 import AddNoticeButton from '../AddNoticeButton/AddNoticeButton';
+
 
 const NoticesCategoriesNav = () => {
   const isLogin = useAuth();
+  const {categoryName} = useParams()
+  const navigate = useNavigate()
+
+  useEffect(()=> {
+    if(categoryName === undefined) {
+      navigate('sell', { replace: true });
+    }
+  }, [categoryName, navigate])
 
   const getClassName = ({ isActive }) => {
     return isActive ? `${scss.link} ${scss.active}` : `${scss.link}`;
