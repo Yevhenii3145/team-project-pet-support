@@ -19,7 +19,7 @@ const Nav = () => {
         </div>
         <div className={scss.linkWrapper}>
             {isActive === true ? <NavLink to={'news'} className={scss.linkMain} onClick={()=>dispatch(setMenuActive(!isActive))}>News</NavLink> : <NavLink to={'news'} className={scss.linkMain}>News</NavLink>}
-            {isActive === true ? <NavLink to={'notices/sell'} className={scss.linkMain} onClick={()=>dispatch(setMenuActive(!isActive))}>Find pet</NavLink> : <NavLink to={'notices/sell'} className={scss.linkMain}>Find pet</NavLink>}
+            {isActive === true ? <NavLink to={'notices'} className={scss.linkMain} onClick={()=>dispatch(setMenuActive(!isActive))}>Find pet</NavLink> : <NavLink to={'notices'} className={scss.linkMain}>Find pet</NavLink>}
             {isActive === true ? <NavLink to={'friends'} className={scss.linkMain} onClick={()=>dispatch(setMenuActive(!isActive))}>Our friends</NavLink> : <NavLink to={'friends'} className={scss.linkMain}>Our friends</NavLink>}
         </div>
         </div>
