@@ -38,7 +38,6 @@ const NoticeCategoryItem = ({ notice, value}) => {
   const isLogin = useAuth();
   const idUser = useSelector(state => state.auth.user.userId)
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
-  const filter = useSelector(state => state.filter);
   const [isFavorite, setIsFavorite] = useState(false);
   
   useEffect(() => {
@@ -61,11 +60,9 @@ const NoticeCategoryItem = ({ notice, value}) => {
         showOnlyTheLastOne: true});
       return
     }else if(!isFavorite) {
-      if(filter === null) {
         dispatch(addNoticeToFavorite(noticeId));
         setIsFavorite(true)
         return
-      }
     } else if (isFavorite){
         await dispatch(deleteFavoriteNotice(noticeId))
           setIsFavorite(false) 
