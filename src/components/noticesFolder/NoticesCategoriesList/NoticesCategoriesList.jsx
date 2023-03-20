@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import NoticesCategoryList from 'components/noticesFolder/NoticesCategoryList/NoticesCategoryList'
 import { fetchCategoryNotices, getAllFavorites } from 'redux/operations/noticesOperation'
 import { getStore, getNotices, getTotalNotices } from 'redux/selectors/noticesSelectors'
-// import { getFilter } from 'redux/selectors/filterSelector'
 import Loader from 'components/utilsFolder/Loader/Loader'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import useAuth from 'redux/utils/useAuth'
@@ -13,13 +12,11 @@ import LoadMore from 'components/utilsFolder/LoadMore/LoadMore'
 import { Events, scroller } from 'react-scroll'
 import { useState, useMemo, useEffect } from 'react'
 import { setNameCategory } from 'redux/slices/noticesSlice'
-import { EmptyList } from '../EmptyList/EmptyList'
 
 const NoticesCategoriesList = () => {
     const dispatch = useDispatch()
     const { categoryName } = useParams()
     const pets = useSelector(getNotices)
-    // const filter = useSelector(getFilter)
     const totalNotices = useSelector(getTotalNotices)
     const { loading, error } = useSelector(getStore)
     const isLogin = useAuth()
@@ -39,22 +36,6 @@ const memoizedValue = useMemo(
         }
     return data
 }, [categoryName, page, limit, name])
-
-// const filterNotices = () => {
-//     if (!filter) {
-// return pets
-// }
-
-// const normalizedFilter = filter.toLocaleLowerCase()
-
-// const filteredNotice = pets.filter(({ title }) => {
-// const normalizedTittle = title.toLocaleLowerCase()
-// const filterResult = normalizedTittle.includes(normalizedFilter)
-//     return filterResult
-// })
-
-// return filteredNotice
-// }
 
 useEffect(()=>{
 
@@ -109,11 +90,8 @@ const scrollTo = () => {
             {loading && <Loader />}
             {categoryName === 'own' && pets.length === 0 && <EmptyOwnList />}
             {categoryName === 'favorite' && pets.length === 0 && <EmptyFavoriteList />}
-            {pets.length === 0 && <EmptyList />}
             {pets.length > 0 && <NoticesCategoryList data={memoizedValue}/>}
             {totalNotices / 8 > (value ? filterPag : page) ? <LoadMore scroll={scrollTo} changePage={value ? setFilterPag : setPage}/> : null}
-            {/* {value && totalNotices / 8 > filterPag ? <LoadMore scroll={scrollTo} changePage={setPage} filterPage={setFilterPag}/> : null}
-            {!value && totalNotices / 8 > page ? <LoadMore scroll={scrollTo} changePage={setPage} filterPage={setFilterPag}/> : null} */}
             {error && Notify.failure('Oops, something went wrong', 
             {distance: '100px',
             opacity: '0.8',
