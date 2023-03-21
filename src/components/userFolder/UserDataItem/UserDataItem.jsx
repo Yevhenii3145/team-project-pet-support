@@ -5,6 +5,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useSelector, useDispatch } from 'react-redux';
 import operations from 'redux/operations/userOperations';
 import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
 
 const { REACT_APP_BASE_URL } = process.env;
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
@@ -12,6 +13,11 @@ axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 export default function UserDataItem() {
   const userInStore = useSelector(state => state.auth.user);
   const token = useSelector(state => state.auth.token);
+  const [searchParams] = useSearchParams()
+  const usertoken = searchParams.get('token')
+
+  const current = usertoken ? usertoken : token
+
   const dispatch = useDispatch();
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
@@ -38,7 +44,7 @@ export default function UserDataItem() {
       
     };
  
-    if (token !== undefined) {
+    if (current !== undefined) {
       reader.readAsDataURL(file);
 
     } else {
