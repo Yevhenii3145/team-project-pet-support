@@ -4,6 +4,10 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useSelector, useDispatch } from 'react-redux';
 import operations from 'redux/operations/userOperations';
 import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
+import { Oval } from 'react-loader-spinner';
+
 
 const { REACT_APP_BASE_URL } = process.env;
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
@@ -12,6 +16,12 @@ export default function UserAvatar() {
   const userInStore = useSelector(state => state.auth.user);
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [searchParams] = useSearchParams();
+  const usertoken = searchParams.get('token');
+
+  const current = usertoken ? usertoken : token;
+
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
 
@@ -32,22 +42,47 @@ export default function UserAvatar() {
       return;
     }
       
-    reader.onloadend = () => {
-      dispatch(operations.updateUserAvatar(file));
-      
+        setLoading(true);
+        console.log("loading null", loading)
+        
+        setTimeout(() => {
+                  reader.onloadend = () => {
+            dispatch(operations.updateUserAvatar(file));
+            setLoading(false)
+            console.log("loading", loading)
     };
  
-    if (token !== undefined) {
+        if (current !== undefined) {
+
       reader.readAsDataURL(file);
 
-    } else {
+        } else {
       reader.readAsDataURL(file);
     }
-
-    return;
+        }, 1000)
+    // return;
   };
 
   return (
+  <>
+                    {loading &&
+                // <div className={scss.loader__content_avatar}>
+        <div className={scss.loader_oval_avatar}>
+          <Oval
+            height={60}
+            width={60}
+            color="#F59256"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#F59256"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+           />
+                    {/* </div> */}
+                </div>}
+
         <div className={scss.userItem_box_yourPhoto}>
           <img className={scss.userItem__yourPhoto} src={userInStore.avatar ? userInStore.avatar : defaultImg} alt="" />
             <div className={scss.userItem_box_btnPhoto}>    
@@ -64,6 +99,7 @@ export default function UserAvatar() {
                     Edit photo
                 </label>
             </div>
-        </div>  
+      </div>
+      </>
   );
 }
