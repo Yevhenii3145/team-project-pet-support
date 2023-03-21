@@ -189,6 +189,7 @@ export const authSlice = createSlice({
         state.user.name = payload.name;
         state.user.phone = payload.phone;
         state.user.userId = idUser ? idUser : payload.userId;
+        state.token = usertoken ? usertoken : payload.token;
         state.isLogin = true;
       },
       [operations.current.rejected] (state, { payload }) {

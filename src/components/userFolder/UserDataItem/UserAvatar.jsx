@@ -4,7 +4,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useSelector, useDispatch } from 'react-redux';
 import operations from 'redux/operations/userOperations';
 import axios from 'axios';
-
+import { useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import { Oval } from 'react-loader-spinner';
 
@@ -17,6 +17,11 @@ export default function UserAvatar() {
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [searchParams] = useSearchParams();
+  const usertoken = searchParams.get('token');
+
+  const current = usertoken ? usertoken : token;
+
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
 
@@ -47,7 +52,7 @@ export default function UserAvatar() {
             console.log("loading", loading)
     };
  
-        if (token !== undefined) {
+        if (current !== undefined) {
 
       reader.readAsDataURL(file);
 

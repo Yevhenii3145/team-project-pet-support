@@ -7,6 +7,9 @@ import { setAuthHeader } from "redux/operations/userOperations";
 const {REACT_APP_BASE_URL} = process.env;
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
+const searchParams = new URLSearchParams(document.location.search);
+const usertoken = searchParams.get('token');
+
 export const fetchCategoryNotices = createAsyncThunk(
   'notices/fetchNotices',
   async (value, thunkAPI) => {
@@ -59,7 +62,7 @@ export const getAllFavorites = createAsyncThunk(
   'notices/getFavorite',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
+    const persistedToken = usertoken ? usertoken : state.auth.token;
 
     if (persistedToken === null) {
       return thunkAPI.rejectWithValue('Unable to fetch user');
