@@ -11,9 +11,9 @@ const searchParams = new URLSearchParams(document.location.search);
 const usertoken = searchParams.get('token'); 
 
 const persistConfig = {
-  key: usertoken ? usertoken : 'token',
-  storage,
-  whitelist: ['token'],
+  key: 'token',
+  storage: storage,
+  whitelist: [usertoken ? usertoken : 'token'],
 }
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
