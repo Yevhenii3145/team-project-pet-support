@@ -15,9 +15,11 @@ import {
 import useAuth from 'redux/utils/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
 import ModalNotice from '../ModalNotice/ModalNotice';
+import ModalAddNotice from 'components/noticesFolder/ModalAddNotice/ModalAddNotice';
+import EditNoticeContent from 'components/noticesFolder/ModalAddNotice/ModalAddNoticeForm/EditNoticeContent';
 import { fetchInfoPetUser, fetchInfoUser } from 'redux/operations/userGuestOperations';
 
-const NoticeCategoryItem = ({ pet, value}) => {
+const NoticeCategoryItem = ({ notice, value}) => {
   const {
     _id,
     image,
@@ -28,15 +30,14 @@ const NoticeCategoryItem = ({ pet, value}) => {
     price,
     category,
     owner,
-  } = pet;
+  } = notice;
 
-  
   const [modalShow, setModalShow] = useState(false);
+  const [modalShowEditNotice, setModalShowEditNotice] = useState(false);
   const dispatch = useDispatch();
   const isLogin = useAuth();
   const idUser = useSelector(state => state.auth.user.userId)
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
-  const filter = useSelector(state => state.filter);
   const [isFavorite, setIsFavorite] = useState(false);
   
   useEffect(() => {
@@ -54,16 +55,14 @@ const NoticeCategoryItem = ({ pet, value}) => {
       { distance: '100px',
         opacity: '0.8',
         useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
+        fontSize: '18px',
+        borderRadius: '20px',
         showOnlyTheLastOne: true});
       return
     }else if(!isFavorite) {
-      if(filter === null) {
         dispatch(addNoticeToFavorite(noticeId));
         setIsFavorite(true)
         return
-      }
     } else if (isFavorite){
         await dispatch(deleteFavoriteNotice(noticeId))
           setIsFavorite(false) 
@@ -118,6 +117,16 @@ const NoticeCategoryItem = ({ pet, value}) => {
     return category;
   }
 
+  const showModalEditNotice = () => {
+    setModalShowEditNotice(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModalEditNotice = () => {
+    document.body.style.overflow = 'visible';
+    setModalShowEditNotice(false);
+  };
+
   return (
       <>
       {modalShow && (
@@ -129,11 +138,20 @@ const NoticeCategoryItem = ({ pet, value}) => {
               categoryNotice = {getCategoryNotice}
               favorite={isFavorite}
               deleteNotice={btnDeleteNotice}
-              info={pet}
+              info={notice}
             />
           </Modal>
         </>
       )}
+      
+      {modalShowEditNotice && (
+        <>
+          <ModalAddNotice onClose={closeModalEditNotice}>
+            <EditNoticeContent notice={notice} noticeCategory={value} />
+          </ModalAddNotice>
+        </>
+      )}
+
       <li className={scss.card_item}>
         <img src={image} alt="pet" className={scss.card_img} />
         <div className={scss.card_info}>
@@ -179,20 +197,30 @@ const NoticeCategoryItem = ({ pet, value}) => {
               Learn more
             </button>
             {isLogin && idUser === owner._id && (
-              <button
+              <>
+                <button
                 type="button"
                 className={scss.delete_btn}
                 onClick={() => btnDeleteNotice(_id)}
-              >
+                >
                 Delete
                 <SvgInsert id="icon-delete-notice" />
-              </button>
+                </button>
+                <button
+                type="button"
+                className={scss.edit_notice_btn}
+                onClick={showModalEditNotice}
+                >
+                  <SvgInsert id="icon-edit" />
+                </button>
+              </>
             )}
             <button onClick={()=>btnAddToFavorite(_id)}
             type="button"
             className={isFavorite ? `${scss.add_to_favorite_btn} ${scss.add_to_favorite_btn_active}` : scss.add_to_favorite_btn}>
                 <SvgInsert id="icon-heart"/>
             </button>
+            
           </div>
           <p className={scss.card_text}>{getCategoryNotice(category)}</p>
         </div>

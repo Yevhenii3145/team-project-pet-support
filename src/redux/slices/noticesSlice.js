@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCategoryNotices, deleteNotice, getAllFavorites, getSearch, addNoticeToFavorite, deleteFavoriteNotice } from "../operations/noticesOperation";
+import { fetchCategoryNotices, deleteNotice, getAllFavorites, getSearch, addNoticeToFavorite, deleteFavoriteNotice, addNotice } from "../operations/noticesOperation";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { addNotice } from "../operations/noticesOperation";
 
 const initialState = {
     items: [],
@@ -40,7 +39,7 @@ const noticesSlice = createSlice({
               ? state.items = action.payload.data.notices 
               : state.items.push(...action.payload.data.notices)
               return
-            } 
+            }
             state.nameCategory[1] === 1
               ? state.items = action.payload.data.notices
               : state.items.push(...action.payload.data.notices)
@@ -63,8 +62,8 @@ const noticesSlice = createSlice({
             { distance: '100px',
               opacity: '0.8',
               useIcon: false,
-              fontSize: '20px',
-              borderRadius: '40px',
+              fontSize: '18px',
+              borderRadius: '20px',
               showOnlyTheLastOne: true})
           },
           [addNoticeToFavorite.fulfilled] (state, action) {
@@ -94,7 +93,18 @@ const noticesSlice = createSlice({
         },
         [getSearch.fulfilled] (state, action) {
           state.loading = false;
-          state.items = action.payload;
+          if(action.payload.countNotices === 0) {
+            Notify.failure('Ooops, your query is not found', 
+            { distance: '100px',
+              opacity: '0.8',
+              useIcon: false,
+              fontSize: '18px',
+              borderRadius: '20px',
+              showOnlyTheLastOne: true});
+              return
+                }
+          state.totalNotices = action.payload.countNotices;
+          state.nameCategory[2] === 1 ? state.items = action.payload.result : state.items.push(...action.payload.result);
           },
         [getSearch.rejected] (state, action) {
             state.loading = false;
@@ -103,8 +113,8 @@ const noticesSlice = createSlice({
             { distance: '100px',
               opacity: '0.8',
               useIcon: false,
-              fontSize: '20px',
-              borderRadius: '40px',
+              fontSize: '18px',
+              borderRadius: '20px',
               showOnlyTheLastOne: true})
         },
 
@@ -113,7 +123,6 @@ const noticesSlice = createSlice({
         },
         [addNotice.fulfilled] (state, action) {
           state.loading = false;
-          console.log("action.payload.category", action.payload.category);
           state.nameCategory === action.payload.category && state.items.unshift(action.payload);
         },
         [addNotice.rejected] (state, action) {
@@ -123,10 +132,10 @@ const noticesSlice = createSlice({
           { distance: '100px',
             opacity: '0.8',
             useIcon: false,
-            fontSize: '20px',
-            borderRadius: '40px',
+            fontSize: '18px',
+            borderRadius: '20px',
             showOnlyTheLastOne: true})
-        },
+        }
     }
 })
 

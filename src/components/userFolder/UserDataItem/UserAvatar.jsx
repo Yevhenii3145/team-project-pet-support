@@ -4,8 +4,10 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useSelector, useDispatch } from 'react-redux';
 import operations from 'redux/operations/userOperations';
 import axios from 'axios';
+
 import { useState } from 'react';
 import { Oval } from 'react-loader-spinner';
+
 
 const { REACT_APP_BASE_URL } = process.env;
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
@@ -15,7 +17,6 @@ export default function UserAvatar() {
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-
   const defaultImg =
     'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!';
 
@@ -24,29 +25,18 @@ export default function UserAvatar() {
     const file = e.target.files[0];
     if (file?.size > 5242880) {
       Notify.warning('File is too big, please download max 5 mb!', {
-      timeout: 5000,
-      distance: '100px',
-      opacity: '0.8',
-      useIcon: false,
-      fontSize: '20px',
-      borderRadius: '40px',
-      showOnlyTheLastOne: true
+        timeout: 5000,
+        distance: '100px',
+        opacity: '0.8',
+        useIcon: false,
+        fontSize: '18px',
+        borderRadius: '20px',
+        showOnlyTheLastOne: true
       });
       
       return;
     }
       
-    // reader.onloadend = () => {
-    //   dispatch(operations.updateUserAvatar(file));
-      
-    // };
- 
-    // if (token !== undefined) {
-    //   reader.readAsDataURL(file);
-
-    // } else {
-    //   reader.readAsDataURL(file);
-    // }
         setLoading(true);
         console.log("loading null", loading)
         
@@ -87,6 +77,7 @@ export default function UserAvatar() {
            />
                     {/* </div> */}
                 </div>}
+
         <div className={scss.userItem_box_yourPhoto}>
           <img className={scss.userItem__yourPhoto} src={userInStore.avatar ? userInStore.avatar : defaultImg} alt="" />
             <div className={scss.userItem_box_btnPhoto}>    

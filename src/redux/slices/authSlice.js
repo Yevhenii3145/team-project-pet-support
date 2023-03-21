@@ -3,26 +3,26 @@ import operations from '../operations/userOperations';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const searchParams = new URLSearchParams(document.location.search);
-const usertoken = searchParams.get('usertoken'); 
+const usertoken = searchParams.get('token'); 
+const idUser = searchParams.get('id');
 
 
 export const authSlice = createSlice({
-  name: 'auth',
-    initialState: {
-      
+    name: 'auth',
+    initialState: {      
       user: {
         name: "",
         email: "",
         phone: "",
         city: "",
-        userId: "",
+        userId: idUser ? idUser : '',
         avatar: null,
       },
-      token: usertoken ? usertoken : "",
+      token: usertoken ? usertoken : null,
       isLogin: usertoken ? true : false,
       loading: false,
+
     },
-    
     extraReducers: {
       [operations.registerNewUser.pending](state) {
         state.loading = true;
@@ -33,13 +33,16 @@ export const authSlice = createSlice({
        {distance: '100px',
        opacity: '0.8',
        useIcon: false,
-       fontSize: '20px',
-       borderRadius: '40px',
+       fontSize: '18px',
+       borderRadius: '20px',
        showOnlyTheLastOne: true})
        state.user.name = action.payload.name;
         state.user.email = action.payload.email;
         state.user.phone = action.payload.phone;
         state.user.city = action.payload.city; 
+        state.user.userId = idUser ? idUser : '';
+        state.token = usertoken ? usertoken : null;
+        state.isLogin = usertoken ? true : false;
       },
       [operations.registerNewUser.rejected](state) {
         state.loading = false;
@@ -47,8 +50,8 @@ export const authSlice = createSlice({
         { distance: '100px',
           opacity: '0.8',
           useIcon: false,
-          fontSize: '20px',
-          borderRadius: '40px',
+          fontSize: '18px',
+          borderRadius: '20px',
           showOnlyTheLastOne: true})
       },
 
@@ -59,8 +62,8 @@ export const authSlice = createSlice({
       [operations.login.fulfilled] (state, { payload }) {
         state.loading = false;
         state.user.email = payload.email;
-        state.user.userId = payload.userId;
-        state.token = payload.token;
+        state.user.userId = idUser ? idUser : payload.userId;
+        state.token = usertoken ? usertoken : payload.token;
         state.isLogin = true;
       },
       [operations.login.rejected] (state, { payload }) {
@@ -70,79 +73,109 @@ export const authSlice = createSlice({
         { distance: '100px',
           opacity: '0.8',
           useIcon: false,
-          fontSize: '20px',
-          borderRadius: '40px',
+          fontSize: '18px',
+          borderRadius: '20px',
           showOnlyTheLastOne: true})
       },
+        [operations.authVerify.pending](state, { payload }) {
+            state.loading = true
+            state.error = payload
+        },
+        [operations.authVerify.fulfilled](state, { payload }) {
+            state.loading = false
+            Notify.success(
+                'You have successfully registered, the verification has been sent to your mail.',
+                {
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '18px',
+                    borderRadius: '20px',
+                    showOnlyTheLastOne: true,
+                }
+            )
+        },
+        [operations.authVerify.rejected](state, { payload }) {
+            state.loading = false
+            state.error = payload
+            Notify.failure(`${state.error.message}`, {
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '18px',
+                borderRadius: '20px',
+                showOnlyTheLastOne: true,
+            })
+        },
 
-      [operations.authVerify.pending] (state, { payload }) {
-        state.loading = true;
-        state.error = payload;
-      },
-      [operations.authVerify.fulfilled] (state, {payload}) {
-        state.loading = false;
-        Notify.success('You have successfully registered, the verification has been sent to your mail.', 
-        {distance: '100px',
-        opacity: '0.8',
-        useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
-        showOnlyTheLastOne: true})
-      },
-      [operations.authVerify.rejected] (state, { payload }) {
-        state.loading = false;
-        state.error = payload;
-        Notify.failure(`${state.error.message}`, 
-        {distance: '100px',
-        opacity: '0.8',
-        useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
-        showOnlyTheLastOne: true})
-      },
+        [operations.resetUserPassword.pending](state, { payload }) {
+            state.loading = true
+        },
+        [operations.resetUserPassword.fulfilled](state, { payload }) {
+            state.loading = false
+            Notify.success('Please check your mail.', {
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '18px',
+                borderRadius: '20px',
+                showOnlyTheLastOne: true,
+            })
+        },
+        [operations.resetUserPassword.rejected](state, { payload }) {
+            state.loading = false
+            Notify.failure(`${payload.message} this email.`, {
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '18px',
+                borderRadius: '20px',
+                showOnlyTheLastOne: true,
+            })
+        },
+        [operations.refreshPassword.pending](state, { payload }) {
+            state.loading = true
+        },
+        [operations.refreshPassword.fulfilled](state, { payload }) {
+            state.loading = false
+            Notify.success('Your password has been successfully changed.', {
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '18px',
+                borderRadius: '20px',
+                showOnlyTheLastOne: true,
+            })
+        },
+        [operations.refreshPassword.rejected](state, { payload }) {
+            state.loading = false
+            Notify.failure(`Your ${payload.message}.`, {
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '18px',
+                borderRadius: '20px',
+                showOnlyTheLastOne: true,
+            })
+        },
 
-      [operations.resetUserPassword.pending] (state, { payload }) {
-        state.loading = true;
-      },
-      [operations.resetUserPassword.fulfilled] (state, {payload}) {
-        state.loading = false;
-        Notify.success('Please check your mail.', 
-        {distance: '100px',
-        opacity: '0.8',
-        useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
-        showOnlyTheLastOne: true})
-      },
-      [operations.resetUserPassword.rejected] (state, { payload }) {
-        state.loading = false;
-        Notify.failure(`${payload.message} this email.`, 
-        {distance: '100px',
-        opacity: '0.8',
-        useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
-        showOnlyTheLastOne: true})
-      },
-
-      [operations.logout.pending] (state, {payload}) {
-        state.loading = true;
-        state.error = payload;
-      },
-      [operations.logout.fulfilled] (state) {
-        state.loading = false;
-        state.user = {};
-        state.token = '';
-        state.isLogin = false;
-        // const usertoken = localStorage.getItem('token');
-        // if (usertoken) localStorage.removeItem('token');
-        // localStorage.removeItem('userId');
-      },
-      [operations.logout.rejected] (state, { payload }) {
-        state.loading = false;
-        state.error = payload;
-      },
-
+        [operations.logout.pending](state, { payload }) {
+            state.loading = true
+            state.error = payload
+        },
+        [operations.logout.fulfilled](state) {
+            state.loading = false
+            state.user = {}
+            state.token = ''
+            state.isLogin = false
+            // const usertoken = localStorage.getItem('token');
+            // if (usertoken) localStorage.removeItem('token');
+            // localStorage.removeItem('userId');
+        },
+        [operations.logout.rejected](state, { payload }) {
+            state.loading = false
+            state.error = payload
+        },
       [operations.current.pending] (state, {payload}) {
         state.loading = true;
         state.error = payload;
@@ -155,7 +188,7 @@ export const authSlice = createSlice({
         state.user.email = payload.email;
         state.user.name = payload.name;
         state.user.phone = payload.phone;
-        state.user.userId = payload.userId;
+        state.user.userId = idUser ? idUser : payload.userId;
         state.isLogin = true;
       },
       [operations.current.rejected] (state, { payload }) {
@@ -163,79 +196,83 @@ export const authSlice = createSlice({
         state.error = payload;
         state.isLogin = false;
       },
+        [operations.updateUser.pending](state, action) {
+            //state.loading = true;
+        },
+        [operations.updateUser.fulfilled](state, action) {
+            //state.loading = false;
+            for (const key in action.payload) {
+                switch (key) {
+                    case 'name':
+                        state.user.name = action.payload.name
+                        break
 
-      [operations.updateUser.pending] (state, action) {
-        //state.loading = true;
-      },
-      [operations.updateUser.fulfilled] (state, action) {
-        //state.loading = false;
-        for (const key in action.payload) {
-          switch (key) {
-            case 'name':
-              state.user.name = action.payload.name;
-              break;
-  
-            case 'birthday':
-              state.user.birthday = action.payload.birthday;
-              break;
-            case 'email':
-              state.user.email = action.payload.email;
-              break;
-  
-            case 'phone':
-              state.user.phone = action.payload.phone;
-              break;
-  
-            case 'city':
-              state.user.city = action.payload.city;
-              break;
-            default:
-              return;
-          }
-        }
-      },
-      [operations.updateUser.rejected] (state) {
-        //state.loading = false;
-        Notify.failure('Something went wrong or user with this name already exists!', 
-        {distance: '100px',
-        opacity: '0.8',
-        useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
-        showOnlyTheLastOne: true})
-      },
+                    case 'birthday':
+                        state.user.birthday = action.payload.birthday
+                        break
+                    case 'email':
+                        state.user.email = action.payload.email
+                        break
 
-      [operations.updateUserAvatar.pending] (state) {
-        state.loading = true;
-      },
-      [operations.updateUserAvatar.fulfilled] (state, { payload }) {
-          state.loading = false;
-          state.user.avatar = payload.avatarURL;
-      },
-      [operations.updateUserAvatar.rejected]: (state, {payload}) => {
-          state.loading = false;
-          state.error = payload;
-      },
+                    case 'phone':
+                        state.user.phone = action.payload.phone
+                        break
 
-      [operations.deleteAccount.pending] (state) {
-        state.loading = true;
-      },
-      [operations.deleteAccount.fulfilled] (state, { payload }) {
-          state.loading = false;
-        state.user = payload;
-        Notify.success('Your account deleted:(', 
-        {distance: '100px',
-        opacity: '0.8',
-        useIcon: false,
-        fontSize: '20px',
-        borderRadius: '40px',
-        showOnlyTheLastOne: true})
-      },
-      [operations.deleteAccount.rejected]: (state, {payload}) => {
-          state.loading = false;
-          state.error = payload;
-      },
+                    case 'city':
+                        state.user.city = action.payload.city
+                        break
+                    default:
+                        return
+                }
+            }
+        },
+        [operations.updateUser.rejected](state) {
+            //state.loading = false;
+            Notify.failure(
+                'Something went wrong or user with this name already exists!',
+                {
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '18px',
+                    borderRadius: '20px',
+                    showOnlyTheLastOne: true,
+                }
+            )
+        },
+
+        [operations.updateUserAvatar.pending](state) {
+            // state.loading = true;
+        },
+        [operations.updateUserAvatar.fulfilled](state, { payload }) {
+            // state.loading = false;
+            state.user.avatar = payload.avatarURL
+        },
+        [operations.updateUserAvatar.rejected]: (state, { payload }) => {
+            // state.loading = false;
+            state.error = payload
+        },
+
+        [operations.deleteAccount.pending](state) {
+            state.loading = true
+        },
+        [operations.deleteAccount.fulfilled](state, { payload }) {
+            state.loading = false
+            state.user = payload
+            Notify.success('Your account deleted:(', {
+                distance: '100px',
+                opacity: '0.8',
+                useIcon: false,
+                fontSize: '18px',
+                borderRadius: '20px',
+                showOnlyTheLastOne: true,
+            })
+        },
+        [operations.deleteAccount.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.error = payload
+        },
     },
 })
 
-  export const authReducer = authSlice.reducer;
+export const authReducer = authSlice.reducer

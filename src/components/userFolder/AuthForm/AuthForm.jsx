@@ -9,7 +9,7 @@ import Loader from 'components/utilsFolder/Loader/Loader'
 import * as Yup from 'yup'
 import { useEffect, useState } from 'react'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
-import { NavLink, useLocation, useParams } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import SvgInsert from 'components/utilsFolder/Svg/Svg'
 import cities from '../../../helpers/ua.json'
 
@@ -76,6 +76,7 @@ const AuthForm = () => {
     const location = useLocation()
     const page = location.pathname
     const { token } = useParams()
+    const navigate = useNavigate()
 
     useEffect(()=>{
         if(page !== '/register' && page !== '/login' && page !== '/verify' && page !== '/reset-password'){
@@ -127,8 +128,8 @@ const AuthForm = () => {
                         distance: '100px',
                         opacity: '0.8',
                         useIcon: false,
-                        fontSize: '20px',
-                        borderRadius: '40px',
+                        fontSize: '18px',
+                        borderRadius: '20px',
                         showOnlyTheLastOne: true
                     }
                 )
@@ -147,8 +148,8 @@ const AuthForm = () => {
                     distance: '100px',
                     opacity: '0.8',
                     useIcon: false,
-                    fontSize: '20px',
-                    borderRadius: '40px',
+                    fontSize: '18px',
+                    borderRadius: '20px',
                     showOnlyTheLastOne: true
                 })
             }
@@ -208,15 +209,13 @@ const AuthForm = () => {
 
     const handleSubmitForChangePassword = (values, actions) => {
         if (values.password !== values.passwordConfirm) {
-            console.log(values.password)
-            console.log(values.passwordConfirm)
             return Notify.failure('Your passwords must have the same value!', {
                 timeout: 6000,
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
-                fontSize: '20px',
-                borderRadius: '40px',
+                fontSize: '18px',
+                borderRadius: '20px',
                 showOnlyTheLastOne: true
             })
         }
@@ -226,12 +225,12 @@ const AuthForm = () => {
                 password: values.password,
             }
         }
-        console.log(infoForUpdatePassword)
         actions.resetForm()
         setValuePassword('')
         setValueConfirmPassword('')
         setTokenForResetPassword('')
-        return dispatch(operations.refreshPassword(infoForUpdatePassword))
+        dispatch(operations.refreshPassword(infoForUpdatePassword))
+        return navigate("/login")
     }
 
     return (
@@ -352,11 +351,13 @@ const AuthForm = () => {
                                         className={scss.coordination__box_input}
                                         type="checkbox"
                                         name="coordination"
+                                        id="coordination"
                                     />
                                     <label
                                         className={scss.coordination__box_title}
+                                        htmlFor="coordination"
                                     >
-                                        Погоджуюсь з{' '}
+                                        Agree with the{' '}
                                         <a
                                             href="https://www.google.com.ua/"
                                             className={
@@ -365,7 +366,7 @@ const AuthForm = () => {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            правилами користування сайту
+                                            terms of use of the site
                                         </a>
                                     </label>
                                 </div>

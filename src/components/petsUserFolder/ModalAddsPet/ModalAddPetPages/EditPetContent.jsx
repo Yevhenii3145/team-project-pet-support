@@ -12,11 +12,12 @@ const { REACT_APP_BASE_URL } = process.env
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
 
 
-const EditPetContent = ({ close, pets, _id, }) => {
+const EditPetContent = ({ close,  _id }) => {
   // const dispatch = useDispatch();
     
   const [stepOne, setStepOne] = useState(true);
   const loading = useSelector(state => state.user.loading);
+  const pets = useSelector(state => state.user.pets)
 
   const isPet = pets.find(e => e._id === _id);
 
@@ -67,8 +68,8 @@ const EditPetContent = ({ close, pets, _id, }) => {
       distance: '100px',
       opacity: '0.8',
       useIcon: false,
-      fontSize: '20px',
-      borderRadius: '40px',
+      fontSize: '18px',
+      borderRadius: '20px',
       showOnlyTheLastOne: true
       });
       setImageURL(null);
@@ -107,8 +108,8 @@ const EditPetContent = ({ close, pets, _id, }) => {
       {distance: '100px',
       opacity: '0.8',
       useIcon: false,
-      fontSize: '20px',
-      borderRadius: '40px',
+      fontSize: '18px',
+      borderRadius: '20px',
       showOnlyTheLastOne: true})
     }
     return changeStep();
@@ -147,7 +148,7 @@ const handleSubmit = async (e) => {
         birthday: petDate,
         breed: petBreed,
         comments: petComments,
-        image: imageURL,
+
       });
           console.log('imageURL', imageURL)
       setIsSubmitting(false);

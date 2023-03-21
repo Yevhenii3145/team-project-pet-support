@@ -5,6 +5,9 @@ const { REACT_APP_BASE_URL } = process.env;
 
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
+const searchParams = new URLSearchParams(document.location.search);
+const usertoken = searchParams.get('token'); 
+
 export const setAuthHeader = token => {
   if (token) {
     return (axios.defaults.headers.common.authorization = `Bearer ${token} `);
@@ -65,7 +68,6 @@ const authVerify = createAsyncThunk('auth/verify', async (user, thunkAPI) => {
 const resetUserPassword = createAsyncThunk('auth/reset-password', async (user, thunkAPI) => {
   try {
     const response = await axios.post('/auth/reset-password', user);
-    console.log(response.data)
     return response.data;
   } catch ({ response }) {
     const error = {
@@ -78,9 +80,8 @@ const resetUserPassword = createAsyncThunk('auth/reset-password', async (user, t
 
 const refreshPassword = createAsyncThunk('auth/update-password', async (userInfo, thunkAPI) => {
   try {
-    axios.defaults.headers.common.authorization = userInfo.userToken;
+    axios.defaults.headers.common.authorization = `Bearer ${userInfo.userToken} `
     const response = await axios.patch('/auth/update-password', userInfo.userNewPassword);
-    console.log(response.data)
     return response.data;
   } catch ({ response }) {
     const error = {
@@ -109,7 +110,7 @@ const logout = createAsyncThunk(
 
 const current = createAsyncThunk('users/current', async (_, thunkAPI) => {
   const state = thunkAPI.getState();
-  const persistedToken = state.auth.token;
+  const persistedToken = usertoken ? usertoken : state.auth.token;
 
   try {
     setAuthHeader(persistedToken);

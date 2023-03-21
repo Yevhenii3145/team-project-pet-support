@@ -1,9 +1,8 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import NoticesCategoryList from 'components/noticesFolder/NoticesCategoryList/NoticesCategoryList'
 import { fetchCategoryNotices, getAllFavorites } from 'redux/operations/noticesOperation'
 import { getStore, getNotices, getTotalNotices } from 'redux/selectors/noticesSelectors'
-import { getFilter } from 'redux/selectors/filterSelector'
 import Loader from 'components/utilsFolder/Loader/Loader'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import useAuth from 'redux/utils/useAuth'
@@ -18,14 +17,15 @@ const NoticesCategoriesList = () => {
     const dispatch = useDispatch()
     const { categoryName } = useParams()
     const pets = useSelector(getNotices)
-    const filter = useSelector(getFilter)
     const totalNotices = useSelector(getTotalNotices)
     const { loading, error } = useSelector(getStore)
     const isLogin = useAuth()
     const [page, setPage] = useState(1)
+    const [filterPag, setFilterPag] = useState(1)
     const [name, setName] = useState('sell')
     const limit = 8
-
+    const [searchParams, setSearchParams] = useSearchParams();
+    const value = searchParams.get('keyword');
 
 const memoizedValue = useMemo(
     () => {
@@ -37,25 +37,11 @@ const memoizedValue = useMemo(
     return data
 }, [categoryName, page, limit, name])
 
-const filterNotices = () => {
-    if (!filter) {
-return pets
-}
+useEffect(()=>{
 
-const normalizedFilter = filter.toLocaleLowerCase()
+    dispatch(setNameCategory([categoryName, page, filterPag]))
 
-const filteredNotice = pets.filter(({ title }) => {
-const normalizedTittle = title.toLocaleLowerCase()
-const filterResult = normalizedTittle.includes(normalizedFilter)
-    return filterResult
-})
-
-return filteredNotice
-}
-
-useEffect(() => {
-    dispatch(setNameCategory([categoryName, page]))
-}, [categoryName,page, dispatch])
+},[categoryName, page, filterPag, dispatch])
 
 useEffect(() => {
     Events.scrollEvent.register('begin', function () {
@@ -74,15 +60,20 @@ useEffect(() => {
     };
 });
 
+useEffect(()=> {
+    if (isLogin) {
+        dispatch(getAllFavorites())
+    }
+}, [isLogin, dispatch,])
+
 useEffect(() => {
 
-if (isLogin) {
-    dispatch(getAllFavorites())
+if(!value) {
+    setSearchParams({})
+    dispatch(fetchCategoryNotices(memoizedValue))
 }
 
-dispatch(fetchCategoryNotices(memoizedValue))
-
-}, [dispatch, isLogin, memoizedValue])
+}, [dispatch, memoizedValue, setSearchParams, value])
 
 const scrollTo = () => {
         scroller.scrollTo('scroll-to-element', {
@@ -99,14 +90,14 @@ const scrollTo = () => {
             {loading && <Loader />}
             {categoryName === 'own' && pets.length === 0 && <EmptyOwnList />}
             {categoryName === 'favorite' && pets.length === 0 && <EmptyFavoriteList />}
-            {pets.length > 0 && <NoticesCategoryList pets={filterNotices()} data={memoizedValue}/>}
-            {totalNotices / 8 > page ? <LoadMore scroll={scrollTo} changePage={setPage}/> : null}
+            {pets.length > 0 && <NoticesCategoryList data={memoizedValue}/>}
+            {totalNotices / 8 > (value ? filterPag : page) ? <LoadMore scroll={scrollTo} changePage={value ? setFilterPag : setPage}/> : null}
             {error && Notify.failure('Oops, something went wrong', 
             {distance: '100px',
             opacity: '0.8',
             useIcon: false,
-            fontSize: '20px',
-            borderRadius: '40px',
+            fontSize: '18px',
+            borderRadius: '20px',
             showOnlyTheLastOne: true})}
         </>
     )
