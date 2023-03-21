@@ -3,7 +3,8 @@ import operations from '../operations/userOperations';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const searchParams = new URLSearchParams(document.location.search);
-const usertoken = searchParams.get('usertoken'); 
+const usertoken = searchParams.get('token'); 
+const idUser = searchParams.get('id');
 
 
 export const authSlice = createSlice({
@@ -15,10 +16,10 @@ export const authSlice = createSlice({
         email: "",
         phone: "",
         city: "",
-        userId: "",
+        userId: idUser ? idUser : '',
         avatar: null,
       },
-      token: usertoken ? usertoken : "",
+      token: usertoken ? usertoken : null,
       isLogin: usertoken ? true : false,
       loading: false,
     },
@@ -40,6 +41,9 @@ export const authSlice = createSlice({
         state.user.email = action.payload.email;
         state.user.phone = action.payload.phone;
         state.user.city = action.payload.city; 
+        state.user.userId = idUser ? idUser : '';
+        state.token = usertoken ? usertoken : null;
+        state.isLogin = usertoken ? true : false;
       },
       [operations.registerNewUser.rejected](state) {
         state.loading = false;
@@ -59,8 +63,8 @@ export const authSlice = createSlice({
       [operations.login.fulfilled] (state, { payload }) {
         state.loading = false;
         state.user.email = payload.email;
-        state.user.userId = payload.userId;
-        state.token = payload.token;
+        state.user.userId = idUser ? idUser : payload.userId;
+        state.token = usertoken ? usertoken : payload.token;
         state.isLogin = true;
       },
       [operations.login.rejected] (state, { payload }) {
@@ -178,7 +182,7 @@ export const authSlice = createSlice({
         state.user.email = payload.email;
         state.user.name = payload.name;
         state.user.phone = payload.phone;
-        state.user.userId = payload.userId;
+        state.user.userId = idUser ? idUser : payload.userId;
         state.isLogin = true;
       },
       [operations.current.rejected] (state, { payload }) {
