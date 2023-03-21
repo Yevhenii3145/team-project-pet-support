@@ -12,7 +12,7 @@ export default function Logout() {
     const onLogout = () => {
         Confirm.show(
       '',
-      'Are you sure you want to delete your account?',
+      'Do you really want to logout?',
       'Yes',
       'No',
                 () => {
