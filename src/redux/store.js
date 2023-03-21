@@ -1,22 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import { useReducer } from 'react';
-import {
-  persistReducer,
-  persistStore,
-  // FLUSH,
-  // REHYDRATE,
-  // PAUSE,
-  // PERSIST,
-  // PURGE,
-  // REGISTER,
-} from 'redux-persist';
+import { persistReducer, persistStore,} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './slices/authSlice';
 import { menuSlice} from './slices/menuSlice';
 import { userReducer } from './slices/userSlice';
 import { userGuestReducer } from './slices/userGuestSlice';
 import noticesReducer from './slices/noticesSlice';
-import { filtersReducer } from './slices/filterSlice';
 
 const persistConfig = {
   key: 'token',
@@ -31,7 +20,6 @@ export const store = configureStore({
     menu: persistReducer(persistConfig, menuSlice.reducer),
     auth: persistedReducer,
     user: userReducer,
-    filter: filtersReducer,
     notices: noticesReducer,
     guest: userGuestReducer,
   },
@@ -39,9 +27,6 @@ export const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
-      // {
-      //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      // },
     }),
 });
 
