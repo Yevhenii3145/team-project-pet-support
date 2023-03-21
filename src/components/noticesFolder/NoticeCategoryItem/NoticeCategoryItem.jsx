@@ -60,13 +60,13 @@ const NoticeCategoryItem = ({ notice, value}) => {
         showOnlyTheLastOne: true});
       return
     }else if(!isFavorite) {
-        dispatch(addNoticeToFavorite(noticeId));
+        await dispatch(addNoticeToFavorite(noticeId));
         setIsFavorite(true)
         return
     } else if (isFavorite){
         await dispatch(deleteFavoriteNotice(noticeId))
           setIsFavorite(false) 
-          dispatch(fetchCategoryNotices(value))
+        await dispatch(fetchCategoryNotices(value))
         }    
   }
 

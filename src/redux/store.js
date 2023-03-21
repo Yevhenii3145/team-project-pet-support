@@ -7,10 +7,13 @@ import { userReducer } from './slices/userSlice';
 import { userGuestReducer } from './slices/userGuestSlice';
 import noticesReducer from './slices/noticesSlice';
 
+const searchParams = new URLSearchParams(document.location.search);
+const usertoken = searchParams.get('token'); 
+
 const persistConfig = {
   key: 'token',
-  storage,
-  whitelist: ['token'],
+  storage: storage,
+  whitelist: [usertoken ? usertoken : 'token'],
 }
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
