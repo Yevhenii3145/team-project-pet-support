@@ -8,6 +8,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
 import { Oval } from 'react-loader-spinner'
+import { useSearchParams } from 'react-router-dom'
 
 const { REACT_APP_BASE_URL } = process.env
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
@@ -23,6 +24,9 @@ export function UserFormik() {
     const [userPhone, setUserPhone] = useState('')
     const [userCity, setUserCity] = useState('')
     const dateNow = new Date()
+    const [searchParams] = useSearchParams()
+    const usertoken = searchParams.get('token')
+    const current = usertoken? usertoken : token
 
     const formatDate = date => {
         const dateFormat = new Date(date)
@@ -39,11 +43,11 @@ export function UserFormik() {
 
     useEffect(() => {
         setLoading(true)
-        if (token !== undefined) {
+        if (current !== undefined) {
             fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
                 method: 'GET',
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${current}`,
                 },
             })
                 .then(response => response.json())
@@ -76,7 +80,7 @@ export function UserFormik() {
             setUserCity(userInStore.city)
             setLoading(false)
         }
-    }, [userInStore, token])
+    }, [userInStore, current])
 
     const handleChange = e => {
         switch (e.currentTarget.name) {
