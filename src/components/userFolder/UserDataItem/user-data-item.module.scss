@@ -365,3 +365,19 @@ form:not(:last-child) {
             transform: translateY(-50%);
             z-index: 10;
 }
+
+.loaderAvatar {
+    position: relative;
+    top: 45px;
+    right: 0;
+
+    @media screen and (min-width: 768px) {
+        top: -120px;
+        right: -15px;
+    }
+    
+    @media screen and (min-width: 1280px) {
+        top: -35px;
+        right: -55px;    
+    }
+}
