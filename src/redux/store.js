@@ -7,24 +7,13 @@ import { userReducer } from './slices/userSlice';
 import { userGuestReducer } from './slices/userGuestSlice';
 import noticesReducer from './slices/noticesSlice';
 
-const searchParams = new URLSearchParams(document.location.search);
-const token = searchParams.get('token'); 
-
-const tokenConfig = {
-  key: token,
-  storage,
-  whitelist: [token]
-}
-
 const persistConfig = {
   key: 'token',
   storage,
   whitelist: ['token'],
 }
 
-const resultConfig = token ? tokenConfig : persistConfig
-
-const persistedReducer = persistReducer(resultConfig, authReducer);
+const persistedReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
