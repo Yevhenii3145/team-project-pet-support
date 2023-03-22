@@ -89,10 +89,6 @@ export function UserFormik() {
                 setUserName(e.currentTarget.value)
                 break
 
-            case 'email':
-                setUserEmail(e.currentTarget.value)
-                break
-
             case 'phone':
                 setUserPhone(e.currentTarget.value)
                 break
@@ -120,42 +116,6 @@ export function UserFormik() {
             return <SvgInsert id="icon-done" />
         } else {
             return <SvgInsert id="icon-edit-active" />
-        }
-    }
-
-    const handleSubmitMail = e => {
-        e.preventDefault()
-        const form = e.currentTarget
-        const { email } = form.elements
-        if(!email.disabled){
-          return
-        }
-        if (!email.value) {
-            return Notify.failure('Required!', 
-            {   timeout: 5000,
-                distance: '100px',
-                opacity: '0.8',
-                useIcon: false,
-                fontSize: '18px',
-                borderRadius: '20px',
-                showOnlyTheLastOne: true })
-        }
-        if (
-            /^((([0-9A-Za-z]{1}[-0-9A-z]{1,}[0-9A-Za-z]{1}))@([-0-9A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/i.test(
-                email.value
-            ) &&
-            email.value.length < 36
-        ) {
-            return dispatch(operations.updateUser({ email: email.value }))
-        } else {
-            return Notify.failure('Invalid email address!', { 
-                timeout: 5000,
-                distance: '100px',
-                opacity: '0.8',
-                useIcon: false,
-                fontSize: '18px',
-                borderRadius: '20px',
-                showOnlyTheLastOne: true})
         }
     }
 
@@ -206,6 +166,7 @@ export function UserFormik() {
         if(!phone.disabled){
           return
         }
+        console.log(phone.value.length);
         if (!phone.value) {
             return Notify.failure('Required!', { 
                 timeout: 5000,
@@ -216,7 +177,7 @@ export function UserFormik() {
                 borderRadius: '20px',
                 showOnlyTheLastOne: true })
         }
-        if (phone.value.length !== 12) {
+        if (phone.value.length !== 13) {
             return Notify.failure('Is not correct format, must 380xxxxxxxxx!', {
                 timeout: 5000,
                 distance: '100px',
@@ -341,41 +302,17 @@ export function UserFormik() {
                             </div>
                         </form>
 
-                        <form onSubmit={handleSubmitMail}>
-                            <div className={scss.field_box}>
+                        <form>
+                            <div className={`${scss.field_box_email} ${scss.field_box}`}>
                                 <label className={scss.userDataForm_label}>
                                     Email:
                                 </label>
-                                {active && active === 'email' ? (
                                     <input
-                                        onChange={handleChange}
-                                        type="email"
-                                        name="email"
-                                        value={userEmail}
-                                        className={
-                                            scss.userDataForm_field_active
-                                        }
-                                    />
-                                ) : (
-                                    <input
-                                        onChange={handleChange}
                                         type="email"
                                         name="email"
                                         value={userEmail}
                                         disabled
-                                        className={scss.userDataForm_field}
-                                    />
-                                )}
-                                <button
-                                    className={scss.iconEdit_btn}
-                                    onClick={() => changeIcon('email')}
-                                >
-                                    {active ? (
-                                        toggleIcon('email')
-                                    ) : (
-                                        <SvgInsert id="icon-edit" />
-                                    )}
-                                </button>
+                                        className={`${scss.userDataForm_field} ${scss.userDataForm_field_email}`}/>
                             </div>
                         </form>
 
