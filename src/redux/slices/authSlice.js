@@ -18,8 +18,8 @@ export const authSlice = createSlice({
         userId: '',
         avatar: null,
       },
-      token: null,
-      isLogin: false,
+      token: usertoken ? usertoken : null,
+      isLogin: usertoken ? true : false,
       loading: false,
 
     },
