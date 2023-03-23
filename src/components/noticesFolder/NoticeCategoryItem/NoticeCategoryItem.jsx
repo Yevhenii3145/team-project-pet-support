@@ -118,10 +118,13 @@ const NoticeCategoryItem = ({ notice, value }) => {
 
     const getCategoryNotice = category => {
         if (category === 'for-free') {
-            category = 'in good hands'
+            category = t('NoticesPage.categories.inGoodHands')
         }
         if (category === 'lost-found') {
-            category = 'lost/found'
+            category = t('NoticesPage.categories.lostFound')
+        }
+        if (category === 'sell') {
+            category = t('NoticesPage.categories.sell')
         }
         return category
     }

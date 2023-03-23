@@ -17,18 +17,29 @@ const NewsPage = () => {
 
     const items = t('NewsPage', { returnObjects: true })
 
-    const [data, setData] = useState([])
+    // const [data, setData] = useState([])
 
-    useEffect(() => {
-        const formatDate = items.NewsList.map(item => ({
+    // useEffect(() => {
+    //     const formatDate = items.NewsList.map(item => ({
+    //         ...item,
+    //         date: Number(format(new Date(item.date), 'T')),
+    //     }))
+    //     const sortDate = formatDate.sort(function (a, b) {
+    //         return b.date - a.date
+    //     })
+    //     setData(sortDate)
+    // }, [items.NewsList])
+
+    const sortDate = arr => {
+        const formatDate = arr.NewsList.map(item => ({
             ...item,
             date: Number(format(new Date(item.date), 'T')),
         }))
-        const sortDate = formatDate.sort(function (a, b) {
+        const sort = formatDate.sort(function (a, b) {
             return b.date - a.date
         })
-        setData(sortDate)
-    }, [items])
+        return sort
+    }
 
     const [filter, setFilter] = useState('')
     const [inputValue, setInputValue] = useState(false)
@@ -47,10 +58,10 @@ const NewsPage = () => {
 
     function filterNews() {
         if (!filter) {
-            return data
+            return sortDate(items)
         }
         const normalizedFilter = filter.toLocaleLowerCase()
-        const filterlist = data.filter(news => {
+        const filterlist = items.NewsList.filter(news => {
             return news.title.toLocaleLowerCase().includes(normalizedFilter)
         })
         if (filterlist.length === 0) {
@@ -63,7 +74,7 @@ const NewsPage = () => {
                 showOnlyTheLastOne: true,
             })
         }
-        return filterlist
+        return sortDate(filterlist)
     }
 
     return (

@@ -154,7 +154,40 @@
             "price": "Price",
             "owner": "Owner",
             "learnMore": "Learn more",
-            "delete": "Delete"
-        }
+            "delete": "Delete",
+            "name": "Name",
+            "birthday": "Birthday",
+            "location": "Location",
+            "sex": "The sex",
+            "email": "Email",
+            "phone": "Phone",
+            "comments": "Comments",
+            "contact": "Contact",
+            "remove": "Remove",
+            "addTo": "Add to",
+            "male": "male",
+            "female": "female"
+        },
+        "modalAddPet": {
+            "title": {
+                "addPet": "Add pet",
+                "category": "Type of category",
+                "title": "Tittle of ad",
+                "name": "Name pet",
+                "birth": "Data of birth",
+                "breed": "Breed"
+            },
+            "ph": {
+                "title": "Type name",
+                "name": "Type name pet",
+                "birth": "Type date of birth",
+                "breed": "Type breed"
+            },
+            "btn": {
+                "next": "Next",
+                "cancel": "Cancel"
+            }
+        },
+        "addPetBtn": "Add pet"
     }
 }

@@ -54,5 +54,5 @@ NewsItem.propTypes = {
     title: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
+    // date: PropTypes.number.isRequired,
 }
