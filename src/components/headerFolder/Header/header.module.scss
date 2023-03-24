@@ -17,5 +17,10 @@
 
     @media screen and (min-width: 1280px) {
         padding: 20px 0;
+
+        &> [id="header"] {
+            display: flex;
+            justify-content: space-between;
+        }
     }
 }

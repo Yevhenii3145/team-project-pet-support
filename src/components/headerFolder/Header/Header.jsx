@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <header className={scss.header}>
-      <div className={base.container}>
+      <div id="header" className={base.container}>
         <Logo />
         <Nav />
       </div>
