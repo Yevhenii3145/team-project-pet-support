@@ -177,7 +177,7 @@ export function UserFormik() {
                 borderRadius: '20px',
                 showOnlyTheLastOne: true })
         }
-        if (phone.value.length !== 13) {
+        if (phone.value.length !== 12) {
             return Notify.failure('Is not correct format, must 380xxxxxxxxx!', {
                 timeout: 5000,
                 distance: '100px',
@@ -333,9 +333,7 @@ export function UserFormik() {
                                         type="text"
                                         name="birthday"
                                         value={userBirthday}
-                                        className={
-                                            scss.userDataForm_field_active
-                                        }
+                                        className={`${scss.userDataForm_field_active} ${scss.userDataForm_birthday}`}
                                     />
                                 ) : (
                                     <Flatpickr
@@ -350,7 +348,7 @@ export function UserFormik() {
                                         name="birthday"
                                         value={userBirthday}
                                         disabled
-                                        className={scss.userDataForm_field}
+                                        className={`${scss.userDataForm_field} ${scss.userDataForm_birthday}`}
                                     />
                                 )}
                                 <button
@@ -377,19 +375,20 @@ export function UserFormik() {
                                         type="tel"
                                         name="phone"
                                             value={userPhone}
-                                        className={
-                                            scss.userDataForm_field_active
-                                        }
+                                        className={scss.userDataForm_field_active}
                                     />
                                 ) : (
+                                    <>
+                                    <span className={scss.inputNumber}></span>
                                     <input
                                         onChange={handleChange}
                                         type="tel"
                                         name="phone"
-                                        value={`+${userPhone}`}
+                                        value={userPhone}
                                         disabled
-                                        className={scss.userDataForm_field}
+                                        className={`${scss.userDataForm_field} ${scss.userDataForm_number}`}
                                     />
+                                    </>
                                 )}
                                 <button
                                     className={scss.iconEdit_btn}
