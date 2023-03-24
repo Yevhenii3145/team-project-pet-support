@@ -37,6 +37,7 @@ const memoizedValue = useMemo(
     return data
 }, [categoryName, page, limit, name])
 
+
 useEffect(()=>{
 
     dispatch(setNameCategory([categoryName, page, filterPag]))
@@ -64,9 +65,9 @@ useEffect(()=> {
     if (isLogin) {
         dispatch(getAllFavorites())
     }
-}, [isLogin, dispatch,])
+}, [isLogin, dispatch, pets])
 
-useEffect(() => {
+useEffect(() => { 
 
 if(!value) {
     setSearchParams({})

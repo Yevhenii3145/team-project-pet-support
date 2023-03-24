@@ -46,7 +46,7 @@ const UserInfo = () => {
             <span className={scssS.infoText} data-action="link">{user.email}</span>
             </a>
             <a href={`tel:+${user.phone}`} className={scssS.infoLabel}>Phone: 
-            <span className={scssS.infoText} data-action="link">{user.phone}</span>
+            <span className={scssS.infoText} data-action="link">+{user.phone}</span>
             </a>
             </div>
         </div>}

@@ -143,10 +143,61 @@
 }
 
 .userDataForm_field_email {
-    padding: 0 0 0 22px;
+    @media screen and (min-width: 768px) {
+        padding: 0 0 0 20px;
+    }
 
     @media screen and (min-width: 1280px) {
         padding: 0 0 0 2px;
+    }
+}
+
+.userDataForm_number {
+    padding: 0 0 0 14px;
+
+    @media screen and (min-width: 768px) {
+        padding: 0 0 0 18px;
+    }
+    @media screen and (min-width: 1280px) {
+        padding: 0 0 0 12px;
+    }
+}
+
+.userDataForm_birthday {
+    padding-top: 2px;
+
+    @media screen and (min-width: 768px) {
+        padding: 0 0 0 7px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        padding-top: 3px;
+        padding-left: 0;
+    }
+
+}
+
+.inputNumber {
+position: relative;
+}
+
+.inputNumber::before {
+    position: absolute;
+    display: block;
+    content: '+';
+    top: -8px;
+    right: -14px;
+    font-size: 12px;
+
+    @media screen and (min-width: 768px) {
+        top: -13px;
+        right: -25px;
+        font-size: 18px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        top: -13px;
+        right: -14px;
     }
 }
 
