@@ -31,7 +31,7 @@ const NewsPage = () => {
     // }, [items.NewsList])
 
     const sortDate = arr => {
-        const formatDate = arr.NewsList.map(item => ({
+        const formatDate = arr.map(item => ({
             ...item,
             date: Number(format(new Date(item.date), 'T')),
         }))
@@ -58,7 +58,7 @@ const NewsPage = () => {
 
     function filterNews() {
         if (!filter) {
-            return sortDate(items)
+            return sortDate(items.NewsList)
         }
         const normalizedFilter = filter.toLocaleLowerCase()
         const filterlist = items.NewsList.filter(news => {
