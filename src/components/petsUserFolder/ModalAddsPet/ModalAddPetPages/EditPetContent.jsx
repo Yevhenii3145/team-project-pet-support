@@ -174,7 +174,7 @@ const handleSubmit = async (e) => {
         <div className={scss.modalAdds_page__close} onClick={close}>
           <SvgInsert id="icon-close" />
         </div>
-        <h3 className={scss.modalAdds_page__tittle}>Edite pet</h3>
+        <h3 className={scss.modalAdds_page__tittle}>Edit pet</h3>
         {stepOne && (
           <form onSubmit={handleSubmitForStepOne}>
             <label

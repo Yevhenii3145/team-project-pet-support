@@ -3,7 +3,7 @@
 
 .modalAdds_page {
   text-align: center;
-  background: $lightColor;
+  background: var(--card-color);
 }
 
 .modalAdds_page__tittle {
@@ -13,6 +13,7 @@
   line-height: 33px;
   letter-spacing: 0.04em;
   margin: 0px 0px 20px;
+  color: var(--text-color);
 }
 
 .modalAdds_page__input {
@@ -29,6 +30,7 @@
   letter-spacing: 0.04em;
   color: rgba(27, 27, 27, 0.6);
   margin-top: 8px;
+  background-color: var(--modal-input);
 }
 
 .modalAdds_page__label {
@@ -36,12 +38,14 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 1.5;
-  color: #111111;
+  color: var(--text-color);
 }
 
 .modalAdds_page__button {
   display: inline-block;
   margin-top: 40px;
+  // background-color: var(--modal-input);
+  // color: var(--text-color);
 }
 
 .addspet__imgInput {
@@ -54,7 +58,7 @@
 }
 
 .addspet__imgLabel {
-  background: $background;
+  background: var(--modal-input);
   background-image: url(../../../../images/add-pet.png);
   background-repeat: no-repeat;
   background-position: center;
@@ -86,7 +90,7 @@
 .modalAdds_page__input_select{
   display: block;
   padding: 14px 8px;
-  background: $background;
+  background: var(--modal-input);
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
   font-style: normal;
@@ -182,7 +186,7 @@
   display: inline-block;
   width: 100%;
   min-height: 115px;
-  background: $background;
+  background: var(--modal-input);
   border: 1px solid $accentColor;
   border-radius: 20px;
   font-family: 'Manrope';
@@ -298,7 +302,7 @@ input[type="radio"] {
   line-height: 1.36;
   letter-spacing: 0.04em;
   color: inherit;
-  background-color: $lightColor;
+  background-color: var(--modal-input);
   border: 2px solid $accentColor;
   border-radius: 40px;
   cursor: pointer;
@@ -327,6 +331,7 @@ input[type="radio"] {
   font-weight: 500;
   font-size: 20px;
   line-height: 26px;
+  color: var(--text-color);
 
   &:hover,
   &:focus {

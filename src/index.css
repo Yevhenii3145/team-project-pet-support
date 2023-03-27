@@ -4,9 +4,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@500&display=swap');
 
 
-html {
+/* html {
   background-color: #fdf7f2;
+} */
+
+/* light theme */
+
+html[data-theme='light'] {
+    --background-color: #fdf7f2;
+    --text-color:#111;
+    --card-color:#ffffff;
+    --icon-edit-pet: #111;
+    --notices-categories:#ffffff;
+    --learn-more-btn:#ffffff;
+    --search-input: #535353;
+    --background-auth-nav-login:#ffffff;
+    --background-auth-nav-register: #ffffff;
+    --modal-input:#ffffff;
+    --modal-close: #ffffff;
+    
 }
+
+/* dark theme */
+
+html[data-theme='dark'] {
+  --background-color: #262031;
+  --text-color: #dfd6d6;
+  --card-color: #6a6a97;
+  --icon-edit-pet:#dfd6d6;
+  --notices-categories: #6a6a97;
+  --learn-more-btn: #6a6a97;
+  --search-input: #dfd6d6;
+  --auth-nav-text: #ffffff;
+  --background-auth-nav-login: #6a6a97;
+  --background-auth-nav-register: #6a6a97;
+  --modal-input: #b6b6e2;
+  --modal-close: #6a6a97;
+}
+
 
 * {
   box-sizing: border-box;

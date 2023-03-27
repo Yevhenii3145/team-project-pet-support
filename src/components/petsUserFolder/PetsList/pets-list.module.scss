@@ -3,7 +3,7 @@
 .petsList_box {
     display: block;
     width: 100%;
-    background: $lightColor;
+    background-color: var(--card-color);
     box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
     border-radius: 20px;
     padding-top: 16px;
@@ -83,9 +83,9 @@
     white-space: pre-wrap;
     text-align: justify;
     hyphens: auto;
-    color: #111111;
+    color: var(--text-color);
     margin-top: 10px;
-    background-color: $lightColor;
+    background-color: var(--card-color);
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 400;
@@ -103,7 +103,7 @@
 .petsList_button {
     margin: 0 auto;
     display: block;
-    background-color: $lightColor;
+    background-color: var(--card-color);
     border: none;
     position: absolute;
     left: 230px;
@@ -131,7 +131,7 @@
         width: 32px;
         height: 32px;
         border-radius: 50%;
-        background-color: $background;
+        background-color: var(--card-color);
         margin: 0;
         padding: 0;
         left: 92%;
@@ -162,7 +162,7 @@
     height: 22px;
     border-radius: 50%;
     border: none;
-    background-color: $background;
+    background-color: var(--card-color);
     padding: 0;
     cursor: pointer;
     left: 230px;
@@ -199,5 +199,5 @@
 }
 
 .icon_edit {
-    fill: #111111;
+    fill: var(--text-color);
 }

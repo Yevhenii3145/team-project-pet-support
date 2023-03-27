@@ -17,7 +17,7 @@ export function UserFormik() {
     const dispatch = useDispatch()
     const userInStore = useSelector(state => state.auth.user)
     const token = useSelector(state => state.auth.token)
-    const [loading, setLoading] = useState('')
+    // const [loading, setLoading] = useState('')
     const [userName, setUserName] = useState('')
     const [userEmail, setUserEmail] = useState('')
     const [userBirthday, setUserBirthday] = useState('')
@@ -43,7 +43,7 @@ export function UserFormik() {
     }
 
     useEffect(() => {
-        setLoading(true)
+        // setLoading(true)
         if (current !== undefined) {
             fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
                 method: 'GET',
@@ -62,11 +62,11 @@ export function UserFormik() {
                     )
                     setUserPhone(data.phone)
                     setUserCity(data.city)
-                    setLoading(false)
+                    // setLoading(false)
                 })
                 .catch(error => {
                     console.log(error)
-                    setLoading(false)
+                    // setLoading(false)
                 })
             return
         } else {
@@ -79,7 +79,7 @@ export function UserFormik() {
             )
             setUserPhone(userInStore.phone)
             setUserCity(userInStore.city)
-            setLoading(false)
+            // setLoading(false)
         }
     }, [userInStore, current])
 
@@ -281,7 +281,7 @@ export function UserFormik() {
     return (
         <>
             <div className={scss.userDataForm_box}>
-                {loading ? (
+                {/* {loading ? (
                     <>
                         <div className={scss.loader__content}>
                             <div className={scss.loader_oval}>
@@ -300,7 +300,7 @@ export function UserFormik() {
                             </div>
                         </div>
                     </>
-                ) : (
+                ) : ( */}
                     <>
                         <form onSubmit={handleSubmitName}>
                             <div className={scss.field_box}>
@@ -506,7 +506,7 @@ export function UserFormik() {
                             </div>
                         </form>
                     </>
-                )}
+                {/* )} */}
             </div>
         </>
     )

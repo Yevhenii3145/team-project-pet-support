@@ -9,7 +9,6 @@
 .petsData_title_box {
   display: flex;
   justify-content: space-between;
-  background-color: $background;
   align-items: center;
   // margin: 20px 0 24px 0;
 
@@ -29,6 +28,7 @@
   font-size: 20px;
   line-height: 1.35;
   margin: 0;
+  color: var(--text-color);
 
   @media screen and (min-width: 768px) {
     font-size: 28px;
@@ -57,10 +57,10 @@
   width: 135px;
   height: 40px;
   box-sizing: content-box;
-  background-color: $background;
+  background-color: var(--background-color);
   box-sizing: content-box;
   border: none;
-  color: $darkColor;
+  color: var(--text-color);
 
   @media screen and (min-width: 1280px) {
     margin-right: 15px;
@@ -106,7 +106,7 @@
 .petsData__container {
   box-sizing: border-box;
   text-align: center;
-  background: $background;
+  // background: $background;
   background-position: bottom;
   background-size: contain;
   width: 100%;

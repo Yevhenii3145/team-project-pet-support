@@ -1,6 +1,7 @@
 @import '../../../helpers/variables.module.scss';
 
 .logo {
+
   @media screen and (min-width: 768px) {
     width: 94px;
     height: 48px;
@@ -141,6 +142,12 @@
   height: 16px;
   margin-left: auto;
   border: #111;
+  fill: var(--text-color);
+
+  &:hover,
+  &:focus {
+    fill:#111;
+  }
 }
 
 .iconCloseAddNotice{
@@ -242,8 +249,8 @@
   height: 50px;
 }
 
-.iconEdit {
-fill: #111111;
+.iconEdit_pet {
+fill: var(--icon-edit-pet);
 }
 
 .iconEdit_active {

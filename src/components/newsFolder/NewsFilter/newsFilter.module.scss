@@ -18,6 +18,7 @@
   padding-left: 12px;
   margin-top: 30px;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
+  background-color: var(--card-color);
 
   @media (min-width: 768px) {
     margin-top: 40px;
@@ -36,7 +37,7 @@
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 0.04em;
-  color: #535353;
+  color: var(--search-input);
   @media (min-width: 768px) {
     font-size: 20px;
   }

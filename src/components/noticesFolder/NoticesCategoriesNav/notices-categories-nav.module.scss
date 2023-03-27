@@ -20,9 +20,9 @@
   font-size: 14px;
   line-height: 1.36;
   letter-spacing: 0.04em;
-  color: inherit;
+  color: var(--text-color);
 
-  background-color: $lightColor;
+  background-color: var(--notices-categories);
   border: 2px solid $accentColor;
   border-radius: 40px;
 

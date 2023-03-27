@@ -5,10 +5,13 @@ import scss from './our-friends-page.module.scss';
 
 const OurFriendsPage = () => {
   return (
-    <div className={scss.container}>
-      <OurFriendsPageTitle title={'Our friends'} />
-      <OurFriendsPageList items={items} />
+    <div className={scss.section}>
+      <div className={scss.container}>
+        <OurFriendsPageTitle title={'Our friends'} />
+        <OurFriendsPageList items={items} />
+      </div>
     </div>
+
   );
 };
 

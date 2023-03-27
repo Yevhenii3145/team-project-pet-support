@@ -6,7 +6,7 @@ import { getLoading } from 'redux/selectors/selectors'
 import CatLoader from './components/utilsFolder/CatLoader/CatLoader'
 import UserRoutes from './UserRoutes'
 import ScrollToTop from 'components/utilsFolder/ScrollToTop/ScrollToTop';
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom';
 
 export const App = () => {
     const dispatch = useDispatch()
@@ -14,7 +14,8 @@ export const App = () => {
     const isLoadindUser = useSelector(getLoading)
     const [searchParams] = useSearchParams();
     const usertoken = searchParams.get('token'); 
-    const current = usertoken ? usertoken : token
+    const current = usertoken ? usertoken : token;
+    
 
     useEffect(() => {
         if (current) {

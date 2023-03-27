@@ -7,6 +7,7 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    background-color: var(--card-color);
 
     @media screen and (min-width: 768px) {
         display: flex;
@@ -114,15 +115,15 @@
     width: 159px;
     height: 26px;
     box-sizing: border-box;
-    background: $lightColor;
-    border: 1px solid $lightColor;
+    background: var(--card-color);
+    border: 1px solid var(--card-color);
     border-radius: 40px;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 1.33;
     letter-spacing: 0.04em;
-    color: #111111;
+    color: var(--text-color);
     padding: 0 0 0 18px;
 
     @media screen and (min-width: 768px) {
@@ -150,7 +151,7 @@
     width: 159px;
     height: 26px;
     box-sizing: border-box;
-    background: $background;
+    background: var(--card-color);
     border: 1px solid;
     border-color: $accentColor;
     border-radius: 40px;
@@ -159,7 +160,7 @@
     font-size: 12px;
     line-height: 1.33;
     letter-spacing: 0.04em;
-    color: rgba(17, 17, 17, 0.6);
+    color:var(--text-color);
     cursor: pointer;
     padding: 0 0 0 18px;
 
@@ -197,7 +198,7 @@
     height: 22px;
     border-radius: 50%;
     border: none;
-    background-color: $background;
+    background-color: var(--card-color);
     padding: 0;
     cursor: pointer;
 
@@ -221,8 +222,8 @@
 
 .userDataForm_label {
     text-align: left;
-    color: #111111;
-    background-color: $lightColor;
+    color: var(--text-color);
+    background-color: var(--card-color);
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 500;
@@ -259,6 +260,7 @@
     cursor: pointer;
     position: relative;
     width: 85px;
+    color: var(--text-color);
 
     &:hover,
     &:focus {
@@ -359,9 +361,22 @@ form:not(:last-child) {
 
 .loader_oval_avatar {
     position: absolute;
-        content: '';
-            // left: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
+    content: '';
+        // left: 120px;
+    top: 50%;
+    transform: translateY(-165px);
+    z-index: 10;
+
+@media screen and (min-width: 768px) {
+        right: 180px;
+        transform: translateY(80px);
+    }
+
+@media screen and (min-width: 1280px) {
+    
+        // right: 190px;
+        top:200px;
+        transform: translateX(-115px);
+    
+    }
 }

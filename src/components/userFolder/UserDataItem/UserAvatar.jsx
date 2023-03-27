@@ -43,13 +43,13 @@ export default function UserAvatar() {
     }
       
         setLoading(true);
-        console.log("loading null", loading)
+   
         
         setTimeout(() => {
                   reader.onloadend = () => {
             dispatch(operations.updateUserAvatar(file));
             setLoading(false)
-            console.log("loading", loading)
+   
     };
  
         if (current !== undefined) {
