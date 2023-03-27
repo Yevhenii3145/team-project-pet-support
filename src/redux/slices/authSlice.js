@@ -1,87 +1,82 @@
-import { createSlice } from '@reduxjs/toolkit'
-import operations from '../operations/userOperations'
-import { Notify } from 'notiflix/build/notiflix-notify-aio'
+import { createSlice } from '@reduxjs/toolkit';
+import operations from '../operations/userOperations';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-const searchParams = new URLSearchParams(document.location.search)
-const usertoken = searchParams.get('usertoken')
+const searchParams = new URLSearchParams(document.location.search);
+const usertoken = searchParams.get('token'); 
+const idUser = searchParams.get('id');
+
 
 export const authSlice = createSlice({
     name: 'auth',
-    initialState: {
-        user: {
-            name: '',
-            email: '',
-            phone: '',
-            city: '',
-            userId: '',
-            avatar: null,
-        },
-        token: usertoken ? usertoken : '',
-        isLogin: usertoken ? true : false,
-        loading: false,
+    initialState: {      
+      user: {
+        name: "",
+        email: "",
+        phone: "",
+        city: "",
+        userId: '',
+        avatar: null,
+      },
+      token: usertoken ? usertoken : null,
+      isLogin: usertoken ? true : false,
+      loading: false,
+
     },
-
     extraReducers: {
-        [operations.registerNewUser.pending](state) {
-            state.loading = true
-        },
-        [operations.registerNewUser.fulfilled](state, action) {
-            state.loading = false
-            Notify.success(
-                `${action.payload.name}, you have successfully registered, the verification has been sent to your mail.`,
-                {
-                    distance: '100px',
-                    opacity: '0.8',
-                    useIcon: false,
-                    fontSize: '18px',
-                    borderRadius: '20px',
-                    showOnlyTheLastOne: true,
-                }
-            )
-            state.user.name = action.payload.name
-            state.user.email = action.payload.email
-            state.user.phone = action.payload.phone
-            state.user.city = action.payload.city
-        },
-        [operations.registerNewUser.rejected](state) {
-            state.loading = false
-            Notify.failure(
-                'Something went wrong or user with this name already exists!',
-                {
-                    distance: '100px',
-                    opacity: '0.8',
-                    useIcon: false,
-                    fontSize: '18px',
-                    borderRadius: '20px',
-                    showOnlyTheLastOne: true,
-                }
-            )
-        },
+      [operations.registerNewUser.pending](state) {
+        state.loading = true;
+      },
+      [operations.registerNewUser.fulfilled](state, action) {
+       state.loading = false; 
+       Notify.success(`${action.payload.name}, you have successfully registered, the verification has been sent to your mail.`, 
+       {distance: '100px',
+       opacity: '0.8',
+       useIcon: false,
+       fontSize: '18px',
+       borderRadius: '20px',
+       showOnlyTheLastOne: true})
+       state.user.name = action.payload.name;
+        state.user.email = action.payload.email;
+        state.user.phone = action.payload.phone;
+        state.user.city = action.payload.city; 
+        state.user.userId = idUser ? idUser : '';
+        state.token = usertoken ? usertoken : null;
+        state.isLogin = usertoken ? true : false;
+      },
+      [operations.registerNewUser.rejected](state) {
+        state.loading = false;
+        Notify.failure('Something went wrong or user with this name already exists!', 
+        { distance: '100px',
+          opacity: '0.8',
+          useIcon: false,
+          fontSize: '18px',
+          borderRadius: '20px',
+          showOnlyTheLastOne: true})
+      },
 
-        [operations.login.pending](state, { payload }) {
-            state.loading = true
-            state.error = payload
-        },
-        [operations.login.fulfilled](state, { payload }) {
-            state.loading = false
-            state.user.email = payload.email
-            state.user.userId = payload.userId
-            state.token = payload.token
-            state.isLogin = true
-        },
-        [operations.login.rejected](state, { payload }) {
-            state.loading = false
-            state.error = payload
-            Notify.failure(`${state.error.message}`, {
-                distance: '100px',
-                opacity: '0.8',
-                useIcon: false,
-                fontSize: '18px',
-                borderRadius: '20px',
-                showOnlyTheLastOne: true,
-            })
-        },
-
+      [operations.login.pending](state, { payload }) {
+        state.loading = true;
+        state.error = payload;
+      },
+      [operations.login.fulfilled] (state, { payload }) {
+        state.loading = false;
+        state.user.email = payload.email;
+        state.user.userId = idUser ? idUser : payload.userId;
+        state.token = usertoken ? usertoken : payload.token;
+        state.isLogin = true;
+      },
+      [operations.login.rejected] (state, { payload }) {
+        state.loading = false;
+        state.error = payload;
+        Notify.failure(`${state.error.message}`, 
+        { distance: '100px',
+          opacity: '0.8',
+          useIcon: false,
+          fontSize: '18px',
+          borderRadius: '20px',
+          showOnlyTheLastOne: true})
+      },
         [operations.authVerify.pending](state, { payload }) {
             state.loading = true
             state.error = payload
@@ -181,28 +176,24 @@ export const authSlice = createSlice({
             state.loading = false
             state.error = payload
         },
-
-        [operations.current.pending](state, { payload }) {
-            state.loading = true
-            state.error = payload
-            state.isLogin = false
-        },
-        [operations.current.fulfilled](state, { payload }) {
-            state.loading = false
-            state.user.avatar = payload.avatarURL
-            state.user.city = payload.city
-            state.user.email = payload.email
-            state.user.name = payload.name
-            state.user.phone = payload.phone
-            state.user.userId = payload.userId
-            state.isLogin = true
-        },
-        [operations.current.rejected](state, { payload }) {
-            state.loading = false
-            state.error = payload
-            state.isLogin = false
-        },
-
+      [operations.current.pending] (state, {payload}) {
+        state.loading = true;
+      },
+      [operations.current.fulfilled] (state, { payload }) {
+        state.loading = false;
+        state.user.avatar = payload.avatarURL;
+        state.user.city = payload.city;
+        state.user.email = payload.email;
+        state.user.name = payload.name;
+        state.user.phone = payload.phone;
+        state.user.userId = idUser ? idUser : payload.userId;
+        state.isLogin = true;
+      },
+      [operations.current.rejected] (state, { payload }) {
+        state.loading = false;
+        state.error = payload;
+        state.isLogin = false;
+      },
         [operations.updateUser.pending](state, action) {
             //state.loading = true;
         },

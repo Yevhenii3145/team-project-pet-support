@@ -4,7 +4,7 @@ let initialState = {
   menuActive: false,
 };
 
-export const menuSlice = createSlice({
+const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
@@ -17,3 +17,5 @@ export const menuSlice = createSlice({
 
 
 export const { setMenuActive } = menuSlice.actions;
+
+export default menuSlice.reducer;

@@ -8,6 +8,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
 import { Oval } from 'react-loader-spinner'
+import { useSearchParams } from 'react-router-dom'
 
 const { REACT_APP_BASE_URL } = process.env
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
@@ -23,6 +24,10 @@ export function UserFormik() {
     const [userPhone, setUserPhone] = useState('')
     const [userCity, setUserCity] = useState('')
     const dateNow = new Date()
+    const [searchParams] = useSearchParams()
+    const usertoken = searchParams.get('token')
+
+    const current = usertoken ? usertoken : token
 
     const formatDate = date => {
         const dateFormat = new Date(date)
@@ -39,11 +44,11 @@ export function UserFormik() {
 
     useEffect(() => {
         setLoading(true)
-        if (token !== undefined) {
+        if (current !== undefined) {
             fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
                 method: 'GET',
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${current}`,
                 },
             })
                 .then(response => response.json())
@@ -76,16 +81,12 @@ export function UserFormik() {
             setUserCity(userInStore.city)
             setLoading(false)
         }
-    }, [userInStore, token])
+    }, [userInStore, current])
 
     const handleChange = e => {
         switch (e.currentTarget.name) {
             case 'name':
                 setUserName(e.currentTarget.value)
-                break
-
-            case 'email':
-                setUserEmail(e.currentTarget.value)
                 break
 
             case 'phone':
@@ -115,42 +116,6 @@ export function UserFormik() {
             return <SvgInsert id="icon-done" />
         } else {
             return <SvgInsert id="icon-edit-active" />
-        }
-    }
-
-    const handleSubmitMail = e => {
-        e.preventDefault()
-        const form = e.currentTarget
-        const { email } = form.elements
-        if(!email.disabled){
-          return
-        }
-        if (!email.value) {
-            return Notify.failure('Required!', 
-            {   timeout: 5000,
-                distance: '100px',
-                opacity: '0.8',
-                useIcon: false,
-                fontSize: '18px',
-                borderRadius: '20px',
-                showOnlyTheLastOne: true })
-        }
-        if (
-            /^((([0-9A-Za-z]{1}[-0-9A-z]{1,}[0-9A-Za-z]{1}))@([-0-9A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/i.test(
-                email.value
-            ) &&
-            email.value.length < 36
-        ) {
-            return dispatch(operations.updateUser({ email: email.value }))
-        } else {
-            return Notify.failure('Invalid email address!', { 
-                timeout: 5000,
-                distance: '100px',
-                opacity: '0.8',
-                useIcon: false,
-                fontSize: '18px',
-                borderRadius: '20px',
-                showOnlyTheLastOne: true})
         }
     }
 
@@ -201,6 +166,7 @@ export function UserFormik() {
         if(!phone.disabled){
           return
         }
+        console.log(phone.value.length);
         if (!phone.value) {
             return Notify.failure('Required!', { 
                 timeout: 5000,
@@ -336,41 +302,17 @@ export function UserFormik() {
                             </div>
                         </form>
 
-                        <form onSubmit={handleSubmitMail}>
-                            <div className={scss.field_box}>
+                        <form>
+                            <div className={`${scss.field_box_email} ${scss.field_box}`}>
                                 <label className={scss.userDataForm_label}>
                                     Email:
                                 </label>
-                                {active && active === 'email' ? (
                                     <input
-                                        onChange={handleChange}
-                                        type="email"
-                                        name="email"
-                                        value={userEmail}
-                                        className={
-                                            scss.userDataForm_field_active
-                                        }
-                                    />
-                                ) : (
-                                    <input
-                                        onChange={handleChange}
                                         type="email"
                                         name="email"
                                         value={userEmail}
                                         disabled
-                                        className={scss.userDataForm_field}
-                                    />
-                                )}
-                                <button
-                                    className={scss.iconEdit_btn}
-                                    onClick={() => changeIcon('email')}
-                                >
-                                    {active ? (
-                                        toggleIcon('email')
-                                    ) : (
-                                        <SvgInsert id="icon-edit" />
-                                    )}
-                                </button>
+                                        className={`${scss.userDataForm_field} ${scss.userDataForm_field_email}`}/>
                             </div>
                         </form>
 
@@ -391,9 +333,7 @@ export function UserFormik() {
                                         type="text"
                                         name="birthday"
                                         value={userBirthday}
-                                        className={
-                                            scss.userDataForm_field_active
-                                        }
+                                        className={`${scss.userDataForm_field_active} ${scss.userDataForm_birthday}`}
                                     />
                                 ) : (
                                     <Flatpickr
@@ -408,7 +348,7 @@ export function UserFormik() {
                                         name="birthday"
                                         value={userBirthday}
                                         disabled
-                                        className={scss.userDataForm_field}
+                                        className={`${scss.userDataForm_field} ${scss.userDataForm_birthday}`}
                                     />
                                 )}
                                 <button
@@ -435,19 +375,20 @@ export function UserFormik() {
                                         type="tel"
                                         name="phone"
                                             value={userPhone}
-                                        className={
-                                            scss.userDataForm_field_active
-                                        }
+                                        className={scss.userDataForm_field_active}
                                     />
                                 ) : (
+                                    <>
+                                    <span className={scss.inputNumber}></span>
                                     <input
                                         onChange={handleChange}
                                         type="tel"
                                         name="phone"
-                                        value={`+${userPhone}`}
+                                        value={userPhone}
                                         disabled
-                                        className={scss.userDataForm_field}
+                                        className={`${scss.userDataForm_field} ${scss.userDataForm_number}`}
                                     />
+                                    </>
                                 )}
                                 <button
                                     className={scss.iconEdit_btn}
