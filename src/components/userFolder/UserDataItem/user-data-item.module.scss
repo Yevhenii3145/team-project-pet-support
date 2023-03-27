@@ -105,15 +105,16 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
 
-    @media screen and (min-width: 768px) {}
-
+.field_box_email {
+    justify-content: flex-start;
 }
 
 .userDataForm_field {
     display: block;
     width: 159px;
-    height: 26px;
+    // height: 26px;
     box-sizing: border-box;
     background: var(--card-color);
     border: 1px solid var(--card-color);
@@ -121,10 +122,11 @@
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 1.33;
+    // line-height: 1.33;
     letter-spacing: 0.04em;
     color: var(--text-color);
-    padding: 0 0 0 18px;
+    padding: 0 0 0 6px;
+
 
     @media screen and (min-width: 768px) {
         font-size: 18px;
@@ -139,6 +141,65 @@
         width: 280px;
         height: 32px;
         padding: 0 0 0 2px;
+    }
+}
+
+.userDataForm_field_email {
+    @media screen and (min-width: 768px) {
+        padding: 0 0 0 20px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        padding: 0 0 0 2px;
+    }
+}
+
+.userDataForm_number {
+    padding: 0 0 0 14px;
+
+    @media screen and (min-width: 768px) {
+        padding: 0 0 0 18px;
+    }
+    @media screen and (min-width: 1280px) {
+        padding: 0 0 0 12px;
+    }
+}
+
+.userDataForm_birthday {
+    padding-top: 2px;
+
+    @media screen and (min-width: 768px) {
+        padding: 0 0 0 7px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        padding-top: 3px;
+        padding-left: 0;
+    }
+
+}
+
+.inputNumber {
+position: relative;
+}
+
+.inputNumber::before {
+    position: absolute;
+    display: block;
+    content: '+';
+    top: -8px;
+    right: -14px;
+    font-size: 12px;
+
+    @media screen and (min-width: 768px) {
+        top: -13px;
+        right: -25px;
+        font-size: 18px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        top: -13px;
+        right: -14px;
     }
 }
 
@@ -378,5 +439,21 @@ form:not(:last-child) {
         top:200px;
         transform: translateX(-115px);
     
+    }
+}
+
+.loaderAvatar {
+    position: relative;
+    top: 45px;
+    right: 0;
+
+    @media screen and (min-width: 768px) {
+        top: -120px;
+        right: -15px;
+    }
+    
+    @media screen and (min-width: 1280px) {
+        top: -35px;
+        right: -55px;    
     }
 }

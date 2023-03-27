@@ -16,8 +16,11 @@ const UserNav = () => {
     return (
         isActive === true 
             ? <NavLink to={'user'} className={scss.account} onClick={()=>dispatch(setMenuActive(!isActive))}>
-            <SvgInsert id="icon-account"/>
-                Account</NavLink>
+                {user.avatar
+                    ? (<img src={user.avatar} className={scss.avatarURL} alt="" />)
+                    : (<SvgInsert className={scss.icone_account} id="icon-account"/>)}
+                {reversName}
+                </NavLink>
             : <NavLink to={'user'} className={scss.account}>
                 {user.avatar
                     ? (<img src={user.avatar} className={scss.avatarURL} alt="" />)

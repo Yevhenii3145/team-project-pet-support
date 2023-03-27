@@ -41,26 +41,19 @@ export default function UserAvatar() {
       
       return;
     }
-      
-        setLoading(true);
-   
+    
+    setLoading(true);
         
-        setTimeout(() => {
-                  reader.onloadend = () => {
-            dispatch(operations.updateUserAvatar(file));
-            setLoading(false)
-   
+    reader.onloadend = async () => {
+      await dispatch(operations.updateUserAvatar(file));
+      setLoading(false)
     };
  
-        if (current !== undefined) {
-
+    if (current !== undefined) {
       reader.readAsDataURL(file);
-
-        } else {
+    } else {
       reader.readAsDataURL(file);
     }
-        }, 1000)
-    // return;
   };
 
   return (
@@ -69,15 +62,15 @@ export default function UserAvatar() {
                 // <div className={scss.loader__content_avatar}>
         <div className={scss.loader_oval_avatar}>
           <Oval
-            height={60}
-            width={60}
+            height={40}
+            width={40}
             color="#F59256"
             wrapperStyle={{}}
-            wrapperClass=""
+            wrapperClass={scss.loaderAvatar}
             visible={true}
             ariaLabel="oval-loading"
             secondaryColor="#F59256"
-            strokeWidth={2}
+            strokeWidth={4}
             strokeWidthSecondary={2}
            />
                     {/* </div> */}

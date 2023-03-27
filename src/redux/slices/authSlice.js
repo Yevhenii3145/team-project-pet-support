@@ -15,7 +15,7 @@ export const authSlice = createSlice({
         email: "",
         phone: "",
         city: "",
-        userId: idUser ? idUser : '',
+        userId: '',
         avatar: null,
       },
       token: usertoken ? usertoken : null,
@@ -178,8 +178,6 @@ export const authSlice = createSlice({
         },
       [operations.current.pending] (state, {payload}) {
         state.loading = true;
-        state.error = payload;
-        state.isLogin = false;
       },
       [operations.current.fulfilled] (state, { payload }) {
         state.loading = false;
@@ -189,7 +187,6 @@ export const authSlice = createSlice({
         state.user.name = payload.name;
         state.user.phone = payload.phone;
         state.user.userId = idUser ? idUser : payload.userId;
-        state.token = usertoken ? usertoken : payload.token;
         state.isLogin = true;
       },
       [operations.current.rejected] (state, { payload }) {
