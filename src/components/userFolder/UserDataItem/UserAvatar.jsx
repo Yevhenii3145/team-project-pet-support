@@ -1,3 +1,4 @@
+
 import scss from './user-data-item.module.scss'
 import SvgInsert from '../../utilsFolder/Svg/Svg'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
@@ -9,10 +10,12 @@ import { useState } from 'react'
 import { Oval } from 'react-loader-spinner'
 import { useTranslation } from 'react-i18next'
 
+
 const { REACT_APP_BASE_URL } = process.env
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
 
 export default function UserAvatar() {
+
     const userInStore = useSelector(state => state.auth.user)
     const token = useSelector(state => state.auth.token)
     const dispatch = useDispatch()
@@ -22,7 +25,9 @@ export default function UserAvatar() {
 
     const { t } = useTranslation()
 
+
     const current = usertoken ? usertoken : token
+
 
     const defaultImg =
         'https://dummyimage.com/150x150/FDF7F2.gif&text=Add+your+photo!'
@@ -56,6 +61,7 @@ export default function UserAvatar() {
         } else {
             reader.readAsDataURL(file)
         }
+
     }
 
     return (
