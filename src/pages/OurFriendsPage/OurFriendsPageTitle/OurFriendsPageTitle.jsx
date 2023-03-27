@@ -1,7 +1,10 @@
-import scss from './our-friends-page-title.module.scss';
+import scss from './our-friends-page-title.module.scss'
+import { useTranslation } from 'react-i18next'
 
-const OurFriendsPageTitle = ({ title }) => {
-    return <h1 className={scss.header}>{title}</h1>;
-};
+const OurFriendsPageTitle = () => {
+    const { t } = useTranslation()
 
-export default OurFriendsPageTitle;
+    return <h1 className={scss.header}>{t('OurFriendsPage.title')}</h1>
+}
+
+export default OurFriendsPageTitle

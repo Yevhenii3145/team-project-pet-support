@@ -175,19 +175,312 @@
                 "title": "Tittle of ad",
                 "name": "Name pet",
                 "birth": "Data of birth",
-                "breed": "Breed"
+                "breed": "Breed",
+                "sex": "The sex",
+                "location": "Location",
+                "price": "Price",
+                "loadImage": "Load the pet’s image",
+                "comments": "Comments"
             },
             "ph": {
                 "title": "Type name",
                 "name": "Type name pet",
                 "birth": "Type date of birth",
-                "breed": "Type breed"
+                "breed": "Type breed",
+                "cityRegion": "City, region",
+                "price": "Type price",
+                "comment": "Type comment"
             },
             "btn": {
                 "next": "Next",
-                "cancel": "Cancel"
+                "cancel": "Cancel",
+                "done": "Done",
+                "back": "Back"
+            },
+            "male": "Male",
+            "female": "Female"
+        },
+        "addPetBtn": "Add pet",
+        "emptyFavoriteList": "Add your favorite animals so as not to lose",
+        "EmptyOwnList": "You haven`t added any animals to your list yet",
+        "loadMore": "Load more..."
+    },
+    "OurFriendsPage": {
+        "title": "Our friends",
+        "cardsTitle": {
+            "time": "Time",
+            "address": "Address",
+            "email": "Email",
+            "phone": "Phone"
+        },
+        "cards": [
+            {
+                "title": "\"Sirius\"",
+                "url": "https://dogcat.com.ua",
+                "addressUrl": "https://goo.gl/maps/iq8NXEUf31EAQCzc6",
+                "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_287.png",
+                "address": "Fedorivka, Kyiv Oblast, Ukraine, 07372",
+                "workDays": [
+                    {
+                        "isOpen": false
+                    },
+                    {
+                        "isOpen": false
+                    },
+                    {
+                        "isOpen": false
+                    },
+                    {
+                        "isOpen": false
+                    },
+                    {
+                        "isOpen": false
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "11:00",
+                        "to": "16:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "11:00",
+                        "to": "16:00"
+                    }
+                ],
+                "phone": "+380931934069",
+                "email": null
+            },
+            {
+                "title": "Happy Paw",
+                "url": "https://happypaw.ua/ua",
+                "addressUrl": "https://goo.gl/maps/3RyzTYBvMr9WQWCC6",
+                "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_288.png",
+                "address": "Kyiv, Shota Rustaveli Street, 44 (3rd floor, office 7)",
+                "workDays": [
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    }
+                ],
+                "phone": "+380442900329",
+                "email": "hello@happypaw.ua"
+            },
+            {
+                "title": "Kharkiv shelter for animals",
+                "url": "https://www.city.kharkov.ua/uk/news/-51132.html",
+                "addressUrl": "https://goo.gl/maps/gjMzx3ifaRgXSftP9",
+                "imageUrl": null,
+                "address": "Kharkiv, st. Kvitky-Osnovyanenko, 7, 2nd floor",
+                "workDays": null,
+                "phone": "+380577607961",
+                "email": "press@citynet.kharkov.ua"
+            },
+            {
+                "title": "LKP \"LEV\"",
+                "url": "https://lkplev.com/",
+                "addressUrl": "https://goo.gl/maps/4xMfxtahHPfXeAYU8",
+                "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_289.png",
+                "address": "79024, Lviv, st. Promyslova 56",
+                "workDays": null,
+                "phone": "+380685354545",
+                "email": null
+            },
+            {
+                "title": "Shelter for dogs Big Heart",
+                "url": "https://pethelp.com.ua/interv_yu_z_zasnovnitseyu_pritulku_velike_sertse/",
+                "addressUrl": null,
+                "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_286.png",
+                "address": null,
+                "workDays": null,
+                "phone": null,
+                "email": "pethelp.ukr@gmail.com"
+            },
+            {
+                "title": "BARBOS volunteer organization",
+                "url": "https://uk-ua.facebook.com/NGO.Barbos/",
+                "addressUrl": "https://goo.gl/maps/pnzYL8t7jbG7j1SQ9",
+                "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_293.png",
+                "address": "Uzhhorod city",
+                "workDays": null,
+                "phone": "+380664880480",
+                "email": null
+            },
+            {
+                "title": "Veterinary center LicoVet",
+                "url": "https://lico.vet/",
+                "addressUrl": "https://goo.gl/maps/sub8u9TAAvLJRE9j9",
+                "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_292.png",
+                "address": "Drugetiv street, 77, Uzhhorod, Transcarpathian region, 88003",
+                "workDays": [
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "20:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "20:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "20:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "20:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "20:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "20:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "20:00"
+                    }
+                ],
+                "phone": null,
+                "email": null
+            },
+            {
+                "title": "Purina",
+                "url": "https://www.purina.ua/",
+                "addressUrl": null,
+                "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_290.png",
+                "address": null,
+                "workDays": null,
+                "phone": "+380800500950",
+                "email": "info@ua.nestle.com"
+            },
+            {
+                "title": "Whiskas",
+                "url": "https://www.whiskas.ua/",
+                "addressUrl": null,
+                "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_285.png",
+                "address": null,
+                "phone": "+380800500155",
+                "email": null
+            },
+            {
+                "title": "Josera",
+                "url": "https://josera.ua/",
+                "addressUrl": null,
+                "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_291.png",
+                "address": null,
+                "workDays": [
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    },
+                    {
+                        "isOpen": true,
+                        "from": "09:00",
+                        "to": "17:00"
+                    },
+                    {
+                        "isOpen": false,
+                        "from": "",
+                        "to": ""
+                    },
+                    {
+                        "isOpen": false,
+                        "from": "",
+                        "to": ""
+                    }
+                ],
+                "phone": "+380800409060",
+                "email": "info@josera.ua"
+            }
+        ],
+        "popup": {
+            "days": ["MN", "TU", "WE", "TH", "FR", "SA", "SU"],
+            "open": "open",
+            "close": "close"
+        }
+    },
+    "UserPage": {
+        "info": {
+            "title": "My information",
+            "card": {
+                "name": "Name",
+                "email": "Email",
+                "birthday": "Birthday",
+                "phone": "Phone",
+                "city": "City"
+            },
+            "btn": {
+                "editPhoto": "Edit photo",
+                "logout": "Logout",
+                "deleteAccount": "Delete account"
             }
         },
-        "addPetBtn": "Add pet"
+        "pets": {
+            "title": "My pets",
+            "card": {
+                "name": "Name",
+                "birthday": "Date of birth",
+                "breed": "Breed",
+                "comments": "Comments"
+            },
+            "btn": {
+                "addPet": "Add pet"
+            }
+        }
     }
 }

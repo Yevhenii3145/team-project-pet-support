@@ -386,7 +386,8 @@ const AddsNoticeContent = ({ close }) => {
                             <h2
                                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
                             >
-                                The sex<span className={scss.star}>*</span>:
+                                {t('NoticesPage.modalAddPet.title.sex')}
+                                <span className={scss.star}>*</span>:
                             </h2>
                             <div className={scss.radioButtonSection}>
                                 <input
@@ -411,7 +412,7 @@ const AddsNoticeContent = ({ close }) => {
                                     className={scss.radioButton}
                                 >
                                     <SvgInsert id="icon-male" />
-                                    Male
+                                    {t('NoticesPage.modalAddPet.male')}
                                 </label>
                                 <input
                                     id="female"
@@ -427,20 +428,23 @@ const AddsNoticeContent = ({ close }) => {
                                     className={scss.radioButton}
                                 >
                                     <SvgInsert id="icon-female" />
-                                    Female
+                                    {t('NoticesPage.modalAddPet.female')}
                                 </label>
                             </div>
                         </section>
                         <label
                             className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
                         >
-                            Location<span className={scss.star}>*</span>:
+                            {t('NoticesPage.modalAddPet.title.location')}
+                            <span className={scss.star}>*</span>:
                         </label>
                         <input
                             className={scss.modalAdds_page__input}
                             list="region"
                             name="location"
-                            placeholder="City, region"
+                            placeholder={t(
+                                'NoticesPage.modalAddPet.ph.cityRegion'
+                            )}
                             onChange={changeStepOne}
                         />
                         <datalist id="region">
@@ -455,7 +459,8 @@ const AddsNoticeContent = ({ close }) => {
                             <label
                                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
                             >
-                                Price<span className={scss.star}>*</span>:
+                                {t('NoticesPage.modalAddPet.title.price')}
+                                <span className={scss.star}>*</span>:
                                 <div
                                     className={scss.modalAdds_page__input_price}
                                 >
@@ -480,7 +485,9 @@ const AddsNoticeContent = ({ close }) => {
                                         name="price"
                                         min="1"
                                         required
-                                        placeholder="Type price"
+                                        placeholder={t(
+                                            'NoticesPage.modalAddPet.ph.price'
+                                        )}
                                         value={petPrice}
                                         onChange={changeStepOne}
                                     />
@@ -491,7 +498,7 @@ const AddsNoticeContent = ({ close }) => {
                             <p
                                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_page_box}`}
                             >
-                                Load the pet’s image{' '}
+                                {t('NoticesPage.modalAddPet.title.loadImage')}{' '}
                                 <span className={scss.star}>*</span>
                             </p>
                             <input
@@ -522,13 +529,16 @@ const AddsNoticeContent = ({ close }) => {
                             <label
                                 className={`${scss.modalAdds_page__label} ${scss.modalAdds_commit_box}`}
                             >
-                                Comments <span className={scss.star}>*</span>
+                                {t('NoticesPage.modalAddPet.title.comments')}{' '}
+                                <span className={scss.star}>*</span>
                             </label>
                             <textarea
                                 className={scss.modalAdds_commit}
                                 type="text"
                                 name="comments"
-                                placeholder="Type comment"
+                                placeholder={t(
+                                    'NoticesPage.modalAddPet.ph.comment'
+                                )}
                                 required
                                 minLength="8"
                                 maxLength="120"
@@ -539,13 +549,13 @@ const AddsNoticeContent = ({ close }) => {
                                     type="submit"
                                     onClick={validateFile}
                                 >
-                                    Done
+                                    {t('NoticesPage.modalAddPet.btn.done')}
                                 </button>
                                 <span
                                     className={`${scss.button__primary_not_main} ${scss.modalAdds_page__button}`}
                                     onClick={changeStep}
                                 >
-                                    Back
+                                    {t('NoticesPage.modalAddPet.btn.back')}
                                 </span>
                             </div>
                         </div>

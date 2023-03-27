@@ -207,7 +207,7 @@ const ModalNotice = ({
                 </div>
                 <article className={scss.modal_notice__item_comment}>
                     <span className={scss.modal_notice__item_title}>
-                        {t('NoticesPage.card.comments')}:
+                        {t('NoticesPage.card.comments')}:{' '}
                     </span>
                     {comments}
                 </article>
