@@ -12,10 +12,10 @@ const MIGRATION_DEBUG = false;
 
 const persistConfig = {
   key: 'token',
-  version: 0,
-  migrate: createMigrate(migrations, {debug: MIGRATION_DEBUG}),
+  version: 1,
   storage,
   whitelist: ['token'],
+  migrate: createMigrate(migrations, {debug: MIGRATION_DEBUG})
 }
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
