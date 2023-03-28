@@ -7,7 +7,7 @@ export const migrations = {
         ...state, 
         auth: {
             ...state.auth,
-            token: usertoken ? usertoken : null
+            token: usertoken ? usertoken : null,
         }
       }
     }
