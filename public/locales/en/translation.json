@@ -481,6 +481,43 @@
             "btn": {
                 "addPet": "Add pet"
             }
+        },
+        "guest": {
+            "infoTitle": "User information",
+            "petsTitle": "Users own pets"
+        },
+        "modalAddPet": {
+            "title": {
+                "addPet": "Add pet",
+                "editePet": "Edite pet",
+                "name": "Name pet",
+                "birth": "Data of birth",
+                "breed": "Breed",
+                "loadImage": "Add photo and some comments",
+                "comments": "Comments"
+            },
+            "ph": {
+                "name": "Type name pet",
+                "birth": "Type date of birth",
+                "breed": "Type breed",
+                "comment": "Type comment"
+            },
+            "btn": {
+                "next": "Next",
+                "cancel": "Cancel",
+                "done": "Done",
+                "back": "Back"
+            }
+        },
+        "logoutModal": {
+            "question": "Do you really want to logout?",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "deleteAccount": {
+            "question": "Are you sure you want to delete your account?",
+            "yes": "Yes",
+            "no": "No"
         }
     }
 }

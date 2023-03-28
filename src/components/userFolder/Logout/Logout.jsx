@@ -13,9 +13,9 @@ export default function Logout() {
     const onLogout = () => {
         Confirm.show(
             '',
-            'Do you really want to logout?',
-            'Yes',
-            'No',
+            t('UserPage.logoutModal.question'),
+            t('UserPage.logoutModal.yes'),
+            t('UserPage.logoutModal.no'),
             () => {
                 dispatch(operations.logout())
             },

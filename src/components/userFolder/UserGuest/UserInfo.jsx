@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import scss from '../UserDataItem/user-data-item.module.scss'
 import scssS from './userInfo.module.scss'
+import { useTranslation } from 'react-i18next'
 
 const UserInfo = () => {
     const loading = useSelector(state => state.guest.loading)
@@ -12,6 +13,8 @@ const UserInfo = () => {
     const { id } = useParams()
 
     const dispatch = useDispatch()
+
+    const { t } = useTranslation()
 
     useEffect(() => {
         dispatch(fetchInfoUser(id))
@@ -40,26 +43,26 @@ const UserInfo = () => {
                     </div>
                     <div className={scss.userDataForm_box}>
                         <p className={scssS.infoLabel}>
-                            Name:
+                            {t('UserPage.info.card.name')}:
                             <span className={scssS.infoText}>{user.name}</span>
                         </p>
                         {user.birthday && (
                             <p className={scssS.infoLabel}>
-                                Birthday:{' '}
+                                {t('UserPage.info.card.birthday')}:{' '}
                                 <span className={scssS.infoText}>
                                     {editDate(user.birthday)}
                                 </span>
                             </p>
                         )}
                         <p className={scssS.infoLabel}>
-                            City:
+                            {t('UserPage.info.card.city')}:
                             <span className={scssS.infoText}>{user.city}</span>
                         </p>
                         <a
                             href={`mailto:${user.email}`}
                             className={scssS.infoLabel}
                         >
-                            Email:
+                            {t('UserPage.info.card.email')}:
                             <span className={scssS.infoText} data-action="link">
                                 {user.email}
                             </span>
@@ -68,7 +71,7 @@ const UserInfo = () => {
                             href={`tel:+${user.phone}`}
                             className={scssS.infoLabel}
                         >
-                            Phone:
+                            {t('UserPage.info.card.phone')}:
                             <span className={scssS.infoText} data-action="link">
                                 +{user.phone}
                             </span>

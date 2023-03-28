@@ -18,9 +18,9 @@ export default function DeleteAccount() {
     const handlDeleteAccount = () => {
         Confirm.show(
             '',
-            'Are you sure you want to delete your account?',
-            'Yes',
-            'No',
+            t('UserPage.deleteAccount.question'),
+            t('UserPage.deleteAccount.yes'),
+            t('UserPage.deleteAccount.no'),
             () => {
                 dispatch(operations.deleteAccount(token)).then(() => {
                     window.location.replace('http://localhost:3000/register')
