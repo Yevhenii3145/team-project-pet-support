@@ -21,6 +21,7 @@ export const authSlice = createSlice({
       token: usertoken ? usertoken : null,
       isLogin: usertoken ? true : false,
       loading: false,
+      error: null,
 
     },
     extraReducers: {
