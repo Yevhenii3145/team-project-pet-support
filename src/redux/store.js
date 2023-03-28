@@ -1,14 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistReducer, persistStore,} from 'redux-persist';
+import { persistReducer, persistStore, createMigrate} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './slices/authSlice';
 import menuReducer from './slices/menuSlice';
 import { userReducer } from './slices/userSlice';
 import { userGuestReducer } from './slices/userGuestSlice';
 import noticesReducer from './slices/noticesSlice';
+import {migrations} from './utils/migrations';
+
+const MIGRATION_DEBUG = false;
 
 const persistConfig = {
   key: 'token',
+  version: 0,
+  migrate: createMigrate(migrations, {debug: MIGRATION_DEBUG}),
   storage,
   whitelist: ['token'],
 }
