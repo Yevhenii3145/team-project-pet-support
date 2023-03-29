@@ -8,14 +8,12 @@ import { userGuestReducer } from './slices/userGuestSlice';
 import noticesReducer from './slices/noticesSlice';
 import {migrations} from './utils/migrations';
 
-const MIGRATION_DEBUG = false;
-
 const persistConfig = {
   key: 'token',
-  version: 1,
+  version: 0,
   storage,
   whitelist: ['token'],
-  migrate: createMigrate(migrations, {debug: MIGRATION_DEBUG})
+  migrate: createMigrate(migrations)
 }
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
