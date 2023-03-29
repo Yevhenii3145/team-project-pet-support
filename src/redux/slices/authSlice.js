@@ -40,8 +40,10 @@ export const authSlice = createSlice({
         state.user.email = action.payload.email;
         state.user.phone = action.payload.phone;
         state.user.city = action.payload.city;
-        state.token = usertoken ? usertoken : null;
-        state.isLogin = usertoken ? true : false;
+        if(usertoken) {
+            state.token = usertoken;
+            state.isLogin = true;
+        }
       },
       [operations.registerNewUser.rejected](state) {
         state.loading = false;
@@ -188,6 +190,9 @@ export const authSlice = createSlice({
         state.user.phone = payload.phone;
         state.user.userId = payload.userId;
         state.isLogin = true;
+        if(usertoken) {
+            state.token = usertoken;
+        }
       },
       [operations.current.rejected] (state, { payload }) {
         state.loading = false;
