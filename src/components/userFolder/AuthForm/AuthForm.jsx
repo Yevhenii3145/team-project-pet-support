@@ -12,58 +12,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import SvgInsert from 'components/utilsFolder/Svg/Svg'
 import cities from '../../../helpers/ua.json'
-
-const schemasForStepFirst = Yup.object().shape({
-    email: Yup.string()
-        .email()
-        .min(10, 'The minimum number of characters in the field is 10.')
-        .max(63, 'The maximum number of characters in the field is 63.'),
-    password: Yup.string().required().min(7).max(32),
-    passwordConfirm: Yup.string().required(),
-})
-
-function validatePassword(value) {
-    let error
-    if (!value) {
-        error = 'Password is required'
-    } else if (value.includes(' ')) {
-        error = 'Invalid password, must not include spaces'
-    }
-    return error
-}
-
-function validateEmail(value) {
-    let error
-    if (!value) {
-        error = 'E-mail address required'
-    } else if (
-        !/^((([0-9A-Za-z]{1}[-0-9A-z.]{1,}[0-9A-Za-z]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/i.test(
-            value
-        )
-    ) {
-        error =
-            'The e-mail address is not correct, there must be at least 2 characters before the "@" symbol, the hyphen cannot be at the beginning, and the e-mail cannot contain Latin letters'
-    }
-    return error
-}
-
-const schemasForStepSecond = Yup.object().shape({
-    name: Yup.string().required('Name is required!'),
-    region: Yup.string().required('Region is required!'),
-    number: Yup.string()
-        .matches(
-            /[0-9]/,
-            'Field must contain only numbers, format +380xxxxxxxxx!'
-        )
-        .required('Phone number is required!')
-        .min(9, 'Cannot be less than nine characters!')
-        .max(9, 'Cannot be more than nine characters!'),
-})
-
-const schemasForLogin = Yup.object().shape({
-    email: Yup.string().email().required().min(10).max(63),
-    password: Yup.string().required().min(7).max(32),
-})
+import { useTranslation } from 'react-i18next'
 
 const AuthForm = () => {
     const [stepOne, setStepOne] = useState(true)
@@ -77,12 +26,18 @@ const AuthForm = () => {
     const page = location.pathname
     const { token } = useParams()
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
-    useEffect(()=>{
-        if(page !== '/register' && page !== '/login' && page !== '/verify' && page !== '/reset-password'){
+    useEffect(() => {
+        if (
+            page !== '/register' &&
+            page !== '/login' &&
+            page !== '/verify' &&
+            page !== '/reset-password'
+        ) {
             setTokenForResetPassword(token)
         }
-    },[page, token])
+    }, [page, token])
 
     const handleChangePassword = e => {
         switch (e.target.name) {
@@ -118,21 +73,66 @@ const AuthForm = () => {
         number: '',
     }
 
+    const schemasForStepFirst = Yup.object().shape({
+        email: Yup.string()
+            .email()
+            .min(10, t('AuthForm.error.passwordMin'))
+            .max(63, t('AuthForm.error.passwordMax')),
+        password: Yup.string().required().min(7).max(32),
+        passwordConfirm: Yup.string().required(),
+    })
+
+    function validatePassword(value) {
+        let error
+        if (!value) {
+            error = t('AuthForm.error.passwordFalse')
+        } else if (value.includes(' ')) {
+            error = t('AuthForm.error.spaces')
+        }
+        return error
+    }
+
+    function validateEmail(value) {
+        let error
+        if (!value) {
+            error = t('AuthForm.error.emailFalse')
+        } else if (
+            !/^((([0-9A-Za-z]{1}[-0-9A-z.]{1,}[0-9A-Za-z]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/i.test(
+                value
+            )
+        ) {
+            error = t('AuthForm.error.emailSymbol')
+        }
+        return error
+    }
+
+    const schemasForStepSecond = Yup.object().shape({
+        name: Yup.string().required(t('AuthForm.error.name')),
+        region: Yup.string().required(t('AuthForm.error.region')),
+        number: Yup.string()
+            .matches(/[0-9]/, t('AuthForm.error.numberFormat'))
+            .required(t('AuthForm.error.numberFalse'))
+            .min(9, t('AuthForm.error.numberMin'))
+            .max(9, t('AuthForm.error.numberMax')),
+    })
+
+    const schemasForLogin = Yup.object().shape({
+        email: Yup.string().email().required().min(10).max(63),
+        password: Yup.string().required().min(7).max(32),
+    })
+
     const handleSubmitForRegister = (values, actions) => {
         if (stepOne) {
             if (values.password !== values.passwordConfirm) {
-                return Notify.failure(
-                    'Your passwords must have the same value!',
-                    {
-                        timeout: 6000,
-                        distance: '100px',
-                        opacity: '0.8',
-                        useIcon: false,
-                        fontSize: '18px',
-                        borderRadius: '20px',
-                        showOnlyTheLastOne: true
-                    }
-                )
+                return Notify.failure(t('AuthForm.error.passwordsSameValue'), {
+                    timeout: 6000,
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '18px',
+                    borderRadius: '20px',
+                    showOnlyTheLastOne: true,
+                })
             }
             return setStepOne(false)
         }
@@ -143,14 +143,14 @@ const AuthForm = () => {
                 )
             ) {
                 console.log('not')
-                return Notify.failure('Please select a region from the list!', {
+                return Notify.failure(t('AuthForm.error.regionList'), {
                     timeout: 6000,
                     distance: '100px',
                     opacity: '0.8',
                     useIcon: false,
                     fontSize: '18px',
                     borderRadius: '20px',
-                    showOnlyTheLastOne: true
+                    showOnlyTheLastOne: true,
                 })
             }
 
@@ -209,28 +209,28 @@ const AuthForm = () => {
 
     const handleSubmitForChangePassword = (values, actions) => {
         if (values.password !== values.passwordConfirm) {
-            return Notify.failure('Your passwords must have the same value!', {
+            return Notify.failure(t('AuthForm.error.passwordsSameValue'), {
                 timeout: 6000,
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
                 fontSize: '18px',
                 borderRadius: '20px',
-                showOnlyTheLastOne: true
+                showOnlyTheLastOne: true,
             })
         }
         const infoForUpdatePassword = {
             userToken: tokenForResetPassword,
             userNewPassword: {
                 password: values.password,
-            }
+            },
         }
         actions.resetForm()
         setValuePassword('')
         setValueConfirmPassword('')
         setTokenForResetPassword('')
         dispatch(operations.refreshPassword(infoForUpdatePassword))
-        return navigate("/login")
+        return navigate('/login')
     }
 
     return (
@@ -258,7 +258,7 @@ const AuthForm = () => {
                                         placeholder=" "
                                     />
                                     <label className={scss.form__label}>
-                                        Email
+                                        {t('AuthForm.stepOne.email')}
                                     </label>
                                     <ErrorMessage
                                         name="email"
@@ -283,7 +283,7 @@ const AuthForm = () => {
                                         //onChange={handleChangePassword}
                                     />
                                     <label className={scss.form__label}>
-                                        Password
+                                        {t('AuthForm.stepOne.password')}
                                     </label>
                                     {valuePassword.length >= 1 && (
                                         <span
@@ -321,7 +321,7 @@ const AuthForm = () => {
                                         validate={validatePassword}
                                     />
                                     <label className={scss.form__label}>
-                                        Confirm Password
+                                        {t('AuthForm.stepOne.passwordTwo')}
                                     </label>
                                     {valueConfirmPassword.length >= 1 && (
                                         <span
@@ -357,7 +357,7 @@ const AuthForm = () => {
                                         className={scss.coordination__box_title}
                                         htmlFor="coordination"
                                     >
-                                        Agree with the{' '}
+                                        {t('AuthForm.stepOne.confirm')}{' '}
                                         <a
                                             href="https://www.google.com.ua/"
                                             className={
@@ -366,7 +366,7 @@ const AuthForm = () => {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            terms of use of the site
+                                            {t('AuthForm.stepOne.confirmLink')}
                                         </a>
                                     </label>
                                 </div>
@@ -375,7 +375,7 @@ const AuthForm = () => {
                                     type="submit"
                                     disabled={!coordination}
                                 >
-                                    Next
+                                    {t('AuthForm.stepOne.btnNext')}
                                 </button>
                                 <GoogleAuth />
                             </Form>
@@ -397,7 +397,7 @@ const AuthForm = () => {
                                         required
                                     />
                                     <label className={scss.form__label}>
-                                        Name
+                                        {t('AuthForm.stepTwo.name')}
                                     </label>
                                     <ErrorMessage
                                         name="name"
@@ -426,7 +426,7 @@ const AuthForm = () => {
                                         ))}
                                     </datalist>
                                     <label className={scss.form__label}>
-                                        City, region
+                                        {t('AuthForm.stepTwo.cityRegion')}
                                     </label>
                                     <ErrorMessage
                                         name="region"
@@ -465,7 +465,7 @@ const AuthForm = () => {
                                         <p>+380</p>
                                     </span>
                                     <label className={scss.form__label}>
-                                        Mobile phone
+                                        {t('AuthForm.stepTwo.phone')}
                                     </label>
                                     <ErrorMessage
                                         name="number"
@@ -480,22 +480,22 @@ const AuthForm = () => {
                                     className={`${scss.button__primary_not_main} ${scss.form__back_button}`}
                                     onClick={backButtonClick}
                                 >
-                                    &#5130; Go back
+                                    &#5130; {t('AuthForm.stepTwo.btnBack')}
                                 </span>
                                 <button
                                     className={`${scss.button__primary_main} ${scss.form__button}`}
                                     type="submit"
                                 >
-                                    Register
+                                    {t('AuthForm.stepTwo.btnRegister')}
                                 </button>
                                 <GoogleAuth />
                             </Form>
                         </Formik>
                     )}
                     <p className={scss.form__description}>
-                        Already have an account?{' '}
+                        {t('AuthForm.haveAccount')}{' '}
                         <NavLink className={scss.description__nav} to="/login">
-                            Login
+                            {t('AuthForm.login')}
                         </NavLink>
                     </p>
                 </>
@@ -520,7 +520,7 @@ const AuthForm = () => {
                                     placeholder=" "
                                 />
                                 <label className={scss.form__label}>
-                                    Email
+                                    {t('LoginForm.email')}
                                 </label>
                                 <ErrorMessage
                                     name="email"
@@ -540,7 +540,7 @@ const AuthForm = () => {
                                     validate={validatePassword}
                                 />
                                 <label className={scss.form__label}>
-                                    Password
+                                    {t('LoginForm.password')}
                                 </label>
                                 {valuePassword.length >= 1 && (
                                     <span
@@ -569,38 +569,38 @@ const AuthForm = () => {
                                 className={`${scss.button__primary_main} ${scss.form__button}`}
                                 type="submit"
                             >
-                                Login
+                                {t('LoginForm.btnLogin')}
                             </button>
                             <p className={scss.form__description}>
-                                Resend verification email? Click{' '}
+                                {t('LoginForm.resendVerification')}{' '}
                                 <NavLink
                                     to="/verify"
                                     className={scss.description__nav}
                                 >
-                                    here
+                                    {t('LoginForm.here')}
                                 </NavLink>
                             </p>
                             <p
                                 className={`${scss.form__description} ${scss.form__description_reset}`}
                             >
-                                Forgot your password? Click{' '}
+                                {t('LoginForm.forgotPassword')}{' '}
                                 <NavLink
                                     to="/reset-password"
                                     className={scss.description__nav}
                                 >
-                                    here
+                                    {t('LoginForm.here')}
                                 </NavLink>
                             </p>
                             <GoogleAuth />
                         </Form>
                     </Formik>
                     <p className={scss.form__description}>
-                        Don't have an account?{' '}
+                        {t('LoginForm.notAccount')}{' '}
                         <NavLink
                             to="/register"
                             className={scss.description__nav}
                         >
-                            Register
+                            {t('LoginForm.register')}
                         </NavLink>
                     </p>
                 </>
@@ -625,7 +625,7 @@ const AuthForm = () => {
                                     placeholder=" "
                                 />
                                 <label className={scss.form__label}>
-                                    Email
+                                    {t('VerifyForm.email')}
                                 </label>
                                 <ErrorMessage
                                     name="email"
@@ -645,7 +645,7 @@ const AuthForm = () => {
                                     validate={validatePassword}
                                 />
                                 <label className={scss.form__label}>
-                                    Password
+                                    {t('VerifyForm.password')}
                                 </label>
                                 {valuePassword.length >= 1 && (
                                     <span
@@ -675,15 +675,15 @@ const AuthForm = () => {
                                 className={`${scss.button__primary_main} ${scss.form__button}`}
                                 type="submit"
                             >
-                                Verify
+                                {t('VerifyForm.verify')}
                             </button>
                         </Form>
                     </Formik>
 
                     <p className={scss.form__description}>
-                        Go to back?{' '}
+                        {t('VerifyForm.back')}{' '}
                         <NavLink to="/login" className={scss.description__nav}>
-                            Login
+                            {t('VerifyForm.login')}
                         </NavLink>
                     </p>
                 </>
@@ -696,7 +696,7 @@ const AuthForm = () => {
                     >
                         <Form className={scss.form__container}>
                             <p className={scss.form__description_recover}>
-                                Please, enter your email to reset password:
+                                {t('ResetPasswordForm.title')}
                             </p>
                             <div className={scss.form__input_container}>
                                 <Field
@@ -707,7 +707,7 @@ const AuthForm = () => {
                                     validate={validateEmail}
                                 />
                                 <label className={scss.form__label}>
-                                    Email
+                                    {t('ResetPasswordForm.email')}
                                 </label>
                                 <ErrorMessage
                                     name="email"
@@ -722,100 +722,115 @@ const AuthForm = () => {
                                 className={`${scss.button__primary_main} ${scss.form__button}`}
                                 type="submit"
                             >
-                                Reset Password
+                                {t('ResetPasswordForm.resetPassword')}
                             </button>
                         </Form>
                     </Formik>
 
                     <p className={scss.form__description}>
-                        Go to back?{' '}
+                        {t('ResetPasswordForm.back')}{' '}
                         <NavLink to="/login" className={scss.description__nav}>
-                            Login
+                            {t('ResetPasswordForm.login')}
                         </NavLink>
                     </p>
                 </>
             )}
-            {page !== '/register' && page !== '/login' && page !== '/verify' && page !== '/reset-password' && (
-                <Formik
-                    validationSchema={schemasForStepFirst}
-                    initialValues={initialValue}
-                    onSubmit={handleSubmitForChangePassword}
-                >
-                    <Form
-                        className={scss.form__container}
-                        autoComplete="off"
-                        onChange={handleChangePassword}
+            {page !== '/register' &&
+                page !== '/login' &&
+                page !== '/verify' &&
+                page !== '/reset-password' && (
+                    <Formik
+                        validationSchema={schemasForStepFirst}
+                        initialValues={initialValue}
+                        onSubmit={handleSubmitForChangePassword}
                     >
-                        <div className={scss.form__input_container}>
-                            <Field
-                                className={scss.form__input}
-                                type={!onShowPassword ? 'password' : 'text'}
-                                name="password"
-                                validate={validatePassword}
-                                placeholder=" "
-                                //onChange={handleChangePassword}
-                            />
-                            <label className={scss.form__label}>Password</label>
-                            {valuePassword.length >= 1 && (
-                                <span
-                                    className={scss.form__input__password_show}
-                                    onClick={showPassword}
-                                >
-                                    {!onShowPassword ? (
-                                        <SvgInsert id="eye" />
-                                    ) : (
-                                        <SvgInsert id="eye-blocked" />
-                                    )}
-                                </span>
-                            )}
-                            <ErrorMessage
-                                name="password"
-                                render={msg => (
-                                    <p className={scss.error__mesage}>{msg}</p>
-                                )}
-                            />
-                        </div>
-                        <div className={scss.form__input_container}>
-                            <Field
-                                className={scss.form__input}
-                                type={
-                                    !onShowConfirmPassword ? 'password' : 'text'
-                                }
-                                name="passwordConfirm"
-                                placeholder=" "
-                                validate={validatePassword}
-                            />
-                            <label className={scss.form__label}>
-                                Confirm Password
-                            </label>
-                            {valueConfirmPassword.length >= 1 && (
-                                <span
-                                    className={scss.form__input__password_show}
-                                    onClick={showConfirmPassword}
-                                >
-                                    {!onShowConfirmPassword ? (
-                                        <SvgInsert id="eye" />
-                                    ) : (
-                                        <SvgInsert id="eye-blocked" />
-                                    )}
-                                </span>
-                            )}
-                            <ErrorMessage
-                                name="passwordConfirm"
-                                render={msg => (
-                                    <p className={scss.error__mesage}>{msg}</p>
-                                )}
-                            />
-                        </div>
-                        <button
-                            className={`${scss.button__primary_main} ${scss.form__button}`}
-                            type="submit"
+                        <Form
+                            className={scss.form__container}
+                            autoComplete="off"
+                            onChange={handleChangePassword}
                         >
-                            Change password
-                        </button>
-                    </Form>
-                </Formik>
-            )}
+                            <div className={scss.form__input_container}>
+                                <Field
+                                    className={scss.form__input}
+                                    type={!onShowPassword ? 'password' : 'text'}
+                                    name="password"
+                                    validate={validatePassword}
+                                    placeholder=" "
+                                    //onChange={handleChangePassword}
+                                />
+                                <label className={scss.form__label}>
+                                    {t('changePasswordForm.password')}
+                                </label>
+                                {valuePassword.length >= 1 && (
+                                    <span
+                                        className={
+                                            scss.form__input__password_show
+                                        }
+                                        onClick={showPassword}
+                                    >
+                                        {!onShowPassword ? (
+                                            <SvgInsert id="eye" />
+                                        ) : (
+                                            <SvgInsert id="eye-blocked" />
+                                        )}
+                                    </span>
+                                )}
+                                <ErrorMessage
+                                    name="password"
+                                    render={msg => (
+                                        <p className={scss.error__mesage}>
+                                            {msg}
+                                        </p>
+                                    )}
+                                />
+                            </div>
+                            <div className={scss.form__input_container}>
+                                <Field
+                                    className={scss.form__input}
+                                    type={
+                                        !onShowConfirmPassword
+                                            ? 'password'
+                                            : 'text'
+                                    }
+                                    name="passwordConfirm"
+                                    placeholder=" "
+                                    validate={validatePassword}
+                                />
+                                <label className={scss.form__label}>
+                                    {t('changePasswordForm.confirmPassword')}
+                                </label>
+                                {valueConfirmPassword.length >= 1 && (
+                                    <span
+                                        className={
+                                            scss.form__input__password_show
+                                        }
+                                        onClick={showConfirmPassword}
+                                    >
+                                        {!onShowConfirmPassword ? (
+                                            <SvgInsert id="eye" />
+                                        ) : (
+                                            <SvgInsert id="eye-blocked" />
+                                        )}
+                                    </span>
+                                )}
+                                <ErrorMessage
+                                    name="passwordConfirm"
+                                    render={msg => (
+                                        <p className={scss.error__mesage}>
+                                            {msg}
+                                        </p>
+                                    )}
+                                />
+                            </div>
+                            <button
+                                className={`${scss.button__primary_main} ${scss.form__button}`}
+                                type="submit"
+                            >
+                                {t('changePasswordForm.changePassword')}
+                            </button>
+                        </Form>
+                    </Formik>
+                )}
         </>
     )
 }
