@@ -132,7 +132,6 @@ const EditPetContent = ({ close, _id }) => {
             // console.log('image', image.files[0])
             // console.log('imageURL', imageURL)
 
-<
             try {
                 await axios.put(`/users/${_id}`, data)
                 setIsSubmitting(false)
