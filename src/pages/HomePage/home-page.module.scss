@@ -3,6 +3,7 @@
     height: 95vh;
     // overflow-y: scroll;
     // overflow-x: hidden;
+    background-color: var(--background-color);
 
     @media screen and (min-width: 768px) {
         height: 92vh;
@@ -12,3 +13,4 @@
         height: 100vh;
     }
 }
+

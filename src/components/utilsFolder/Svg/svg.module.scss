@@ -1,16 +1,19 @@
 @import '../../../helpers/variables.module.scss';
 
 .logo {
-    @media screen and (min-width: 768px) {
-        width: 94px;
-        height: 48px;
-    }
+
+  @media screen and (min-width: 768px) {
+    width: 94px;
+    height: 48px;
+  }
 }
 
 .openMenu {
-    padding-top: 4px;
-    transition: fill 500ms ease-in-out;
-    cursor: pointer;
+  padding-top: 4px;
+  fill: var(--icon-menu-open);
+  transition: fill 500ms ease-in-out;
+  cursor: pointer;
+
 
     &:hover,
     &:focus {
@@ -23,10 +26,11 @@
 }
 
 .closeMenu {
-    padding-top: 4px;
-    stroke: #111;
-    transition: stroke 500ms ease-in-out;
-    cursor: pointer;
+  padding-top: 4px;
+  stroke: var(--icon-menu-close);
+  transition: stroke 500ms ease-in-out;
+  cursor: pointer;
+
 
     &:hover,
     &:focus {
@@ -130,11 +134,19 @@
 }
 
 .iconClose {
-    display: block;
-    width: 16px;
-    height: 16px;
-    margin-left: auto;
-    border: #111;
+
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  border: #111;
+  fill: var(--text-color);
+
+  &:hover,
+  &:focus {
+    fill:#111;
+  }
+
 }
 
 .iconCloseAddNotice {
@@ -149,8 +161,10 @@
 }
 
 .iconDeleteNotice {
-    margin-left: 13px;
-    fill: #ff6101;
+
+  margin-left: 13px;
+  fill: #F59256;
+
 }
 
 .google {
@@ -230,10 +244,19 @@
     height: 50px;
 }
 
-.iconEdit {
-    fill: #111111;
+.iconEdit_pet {
+fill: #111;
+&:hover {
+    fill: $accentColor;
+
+  }
 }
 
 .iconEdit_active {
-    fill: $accentColor;
+  fill: #111;
+  &:hover {
+      fill: $accentColor;
+  
+    }
+
 }

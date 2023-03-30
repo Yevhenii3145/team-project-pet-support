@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
 
 const OurFriendsPage = () => {
+
     const { t, ready } = useTranslation()
 
     useEffect(() => {

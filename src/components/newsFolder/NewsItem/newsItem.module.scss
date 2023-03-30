@@ -41,11 +41,14 @@ p {
   font-weight: 700;
   line-height: 1.375;
   letter-spacing: -0.01em;
+  color: var(--text-color);
 }
 .news_text {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.375;
+  color: var(--text-color);
+
 
   @media (min-width: 768px) {
     height: 150px;
@@ -68,14 +71,14 @@ p {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.375;
-  color: #11111199;
+  color: var(--text-color);
 }
 
 .news_link {
   font-size: 16px;
   font-weight: 500;
   line-height: 1.375;
-  color: #000;
+  color: var(--text-color);
   text-decoration: underline;
   &:hover,
   :focus {

@@ -4,7 +4,7 @@
 .modalAdds_page  {
     position: relative;
     text-align: center;
-    background: $lightColor;
+    background: var(--card-color);
 }
 
 .modalAdds_page__close{
@@ -12,7 +12,7 @@
     right: 0;
     top: -5px;
     text-align: center;
-    background: $background;
+    background: var(--card-color);
     backdrop-filter: blur(2px);
     margin-left: auto;
     max-width: 34px;
@@ -32,13 +32,14 @@
     line-height: 33px;
     letter-spacing: 0.04em;
     margin: 0px 0px 20px;
+    color: var(--text-color);
 }
 
 .modalAdds_page__input {
     display: block;
     width: 100%;
     padding: 14px 11px 12px;
-    background: $background;
+    background: var(--modal-input);
     border: 1px solid rgba(245, 146, 86, 0.5);
     border-radius: 40px;
     font-style: normal;
@@ -55,12 +56,13 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 1.5;
-    color: #111111;
+    color: var(--text-color);
 }
 
 .modalAdds_page__button {
     display: inline-block;
     margin-top: 40px;
+    color: var(--text-color);
 }
 
 .addspet__imgInput{
@@ -129,7 +131,7 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 1.5;
-    color: #111111;
+    color: var(--text-color);
     margin-bottom: 20px;
 }
 
@@ -162,7 +164,7 @@
     display: inline-block;
     width: 100%;
     height: 100px;
-    background: $background;
+    background: var(--modal-input);
     border: 1px solid $accentColor;
     border-radius: 20px;
     font-family: 'Manrope';
@@ -180,6 +182,7 @@
 @media screen and (max-width: 767px){
     .modalAdds_page__button {
         width: 100%;
+        color: var(--text-color);
     
         &:last-child{
             margin-top: 12px;
@@ -215,6 +218,7 @@
     .modalAdds_page__button {
         min-width: 180px;
         margin-left: 20px;
+        color: var(--text-color);
 
         &:last-child{
             margin-left: 0px;

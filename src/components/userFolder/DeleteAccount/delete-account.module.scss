@@ -17,8 +17,8 @@
     font-size: 14px;
     line-height: 1.4;
     padding: 0;
-    background-color: $lightColor;
-    color: rgba(17, 17, 17, 0.6);
+    background-color: var(--card-color);
+    color: var(--text-color);
     cursor: pointer;
     // color: $darkColor;
     // opacity: 0.6;
@@ -67,3 +67,10 @@
 
 }
 
+.delete_account_text {
+    @media screen and (min-width: 1280px) {
+            font-size: 14px;
+            line-height: 1.4;
+
+        }
+}

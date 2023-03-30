@@ -17,7 +17,7 @@ margin-right: 12px;
 
 &:hover,
 &:focus {
-  background: $lightColor;
+  background: var(--background-auth-nav-login);
   color: $accentColor;
 }
 
@@ -37,7 +37,7 @@ text-align: center;
 letter-spacing: 0.04em;
 color: #111111;
 cursor: pointer;
-background-color: $lightColor;
+background-color: var(--background-auth-nav-register);
 border-radius: 40px;
 border: 2px solid $accentColor;
 
