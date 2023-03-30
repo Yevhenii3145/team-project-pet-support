@@ -8,7 +8,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
 
-import { useSearchParams } from 'react-router-dom'
+// import { useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 const { REACT_APP_BASE_URL } = process.env
@@ -25,12 +25,12 @@ export function UserFormik() {
     const [userPhone, setUserPhone] = useState('')
     const [userCity, setUserCity] = useState('')
     const dateNow = new Date()
-    const [searchParams] = useSearchParams()
-    const usertoken = searchParams.get('token')
+    // const [searchParams] = useSearchParams()
+    // const usertoken = searchParams.get('token')
 
     const { t } = useTranslation()
 
-    const current = usertoken ? usertoken : token
+    // const current = usertoken ? usertoken : token
 
     const formatDate = date => {
         const dateFormat = new Date(date)
@@ -46,7 +46,7 @@ export function UserFormik() {
     }
 
     useEffect(() => {
-        if (current !== undefined) {
+        if (token !== undefined) {
 
             fetch(`${REACT_APP_BASE_URL}/api/users/current`, {
                 method: 'GET',
