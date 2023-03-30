@@ -8,17 +8,19 @@ import Loader from 'components/utilsFolder/Loader/Loader'
 import { useState } from 'react'
 import SvgInsert from '../../utilsFolder/Svg/Svg'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import scss from './pets-data.module.scss'
 
 function PetsData() {
     const [modalShow, setModalShow] = useState(false)
     const dispatch = useDispatch()
+    const { t } = useTranslation()
 
     useEffect(() => {
-        dispatch(operationsPets.getUserPet());
-      }, [dispatch]);
-    
+        dispatch(operationsPets.getUserPet())
+    }, [dispatch])
+
     const pets = useSelector(state => state.user.pets)
 
     const loading = useSelector(state => state.user.loading)
@@ -37,14 +39,16 @@ function PetsData() {
         <>
             {loading && <Loader />}
             <div className={scss.petsData_title_box}>
-                <h2 className={scss.petsData_title}>My pets:</h2>
+                <h2 className={scss.petsData_title}>
+                    {t('UserPage.pets.title')}:
+                </h2>
                 <div className={scss.addPetModal_buttonBox}>
                     <button
                         className={scss.addPetModal_button}
                         type="button"
                         onClick={showModal}
                     >
-                        Add pet{' '}
+                        {t('UserPage.pets.btn.addPet')}{' '}
                         <SvgInsert
                             className={scss.iconAddPet}
                             id="icon-add-pet"
@@ -62,7 +66,11 @@ function PetsData() {
                 )}
 
                 <div className={scss.overflow}>
-                    {pets.length === 0 ? <EmptyPetsList text='You haven`t added any animals to your list yet'/> : <PetsList />}
+                    {pets.length === 0 ? (
+                        <EmptyPetsList text="You haven`t added any animals to your list yet" />
+                    ) : (
+                        <PetsList />
+                    )}
                 </div>
             </div>
         </>

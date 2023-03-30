@@ -8,7 +8,9 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
 import { Oval } from 'react-loader-spinner'
+
 // import { useSearchParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const { REACT_APP_BASE_URL } = process.env
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
@@ -26,6 +28,8 @@ export function UserFormik() {
     const dateNow = new Date()
     // const [searchParams] = useSearchParams()
     // const usertoken = searchParams.get('token')
+
+    const { t } = useTranslation()
 
     // const current = usertoken ? usertoken : token
 
@@ -123,18 +127,19 @@ export function UserFormik() {
         e.preventDefault()
         const form = e.currentTarget
         const { name } = form.elements
-        if(!name.disabled){
-          return
+        if (!name.disabled) {
+            return
         }
         if (!name.value) {
-            return Notify.failure('Required!', { 
+            return Notify.failure(t('UserPage.error.required'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
                 fontSize: '18px',
                 borderRadius: '20px',
-                showOnlyTheLastOne: true })
+                showOnlyTheLastOne: true,
+            })
         }
         return dispatch(operations.updateUser({ name: name.value }))
     }
@@ -143,18 +148,19 @@ export function UserFormik() {
         e.preventDefault()
         const form = e.currentTarget
         const { birthday } = form.elements
-        if(!birthday.disabled){
-          return
+        if (!birthday.disabled) {
+            return
         }
         if (!birthday.value) {
-            return Notify.failure('Required!', { 
+            return Notify.failure(t('UserPage.error.required'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
                 fontSize: '18px',
                 borderRadius: '20px',
-                showOnlyTheLastOne: true })
+                showOnlyTheLastOne: true,
+            })
         }
         return dispatch(operations.updateUser({ birthday: birthday.value }))
     }
@@ -163,29 +169,30 @@ export function UserFormik() {
         e.preventDefault()
         const form = e.currentTarget
         const { phone } = form.elements
-        if(!phone.disabled){
-          return
+        if (!phone.disabled) {
+            return
         }
-        console.log(phone.value.length);
+        console.log(phone.value.length)
         if (!phone.value) {
-            return Notify.failure('Required!', { 
+            return Notify.failure(t('UserPage.error.required'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
                 fontSize: '18px',
                 borderRadius: '20px',
-                showOnlyTheLastOne: true })
+                showOnlyTheLastOne: true,
+            })
         }
         if (phone.value.length !== 12) {
-            return Notify.failure('Is not correct format, must 380xxxxxxxxx!', {
+            return Notify.failure(t('UserPage.error.numberFormat'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
                 fontSize: '18px',
                 borderRadius: '20px',
-                showOnlyTheLastOne: true
+                showOnlyTheLastOne: true,
             })
         }
         if (
@@ -193,14 +200,14 @@ export function UserFormik() {
                 phone.value
             )
         ) {
-            return Notify.failure('Is not correct format, must 380xxxxxxxxx!', {
+            return Notify.failure(t('UserPage.error.numberFormat'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
                 fontSize: '18px',
                 borderRadius: '20px',
-                showOnlyTheLastOne: true
+                showOnlyTheLastOne: true,
             })
         } else {
             return dispatch(operations.updateUser({ phone: phone.value }))
@@ -211,28 +218,29 @@ export function UserFormik() {
         e.preventDefault()
         const form = e.currentTarget
         const { city } = form.elements
-        if(!city.disabled){
-          return
+        if (!city.disabled) {
+            return
         }
         if (!city.value) {
-            return Notify.failure('Required!', { 
+            return Notify.failure(t('UserPage.error.required'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
                 fontSize: '18px',
                 borderRadius: '20px',
-                showOnlyTheLastOne: true })
+                showOnlyTheLastOne: true,
+            })
         }
         if (!/^[aA-zZ]/.test(city.value)) {
-            return Notify.failure('Is not correct format, must only letters!', {
+            return Notify.failure(t('UserPage.error.onlyLetters'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
                 fontSize: '18px',
                 borderRadius: '20px',
-                showOnlyTheLastOne: true
+                showOnlyTheLastOne: true,
             })
         } else {
             return dispatch(operations.updateUser({ city: city.value }))
@@ -247,17 +255,17 @@ export function UserFormik() {
                         <div className={scss.loader__content}>
                             <div className={scss.loader_oval}>
                                 <Oval
-                                height={60}
-                                width={60}
-                                color="#F59256"
-                                wrapperStyle={{}}
-                                wrapperClass=""
-                                visible={true}
-                                ariaLabel="oval-loading"
-                                secondaryColor="#F59256"
-                                strokeWidth={2}
-                                strokeWidthSecondary={2}
-                            />
+                                    height={60}
+                                    width={60}
+                                    color="#F59256"
+                                    wrapperStyle={{}}
+                                    wrapperClass=""
+                                    visible={true}
+                                    ariaLabel="oval-loading"
+                                    secondaryColor="#F59256"
+                                    strokeWidth={2}
+                                    strokeWidthSecondary={2}
+                                />
                             </div>
                         </div>
                     </>
@@ -266,7 +274,7 @@ export function UserFormik() {
                         <form onSubmit={handleSubmitName}>
                             <div className={scss.field_box}>
                                 <label className={scss.userDataForm_label}>
-                                    Name:
+                                    {t('UserPage.info.card.name')}:
                                 </label>
                                 {active && active === 'name' ? (
                                     <input
@@ -303,23 +311,26 @@ export function UserFormik() {
                         </form>
 
                         <form>
-                            <div className={`${scss.field_box_email} ${scss.field_box}`}>
+                            <div
+                                className={`${scss.field_box_email} ${scss.field_box}`}
+                            >
                                 <label className={scss.userDataForm_label}>
-                                    Email:
+                                    {t('UserPage.info.card.email')}:
                                 </label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={userEmail}
-                                        disabled
-                                        className={`${scss.userDataForm_field} ${scss.userDataForm_field_email}`}/>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={userEmail}
+                                    disabled
+                                    className={`${scss.userDataForm_field} ${scss.userDataForm_field_email}`}
+                                />
                             </div>
                         </form>
 
                         <form onSubmit={handleSubmitBirthday}>
                             <div className={scss.field_box}>
                                 <label className={scss.userDataForm_label}>
-                                    Birthday:
+                                    {t('UserPage.info.card.birthday')}:
                                 </label>
                                 {active && active === 'birthday' ? (
                                     <Flatpickr
@@ -367,27 +378,31 @@ export function UserFormik() {
                         <form onSubmit={handleSubmitPhone}>
                             <div className={scss.field_box}>
                                 <label className={scss.userDataForm_label}>
-                                    Phone:
+                                    {t('UserPage.info.card.phone')}:
                                 </label>
                                 {active && active === 'phone' ? (
                                     <input
                                         onChange={handleChange}
                                         type="tel"
                                         name="phone"
-                                            value={userPhone}
-                                        className={scss.userDataForm_field_active}
+                                        value={userPhone}
+                                        className={
+                                            scss.userDataForm_field_active
+                                        }
                                     />
                                 ) : (
                                     <>
-                                    <span className={scss.inputNumber}></span>
-                                    <input
-                                        onChange={handleChange}
-                                        type="tel"
-                                        name="phone"
-                                        value={userPhone}
-                                        disabled
-                                        className={`${scss.userDataForm_field} ${scss.userDataForm_number}`}
-                                    />
+                                        <span
+                                            className={scss.inputNumber}
+                                        ></span>
+                                        <input
+                                            onChange={handleChange}
+                                            type="tel"
+                                            name="phone"
+                                            value={userPhone}
+                                            disabled
+                                            className={`${scss.userDataForm_field} ${scss.userDataForm_number}`}
+                                        />
                                     </>
                                 )}
                                 <button
@@ -407,7 +422,7 @@ export function UserFormik() {
                         <form onSubmit={handleSubmitCity}>
                             <div className={scss.field_box}>
                                 <label className={scss.userDataForm_label}>
-                                    City:
+                                    {t('UserPage.info.card.city')}:
                                 </label>
                                 {active && active === 'city' ? (
                                     <input
