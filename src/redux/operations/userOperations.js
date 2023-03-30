@@ -5,8 +5,8 @@ const { REACT_APP_BASE_URL } = process.env;
 
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
 
-// const searchParams = new URLSearchParams(document.location.search);
-// const usertoken = searchParams.get('token'); 
+const searchParams = new URLSearchParams(document.location.search);
+const usertoken = searchParams.get('token'); 
 
 export const setAuthHeader = token => {
   if (token) {
@@ -111,8 +111,8 @@ const logout = createAsyncThunk(
 const current = createAsyncThunk('users/current', async (_, thunkAPI) => {
   const state = thunkAPI.getState();
 
-  // const persistedToken = usertoken ? usertoken : state.auth.token;
-  const persistedToken = state.auth.token;
+  const persistedToken = usertoken ? usertoken : state.auth.token;
+  // const persistedToken = state.auth.token;
 
   try {
     setAuthHeader(persistedToken);
@@ -159,8 +159,8 @@ const updateUser = createAsyncThunk('user/update', async (data, thunkAPI) => {
 const deleteAccount = createAsyncThunk('users/delete', async (_, thunkAPI) => {
   const state = thunkAPI.getState();
 
-  const persistedToken = state.auth.token;
-  // const persistedToken = usertoken ? usertoken : state.auth.token;
+  // const persistedToken = state.auth.token;
+  const persistedToken = usertoken ? usertoken : state.auth.token;
 
   try {
     setAuthHeader(persistedToken);

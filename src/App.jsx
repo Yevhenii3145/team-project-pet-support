@@ -7,7 +7,7 @@ import CatLoader from './components/utilsFolder/CatLoader/CatLoader'
 import UserRoutes from './UserRoutes'
 import ScrollToTop from 'components/utilsFolder/ScrollToTop/ScrollToTop';
 
-// import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 
 export const App = () => {
@@ -15,16 +15,17 @@ export const App = () => {
     const token = useSelector(state => state.auth.token)
     const isLoadindUser = useSelector(getLoading)
 
-    // const [searchParams] = useSearchParams();
-    // const usertoken = searchParams.get('token'); 
-    // const current = usertoken ? usertoken : token
+    const [searchParams] = useSearchParams();
+    const usertoken = searchParams.get('token'); 
+    const current = usertoken ? usertoken : token
+
 
 
     useEffect(() => {
-        if (token) {
+        if (current) {
             dispatch(operations.current())
         }
-    }, [token, dispatch])
+    }, [current, dispatch])
 
   return (
     <>
