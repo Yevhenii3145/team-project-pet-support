@@ -69,13 +69,12 @@
 .userData_box {
     display: block;
     width: 100%;
-    background: #ffffff;
-    box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
+    background-color: var(--card-color);
+    box-shadow: 7px 4px 14px var(--shadow);
     border-radius: 20px;
     margin-bottom: 47px;
     margin-top: 18px;
     padding-bottom: 20px;
-    background-color: $lightColor;
     padding: 20px 24px;
 
     @media screen and (min-width: 768px) {
@@ -93,6 +92,8 @@
         margin: 0;
         margin-left: -20px;
         padding: 0;
+
+
     }
 }
 

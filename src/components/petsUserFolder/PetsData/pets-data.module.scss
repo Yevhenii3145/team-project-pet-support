@@ -132,7 +132,7 @@
     }
 
     &::-webkit-scrollbar-track {
-      background: $background;
+      background: var(--card-color);
       border-radius: 5px;
     }
 

@@ -6,7 +6,7 @@
     flex-direction: column;
     width: 280px;
     background-color: var(--card-color);
-    box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
+    box-shadow: 7px 4px 14px var(--shadow);
     border-radius: 0px 0px 20px 20px;
 }
 
@@ -190,10 +190,10 @@ a[data-action="owner"] {
     font-size: 16px;
     line-height: 1.38;
     letter-spacing: 0.04em;
-    color: #FF6101;
+    color:#F59256;
 
-    background-color: $lightColor;
-    border: 2px solid #FF6101;
+    background-color: var(--delete-btn);
+    border: 2px solid #F59256;
     border-radius: 40px;
     cursor: pointer;
 }
@@ -239,6 +239,6 @@ a[data-action="owner"] {
     }
 
     .learn_more_btn {
-        box-shadow: 7px 4px 16px rgba(0, 0, 0, 0.08);
+        box-shadow: 7px 4px 16px var(--shadow);
     }
 }

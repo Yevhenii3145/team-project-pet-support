@@ -17,11 +17,17 @@ html[data-theme='light'] {
     --icon-edit-pet: #111;
     --notices-categories:#ffffff;
     --learn-more-btn:#ffffff;
+    --delete-btn: #ffffff;
     --search-input: #535353;
     --background-auth-nav-login:#ffffff;
     --background-auth-nav-register: #ffffff;
     --modal-input:#ffffff;
     --modal-close: #ffffff;
+    --modal-next-btn-color:#cccccc;
+    --modal-next-btn-text:#666666;
+    --shadow: rgba(0, 0, 0, 0.11);
+    --icon-menu-open:#111;
+    --icon-menu-close:#111;
     
 }
 
@@ -34,12 +40,19 @@ html[data-theme='dark'] {
   --icon-edit-pet:#dfd6d6;
   --notices-categories: #6a6a97;
   --learn-more-btn: #6a6a97;
+  --delete-btn:#6a6a97;
   --search-input: #dfd6d6;
   --auth-nav-text: #ffffff;
   --background-auth-nav-login: #6a6a97;
   --background-auth-nav-register: #6a6a97;
   --modal-input: #b6b6e2;
   --modal-close: #6a6a97;
+  --modal-next-btn-color: #c87070;
+  --modal-next-btn-text: #faeded;
+  --shadow: #363655;
+  --icon-menu-open: #ffffff;
+  --icon-menu-close: #ffffff;
+
 }
 
 
@@ -55,6 +68,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #111111;
   display: block;
+  background-color: var(--background-color);
   
 }
 

@@ -2,8 +2,8 @@
 
 .infoText {
     text-align: left;
-    color: #111111;
-    background-color: $lightColor;
+    color: var(--text-color);
+    background-color: var(--card-color);
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 500;
@@ -27,8 +27,8 @@
 .infoLabel {
     display: flex;
     text-align: left;
-    color: #111111;
-    background-color: $lightColor;
+    color: var(--text-color);
+    background-color: var(--card-color);
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 700;

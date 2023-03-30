@@ -3,29 +3,30 @@ import base from "../../../helpers/container.module.scss";
 
 import Logo from "components/headerFolder/Logo/Logo";
 import Nav from "components/headerFolder/Nav/Nav";
-import { useTheme } from '../../../hooks/theme';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+// import { useTheme } from '../../../hooks/theme';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const Header = () => {
-  const { theme, setTheme } = useTheme();
-  const [isChecked, setIsChecked] = useState(theme === 'dark');
+  // const { theme, setTheme } = useTheme();
+  // const [isChecked, setIsChecked] = useState(theme === 'dark');
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    setIsChecked(newTheme === 'dark');
-  };
+  // const toggleTheme = () => {
+  //   const newTheme = theme === 'dark' ? 'light' : 'dark';
+  //   setTheme(newTheme);
+  //   setIsChecked(newTheme === 'dark');
+  // };
 
 
   return (
-    <header className={scss.header}>
-      <div className={base.container}>
-        <div className={scss.theme_box}>
+    <header className={scss.header} id="header">
+      <div className={`${base.container} ${scss.container_header}`}>
+        {/* <div className={scss.theme_box}> */}
           <Logo />
-          <label className={scss.toggle}>
+          {/* <>
+            <label className={scss.toggle}>
               <input type="checkbox" checked={isChecked} onChange={toggleTheme} />
               <span className={scss.slider} />
               <div className={scss.fa_icon}>
@@ -33,7 +34,8 @@ const Header = () => {
               <FontAwesomeIcon icon={faMoon} className={`${isChecked ? scss.fa_moon : scss.fa_moon_hidden}`} />
               </div>
           </label>
-        </div>
+          </> */}
+        {/* </div> */}
         <Nav />
       </div>
     </header>

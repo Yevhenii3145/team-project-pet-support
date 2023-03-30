@@ -9,7 +9,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 300;
-    background-color: $background;
+    background-color: var(--background-color);
     }
 
     @media screen and (min-width: 1280px) {

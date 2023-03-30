@@ -9,6 +9,7 @@
     text-align: center;
     background-color: var(--card-color);
 
+
     @media screen and (min-width: 768px) {
         display: flex;
         flex-direction: row-reverse;
@@ -22,6 +23,7 @@
     @media screen and (min-width: 1280px) {
         display: block;
         padding: 20px 16px 16px 18px;
+        border-radius: 0 40px 40px 0;
 
     }
 }
@@ -190,6 +192,7 @@ position: relative;
     top: -8px;
     right: -14px;
     font-size: 12px;
+    color: var(--text-color);
 
     @media screen and (min-width: 768px) {
         top: -13px;

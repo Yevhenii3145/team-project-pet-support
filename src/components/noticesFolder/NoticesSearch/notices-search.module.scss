@@ -22,7 +22,7 @@
   border-radius: 20px;
   font-size: 16px;
   padding-left: 12px;
-  box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
+  box-shadow: 7px 4px 14px  var(--shadow);
   background-color: var(--notices-categories);
 
   @media (min-width: 768px) {
