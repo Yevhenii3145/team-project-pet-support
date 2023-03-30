@@ -55,7 +55,7 @@ const NoticeCategoryItem = ({ notice, value }) => {
 
     const btnAddToFavorite = async noticeId => {
         if (!isLogin) {
-            Notify.failure('You need authorization', {
+            Notify.failure(t('NoticesPage.needAuthorization'), {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
@@ -95,9 +95,9 @@ const NoticeCategoryItem = ({ notice, value }) => {
     const btnDeleteNotice = noticeId => {
         Confirm.show(
             '',
-            'Are you sure you want to delete notis?',
-            'Yes',
-            'No',
+            t('NoticesPage.deleteNotis'),
+            t('NoticesPage.yes'),
+            t('NoticesPage.no'),
             () => {
                 dispatch(deleteNotice(noticeId))
             },

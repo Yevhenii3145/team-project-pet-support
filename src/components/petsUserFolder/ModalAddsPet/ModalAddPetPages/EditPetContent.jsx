@@ -63,7 +63,7 @@ const EditPetContent = ({ close, _id }) => {
         const reader = new FileReader()
         const image = e.target.files[0]
         if (image?.size > 5242880) {
-            Notify.warning('File is too big, please download max 5 mb!', {
+            Notify.warning(t('UserPage.modalAddPet.bigSizeImage'), {
                 timeout: 6000,
                 distance: '100px',
                 opacity: '0.8',
@@ -104,7 +104,7 @@ const EditPetContent = ({ close, _id }) => {
         setPetDate(date.value)
         setPetBreed(breed.value)
         if (new Date(petDate) >= new Date(formatDate)) {
-            return Notify.failure('Please choose a date no later than today!', {
+            return Notify.failure(t('UserPage.modalAddPet.dateFalse'), {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,

@@ -26,15 +26,14 @@ const PetsInfo = () => {
         const reversDate = e.slice(0, 10).split('-').reverse()
         return reversDate.join('.')
     }
+    const textEmptyPetsList = t('UserPage.pets.emptyPetsList')
 
     return (
         <div className={style.overflow}>
             <ul className={scss.petList_container}>
                 {loading && <Loader />}
                 {!loading && pets.length === 0 ? (
-                    <EmptyPetsList
-                        text={`${userName} hasn't added any own animals to yourself list yet`}
-                    />
+                    <EmptyPetsList text={`${userName} ${textEmptyPetsList}`} />
                 ) : (
                     pets.map(
                         ({ name, birthday, breed, image, comments, _id }) => {

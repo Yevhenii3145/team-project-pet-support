@@ -29,7 +29,7 @@ const NoticesSearch = () => {
 
     const getSearchWord = async value => {
         if (!value) {
-            Notify.failure('You need to enter something', {
+            Notify.failure(t('NoticesPage.searchError'), {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,

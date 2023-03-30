@@ -21,7 +21,7 @@ const AddNoticeButton = () => {
             setModalShow(true)
             document.body.style.overflow = 'hidden'
         } else {
-            Notify.failure('You need authorization', {
+            Notify.failure(t('NoticesPage.needAuthorization'), {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,

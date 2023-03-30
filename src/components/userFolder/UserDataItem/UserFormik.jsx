@@ -131,7 +131,7 @@ export function UserFormik() {
             return
         }
         if (!name.value) {
-            return Notify.failure('Required!', {
+            return Notify.failure(t('UserPage.error.required'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
@@ -152,7 +152,7 @@ export function UserFormik() {
             return
         }
         if (!birthday.value) {
-            return Notify.failure('Required!', {
+            return Notify.failure(t('UserPage.error.required'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
@@ -174,7 +174,7 @@ export function UserFormik() {
         }
         console.log(phone.value.length)
         if (!phone.value) {
-            return Notify.failure('Required!', {
+            return Notify.failure(t('UserPage.error.required'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
@@ -185,7 +185,7 @@ export function UserFormik() {
             })
         }
         if (phone.value.length !== 12) {
-            return Notify.failure('Is not correct format, must 380xxxxxxxxx!', {
+            return Notify.failure(t('UserPage.error.numberFormat'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
@@ -200,7 +200,7 @@ export function UserFormik() {
                 phone.value
             )
         ) {
-            return Notify.failure('Is not correct format, must 380xxxxxxxxx!', {
+            return Notify.failure(t('UserPage.error.numberFormat'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
@@ -222,7 +222,7 @@ export function UserFormik() {
             return
         }
         if (!city.value) {
-            return Notify.failure('Required!', {
+            return Notify.failure(t('UserPage.error.required'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',
@@ -233,7 +233,7 @@ export function UserFormik() {
             })
         }
         if (!/^[aA-zZ]/.test(city.value)) {
-            return Notify.failure('Is not correct format, must only letters!', {
+            return Notify.failure(t('UserPage.error.onlyLetters'), {
                 timeout: 5000,
                 distance: '100px',
                 opacity: '0.8',

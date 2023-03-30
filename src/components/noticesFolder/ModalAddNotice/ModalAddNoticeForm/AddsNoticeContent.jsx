@@ -78,7 +78,7 @@ const AddsNoticeContent = ({ close }) => {
         const reader = new FileReader()
         const image = e.target.files[0]
         if (image?.size > 5242880) {
-            Notify.warning('File is too big, please download max 5 mb!', {
+            Notify.warning(t('NoticesPage.modalAddPet.notify.bigSizeImage'), {
                 timeout: 6000,
                 distance: '100px',
                 opacity: '0.8',
@@ -100,24 +100,30 @@ const AddsNoticeContent = ({ close }) => {
     const handleSubmitForStepOne = e => {
         e.preventDefault()
         if (petCategory === '') {
-            return Notify.warning('Please, selected type of category!', {
-                distance: '100px',
-                opacity: '0.8',
-                useIcon: false,
-                fontSize: '18px',
-                borderRadius: '20px',
-                showOnlyTheLastOne: true,
-            })
+            return Notify.warning(
+                t('NoticesPage.modalAddPet.notify.petCategoryFalse'),
+                {
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '18px',
+                    borderRadius: '20px',
+                    showOnlyTheLastOne: true,
+                }
+            )
         }
         if (petDate === '') {
-            return Notify.warning('Please, selected date of birth!', {
-                distance: '100px',
-                opacity: '0.8',
-                useIcon: false,
-                fontSize: '18px',
-                borderRadius: '20px',
-                showOnlyTheLastOne: true,
-            })
+            return Notify.warning(
+                t('NoticesPage.modalAddPet.notify.petBirthFalse'),
+                {
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '18px',
+                    borderRadius: '20px',
+                    showOnlyTheLastOne: true,
+                }
+            )
         }
         const form = e.currentTarget
         const { title, name, date, breed } = form.elements
@@ -131,28 +137,34 @@ const AddsNoticeContent = ({ close }) => {
     const handleSubmit = e => {
         e.preventDefault()
         if (currentRadioValue === '') {
-            return Notify.warning('Please, selected type of sex!', {
-                distance: '100px',
-                opacity: '0.8',
-                useIcon: false,
-                fontSize: '18px',
-                borderRadius: '20px',
-                showOnlyTheLastOne: true,
-            })
+            return Notify.warning(
+                t('NoticesPage.modalAddPet.notify.petSexFalse'),
+                {
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '18px',
+                    borderRadius: '20px',
+                    showOnlyTheLastOne: true,
+                }
+            )
         }
         if (
             !cities.find(
                 city => `${city.city}, ${city.admin_name}` === petLocation
             )
         ) {
-            return Notify.warning('Please, selected location from the list!', {
-                distance: '100px',
-                opacity: '0.8',
-                useIcon: false,
-                fontSize: '18px',
-                borderRadius: '20px',
-                showOnlyTheLastOne: true,
-            })
+            return Notify.warning(
+                t('NoticesPage.modalAddPet.notify.petLocationFalse'),
+                {
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '18px',
+                    borderRadius: '20px',
+                    showOnlyTheLastOne: true,
+                }
+            )
         }
         const form = e.currentTarget
         const { image, comments } = form.elements
@@ -200,14 +212,17 @@ const AddsNoticeContent = ({ close }) => {
 
     const validateFile = () => {
         if (!imageURL) {
-            return Notify.warning('Please add a photo!', {
-                distance: '100px',
-                opacity: '0.8',
-                useIcon: false,
-                fontSize: '18px',
-                borderRadius: '20px',
-                showOnlyTheLastOne: true,
-            })
+            return Notify.warning(
+                t('NoticesPage.modalAddPet.notify.petImageFalse'),
+                {
+                    distance: '100px',
+                    opacity: '0.8',
+                    useIcon: false,
+                    fontSize: '18px',
+                    borderRadius: '20px',
+                    showOnlyTheLastOne: true,
+                }
+            )
         }
     }
 

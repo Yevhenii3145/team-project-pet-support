@@ -20,6 +20,7 @@ import LoadMore from 'components/utilsFolder/LoadMore/LoadMore'
 import { Events, scroller } from 'react-scroll'
 import { useState, useMemo, useEffect } from 'react'
 import { setNameCategory } from 'redux/slices/noticesSlice'
+import { useTranslation } from 'react-i18next'
 
 const NoticesCategoriesList = () => {
     const dispatch = useDispatch()
@@ -34,6 +35,7 @@ const NoticesCategoriesList = () => {
     const limit = 8
     const [searchParams, setSearchParams] = useSearchParams()
     const value = searchParams.get('keyword')
+    const { t } = useTranslation()
 
     const memoizedValue = useMemo(() => {
         const data = {
@@ -106,7 +108,7 @@ const NoticesCategoriesList = () => {
                 />
             ) : null}
             {error &&
-                Notify.failure('Oops, something went wrong', {
+                Notify.failure(t('NoticesPage.error'), {
                     distance: '100px',
                     opacity: '0.8',
                     useIcon: false,

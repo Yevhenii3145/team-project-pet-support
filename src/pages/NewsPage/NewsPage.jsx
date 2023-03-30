@@ -17,19 +17,6 @@ const NewsPage = () => {
 
     const items = t('NewsPage', { returnObjects: true })
 
-    // const [data, setData] = useState([])
-
-    // useEffect(() => {
-    //     const formatDate = items.NewsList.map(item => ({
-    //         ...item,
-    //         date: Number(format(new Date(item.date), 'T')),
-    //     }))
-    //     const sortDate = formatDate.sort(function (a, b) {
-    //         return b.date - a.date
-    //     })
-    //     setData(sortDate)
-    // }, [items.NewsList])
-
     const sortDate = arr => {
         const formatDate = arr.map(item => ({
             ...item,
@@ -65,7 +52,7 @@ const NewsPage = () => {
             return news.title.toLocaleLowerCase().includes(normalizedFilter)
         })
         if (filterlist.length === 0) {
-            Notify.warning('Write a correct request', {
+            Notify.warning(t('NewsPage.filterFalse'), {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,

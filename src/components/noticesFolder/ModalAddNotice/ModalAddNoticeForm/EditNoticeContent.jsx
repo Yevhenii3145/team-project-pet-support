@@ -70,7 +70,7 @@ const EditNoticeContent = ({ close, notice, noticeCategory }) => {
         const reader = new FileReader()
         const image = e.target.files[0]
         if (image?.size > 5242880) {
-            Notify.warning('File is too big, please download max 5 mb!', {
+            Notify.warning(t('NoticesPage.modalAddPet.notify.bigSizeImage'), {
                 timeout: 6000,
             })
             setImageURL(null)
@@ -87,16 +87,16 @@ const EditNoticeContent = ({ close, notice, noticeCategory }) => {
         e.preventDefault()
         if (petCategory === '') {
             return Report.warning(
-                'Warning!',
-                'Please, selected type of category!',
-                'Okay'
+                t('NoticesPage.modalAddPet.notify.warning'),
+                t('NoticesPage.modalAddPet.notify.petCategoryFalse'),
+                t('NoticesPage.modalAddPet.notify.Okay')
             )
         }
         if (petDate === '') {
             return Report.warning(
-                'Warning!',
-                'Please, selected date of birth!',
-                'Okay'
+                t('NoticesPage.modalAddPet.notify.warning'),
+                t('NoticesPage.modalAddPet.notify.petBirthFalse'),
+                t('NoticesPage.modalAddPet.notify.Okay')
             )
         }
 
@@ -113,9 +113,9 @@ const EditNoticeContent = ({ close, notice, noticeCategory }) => {
         e.preventDefault()
         if (currentRadioValue === '') {
             return Report.warning(
-                'Warning!',
-                'Please, selected type of sex!',
-                'Okay'
+                t('NoticesPage.modalAddPet.notify.warning'),
+                t('NoticesPage.modalAddPet.notify.petSexFalse'),
+                t('NoticesPage.modalAddPet.notify.Okay')
             )
         }
         if (
@@ -125,9 +125,9 @@ const EditNoticeContent = ({ close, notice, noticeCategory }) => {
         ) {
             console.log('not')
             return Report.warning(
-                'Warning!',
-                'Please, selected location from the list!',
-                'Okay'
+                t('NoticesPage.modalAddPet.notify.warning'),
+                t('NoticesPage.modalAddPet.notify.petLocationFalse'),
+                t('NoticesPage.modalAddPet.notify.Okay')
             )
         }
         const form = e.currentTarget

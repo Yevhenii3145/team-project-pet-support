@@ -12,6 +12,7 @@
     "NewsPage": {
         "title": "News",
         "search": "Search",
+        "filterFalse": "Write a correct request",
         "NewsList": [
             {
                 "title": "On the Day of the Veterinarian, a free training on providing first aid to animals will be held in the capital",
@@ -144,9 +145,11 @@
             "inGoodHands": "in good hands",
             "all": "all",
             "favoriteAds": "favorite ads",
-            "myAds": "my ads"
+            "myAds": "my ads",
+            "error": "Oops, something went wrong"
         },
         "search": "Search",
+        "searchError": "You need to enter something",
         "card": {
             "breed": "Breed",
             "place": "Place",
@@ -198,12 +201,26 @@
                 "back": "Back"
             },
             "male": "Male",
-            "female": "Female"
+            "female": "Female",
+            "notify": {
+                "bigSizeImage": "File is too big, please download max 5 mb!",
+                "petCategoryFalse": "Please, selected type of category!",
+                "petBirthFalse": "Please, selected date of birth!",
+                "petSexFalse": "Please, selected type of sex!",
+                "petLocationFalse": "Please, selected location from the list!",
+                "petImageFalse": "Please add a photo!",
+                "warning": "Warning!",
+                "okay": "Okay"
+            }
         },
         "addPetBtn": "Add pet",
+        "needAuthorization": "You need authorization",
         "emptyFavoriteList": "Add your favorite animals so as not to lose",
         "EmptyOwnList": "You haven`t added any animals to your list yet",
-        "loadMore": "Load more..."
+        "loadMore": "Load more...",
+        "deleteNotis": "Are you sure you want to delete notis?",
+        "yes": "Yes",
+        "no": "No"
     },
     "OurFriendsPage": {
         "title": "Our friends",
@@ -480,7 +497,8 @@
             },
             "btn": {
                 "addPet": "Add pet"
-            }
+            },
+            "emptyPetsList": "hasn't added any own animals to yourself list yet"
         },
         "guest": {
             "infoTitle": "User information",
@@ -507,7 +525,10 @@
                 "cancel": "Cancel",
                 "done": "Done",
                 "back": "Back"
-            }
+            },
+            "bigSizeImage": "File is too big, please download max 5 mb!",
+            "imageFalse": "Please add a photo!",
+            "dateFalse": "Please choose a date no later than today!"
         },
         "logoutModal": {
             "question": "Do you really want to logout?",
@@ -518,6 +539,79 @@
             "question": "Are you sure you want to delete your account?",
             "yes": "Yes",
             "no": "No"
+        },
+        "error": {
+            "required": "Required!",
+            "numberFormat": "Is not correct format, must 380xxxxxxxxx!",
+            "onlyLetters": "Is not correct format, must only letters!"
         }
+    },
+    "AuthForm": {
+        "stepOne": {
+            "email": "Email",
+            "password": "Password",
+            "passwordTwo": "Confirm Password",
+            "confirm": "Agree with the",
+            "confirmLink": "terms of use of the site",
+            "btnNext": "Next"
+        },
+        "stepTwo": {
+            "name": "Name",
+            "cityRegion": "City, region",
+            "phone": "Mobile phone",
+            "btnBack": "Go back",
+            "btnRegister": "Register"
+        },
+        "registration": "Registration",
+        "haveAccount": "Already have an account?",
+        "login": "Login",
+        "google": "Or sign in with",
+        "error": {
+            "passwordMin": "The minimum number of characters in the field is 10.",
+            "passwordMax": "The maximum number of characters in the field is 63.",
+            "passwordFalse": "Password is required",
+            "spaces": "Invalid password, must not include spaces",
+            "emailFalse": "E-mail address required",
+            "emailSymbol": "The e-mail address is not correct, there must be at least 2 characters before the \"@\" symbol, the hyphen cannot be at the beginning, and the e-mail cannot contain Latin letters",
+            "name": "Name is required!",
+            "region": "Region is required!",
+            "numberFormat ": "Field must contain only numbers, format +380xxxxxxxxx!",
+            "numberFalse": "Phone number is required!",
+            "numberMin": "Cannot be less than nine characters!",
+            "numberMax": "Cannot be more than nine characters!",
+            "passwordsSameValue": "Your passwords must have the same value!",
+            "regionList": "Please select a region from the list!"
+        }
+    },
+    "LoginForm": {
+        "login": "Login",
+        "email": "Email",
+        "password": "Password",
+        "btnLogin": "Login",
+        "resendVerification": "Resend verification email? Click",
+        "forgotPassword": "Forgot your password? Click",
+        "here": "here",
+        "notAccount": "Don't have an account?",
+        "register": "Register"
+    },
+    "VerifyForm": {
+        "email": "Email",
+        "password": "Password",
+        "verify": "Verify",
+        "back": "Go to back?",
+        "login": "Login"
+    },
+    "ResetPasswordForm": {
+        "title": "Please, enter your email to reset password:",
+        "email": "Email",
+        "resetPassword": "Reset password",
+        "back": "Go to back?",
+        "login": "Login"
+    },
+    "changePasswordForm": {
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "changePassword": "Change password",
+        "recoverPassword": "Recover password"
     }
 }

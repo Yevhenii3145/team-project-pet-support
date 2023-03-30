@@ -50,7 +50,7 @@ const AddsPetContent = ({ close }) => {
         const reader = new FileReader()
         const image = e.target.files[0]
         if (image?.size > 5242880) {
-            Notify.warning('File is too big, please download max 5 mb!', {
+            Notify.warning(t('UserPage.modalAddPet.bigSizeImage'), {
                 timeout: 6000,
                 distance: '100px',
                 opacity: '0.8',
@@ -115,7 +115,7 @@ const AddsPetContent = ({ close }) => {
 
     const validateFile = () => {
         if (!imageURL) {
-            Notify.failure('Please add a photo!', {
+            Notify.failure(t('UserPage.modalAddPet.imageFalse'), {
                 distance: '100px',
                 opacity: '0.8',
                 useIcon: false,
