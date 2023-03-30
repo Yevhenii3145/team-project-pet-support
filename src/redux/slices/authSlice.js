@@ -17,8 +17,8 @@ export const authSlice = createSlice({
         userId: "",
         avatar: null,
       },
-      token: usertoken ? usertoken : null,
-      isLogin: usertoken ? true : false,
+      token: null,
+      isLogin: false,
       loading: false,
       error: null,
 
@@ -40,10 +40,10 @@ export const authSlice = createSlice({
         state.user.email = action.payload.email;
         state.user.phone = action.payload.phone;
         state.user.city = action.payload.city;
-        // if(usertoken) {
-        //     state.token = usertoken;
-        //     state.isLogin = true;
-        // }
+        if(usertoken) {
+            state.token = usertoken;
+            state.isLogin = true;
+        }
       },
       [operations.registerNewUser.rejected](state) {
         state.loading = false;
@@ -64,8 +64,7 @@ export const authSlice = createSlice({
         state.loading = false;
         state.user.email = payload.email;
         state.user.userId = payload.userId;
-        state.token = payload.token;
-        // state.token = usertoken ? usertoken : payload.token;
+        state.token = usertoken ? usertoken : payload.token;
         state.isLogin = true;
       },
       [operations.login.rejected] (state, { payload }) {
@@ -183,6 +182,9 @@ export const authSlice = createSlice({
       },
       [operations.current.fulfilled] (state, { payload }) {
         state.loading = false;
+        if(usertoken) {
+            state.token = usertoken;
+        }
         state.user.avatar = payload.avatarURL;
         state.user.city = payload.city;
         state.user.email = payload.email;
@@ -190,9 +192,6 @@ export const authSlice = createSlice({
         state.user.phone = payload.phone;
         state.user.userId = payload.userId;
         state.isLogin = true;
-        // if(usertoken) {
-        //     state.token = usertoken;
-        // }
       },
       [operations.current.rejected] (state, { payload }) {
         state.loading = false;
