@@ -12,9 +12,9 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 1.35;
-    color: #181c27;
+    color: var(--text-color);
 
-    background-color: #fdf7f2;
+    background-color: var(--background-color);
     border: none;
     /* border-radius: ${props => props.theme.radii.big}; */
     padding: 0 10px;

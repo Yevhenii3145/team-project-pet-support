@@ -3,12 +3,13 @@
 .main {
     padding-top: 42px;
     padding-bottom: 50px;
+    background-color: var(--background-color);
 }
 
 .main_title {
     line-height: 1.38;
     text-align: center;
-
+    color: var(--text-color);
     margin-bottom: 28px;
 }
 

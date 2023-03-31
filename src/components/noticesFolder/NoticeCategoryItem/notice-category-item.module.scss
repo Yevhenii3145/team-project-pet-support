@@ -5,8 +5,8 @@
     display: flex;
     flex-direction: column;
     width: 280px;
-    background-color: $lightColor;
-    box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
+    background-color: var(--card-color);
+    box-shadow: 7px 4px 14px var(--shadow);
     border-radius: 0px 0px 20px 20px;
 }
 
@@ -34,6 +34,7 @@
     line-height: 1.36;
     letter-spacing: -0.01em;
     overflow: hidden;
+    color: var(--text-color);
 }
 
 .card_info_list {
@@ -53,7 +54,12 @@
 
 .card_info_item_text {
     min-width: 60px;
+    color: var(--text-color);
 }
+
+p {
+color: var(--text-color);
+}   
 
 a[data-action="owner"] {
     font-size: 16px;
@@ -67,7 +73,7 @@ a[data-action="owner"] {
     line-height: 19px;
     word-break: break-word;
   
-    color: #000000;
+    color: var(--text-color);
 
     &:hover, &:focus {
         color: $accentColor;
@@ -139,6 +145,7 @@ a[data-action="owner"] {
     height: 88px;
     margin-left: auto;
     margin-right: auto;
+    
 }
 
 .learn_more_btn {
@@ -157,7 +164,7 @@ a[data-action="owner"] {
     letter-spacing: 0.04em;
     color: $accentColor;
 
-    background-color: $lightColor;
+    background-color:var(--learn-more-btn);
     border: 2px solid $accentColor;
     border-radius: 40px;
     cursor: pointer;
@@ -183,10 +190,10 @@ a[data-action="owner"] {
     font-size: 16px;
     line-height: 1.38;
     letter-spacing: 0.04em;
-    color: #FF6101;
+    color:#F59256;
 
-    background-color: $lightColor;
-    border: 2px solid #FF6101;
+    background-color: var(--delete-btn);
+    border: 2px solid #F59256;
     border-radius: 40px;
     cursor: pointer;
 }
@@ -200,7 +207,7 @@ a[data-action="owner"] {
     align-items: center;
     width: 158px;
     height: 28px;
-
+    color: #111;
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33;
@@ -232,6 +239,6 @@ a[data-action="owner"] {
     }
 
     .learn_more_btn {
-        box-shadow: 7px 4px 16px rgba(0, 0, 0, 0.08);
+        box-shadow: 7px 4px 16px var(--shadow);
     }
 }

@@ -13,6 +13,7 @@
   background-repeat: no-repeat;
   background-position: bottom;
   box-sizing: content-box;
+  background-color: var(--background-color);
   
     @media screen and (min-width: 768px) {
       padding-top: 64px;
@@ -100,7 +101,7 @@
 font-weight: 700;
 font-size: 32px;
 line-height: 1.4;
-color: $darkColor;
+color: var(--text-color);
 margin-bottom: 57px;
 
 @media screen and (min-width: 768px) {

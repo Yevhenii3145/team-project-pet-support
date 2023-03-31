@@ -34,7 +34,7 @@ export default function LangBtn() {
             <button
                 type="button"
                 className={style.lang_btn}
-                style={{ color: en === true ? '#F59256' : '#181c27' }}
+                style={{ color: en === true ? '#F59256' : 'var(--text-color)' }}
                 onClick={() => handleClick('en')}
             >
                 EN
@@ -42,7 +42,7 @@ export default function LangBtn() {
             <button
                 type="button"
                 className={style.lang_btn}
-                style={{ color: ua === true ? '#F59256' : '#181c27' }}
+                style={{ color: ua === true ? '#F59256' : 'var(--text-color)' }}
                 onClick={() => handleClick('ua')}
             >
                 UA
