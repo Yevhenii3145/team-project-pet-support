@@ -300,8 +300,11 @@ export function UserFormik() {
                                     name="email"
                                     value={userEmail}
                                     disabled
-                                    className={`${scss.userDataForm_field} ${scss.userDataForm_field_email}`}
+                                    className={scss.userDataForm_field}
                                 />
+                                <button className={scss.iconEdit_btn}>
+                                    <SvgInsert id="icon-email"/>
+                                </button>
                             </div>
                         </form>
 
@@ -322,7 +325,8 @@ export function UserFormik() {
                                         type="text"
                                         name="birthday"
                                         value={userBirthday}
-                                        className={`${scss.userDataForm_field_active} ${scss.userDataForm_birthday}`}
+                                        style={{cursor:'auto'}}
+                                        className={scss.userDataForm_field_active}
                                     />
                                 ) : (
                                     <Flatpickr
@@ -337,6 +341,7 @@ export function UserFormik() {
                                         name="birthday"
                                         value={userBirthday}
                                         disabled
+                                        style={{cursor:'auto'}}
                                         className={`${scss.userDataForm_field} ${scss.userDataForm_birthday}`}
                                     />
                                 )}
