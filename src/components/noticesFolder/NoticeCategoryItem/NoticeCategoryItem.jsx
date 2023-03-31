@@ -65,7 +65,7 @@ const NoticeCategoryItem = ({ notice, value }) => {
             })
             return
         } else if (!isFavorite) {
-            if (filter === null) {
+            if (filter !== null) {
                 dispatch(addNoticeToFavorite(noticeId))
                 setIsFavorite(true)
                 return

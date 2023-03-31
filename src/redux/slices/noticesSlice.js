@@ -28,21 +28,21 @@ const noticesSlice = createSlice({
         [fetchCategoryNotices.fulfilled] (state, action) {
             state.loading = false;
             state.error = null;
-            state.totalNotices = action.payload.data.countNotices;
+            state.totalNotices = action.payload.countNotices;
             if(state.nameCategory[0] === 'own') {
               state.nameCategory[1] === 1 
-              ? state.items = action.payload.data.notices 
-              : state.items.push(...action.payload.data.notices)
+              ? state.items = action.payload.notices 
+              : state.items.push(...action.payload.notices)
               return
             } else if(state.nameCategory[0] === 'favorite') {
               state.nameCategory[1] === 1 
-              ? state.items = action.payload.data.notices 
-              : state.items.push(...action.payload.data.notices)
+              ? state.items = action.payload.notices 
+              : state.items.push(...action.payload.notices)
               return
             }
             state.nameCategory[1] === 1
-              ? state.items = action.payload.data.notices
-              : state.items.push(...action.payload.data.notices)
+              ? state.items = action.payload.notices
+              : state.items.push(...action.payload.notices)
         },
         [fetchCategoryNotices.rejected] (state, action) {
             state.loading = false;
@@ -67,7 +67,7 @@ const noticesSlice = createSlice({
               showOnlyTheLastOne: true})
           },
           [addNoticeToFavorite.fulfilled] (state, action) {
-            state.favoriteNotices = action.payload;
+            // state.favoriteNotices = action.payload;
           },
           [addNoticeToFavorite.rejected] (state, action) {
             state.error = action.payload;
