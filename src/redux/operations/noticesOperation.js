@@ -4,9 +4,6 @@ import axios from 'axios';
 import { setAuthHeader } from "redux/operations/userOperations";
 
 
-const {REACT_APP_BASE_URL} = process.env;
-axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`;
-
 const searchParams = new URLSearchParams(document.location.search);
 const usertoken = searchParams.get('token');
 
@@ -14,7 +11,7 @@ export const fetchCategoryNotices = createAsyncThunk(
   'notices/fetchNotices',
   async (value, thunkAPI) => {
     try {
-      const data = await api.getCategoryNotices(value);
+      const {data} = await api.getCategoryNotices(value);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -26,7 +23,7 @@ export const addNoticeToFavorite = createAsyncThunk(
   'notices/favoriteNotice',
   async (noticeId, thunkAPI) => {
     try {
-      const data = await api.addNoticeToFavorite(noticeId);
+      const {data} = await api.addNoticeToFavorite(noticeId);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -38,8 +35,7 @@ export const deleteFavoriteNotice = createAsyncThunk(
   'notices/deleteFavorites',
   async (noticeId, thunkAPI) => {
     try {
-      const data = await api.deleteNoticeFromFavorite(noticeId);
-      return data;
+      await api.deleteNoticeFromFavorite(noticeId);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -62,7 +58,6 @@ export const getAllFavorites = createAsyncThunk(
   'notices/getFavorite',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    // const persistedToken = state.auth.token;
     const persistedToken = usertoken ? usertoken : state.auth.token;
 
     if (persistedToken === null) {
@@ -107,7 +102,7 @@ export const editNotice = createAsyncThunk(
   'notices/editNotice',
   async (dataNotice, thunkAPI) => {
     try {
-      const data = await api.edithNotice(dataNotice);
+      const {data} = await api.edithNotice(dataNotice);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

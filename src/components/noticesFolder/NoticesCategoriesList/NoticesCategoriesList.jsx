@@ -50,6 +50,12 @@ const NoticesCategoriesList = () => {
     }, [categoryName, page, limit, name])
 
     useEffect(() => {
+        if (isLogin) {
+            dispatch(getAllFavorites())
+        }
+    }, [isLogin, dispatch, name])
+
+    useEffect(() => {
         dispatch(setNameCategory([categoryName, page, filterPag]))
     }, [categoryName, page, filterPag, dispatch])
 
@@ -69,12 +75,6 @@ const NoticesCategoriesList = () => {
             Events.scrollEvent.remove('end')
         }
     })
-
-    useEffect(() => {
-        if (isLogin) {
-            dispatch(getAllFavorites())
-        }
-    }, [isLogin, dispatch])
 
     useEffect(() => {
         if (!value) {
