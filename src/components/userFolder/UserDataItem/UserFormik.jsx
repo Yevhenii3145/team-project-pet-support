@@ -7,8 +7,6 @@ import axios from 'axios'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import 'flatpickr/dist/themes/airbnb.css'
 import Flatpickr from 'react-flatpickr'
-
-// import { useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 const { REACT_APP_BASE_URL } = process.env
@@ -25,12 +23,8 @@ export function UserFormik() {
     const [userPhone, setUserPhone] = useState('')
     const [userCity, setUserCity] = useState('')
     const dateNow = new Date()
-    // const [searchParams] = useSearchParams()
-    // const usertoken = searchParams.get('token')
 
     const { t } = useTranslation()
-
-    // const current = usertoken ? usertoken : token
 
     const formatDate = date => {
         const dateFormat = new Date(date)
@@ -300,8 +294,11 @@ export function UserFormik() {
                                     name="email"
                                     value={userEmail}
                                     disabled
-                                    className={`${scss.userDataForm_field} ${scss.userDataForm_field_email}`}
+                                    className={scss.userDataForm_field}
                                 />
+                                <button className={scss.iconEdit_btn}>
+                                    <SvgInsert id="icon-email"/>
+                                </button>
                             </div>
                         </form>
 
@@ -322,7 +319,8 @@ export function UserFormik() {
                                         type="text"
                                         name="birthday"
                                         value={userBirthday}
-                                        className={`${scss.userDataForm_field_active} ${scss.userDataForm_birthday}`}
+                                        style={{cursor:'auto'}}
+                                        className={scss.userDataForm_field_active}
                                     />
                                 ) : (
                                     <Flatpickr
@@ -337,6 +335,7 @@ export function UserFormik() {
                                         name="birthday"
                                         value={userBirthday}
                                         disabled
+                                        style={{cursor:'auto'}}
                                         className={`${scss.userDataForm_field} ${scss.userDataForm_birthday}`}
                                     />
                                 )}
