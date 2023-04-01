@@ -36,6 +36,7 @@
     line-height: 1.33;
     width: 100%;
     justify-content: space-between;
+    cursor: auto;
 
     &:not(:last-child) {
         margin-bottom: 8px;
@@ -55,4 +56,5 @@
 span[data-action="link"]:hover, 
 span[data-action="link"]:focus {
 color: $accentColor;
+cursor: pointer;
 }
