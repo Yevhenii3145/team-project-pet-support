@@ -140,12 +140,12 @@
     "NoticesPage": {
         "title": "Find your favorite pet",
         "categories": {
-            "sell": "sell",
-            "lostFound": "lost/found",
-            "inGoodHands": "in good hands",
-            "all": "all",
-            "favoriteAds": "favorite ads",
-            "myAds": "my ads",
+            "sell": "Sell",
+            "lostFound": "Lost/found",
+            "inGoodHands": "In good hands",
+            "all": "All",
+            "favoriteAds": "Favorite ads",
+            "myAds": "My ads",
             "error": "Oops, something went wrong"
         },
         "search": "Search",
