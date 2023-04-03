@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.ad121572.css",
+    "main.css": "/static/css/main.963181db.css",
     "main.js": "/static/js/main.7dc002fc.js",
     "static/css/766.af1e52f1.chunk.css": "/static/css/766.af1e52f1.chunk.css",
     "static/js/766.f6081f8a.chunk.js": "/static/js/766.f6081f8a.chunk.js",
@@ -61,7 +61,7 @@
     "static/media/wave-tablet-home.svg": "/static/media/wave-tablet-home.4e26cbf50ac121bc16ab.svg",
     "index.html": "/index.html",
     "static/media/getFetch.cjs": "/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.ad121572.css.map": "/static/css/main.ad121572.css.map",
+    "main.963181db.css.map": "/static/css/main.963181db.css.map",
     "main.7dc002fc.js.map": "/static/js/main.7dc002fc.js.map",
     "766.af1e52f1.chunk.css.map": "/static/css/766.af1e52f1.chunk.css.map",
     "766.f6081f8a.chunk.js.map": "/static/js/766.f6081f8a.chunk.js.map",
@@ -105,7 +105,7 @@
     "277.34ba3b32.chunk.js.map": "/static/js/277.34ba3b32.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ad121572.css",
+    "static/css/main.963181db.css",
     "static/js/main.7dc002fc.js"
   ]
 }
