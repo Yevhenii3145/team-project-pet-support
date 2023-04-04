@@ -2,279 +2,281 @@
 @import '../../../../helpers/buttons.module.scss';
 
 .modalAdds_page {
-  text-align: center;
-  background: var(--card-color);
+    text-align: center;
+    background: var(--card-color);
 }
 
 .modalAdds_page__tittle {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 33px;
-  letter-spacing: 0.04em;
-  margin: 0px 0px 20px;
-  color: var(--text-color);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 33px;
+    letter-spacing: 0.04em;
+    margin: 0px 0px 20px;
+    color: var(--text-color);
 }
 
 .modalAdds_page__input {
-  display: block;
-  width: 100%;
-  padding: 14px 11px 12px;
-  background: $background;
-  border: 1px solid rgba(245, 146, 86, 0.5);
-  border-radius: 40px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.4;
-  letter-spacing: 0.04em;
-  color: rgba(27, 27, 27, 0.6);
-  margin-top: 8px;
-  background-color: var(--modal-input);
+    display: block;
+    width: 100%;
+    padding: 14px 11px 12px;
+    background: $background;
+    border: 1px solid rgba(245, 146, 86, 0.5);
+    border-radius: 40px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    color: rgba(27, 27, 27, 0.6);
+    margin-top: 8px;
+    background-color: var(--modal-input);
 }
 
 .modalAdds_page__label {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 1.5;
-  color: var(--text-color);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--text-color);
 }
 
 .modalAdds_page__button {
-  display: inline-block;
-  margin-top: 40px;
-  // background-color: var(--modal-input);
-  // color: var(--text-color);
+    display: inline-block;
+    margin-top: 40px;
+    // background-color: var(--modal-input);
+    // color: var(--text-color);
 }
 
 .addspet__imgInput {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 
 .addspet__imgLabel {
-  background: var(--modal-input);
-  background-image: url(../../../../images/add-pet.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-top: 8px;
-  margin-right: 160px;
-  border-radius: 20px;
-  display: inline-block;
-  width: 116px;
-  height: 116px;
+    background: var(--modal-input);
+    background-image: url(../../../../images/add-pet.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 8px;
+    margin-right: 160px;
+    border-radius: 20px;
+    display: inline-block;
+    width: 116px;
+    height: 116px;
 
-  @media screen and (min-width: 768px) {
-    margin-right: 350px;
-    margin-top: 12px;
-    width: 140px;
-    height: 140px;
-  }
+    @media screen and (min-width: 768px) {
+        margin-right: 350px;
+        margin-top: 12px;
+        width: 140px;
+        height: 140px;
+    }
 
-  &:hover {
-    cursor: pointer;
-    background-color: rgba(245, 146, 86, 0.5);
-  }
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(245, 146, 86, 0.5);
+    }
 }
 
-.modalAdds_page__input_price{
-  display: flex;
-  margin-top: 8px;
+.modalAdds_page__input_price {
+    display: flex;
+    margin-top: 8px;
 }
 
-.modalAdds_page__input_select{
-  display: block;
-  padding: 14px 8px;
-  background: var(--modal-input);
-  border: 1px solid rgba(245, 146, 86, 0.5);
-  border-radius: 40px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.4;
-  letter-spacing: 0.04em;
-  color: rgba(27, 27, 27, 0.6);
-  outline: none;
-  text-align: center;
-    &:last-child{
-      margin-left: 10px;
-      width: 85%;
-      text-align: start;
-      padding: 14px 11px 12px;
+.modalAdds_page__input_select {
+    display: block;
+    padding: 14px 8px;
+    background: var(--modal-input);
+    border: 1px solid rgba(245, 146, 86, 0.5);
+    border-radius: 40px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    color: rgba(27, 27, 27, 0.6);
+    outline: none;
+    text-align: center;
+    &:last-child {
+        margin-left: 10px;
+        width: 85%;
+        text-align: start;
+        padding: 14px 11px 12px;
     }
 }
 
 .add__pet__container {
-  position: relative;
+    position: relative;
 }
 
 .addspetPhoto__container {
-  width: 116px;
-  height: 116px;
-  border-radius: 20px;
-  position: absolute;
-  overflow: hidden;
+    width: 116px;
+    height: 116px;
+    border-radius: 20px;
+    position: absolute;
+    overflow: hidden;
 
-  @media screen and (min-width: 768px) {
-    width: 140px;
-    height: 140px;
-  }
+    @media screen and (min-width: 768px) {
+        width: 140px;
+        height: 140px;
+    }
 }
 
 .addspet__photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .addspet__imgLabel_select {
-  background: $background;
-  border-radius: 20px;
-  display: inline-block;
-  min-width: 208px;
-  min-height: 208px;
+    background: $background;
+    border-radius: 20px;
+    display: inline-block;
+    min-width: 208px;
+    min-height: 208px;
 
-  &:hover {
-    cursor: pointer;
-    background-color: rgba(245, 146, 86, 0.5);
-  }
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(245, 146, 86, 0.5);
+    }
 }
 
 .modalAdds_page__field {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 26px;
-  color: #111111;
-  margin-bottom: 8px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    color: #111111;
+    margin-bottom: 8px;
 }
 
 .modal_notice__close {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    fill: var(--text-color);
 }
 
 .modalAdds_page_box {
-  display: block;
-  text-align: left;
-  width: 100%;
-  margin: 16px auto 0 0;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 16px auto 0 0;
 }
 
 .modalAdds_page__photoBox {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
 }
 
 .modalAdds_commit_box {
-  display: block;
-  text-align: left;
-  width: 100%;
-  margin-top: 20px;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .modalAdds_commit {
-  display: inline-block;
-  width: 100%;
-  min-height: 115px;
-  background: var(--modal-input);
-  border: 1px solid $accentColor;
-  border-radius: 20px;
-  font-family: 'Manrope';
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.4;
-  letter-spacing: 0.04em;
-  color: rgba(17, 17, 17, 0.6);
-  padding-left: 14px;
-  padding-top: 12px;
-  margin-top: 8px;
-  resize: none;
+    display: inline-block;
+    width: 100%;
+    min-height: 115px;
+    background: var(--modal-input);
+    border: 1px solid $accentColor;
+    border-radius: 20px;
+    font-family: 'Manrope';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    color: rgba(17, 17, 17, 0.6);
+    padding-left: 14px;
+    padding-top: 12px;
+    margin-top: 8px;
+    resize: none;
 }
 @media screen and (max-width: 767px) {
-  .modalAdds_page__button {
-    width: 100%;
+    .modalAdds_page__button {
+        width: 100%;
 
-    &:last-child {
-      margin-top: 12px;
+        &:last-child {
+            margin-top: 12px;
+        }
     }
-  }
 }
 
 @media screen and (min-width: 768px) {
-  .modalAdds_page__tittle {
-    font-size: 36px;
-    line-height: 49px;
-    margin: 0px 0px 40px;
-  }
-
-  .modalAdds_page__input {
-    padding: 11px 16px 10px;
-    font-size: 16px;
-    line-height: 26px;
-    letter-spacing: 0.04em;
-    margin-top: 12px;
-  }
-
-  .modalAdds_page__label {
-    font-size: 24px;
-    line-height: 26px;
-  }
-
-  .modalAdds_page__button {
-    min-width: 180px;
-    margin-left: 20px;
-
-    &:last-child {
-      margin-left: 0px;
+    .modalAdds_page__tittle {
+        font-size: 36px;
+        line-height: 49px;
+        margin: 0px 0px 40px;
     }
-  }
 
-  .addPet__button {
-    display: flex;
-    justify-content: center;
-    flex-direction: row-reverse;
-  }
+    .modalAdds_page__input {
+        padding: 11px 16px 10px;
+        font-size: 16px;
+        line-height: 26px;
+        letter-spacing: 0.04em;
+        margin-top: 12px;
+    }
 
-  .modalAdds_commit_box {
-    margin-top: 40px;
-  }
+    .modalAdds_page__label {
+        font-size: 24px;
+        line-height: 26px;
+    }
+
+    .modalAdds_page__button {
+        min-width: 180px;
+        margin-left: 20px;
+        color: var(--text-color);
+
+        &:last-child {
+            margin-left: 0px;
+        }
+    }
+
+    .addPet__button {
+        display: flex;
+        justify-content: center;
+        flex-direction: row-reverse;
+    }
+
+    .modalAdds_commit_box {
+        margin-top: 40px;
+    }
 }
 
 .modalAdds_descriptions {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-  text-align: center;
-  color: #111111;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #111111;
 }
 
 .star {
-  color: #f59256;
+    color: #f59256;
 }
 
 .divNoticesCategoriesNav {
-  @media screen and (max-width: 767px) {
-    display: flex;
-    width: 400px;
-  }
+    @media screen and (max-width: 767px) {
+        display: flex;
+        width: 400px;
+    }
 }
 
 .radioButtonSection {
-  display: flex;
+    display: flex;
 }
 
-input[type="radio"] {
-	display: none;
+input[type='radio'] {
+    display: none;
 }
 // .radioButtonInput {
 //   -webkit-appearance: none;
@@ -283,66 +285,65 @@ input[type="radio"] {
 // }
 
 .buttonCont {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  gap: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    gap: 12px;
 
-  @media screen and (min-width: 768px) {
-    width: 290px;
-  }
+    @media screen and (min-width: 768px) {
+        width: 290px;
+    }
 }
 
 .buttonCategory {
-  display: block;
-  padding: 7px 24px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.36;
-  letter-spacing: 0.04em;
-  color: inherit;
-  background-color: var(--modal-input);
-  border: 2px solid $accentColor;
-  border-radius: 40px;
-  cursor: pointer;
+    display: block;
+    padding: 7px 24px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.36;
+    letter-spacing: 0.04em;
+    color: var(--text-color);
+    background-color: var(--modal-categories);
+    border: 2px solid $accentColor;
+    border-radius: 40px;
+    cursor: pointer;
 
-  &:hover,
-  &:focus{
-    background-color: $accentColor;
-  }
+    &:hover,
+    &:focus {
+        background-color: $accentColor;
+    }
 }
 
-.radioButtonInput{
-	&:checked {
-		& + label {
-			background-color: $accentColor;
-		}
-	}
+.radioButtonInput {
+    &:checked {
+        & + label {
+            background-color: $accentColor;
+        }
+    }
 }
-
 
 .radioButton {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-right: 40px;
-  margin-bottom: 32px;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 26px;
-  color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 40px;
+    margin-bottom: 32px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26px;
+    color: var(--text-color);
 
-  &:hover,
-  &:focus {
-    color: $accentColor;
-  }
+    &:hover,
+    &:focus {
+        color: $accentColor;
+    }
 }
 
-.radioButtonInputSex{
-	&:checked {
-		& + label {
-		color: $accentColor;
-		}
-	}
+.radioButtonInputSex {
+    &:checked {
+        & + label {
+            color: $accentColor;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-@import "helpers/variables.module.scss";
+@import 'helpers/variables.module.scss';
 
 .card_item {
     position: relative;
@@ -53,15 +53,15 @@
 }
 
 .card_info_item_text {
-    min-width: 60px;
+    min-width: 80px;
     color: var(--text-color);
 }
 
 p {
-color: var(--text-color);
-}   
+    color: var(--text-color);
+}
 
-a[data-action="owner"] {
+a[data-action='owner'] {
     font-size: 16px;
     line-height: 1.38;
 }
@@ -72,10 +72,11 @@ a[data-action="owner"] {
     font-size: 14px;
     line-height: 19px;
     word-break: break-word;
-  
+
     color: var(--text-color);
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         color: $accentColor;
     }
 }
@@ -99,8 +100,9 @@ a[data-action="owner"] {
     opacity: 0.6;
     stroke: $accentColor;
     cursor: pointer;
-    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1), opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
     &:hover {
         border: 1px solid $accentColor;
         fill: $accentColor;
@@ -108,7 +110,7 @@ a[data-action="owner"] {
     }
 }
 
-.add_to_favorite_btn_active> svg {
+.add_to_favorite_btn_active > svg {
     fill: $accentColor;
 }
 
@@ -145,7 +147,6 @@ a[data-action="owner"] {
     height: 88px;
     margin-left: auto;
     margin-right: auto;
-    
 }
 
 .learn_more_btn {
@@ -164,15 +165,15 @@ a[data-action="owner"] {
     letter-spacing: 0.04em;
     color: $accentColor;
 
-    background-color:var(--learn-more-btn);
+    background-color: var(--learn-more-btn);
     border: 2px solid $accentColor;
     border-radius: 40px;
     cursor: pointer;
 
     &:hover,
     &:focus {
-        color: #FF6101;
-        border: 2px solid #FF6101;
+        color: #ff6101;
+        border: 2px solid #ff6101;
     }
 }
 
@@ -190,10 +191,10 @@ a[data-action="owner"] {
     font-size: 16px;
     line-height: 1.38;
     letter-spacing: 0.04em;
-    color:#F59256;
+    color: #f59256;
 
     background-color: var(--delete-btn);
-    border: 2px solid #F59256;
+    border: 2px solid #f59256;
     border-radius: 40px;
     cursor: pointer;
 }

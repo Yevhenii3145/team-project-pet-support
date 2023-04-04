@@ -18,10 +18,10 @@
 
     background-color: var(--background-color);
     border: none;
-    /* border-radius: ${props => props.theme.radii.big}; */
+    border-radius: 4px;
     padding: 0 10px;
     &:hover {
-        background-color: #5e5e5e28;
+        background-color: var(--lang-btn-bg);
     }
 
     @media (min-width: 1280px) {
