@@ -21,12 +21,14 @@ export default function NewsFilter({
                 onInput={onChange}
                 value={input}
             />
-            {inputValue && (
-                <div onClick={() => resetInput()}>
-                    <SvgInsert id="icon-reset-search" />
-                </div>
-            )}
-            {!inputValue && <SvgInsert id="icon-search-news" />}
+            <div className={s.icon}>
+                {inputValue && (
+                    <div onClick={() => resetInput()}>
+                        <SvgInsert id="icon-reset-search" />
+                    </div>
+                )}
+                {!inputValue && <SvgInsert id="icon-search-news" />}
+            </div>
         </div>
     )
 }

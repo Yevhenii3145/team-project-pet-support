@@ -1,19 +1,17 @@
 @import '../../../helpers/variables.module.scss';
 
 .logo {
-
-  @media screen and (min-width: 768px) {
-    width: 94px;
-    height: 48px;
-  }
+    @media screen and (min-width: 768px) {
+        width: 94px;
+        height: 48px;
+    }
 }
 
 .openMenu {
-  padding-top: 4px;
-  fill: var(--icon-menu-open);
-  transition: fill 500ms ease-in-out;
-  cursor: pointer;
-
+    padding-top: 4px;
+    fill: var(--icon-menu-open);
+    transition: fill 500ms ease-in-out;
+    cursor: pointer;
 
     &:hover,
     &:focus {
@@ -26,11 +24,10 @@
 }
 
 .closeMenu {
-  padding-top: 4px;
-  stroke: var(--icon-menu-close);
-  transition: stroke 500ms ease-in-out;
-  cursor: pointer;
-
+    padding-top: 4px;
+    stroke: var(--icon-menu-close);
+    transition: stroke 500ms ease-in-out;
+    cursor: pointer;
 
     &:hover,
     &:focus {
@@ -64,7 +61,8 @@
         bottom: 10px;
     }
     @media (min-width: 1280px) {
-        right: 332px;
+        right: 333px;
+        bottom: 11px;
     }
 }
 
@@ -73,7 +71,7 @@
     right: 8px;
     bottom: 8px;
     cursor: pointer;
-    stroke: #111;
+    // stroke: ;
     &:hover,
     &:focus {
         stroke: $accentColor;
@@ -133,19 +131,17 @@
 }
 
 .iconClose {
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin-left: auto;
+    border: #111;
+    fill: var(--text-color);
 
-  display: block;
-  width: 16px;
-  height: 16px;
-  margin-left: auto;
-  border: #111;
-  fill: var(--text-color);
-
-  &:hover,
-  &:focus {
-    fill:#111;
-  }
-
+    &:hover,
+    &:focus {
+        fill: #111;
+    }
 }
 
 .iconCloseAddNotice {
@@ -160,10 +156,8 @@
 }
 
 .iconDeleteNotice {
-
-  margin-left: 13px;
-  fill: #F59256;
-
+    margin-left: 13px;
+    fill: #f59256;
 }
 
 .google {
@@ -244,18 +238,15 @@
 }
 
 .iconEdit_pet {
-fill: #111;
-&:hover {
-    fill: $accentColor;
-
-  }
+    fill: #111;
+    &:hover {
+        fill: $accentColor;
+    }
 }
 
 .iconEdit_active {
-  fill: #111;
-  &:hover {
-      fill: $accentColor;
-  
+    fill: #111;
+    &:hover {
+        fill: $accentColor;
     }
-
 }
