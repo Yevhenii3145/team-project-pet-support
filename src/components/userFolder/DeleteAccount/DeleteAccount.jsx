@@ -23,7 +23,7 @@ export default function DeleteAccount() {
             t('UserPage.deleteAccount.no'),
             () => {
                 dispatch(operations.deleteAccount(token)).then(() => {
-                    window.location.replace('http://localhost:3000/register')
+                    window.location.replace('https://team-project-pet-support.vercel.app/register')
                 })
             },
             () => {},
