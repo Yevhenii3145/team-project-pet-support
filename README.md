@@ -47,6 +47,7 @@ Join us in our mission to give every animal a loving and caring home.
 -   Dmytro Zayets
 -   Taras Perchyk
 -   Evgen Grabar
+-   Evgen Zgardan
 -   Kateryna Bykova
 -   Mykyta Kovpak
 -   Olena Holovina
