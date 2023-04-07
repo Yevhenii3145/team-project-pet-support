@@ -1,13 +1,6 @@
 @import '../../../helpers/variables.module.scss';
 @import '../../../helpers/buttons.module.scss';
 
-h4,
-h3,
-p {
-  margin: 0;
-  padding: 0;
-}
-
 .modal_notice__button_favorite {
   fill: $accentColor;
   color: $accentColor;
@@ -29,9 +22,14 @@ p {
   padding: 6px;
   border-radius: 40px;
   cursor: pointer;
-    &:hover, &:focus{
+
+    @media screen and (min-width: 1280px) {
+      &:hover,
+      &:focus {
         background: #e6dfda;
+      }
     }
+    
 }
 
 .modal_notice__image_content {
