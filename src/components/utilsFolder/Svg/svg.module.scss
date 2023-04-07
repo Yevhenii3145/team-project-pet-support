@@ -219,8 +219,13 @@
 .iconEye {
     display: inline-block;
     stroke-width: 0;
-    stroke: currentColor;
-    fill: currentColor;
+    stroke: var(--text-color);
+    fill: var(--text-color);
+    &:focus,
+    &:hover {
+        stroke: $accentColor;
+        fill: $accentColor;
+    }
 }
 
 .iconDelete_pet {

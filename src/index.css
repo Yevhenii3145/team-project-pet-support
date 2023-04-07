@@ -34,6 +34,7 @@ html[data-theme='light'] {
     --shadow-hero-title: #1e162c00;
     --modal-categories: #ffffff;
     --lang-btn-bg: rgba(94, 94, 94, 0.1568627451);
+    --modal-register-login: #ffffff;
 }
 
 /* dark theme */
@@ -52,7 +53,7 @@ html[data-theme='dark'] {
     --background-auth-nav-register: #3e384e;
     --modal-input: #ededff;
     --modal-close: #3e384e;
-    --modal-next-btn-color: #c87070;
+    --modal-next-btn-color: #9b8070;
     --modal-next-btn-text: #faeded;
     --shadow: #1a1522;
     --icon-menu-open: #ffffff;
@@ -62,6 +63,7 @@ html[data-theme='dark'] {
     --shadow-hero-title: #1e162c;
     --modal-categories: #574f6a;
     --lang-btn-bg: rgb(221 215 255 / 22%);
+    --modal-register-login: #3e384e;
 }
 
 * {
