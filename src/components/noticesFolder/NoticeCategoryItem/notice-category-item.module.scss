@@ -53,12 +53,15 @@
 }
 
 .card_info_item_text {
-    min-width: 80px;
+    margin: 0px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.38;
     color: var(--text-color);
 }
 
-p {
-    color: var(--text-color);
+.text_width {
+    min-width: 80px;
 }
 
 a[data-action='owner'] {
