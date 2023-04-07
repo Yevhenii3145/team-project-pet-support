@@ -1,7 +1,9 @@
 .wrap_btn {
-    margin-top: 20px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
 
-    @media (min-width: 1100px) {
+    @media (min-width: 1280px) {
         padding: 0 5px;
         margin-top: 0;
     }
@@ -10,19 +12,20 @@
 .lang_btn {
     cursor: pointer;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 25px;
     line-height: 1.35;
     color: var(--text-color);
 
     background-color: var(--background-color);
     border: none;
-    /* border-radius: ${props => props.theme.radii.big}; */
+    border-radius: 4px;
     padding: 0 10px;
     &:hover {
-        background-color: #5e5e5e28;
+        background-color: var(--lang-btn-bg);
     }
 
-    @media (min-width: 1100px) {
+    @media (min-width: 1280px) {
+        font-size: 20px;
         padding: 0 5px;
     }
 }

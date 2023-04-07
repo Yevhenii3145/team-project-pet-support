@@ -32,7 +32,7 @@
     color: var(--text-color);
 
     background-color: var(--notices-categories);
-    border: 2px solid $accentColor;
+    border: 2px solid var(--notice-categories-link-border);
     border-radius: 40px;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1); 
     

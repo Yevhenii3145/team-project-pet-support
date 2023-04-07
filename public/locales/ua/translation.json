@@ -140,12 +140,12 @@
     "NoticesPage": {
         "title": "Знайдіть свою улюблену домашню тваринку",
         "categories": {
-            "sell": "продаж",
-            "lostFound": "загублено/знайдено",
-            "inGoodHands": "в добрі руки",
-            "all": "всі",
-            "favoriteAds": "улюблені",
-            "myAds": "додані",
+            "sell": "Продаж",
+            "lostFound": "Загублено/знайдено",
+            "inGoodHands": "В добрі руки",
+            "all": "Всі",
+            "favoriteAds": "Обрані",
+            "myAds": "Додані",
             "error": "Щось пішло не так"
         },
         "search": "Пошук",
