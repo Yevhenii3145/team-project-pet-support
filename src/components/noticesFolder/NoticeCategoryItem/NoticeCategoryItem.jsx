@@ -173,33 +173,33 @@ const NoticeCategoryItem = ({ notice, value }) => {
                     <h3 className={scss.card_info_title}>{title}</h3>
                     <ul className={scss.card_info_list}>
                         <li className={scss.card_info_item}>
-                            <p className={scss.card_info_item_text}>
+                            <p className={`${scss.card_info_item_text} ${scss.text_width}`}>
                                 {t('NoticesPage.card.breed')}:
                             </p>
-                            <p>{breed ? breed : 'no information'}</p>
+                            <p className={scss.card_info_item_text}>{breed ? breed : 'no information'}</p>
                         </li>
                         <li className={scss.card_info_item}>
-                            <p className={scss.card_info_item_text}>
+                            <p className={`${scss.card_info_item_text} ${scss.text_width}`}>
                                 {t('NoticesPage.card.place')}:
                             </p>
-                            <p>{getPlacePet()}</p>
+                            <p className={scss.card_info_item_text}>{getPlacePet()}</p>
                         </li>
                         <li className={scss.card_info_item}>
-                            <p className={scss.card_info_item_text}>
+                            <p className={`${scss.card_info_item_text} ${scss.text_width}`}>
                                 {t('NoticesPage.card.age')}:
                             </p>
-                            <p>{getAgePet}</p>
+                            <p className={scss.card_info_item_text}>{getAgePet}</p>
                         </li>
                         {category === 'sell' && (
                             <li className={scss.card_info_item}>
-                                <p className={scss.card_info_item_text}>
+                                <p className={`${scss.card_info_item_text} ${scss.text_width}`}>
                                     {t('NoticesPage.card.price')}:
                                 </p>
-                                <p>{price}</p>
+                                <p className={scss.card_info_item_text}>{price}</p>
                             </li>
                         )}
                         <li className={scss.card_info_item}>
-                            <p className={scss.card_info_item_text}>
+                            <p className={`${scss.card_info_item_text} ${scss.text_width}`}>
                                 {t('NoticesPage.card.owner')}:
                             </p>
                             <Link

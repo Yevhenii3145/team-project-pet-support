@@ -103,14 +103,6 @@
     }
 }
 
-.iconAddNotice {
-    background-color: $accentColor;
-    padding: 10px;
-    border-radius: 50px;
-    margin-left: 8px;
-    cursor: pointer;
-}
-
 .male {
     display: block;
     margin-top: 16px;
@@ -145,13 +137,12 @@
 }
 
 .iconCloseAddNotice {
-    display: block;
-    height: 16px;
-    margin-left: auto;
-    border: #111;
+    width: 28px;
+    height: 28px;
 
     @media screen and (min-width: 768px) {
-        height: 20px;
+        width: 36px;
+        height: 36px;
     }
 }
 

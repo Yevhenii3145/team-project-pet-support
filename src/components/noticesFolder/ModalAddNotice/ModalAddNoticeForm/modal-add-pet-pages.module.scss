@@ -7,13 +7,12 @@
 }
 
 .modalAdds_page__tittle {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 33px;
-    letter-spacing: 0.04em;
-    margin: 0px 0px 20px;
-    color: var(--text-color);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: 0.04em;
+  margin: 0px 0px 20px;
+  color: var(--text-color);
 }
 
 .modalAdds_page__input {
@@ -155,11 +154,40 @@
 }
 
 .modal_notice__close {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    cursor: pointer;
-    fill: var(--text-color);
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50px;
+  background-color: var(--background-color);
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.modal_notice__close > svg {
+  fill: var(--text-color);
+
+  @media screen and (min-width: 1280px) {
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.modal_notice__close > svg {
+  @media screen and (min-width: 1280px) {
+    &:hover,
+    &:focus {
+      fill: $accentColor;
+    }
+  }
 }
 
 .modalAdds_page_box {
@@ -278,11 +306,6 @@
 input[type='radio'] {
     display: none;
 }
-// .radioButtonInput {
-//   -webkit-appearance: none;
-//   -moz-appearance: none;
-//   appearance: none;
-// }
 
 .buttonCont {
     display: flex;
@@ -298,7 +321,7 @@ input[type='radio'] {
 
 .buttonCategory {
     display: block;
-    padding: 7px 24px;
+    padding: 8px 28px;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.36;

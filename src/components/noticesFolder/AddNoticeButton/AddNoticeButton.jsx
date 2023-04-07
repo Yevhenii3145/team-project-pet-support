@@ -36,10 +36,13 @@ const AddNoticeButton = () => {
 
     return (
         <>
-            <button className={scss.button} type="button" onClick={showModal}>
-                <SvgInsert id="icon-add-notice" />
-                {t('NoticesPage.addPetBtn')}
-            </button>
+            <div className={scss.button__wrapper} onClick={showModal}>
+                <p className={scss.button__text}>{t('NoticesPage.addPetBtn')}</p>
+                <button className={scss.button} type="button" >
+                    <SvgInsert id="icon-add-notice" />
+                    
+                </button>
+            </div>
             {modalShow && (
                 <>
                     <ModalAddNotice onClose={closeModal}>

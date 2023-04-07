@@ -56,7 +56,7 @@ const ModalNotice = ({
             <div className={scss.modal_notice__content}>
                 <div className={scss.modal_notice__content_info}>
                     <div className={scss.modal_notice__close} onClick={onClose}>
-                        <SvgInsert id="icon-close" />
+                        <SvgInsert id="icon-close-add-notice" />
                     </div>
                     <div className={scss.modal_notice__image_content}>
                         <img
