@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next'
 export function PetsList() {
     const dispatch = useDispatch()
     const [modalShow, setModalShow] = useState(false)
-    // const [isActiveEdite, setIsActiveEdite] = useState(false);
     const [isActiveCardEdite, setIsActiveCardEdite] = useState(null)
     const [isActiveCardDelete, setIsActiveCardDelete] = useState(null)
     const [id, setId] = useState(null)
@@ -59,9 +58,6 @@ export function PetsList() {
         setModalShow(true)
         document.body.style.overflow = 'hidden'
     }
-
-    // const active = isActive ? "icon-delete" : "icon-deletepet";
-    // const activeEdite = isActiveEdite ? "icon-edit-pet" : "icon-edit-pet-active";
 
     const elements =
         Array.isArray(pets) &&

@@ -1,6 +1,5 @@
 import scss from "./modal-add-pet-pages.module.scss"
 export function ModalAddPetPageOne() {
-    // const [modalActive, setModalActive] = useState(true);
 
     return (
         <div className={scss.modalAdds_page}>

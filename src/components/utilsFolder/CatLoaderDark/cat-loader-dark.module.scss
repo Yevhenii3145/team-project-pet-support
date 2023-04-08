@@ -25,13 +25,6 @@
         display: block;
         padding-bottom: 100%;
     }
-
-    // &:hover > * {
-    //     animation-play-state: paused;
-    // }
-    // &:active > * {
-    //     animation-play-state: running;
-    // }
 }
 
 %cat-img {
@@ -108,8 +101,6 @@
     align-items: center;
     padding-top: 30vh;
 }
-
-// reset
 
 *,
 *::before,

@@ -169,9 +169,6 @@ export const authSlice = createSlice({
             state.user = {}
             state.token = ''
             state.isLogin = false
-            // const usertoken = localStorage.getItem('token');
-            // if (usertoken) localStorage.removeItem('token');
-            // localStorage.removeItem('userId');
         },
         [operations.logout.rejected](state, { payload }) {
             state.loading = false
@@ -198,11 +195,7 @@ export const authSlice = createSlice({
         state.error = payload;
         state.isLogin = false;
       },
-        [operations.updateUser.pending](state, action) {
-            //state.loading = true;
-        },
         [operations.updateUser.fulfilled](state, action) {
-            //state.loading = false;
             for (const key in action.payload) {
                 switch (key) {
                     case 'name':
@@ -228,8 +221,7 @@ export const authSlice = createSlice({
                 }
             }
         },
-        [operations.updateUser.rejected](state) {
-            //state.loading = false;
+        [operations.updateUser.rejected]() {
             Notify.failure(
                 'Something went wrong or user with this name already exists!',
                 {
@@ -242,16 +234,10 @@ export const authSlice = createSlice({
                 }
             )
         },
-
-        [operations.updateUserAvatar.pending](state) {
-            // state.loading = true;
-        },
         [operations.updateUserAvatar.fulfilled](state, { payload }) {
-            // state.loading = false;
             state.user.avatar = payload.avatarURL
         },
         [operations.updateUserAvatar.rejected]: (state, { payload }) => {
-            // state.loading = false;
             state.error = payload
         },
 

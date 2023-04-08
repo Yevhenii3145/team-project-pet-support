@@ -7,7 +7,7 @@ import axios from 'axios'
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio'
 import { useTranslation } from 'react-i18next'
 
-const { REACT_APP_BASE_URL } = process.env
+const { REACT_APP_BASE_URL, REACT_APP_FRONTEND_BASE_URL } = process.env
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
 
 export default function DeleteAccount() {
@@ -23,7 +23,7 @@ export default function DeleteAccount() {
             t('UserPage.deleteAccount.no'),
             () => {
                 dispatch(operations.deleteAccount(token)).then(() => {
-                    window.location.replace('https://team-project-pet-support.vercel.app/register')
+                    window.location.replace(`${REACT_APP_FRONTEND_BASE_URL}register`)
                 })
             },
             () => {},

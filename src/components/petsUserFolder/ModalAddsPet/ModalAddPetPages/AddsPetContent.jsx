@@ -5,9 +5,7 @@ import operationsPets from 'redux/operations/userPetsApi'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import Loader from 'components/utilsFolder/Loader/Loader'
 import SvgInsert from '../../../utilsFolder/Svg/Svg'
-// import 'flatpickr/dist/themes/material_orange.css'
 import Flatpickr from 'react-flatpickr'
-// import { add } from 'date-fns';
 import { useTranslation } from 'react-i18next'
 
 const AddsPetContent = ({ close }) => {
@@ -28,10 +26,6 @@ const AddsPetContent = ({ close }) => {
             case 'name':
                 setPetName(e.currentTarget.value)
                 break
-
-            // case 'date':
-            //   setPetDate(e.currentTarget.value);
-            //   break;
 
             case 'breed':
                 setPetBreed(e.currentTarget.value)

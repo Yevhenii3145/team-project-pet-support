@@ -320,12 +320,6 @@ form:not(:last-child) {
 
 }
 
-// .loading__watch {
-//     position: relative;
- 
-//     left: 100%;
-// }
-
 .loader__content {
     display: flex;
     position: relative;
@@ -355,7 +349,6 @@ form:not(:last-child) {
 .loader_oval_avatar {
     position: absolute;
     content: '';
-        // left: 120px;
     top: 50%;
     transform: translateY(-165px);
     z-index: 10;
@@ -366,8 +359,6 @@ form:not(:last-child) {
     }
 
 @media screen and (min-width: 1280px) {
-    
-        // right: 190px;
         top:200px;
         transform: translateX(-115px);
     

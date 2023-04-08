@@ -66,12 +66,7 @@ const userSlice = createSlice({
           },
         [operationsPets.updatePet.fulfilled] (state, action) {
           state.loading = false;
-          console.log('fulfilled')
           state.pets = action.payload;
-          // state.pets = state.pets.filter(pet => pet._id !== action.payload);
-          // const index = state.pets.findIndex((pet) => pet._id === action.payload._id);
-          // state.pets[index] = action.payload;
-           console.log('state.pets', state.pets)
         },
         [operationsPets.updatePet.rejected] (state) {
             state.loading = false;

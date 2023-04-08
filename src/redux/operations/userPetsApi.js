@@ -44,7 +44,6 @@ const getUserPet = createAsyncThunk(
    
       try {
         const response = await axios.put(`/users/${petId}`, formData);
-        console.log('response.data', response.data)
         return response.data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error);

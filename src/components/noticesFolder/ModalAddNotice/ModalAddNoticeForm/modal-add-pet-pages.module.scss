@@ -43,8 +43,6 @@
 .modalAdds_page__button {
     display: inline-block;
     margin-top: 40px;
-    // background-color: var(--modal-input);
-    // color: var(--text-color);
 }
 
 .addspet__imgInput {
@@ -62,7 +60,6 @@
     background-repeat: no-repeat;
     background-position: center;
     margin-top: 8px;
-    margin-right: 160px;
     border-radius: 20px;
     display: inline-block;
     width: 116px;
@@ -301,6 +298,7 @@
 
 .radioButtonSection {
     display: flex;
+    justify-content: space-evenly;
 }
 
 input[type='radio'] {
@@ -349,8 +347,7 @@ input[type='radio'] {
 .radioButton {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    margin-right: 40px;
+    align-items: center;
     margin-bottom: 32px;
     font-weight: 500;
     font-size: 20px;
