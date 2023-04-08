@@ -53,9 +53,6 @@ const AddsNoticeContent = ({ close }) => {
             case 'name':
                 setPetName(e.currentTarget.value)
                 break
-            // case 'date':
-            //   setPetDate(e.currentTarget.value);
-            //   break;
             case 'breed':
                 setPetBreed(e.currentTarget.value)
                 break

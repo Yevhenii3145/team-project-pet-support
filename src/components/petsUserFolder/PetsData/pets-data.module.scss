@@ -10,7 +10,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // margin: 20px 0 24px 0;
 
   @media screen and (min-width: 768px) {
     margin: 20px 0 24px 0;
@@ -54,7 +53,6 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 1.35;
-  // width: 135px;
   height: 40px;
   box-sizing: content-box;
   background-color: var(--background-color);
@@ -106,7 +104,6 @@
 .petsData__container {
   box-sizing: border-box;
   text-align: center;
-  // background: $background;
   background-position: bottom;
   background-size: contain;
   width: 100%;

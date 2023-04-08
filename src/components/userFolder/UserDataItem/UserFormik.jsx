@@ -16,7 +16,6 @@ export function UserFormik() {
     const dispatch = useDispatch()
     const userInStore = useSelector(state => state.auth.user)
     const token = useSelector(state => state.auth.token)
-    // const [loading, setLoading] = useState('')
     const [userName, setUserName] = useState('')
     const [userEmail, setUserEmail] = useState('')
     const [userBirthday, setUserBirthday] = useState('')
@@ -59,11 +58,9 @@ export function UserFormik() {
                     )
                     setUserPhone(data.phone)
                     setUserCity(data.city)
-                    // setLoading(false)
                 })
                 .catch(error => {
-                    console.log(error)
-                    // setLoading(false)
+                    Notify.failure(`${error.message}`)
                 })
             return
         } else {
@@ -164,7 +161,6 @@ export function UserFormik() {
         if (!phone.disabled) {
             return
         }
-        console.log(phone.value.length)
         if (!phone.value) {
             return Notify.failure(t('UserPage.error.required'), {
                 timeout: 5000,
@@ -316,7 +312,6 @@ export function UserFormik() {
                                         onChange={([date]) => {
                                             setUserBirthday(formatDate(date))
                                         }}
-                                        type="text"
                                         name="birthday"
                                         value={userBirthday}
                                         style={{cursor:'auto'}}
@@ -324,19 +319,11 @@ export function UserFormik() {
                                     />
                                 ) : (
                                     <Flatpickr
-                                        options={{
-                                            dateFormat: 'm.d.Y',
-                                            maxDate: `${formatDate(dateNow)}`,
-                                        }}
-                                        onChange={([date]) => {
-                                            setUserBirthday(formatDate(date))
-                                        }}
-                                        type="text"
                                         name="birthday"
                                         value={userBirthday}
                                         disabled
                                         style={{cursor:'auto'}}
-                                        className={`${scss.userDataForm_field} ${scss.userDataForm_birthday}`}
+                                        className={scss.userDataForm_field}
                                     />
                                 )}
                                 <button

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import scss from './modal-add-pet-pages.module.scss'
-// import operationsPets from 'redux/operations/userPetsApi';
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import Loader from 'components/utilsFolder/Loader/Loader'
 import SvgInsert from '../../../utilsFolder/Svg/Svg'
@@ -13,7 +12,6 @@ const { REACT_APP_BASE_URL } = process.env
 axios.defaults.baseURL = `${REACT_APP_BASE_URL}/api`
 
 const EditPetContent = ({ close, _id }) => {
-    // const dispatch = useDispatch();
     const { t } = useTranslation()
 
     const [stepOne, setStepOne] = useState(true)
@@ -129,8 +127,6 @@ const EditPetContent = ({ close, _id }) => {
             data.append('breed', petBreed)
             data.append('comments', petComments)
             data.append('image', image.files[0])
-            // console.log('image', image.files[0])
-            // console.log('imageURL', imageURL)
 
             try {
                 await axios.put(`/users/${_id}`, data)
@@ -146,7 +142,6 @@ const EditPetContent = ({ close, _id }) => {
                     breed: petBreed,
                     comments: petComments,
                 })
-                console.log('imageURL', imageURL)
                 setIsSubmitting(false)
             } catch (error) {
                 setIsSubmitting(false)
@@ -184,7 +179,6 @@ const EditPetContent = ({ close, _id }) => {
                             name="name"
                             placeholder={t('UserPage.modalAddPet.ph.name')}
                             type="text"
-                            // required
                             value={petName}
                             onChange={changeStepOne}
                         />
@@ -198,7 +192,6 @@ const EditPetContent = ({ close, _id }) => {
                             name="date"
                             type="text"
                             placeholder={t('UserPage.modalAddPet.ph.birth')}
-                            // required
                             value={petDate}
                             options={{
                                 dateFormat: 'm.d.Y',
@@ -218,7 +211,6 @@ const EditPetContent = ({ close, _id }) => {
                             type="text"
                             name="breed"
                             placeholder={t('UserPage.modalAddPet.ph.breed')}
-                            // required
                             value={petBreed}
                             onChange={changeStepOne}
                         />
@@ -255,7 +247,6 @@ const EditPetContent = ({ close, _id }) => {
                                 name="image"
                                 accept="image/png, image/jpeg, image/jpg, image/webp"
                                 id="img"
-                                // required
                                 title="is required"
                                 multiple
                                 onChange={handleImageChange}
@@ -286,7 +277,6 @@ const EditPetContent = ({ close, _id }) => {
                                 )}
                                 defaultValue={petComments}
                                 minLength={8}
-                                // required
                             />
 
                             <div className={scss.addPet__button}>
@@ -294,7 +284,6 @@ const EditPetContent = ({ close, _id }) => {
                                     className={`${scss.button__primary_main} ${scss.modalAdds_page__button}`}
                                     type="submit"
                                     disabled={isSubmitting}
-                                    // onClick={validateFile}
                                 >
                                     {t('UserPage.modalAddPet.btn.done')}
                                 </button>

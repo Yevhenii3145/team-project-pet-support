@@ -55,8 +55,6 @@ const AuthForm = () => {
         }
     }
 
-    // let user = useSelector(state => state.auth.user);
-    // console.log(user);
     const loading = useSelector(state => state.auth.loading)
     const dispatch = useDispatch()
 
@@ -142,7 +140,6 @@ const AuthForm = () => {
                     city => `${city.city}, ${city.admin_name}` === values.region
                 )
             ) {
-                console.log('not')
                 return Notify.failure(t('AuthForm.error.regionList'), {
                     timeout: 6000,
                     distance: '100px',
@@ -163,7 +160,6 @@ const AuthForm = () => {
             }
             actions.resetForm()
             setStepOne(true)
-            console.log(user)
             return dispatch(operations.registerNewUser(user))
         }
     }
@@ -280,7 +276,6 @@ const AuthForm = () => {
                                         name="password"
                                         validate={validatePassword}
                                         placeholder=" "
-                                        //onChange={handleChangePassword}
                                     />
                                     <label className={scss.form__label}>
                                         {t('AuthForm.stepOne.password')}
@@ -756,7 +751,6 @@ const AuthForm = () => {
                                     name="password"
                                     validate={validatePassword}
                                     placeholder=" "
-                                    //onChange={handleChangePassword}
                                 />
                                 <label className={scss.form__label}>
                                     {t('changePasswordForm.password')}

@@ -61,7 +61,6 @@ export default function UserAvatar() {
     return (
         <>
             {loading && (
-                // <div className={scss.loader__content_avatar}>
                 <div className={scss.loader_oval_avatar}>
                     <Oval
                         height={40}
@@ -75,7 +74,6 @@ export default function UserAvatar() {
                         strokeWidth={4}
                         strokeWidthSecondary={2}
                     />
-                    {/* </div> */}
                 </div>
             )}
 

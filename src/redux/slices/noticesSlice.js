@@ -23,7 +23,6 @@ const noticesSlice = createSlice({
     extraReducers: {
         [fetchCategoryNotices.pending] (state) {
             state.loading = true;
-            // state.items = [];
         },
         [fetchCategoryNotices.fulfilled] (state, action) {
             state.loading = false;
@@ -65,9 +64,6 @@ const noticesSlice = createSlice({
               fontSize: '18px',
               borderRadius: '20px',
               showOnlyTheLastOne: true})
-          },
-          [addNoticeToFavorite.fulfilled] (state, action) {
-            // state.favoriteNotices = action.payload;
           },
           [addNoticeToFavorite.rejected] (state, action) {
             state.error = action.payload;

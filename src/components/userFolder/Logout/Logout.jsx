@@ -32,9 +32,6 @@ export default function Logout() {
         )
     }
 
-    //     dispatch(operations.logout())
-    // }
-
     return (
         <div className={scss.logout_box}>
             <button className={scss.logout_button} onClick={onLogout}>

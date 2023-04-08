@@ -1,6 +1,5 @@
 import OurFriendsPageTitle from './OurFriendsPageTitle/OurFriendsPageTitle'
 import OurFriendsPageList from './OurFriendsPageList/OurFriendsPageList'
-// import items from './sponsors.json'
 import scss from './our-friends-page.module.scss'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'

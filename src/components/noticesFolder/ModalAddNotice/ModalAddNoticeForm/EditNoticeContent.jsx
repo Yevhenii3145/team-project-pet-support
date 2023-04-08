@@ -123,7 +123,6 @@ const EditNoticeContent = ({ close, notice, noticeCategory }) => {
                 city => `${city.city}, ${city.admin_name}` === petLocation
             )
         ) {
-            console.log('not')
             return Report.warning(
                 t('NoticesPage.modalAddPet.notify.warning'),
                 t('NoticesPage.modalAddPet.notify.petLocationFalse'),

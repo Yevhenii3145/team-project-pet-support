@@ -1,5 +1,4 @@
 import { useState } from 'react'
-// import { useState, useEffect } from 'react';
 import EllipsisText from 'react-ellipsis-text'
 import scss from './our-friends-page-item.module.scss'
 import OurFriendsPageItemPopup from './OurFriendsPageItemPopup/OurFriendsPageItemPopup'
@@ -40,7 +39,6 @@ const OurFriendsPageItem = ({
         }
 
         const startTime = start.split(':')
-        // minutes are worth 60 seconds. Hours are worth 60 minutes.
         const secondsStart = startTime[0] * 60 * 60 + startTime[1] * 60
 
         const endTime = end.split(':')
