@@ -58,24 +58,18 @@ const UserInfo = () => {
                             {t('UserPage.info.card.city')}:
                             <span className={scssS.infoText}>{user.city}</span>
                         </p>
-                        <a
-                            href={`mailto:${user.email}`}
-                            className={scssS.infoLabel}
-                        >
+                        <div className={scssS.infoLabel}>
                             {t('UserPage.info.card.email')}:
-                            <span className={scssS.infoText} data-action="link">
+                            <a href={`mailto:${user.email}`} className={scssS.infoText} data-action="link">
                                 {user.email}
-                            </span>
-                        </a>
-                        <a
-                            href={`tel:+${user.phone}`}
-                            className={scssS.infoLabel}
-                        >
+                            </a>
+                        </div>
+                        <div className={scssS.infoLabel}>
                             {t('UserPage.info.card.phone')}:
-                            <span className={scssS.infoText} data-action="link">
+                            <a href={`tel:+${user.phone}`} className={scssS.infoText} data-action="link">
                                 +{user.phone}
-                            </span>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
             )}

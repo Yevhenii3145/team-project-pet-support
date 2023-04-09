@@ -292,7 +292,7 @@ export function UserFormik() {
                                     disabled
                                     className={scss.userDataForm_field}
                                 />
-                                <button className={scss.iconEdit_btn}>
+                                <button className={scss.iconEdit_btn} style={{pointerEvents: 'none'}}>
                                     <SvgInsert id="icon-email"/>
                                 </button>
                             </div>
