@@ -7,11 +7,9 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import scss from './notice-category-item.module.scss';
 import SvgInsert from 'components/Svg/Svg';
 import {
-  fetchCategoryNotices,
   addNoticeToFavorite,
   deleteNotice,
   searchNotice,
-  getAllFavorites,
 } from 'redux/notices/notices-operation';
 import useAuth from 'shared/hooks/useAuth';
 import Modal from '../ModalNotice/Modal/Modal';
